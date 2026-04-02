@@ -1,4 +1,4 @@
-import { CSSProperties, ReactNode, useEffect, useState } from "react";
+import { CSSProperties, ReactNode, useState } from "react";
 import {
   getDisplacementFilter,
   DisplacementOptions,
@@ -10,14 +10,6 @@ type GlassElementProps = DisplacementOptions & {
   children?: ReactNode | undefined;
   blur?: number;
   debug?: boolean;
-};
-
-/** Detect if the browser supports backdrop-filter with SVG url() references.
- *  iOS Safari and Android Chrome do not support this — they only support blur(). */
-const isMobile = (): boolean => {
-  if (typeof window === "undefined") return false;
-  return /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) ||
-    window.matchMedia("(max-width: 768px)").matches;
 };
 
 export const GlassElement = ({
@@ -33,38 +25,25 @@ export const GlassElement = ({
 }: GlassElementProps) => {
   /* Change element depth on click */
   const [clicked, setClicked] = useState(false);
-  const [mobile, setMobile] = useState(false);
-
-  useEffect(() => {
-    setMobile(isMobile());
-    const handleResize = () => setMobile(isMobile());
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
   let depth = baseDepth / (clicked ? 0.7 : 1);
 
   /* Dynamic CSS properties */
   const style: CSSProperties = {
+    height: `${height}px`,
+    width: `${width}px`,
     borderRadius: `${radius}px`,
-    // On mobile: fallback to simple glassmorphism (blur only — universally supported)
-    // On desktop: full SVG displacement filter effect
-    backdropFilter: mobile
-      ? `blur(${blur * 3}px) brightness(1.1) saturate(1.4)`
-      : `blur(${blur / 2}px) url('${getDisplacementFilter({
-          height,
-          width,
-          radius,
-          depth,
-          strength,
-          chromaticAberration,
-        })}') blur(${blur}px) brightness(1.1) saturate(1.5)`,
-    // On mobile: let CSS handle sizing responsively
-    ...(mobile ? {} : { height: `${height}px`, width: `${width}px` }),
+    backdropFilter: `blur(${blur / 2}px) url('${getDisplacementFilter({
+      height,
+      width,
+      radius,
+      depth,
+      strength,
+      chromaticAberration,
+    })}') blur(${blur}px) brightness(1.1) saturate(1.5) `,
   };
 
   /* Debug mode: display the displacement map instead of actual effect */
-  if (debug === true && !mobile) {
+  if (debug === true) {
     style.background = `url("${getDisplacementMap({
       height,
       width,
@@ -73,15 +52,12 @@ export const GlassElement = ({
     })}")`;
     style.boxShadow = "none";
   }
-
   return (
     <div
-      className={`${styles.box} ${mobile ? styles.mobile : ""}`}
+      className={styles.box}
       style={style}
       onMouseDown={() => setClicked(true)}
       onMouseUp={() => setClicked(false)}
-      onTouchStart={() => setClicked(true)}
-      onTouchEnd={() => setClicked(false)}
     >
       {children}
     </div>
