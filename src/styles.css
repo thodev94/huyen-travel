@@ -1,0 +1,765 @@
+:root {
+  --primary: #ffffff;
+  --accent: rgb(190, 50, 25);
+  --text: #ffffff;
+  --gray: red;
+  --max-width: 1536px;
+  /* --text-shadow: 1px 3px 0 #969696, 1px 13px 5px #aba8a8; */
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background: var(--primary);
+  color: var(--text);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+html {
+  scroll-behavior: initial;
+}
+
+.main-wrapper {
+  background: url('https://images.unsplash.com/photo-1472214103451-9374bd1c798e?q=80&w=2400&auto=format&fit=crop');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  width: 100%;
+  min-height: 100vh;
+
+
+}
+
+/* .main-wrapper::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.2);
+  background-position: center;
+  background-attachment: fixed;
+} */
+
+
+/* Navbar */
+.navbar-wrapper {
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
+}
+
+.navbar {
+  width: 100%;
+  padding: 0 10px;
+  display: flex;
+  line-height: 80px;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  transition: all 0.6s cubic-bezier(0.2, 1, 0.3, 1);
+}
+
+.navbar.scrolled {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.nav-links {
+  display: flex;
+  gap: 40px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--text);
+  text-shadow: var(--text-shadow);
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: opacity 0.3s;
+}
+
+.nav-links a:hover {
+  opacity: 1;
+}
+
+.logo {
+  font-size: clamp(1rem, 4vw, 1.2rem);
+  letter-spacing: clamp(1px, 2vw, 4px);
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+/* Mobile Menu Button */
+.mobile-menu-btn {
+  display: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  z-index: 1100;
+}
+
+.mobile-menu-btn span {
+  display: block;
+  width: 25px;
+  height: 2px;
+  background-color: var(--text);
+  margin: 5px 0;
+  transition: 0.4s;
+}
+
+.mobile-menu-btn.open span:nth-child(1) {
+  transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.mobile-menu-btn.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.mobile-menu-btn.open span:nth-child(3) {
+  transform: rotate(45deg) translate(-5px, -6px);
+}
+
+/* Mobile Nav */
+.mobile-nav-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  z-index: 1050;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.4s ease;
+}
+
+.mobile-nav-overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.mobile-nav {
+  position: fixed;
+  top: 80px;
+  /* Below navbar */
+  left: -100%;
+  width: 100%;
+  height: calc(100vh - 80px);
+  z-index: 1060;
+  display: flex;
+  flex-direction: column;
+  transition: left 0.5s cubic-bezier(0.2, 1, 0.3, 1);
+  overflow: hidden;
+}
+
+.mobile-nav.open {
+  left: 0;
+}
+
+.mobile-nav-inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 35px;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.mobile-nav a {
+  text-decoration: none;
+  color: white;
+  font-size: 1.8rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  font-weight: 800;
+  transition: color 0.3s;
+}
+
+.mobile-nav a:hover {
+  color: var(--accent);
+}
+
+/* Hero */
+/* --- APP.CSS (Bản chuẩn) --- */
+
+:root {
+  --primary-color: #d4a373;
+  /* Màu nâu vàng của nút bấm */
+  --text-white: #ffffff;
+  --bg-dark: #121212;
+  /* Màu nền cho footer/contact */
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  color: var(--text-white);
+  /* Đảm bảo nền tối nếu ảnh chưa load */
+  overflow-x: hidden;
+  /* Tránh thanh cuộn ngang */
+}
+
+/* 1. SECTION HERO (Tổng thể) */
+.hero {
+  position: relative;
+  width: 100%;
+  height: max-content;
+  padding-top: 150px;
+  /* Chiếm toàn bộ chiều cao màn hình */
+  display: flex;
+  align-items: center;
+  /* Căn giữa theo chiều dọc */
+  justify-content: center;
+  /* Căn giữa theo chiều ngang */
+  background: transparent;
+  /* Changed to transparent to show wrapper bg */
+  overflow: hidden;
+  text-shadow: var(--text-shadow);
+
+  background: rgba(0, 0, 0, 0.4);
+
+}
+
+
+
+/* 2. NỀN VIDEO/ẢNH (High-res landscape) */
+.hero-bg-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* Thay bằng ảnh của bạn */
+  background-size: cover;
+  background-position: center;
+  z-index: 1;
+  /* Lớp nền dưới cùng */
+  transform-origin: center;
+  /* Cần cho animation scale */
+}
+
+/* 3. HERO CONTENT (Trái tim của trang web) */
+.hero-content {
+  position: relative;
+  z-index: 10;
+  /* Đưa toàn bộ nội dung lên trên nền */
+  width: 90%;
+  /* Chiếm 90% chiều rộng màn hình (Responsive) */
+  max-width: 900px;
+  /* Chiều rộng tối đa */
+  display: flex;
+  flex-direction: column;
+  /* Sắp xếp các con theo chiều dọc (Stack) */
+  align-items: center;
+  /* Căn giữa toàn bộ các con */
+  text-align: center;
+  /* Căn giữa văn bản */
+
+}
+
+/* 4. CHỈNH SỬA CHO GLASSELEMENT (Vì GlassElement có thể có style riêng, cần reset nhẹ) */
+.hero-content>div {
+  width: 100% !important;
+  /* Buộc khối kính chiếm 100% chiều rộng cha */
+  height: auto !important;
+  /* Chiều cao tự động theo nội dung */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 5. CÁC THÀNH PHẦN BÊN TRONG KHỐI KÍNH */
+.hero-inner-container {
+  padding: clamp(20px, 5vw, 40px) 20px clamp(40px, 8vw, 60px) 20px;
+  /* Padding trong để không bị sát viền kính */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+/* Badge ( ★ 5.0 TripAdvisor ) */
+.badge-container {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 30px;
+
+}
+
+.badge {
+  /* background: rgba(255, 255, 255, 0.1); */
+  padding: 8px 18px;
+  border-radius: 100px;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background-color: var(--accent);
+  /* backdrop-filter: blur(5px); */
+  /* Hiệu ứng mờ nền của badge */
+}
+
+/* Tiêu đề chính (EXPERIENCE Authentic Vietnam) */
+.hero-main-title {
+  font-size: clamp(2rem, 7vw, 4rem);
+  /* Tự động đổi size trên các thiết bị */
+  line-height: 1.1;
+  font-weight: 800;
+  margin-bottom: 25px;
+  color: var(--text-white);
+  text-transform: uppercase;
+}
+
+.gradient-text {
+  color: rgb(202, 24, 24);
+  text-shadow: var(--text-shadow);
+
+}
+
+/* Phụ đề */
+.hero-sub {
+  font-size: 1rem;
+  line-height: 1.6;
+  max-width: 600px;
+  /* Tránh chữ quá dài */
+  margin-bottom: 45px;
+  color: var(--text-white);
+}
+
+/* 6. CTA GROUP (Nhóm 2 nút bấm) */
+.hero-cta-group {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 10px;
+  /* Khoảng cách nhẹ với sub-text */
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  color: var(--text-white);
+  padding: 16px 36px;
+  border-radius: 50px;
+  border: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: var(--text-shadow);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--text-white);
+  padding: 16px 36px;
+  border-radius: 50px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  font-weight: 500;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Hover effects */
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(212, 163, 115, 0.3);
+}
+
+.btn-secondary:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* 7. SCROLL INDICATOR (Biểu tượng chuột cuộn) */
+.scroll-indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  opacity: 0.7;
+  z-index: 10;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.mouse-icon {
+  width: 22px;
+  height: 38px;
+  border: 2px solid var(--text-white);
+  border-radius: 20px;
+  margin: 0 auto 12px;
+  position: relative;
+}
+
+.mouse-icon::before {
+  content: '';
+  width: 4px;
+  height: 9px;
+  background: var(--text-white);
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 7px;
+  border-radius: 2px;
+  animation: scrollMouse 2s infinite ease-in-out;
+}
+
+@keyframes scrollMouse {
+  0% {
+    opacity: 1;
+    top: 7px;
+  }
+
+  100% {
+    opacity: 0;
+    top: 22px;
+  }
+}
+
+.scroll-indicator span {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.bento-grid {
+  margin: 50px 0;
+
+}
+
+
+.bento-grid .badge {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 8px 16px;
+  border-radius: 100px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.8rem;
+  color: var(--accent);
+  z-index: 100;
+}
+
+.bento-grid li {
+  margin-bottom: 5px;
+  font-size: 0.95rem;
+}
+
+/* Services section spacing adjustment */
+.about {
+  position: relative;
+  z-index: 100;
+  padding: 0 5%;
+}
+
+.services {
+  padding: 50px;
+  background: rgba(0, 0, 0, 0.4);
+  width: 100%;
+  position: relative;
+  z-index: 101;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+.services-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.section-title {
+  font-size: clamp(2rem, 5vw, 4rem);
+  margin-bottom: clamp(2rem, 5vw, 4rem);
+  text-align: left;
+  text-transform: uppercase;
+  font-weight: 900;
+  color: var(--text-white);
+  /* Dark text for light background */
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.card {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.services .card h3 {
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: clamp(1.8rem, 2vw, 1.8rem);
+  font-weight: 700;
+
+}
+
+.services .card p {
+  font-size: 0.9rem;
+  color: var(--primary);
+  opacity: 1;
+  line-height: 1.6;
+}
+
+/* Contact */
+.contact {
+  background: #000;
+  padding: 20px;
+  text-align: center;
+}
+
+.contact h2 {
+  font-size: clamp(2rem, 5vw, 4.5rem);
+  margin-bottom: 40px;
+  font-weight: 900;
+}
+
+.contact-links {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: clamp(20px, 4vw, 50px);
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+
+
+
+/* Responsive Queries for requested breakpoints */
+
+/* 1536px and below (already handled by clamp, but fine-tune) */
+@media (max-width: 1536px) {
+  .service-grid {
+    gap: 20px;
+  }
+}
+
+/* 1366px and below */
+@media (max-width: 1366px) {
+  .navbar {
+    padding: 25px 5%;
+  }
+}
+
+/* 1280px and below */
+@media (max-width: 1280px) {
+  .section-title {
+    margin-bottom: 3rem;
+  }
+}
+
+/* Tablet (1024px and below) */
+@media (max-width: 1024px) {
+  .service-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .nav-links {
+    gap: 25px;
+  }
+}
+
+/* Mobile (768px and below) */
+@media (max-width: 768px) {
+  .service-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .navbar {
+    padding: 0 5%;
+  }
+
+  .mobile-menu-btn {
+    display: block;
+  }
+
+  .contact-links {
+    flex-direction: column;
+    gap: 15px;
+  }
+}
+
+/* Small Mobile (below 480px) */
+@media (max-width: 480px) {
+  .hero-content .glass-box {
+    width: 100vw !important;
+    border-radius: 0 !important;
+  }
+}
+
+.btn-grad {
+  background-image: linear-gradient(to right, #cb2d3e 0%, #ef473a 51%, #cb2d3e 100%);
+}
+
+.btn-grad {
+  margin: 10px;
+  padding: 8px 20px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  box-shadow: 0 3px 8px #c23030;
+  border-radius: 20px;
+  display: block;
+  outline: none;
+  border: none;
+}
+
+.btn-grad:hover {
+  background-position: right center;
+  color: #fff;
+  text-decoration: none;
+}
+
+.gallery-img:hover {
+  transform: scale(1.05);
+}
+
+.gallery-inner .glass-box {
+  transition: transform 0.4s ease;
+}
+
+.gallery-inner .glass-box:hover {
+  transform: translateY(-10px);
+}
+
+/* Footer & Branding Animations */
+.brand-marquee-container {
+  overflow: hidden;
+  white-space: nowrap;
+  background: transparent;
+  padding: 10px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.brand-marquee {
+  display: inline-block;
+  animation: marquee 90s linear infinite;
+  padding-left: 100%;
+}
+
+.brand-item {
+  display: inline-block;
+  padding: 0 40px;
+  font-size: clamp(3rem, 10vw, 8rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
+  letter-spacing: 5px;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+/* Circular Text */
+.circular-text-container {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 40px auto;
+
+  @media (max-width: 768px) {
+    margin: 40px auto;
+  }
+}
+
+.circular-text {
+  width: 150px;
+  height: 150px;
+  animation: rotateText 25s linear infinite;
+}
+
+@keyframes rotateText {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.footer-main {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 50px;
+  text-align: left;
+  margin-top: 60px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 60px;
+
+  @media (max-width: 768px) {
+    margin: 10px auto;
+    gap: 20px;
+  }
+}
+
+.footer-col h4 {
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 25px;
+  letter-spacing: 2px;
+  font-size: 0.9rem;
+}
+
+.footer-col p,
+.footer-col a {
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+  font-size: 0.95rem;
+  line-height: 1.8;
+  display: block;
+}
+
+.footer-col a:hover {
+  color: white;
+}
+
+.gallery-img:hover {
+  transform: scale(1.05);
+}
+
+.gallery-inner .glass-box {
+  transition: transform 0.4s ease;
+}
+
+.gallery-inner .glass-box:hover {
+  transform: translateY(-10px);
+}
