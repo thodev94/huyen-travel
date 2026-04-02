@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/huyen-travel/static/css/main.6c074dea.css",
+    "main.js": "/huyen-travel/static/js/main.06131f48.js",
+    "index.html": "/huyen-travel/index.html",
+    "main.6c074dea.css.map": "/huyen-travel/static/css/main.6c074dea.css.map",
+    "main.06131f48.js.map": "/huyen-travel/static/js/main.06131f48.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.6c074dea.css",
+    "static/js/main.06131f48.js"
+  ]
+}
