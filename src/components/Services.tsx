@@ -1,5 +1,4 @@
 import React, { useRef } from 'react';
-import { GlassElement } from '../GlassElement/GlassElement';
 import { useWindowSize } from '../hooks/useWindowSize';
 
 const services = [
@@ -34,30 +33,19 @@ const Services: React.FC = () => {
   const { width } = useWindowSize();
   const isMobile = width < 768;
 
-  const cardWidth = isMobile ? width * 0.9 :
-    width < 1280 ? Math.min(width * 0.45, 400) : 380;
-  const cardHeight = isMobile ? 220 : 300;
-
   return (
-    <section id="services" className="services" ref={sectionRef}>
+    <section id="services" className="services" ref={sectionRef} style={{ padding: isMobile ? '60px 15px' : '100px 50px' }}>
       <div className="services-inner">
-        <h2 className="section-title">Expertise</h2>
+        <h2 className="section-title" style={{ textAlign: isMobile ? 'center' : 'left' }}>Expertise</h2>
         <div className="service-grid">
           {services.map((s, i) => (
             <div key={i} className="card-container" style={{ display: 'flex', justifyContent: 'center' }}>
-              <GlassElement
-                width={cardWidth}
-                height={cardHeight}
-                radius={20}
-                depth={10}
-                blur={0.5}
-                chromaticAberration={1}
-              >
-                <div className="card" style={{ padding: isMobile ? '20px 25px' : '30px 40px', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                  <h3 style={{ textTransform: 'uppercase', letterSpacing: '1px', fontSize: isMobile ? '1.1rem' : '1.3rem', color: 'var(--accent)' }}>{s.title}</h3>
-                  <p style={{ marginTop: '10px', fontSize: isMobile ? '0.85rem' : '0.9rem', color: 'var(--text)' }}>{s.desc}</p>
+              <div className="glass-panel" style={{ width: '100%', minHeight: '220px', padding: '10px', borderRadius: '10px' }}>
+                <div className="card" style={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '10px' }}>
+                  <h3 style={{ textTransform: 'uppercase', letterSpacing: '1px', color: 'var(--accent)' }}>{s.title}</h3>
+                  <p style={{ marginTop: '10px', fontSize: '0.9rem', color: 'var(--text)' }}>{s.desc}</p>
                 </div>
-              </GlassElement>
+              </div>
             </div>
           ))}
         </div>

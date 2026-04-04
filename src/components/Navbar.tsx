@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { GlassElement } from '../GlassElement/GlassElement';
-import { useWindowSize } from '../hooks/useWindowSize';
 
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { width, height } = useWindowSize(); // Get both width and height
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
