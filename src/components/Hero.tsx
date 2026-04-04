@@ -10,7 +10,7 @@ const Hero: React.FC = () => {
 
       <div className="hero-content">
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
-          <div className="glass-panel" style={{ width: '100%', maxWidth: '900px', padding: 'clamp(20px, 5vw, 40px) 20px' }}>
+          <div className="glass-panel" style={{ width: '100%', maxWidth: '900px', padding: 'clamp(20px, 5vw, 40px) 10px' }}>
             <div className="hero-inner-container">
               {/* Badge chứng thực */}
               <div className="badge-container" style={{ flexWrap: 'wrap', justifyContent: 'center' }}>
@@ -23,18 +23,18 @@ const Hero: React.FC = () => {
                 <span className="gradient-text">Authentic Saigon</span>
               </h1>
 
-              <p className="hero-sub" style={{ margin: '0 auto 40px auto' }}>
+              <p className="hero-sub">
                 I am **Huyen (Wind)** — a licensed guide with a passion for showing <br />
                 the real side of Ho Chi Minh City through storytelling and hidden gems.
               </p>
 
               <div className="hero-cta-group" style={{ flexWrap: 'wrap' }}>
                 <div className="glass-panel" style={{ borderRadius: '50px' }}>
-                  <button className="nav-btn" style={{ background: 'transparent', border: 'none', color: 'white', cursor: 'pointer', padding: '12px 30px', fontWeight: '600', minWidth: '160px' }}>Start Journey</button>
+                  <button className="nav-btn" style={{ background: 'transparent', border: 'none', color: 'white', cursor: 'pointer', padding: '12px 30px', fontWeight: '600', minWidth: '120px' }}>Start Journey</button>
                 </div>
 
                 <div className="glass-panel" style={{ borderRadius: '50px' }}>
-                  <button className="nav-btn" style={{ background: 'transparent', border: 'none', color: 'white', cursor: 'pointer', padding: '12px 30px', fontWeight: '600', minWidth: '160px' }}>View Tour</button>
+                  <button className="nav-btn" style={{ background: 'transparent', border: 'none', color: 'white', cursor: 'pointer', padding: '12px 30px', fontWeight: '600', minWidth: '120px' }}>View Tour</button>
                 </div>
               </div>
             </div>

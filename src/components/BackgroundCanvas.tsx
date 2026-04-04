@@ -169,13 +169,27 @@ const BackgroundCanvas: React.FC = () => {
         }
       }
 
-      // CLOUDS (Sharp Vector Silhouette, Mobile Scaling)
-      ctx.fillStyle = cloudC;
+      // CLOUDS (Sharp Vector Silhouette & Dynamic Shadows)
       const cSizeMult = isMob ? 0.2 : 0.5;
       sceneData.clouds.forEach(c => {
         const cx = (c.x + t * 65) % (w + 500) - 250;
         const cw = c.w * cSizeMult;
-        // Draw segment cloud
+
+        // 1. Dynamic Cloud Shadow (Reacts to Sun Position)
+        if (p < 0.8) {
+          const sOff = (cx - sX) * 0.05; // Offset based on sun position
+          const shadY = h * 0.85 + mobOff; // Over the city
+          ctx.save();
+          ctx.fillStyle = 'rgba(0,0,0,0.1)';
+          ctx.filter = 'blur(15px)';
+          ctx.beginPath();
+          ctx.ellipse(cx + sOff, shadY, cw, cw * 0.2, 0, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.restore();
+        }
+
+        // 2. Cloud Body
+        ctx.fillStyle = cloudC;
         ctx.beginPath();
         ctx.arc(cx, c.y, cw * 0.4, 0, Math.PI * 2);
         ctx.arc(cx - cw * 0.3, c.y + 10 * cSizeMult, cw * 0.3, 0, Math.PI * 2);
