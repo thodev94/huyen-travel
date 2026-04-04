@@ -3,12 +3,12 @@ import { GlassElement } from '../GlassElement/GlassElement';
 import { useWindowSize } from '../hooks/useWindowSize';
 
 const galleryImages = [
-  "https://images.unsplash.com/photo-1583417319070-4a69db38a482?q=80&w=1200&auto=format&fit=crop", // Cityscape (Works)
-  "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=1200&auto=format&fit=crop", // Food (Works)
-  "https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?q=80&w=1200&auto=format&fit=crop", // Venice-like (Works)
-  "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=1200&auto=format&fit=crop", // Lake (Works)
-  "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=80&w=1200&auto=format&fit=crop", // Paris (Works - consistent loading)
-  "https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"  // Nature (Works)
+  "https://images.unsplash.com/photo-1583417319070-4a69db38a482?q=80&w=600&auto=format&fit=crop", // Cityscape (Works)
+  "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=600&auto=format&fit=crop", // Food (Works)
+  "https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?q=80&w=600&auto=format&fit=crop", // Venice-like (Works)
+  "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=600&auto=format&fit=crop", // Lake (Works)
+  "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=80&w=600&auto=format&fit=crop", // Paris (Works - consistent loading)
+  "https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=600&auto=format&fit=crop"  // Nature (Works)
 ];
 
 const Gallery: React.FC = () => {
@@ -52,6 +52,7 @@ const Gallery: React.FC = () => {
             return (
               <div
                 key={index}
+                className="glass-box"
                 style={{
                   gridColumn: isMobile ? 'span 1' : `span ${config.spanC}`,
                   gridRow: isMobile ? 'span 1' : `span ${config.spanR}`

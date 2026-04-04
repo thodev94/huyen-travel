@@ -8,7 +8,7 @@ const Contact: React.FC = () => {
   const brands = ["SAIGON", "CULTURE", "TRADITION", "CUISINE", "NIGHTLIFE", "STORYTELLING", "AUTHENTICITY"];
 
   return (
-    <footer id="contact" className="contact" style={{ background: '#000', color: 'white', overflow: 'hidden' }}>
+    <footer id="contact" className="contact" style={{ background: 'rgba(0,0,0,0.4)', color: 'white', overflow: 'hidden' }}>
       {/* 1. Brand Marquee */}
       <div className="brand-marquee-container">
         <div className="brand-marquee">

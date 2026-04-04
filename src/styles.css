@@ -33,17 +33,7 @@ html {
 
 /* Fixed background workaround for mobile (iOS/Android ignore background-attachment: fixed) */
 .main-wrapper::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: url('https://images.unsplash.com/photo-1472214103451-9374bd1c798e?q=80&w=2400&auto=format&fit=crop');
-  background-size: cover;
-  background-position: center;
-  z-index: -1;
-  will-change: transform;
+  display: none;
 }
 
 
@@ -62,7 +52,7 @@ html {
   justify-content: center;
   align-items: center;
   z-index: 1000;
-  transition: all 0.6s cubic-bezier(0.2, 1, 0.3, 1);
+  transition: background-color 0.6s cubic-bezier(0.2, 1, 0.3, 1), transform 0.6s cubic-bezier(0.2, 1, 0.3, 1);
 }
 
 .navbar.scrolled {
@@ -139,7 +129,7 @@ html {
   z-index: 1050;
   opacity: 0;
   visibility: hidden;
-  transition: all 0.4s ease;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
 }
 
 .mobile-nav-overlay.open {
@@ -355,7 +345,7 @@ body {
   font-weight: 600;
   font-size: 0.95rem;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   box-shadow: var(--text-shadow);
 }
 
@@ -368,7 +358,7 @@ body {
   font-weight: 500;
   font-size: 0.95rem;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 /* Hover effects */
@@ -411,21 +401,20 @@ body {
   background: var(--text-white);
   position: absolute;
   left: 50%;
-  transform: translateX(-50%);
-  top: 7px;
   border-radius: 2px;
   animation: scrollMouse 2s infinite ease-in-out;
+  will-change: transform;
 }
 
 @keyframes scrollMouse {
   0% {
     opacity: 1;
-    top: 7px;
+    transform: translateX(-50%) translateY(7px);
   }
 
   100% {
     opacity: 0;
-    top: 22px;
+    transform: translateX(-50%) translateY(22px);
   }
 }
 

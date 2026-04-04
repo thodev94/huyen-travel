@@ -44,7 +44,6 @@ export const GlassElement = React.memo(({
       borderRadius: `${radius}px`,
       backdropFilter: `blur(${blur / 2}px) url('${filter}') blur(${blur}px) brightness(1.1) saturate(1.5)`,
       transform: 'translateZ(0)', // Promote to its own layer
-      willChange: 'backdrop-filter',
     };
 
     if (debug === true) {
