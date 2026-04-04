@@ -23,7 +23,7 @@ const Navbar: React.FC = () => {
 
   return (
     <nav className="navbar-wrapper">
-      <div 
+      <div
         className={`navbar ${isScrolled ? 'scrolled' : ''}`}
         style={{
           width: '100%',
@@ -34,10 +34,11 @@ const Navbar: React.FC = () => {
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          transition: 'background-color 0.4s ease'
+          transition: 'background-color 0.4s ease',
+          gap: 16
         }}
       >
-        <div className="logo" style={{ position: 'absolute', left: '20px' }}>
+        <div className="logo" >
           <span style={{ fontWeight: 'bold', color: 'red' }}>HUYEN PORTFOLIO.</span>
         </div>
 
