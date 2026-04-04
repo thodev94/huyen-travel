@@ -62,8 +62,8 @@ const Gallery: React.FC = () => {
                   height={h}
                   radius={24}
                   depth={5}
-                  blur={0.3}
-                  chromaticAberration={4}
+                  blur={0.2}
+                  chromaticAberration={1.5}
                 >
                   <div style={{
                     width: '100%',
@@ -71,7 +71,8 @@ const Gallery: React.FC = () => {
                     overflow: 'hidden',
                     position: 'relative',
                     borderRadius: '24px',
-                    background: '#111'
+                    // background: '#111',
+                    padding: 10
                   }}>
                     <img
                       src={img}
@@ -82,6 +83,8 @@ const Gallery: React.FC = () => {
                         height: '100%',
                         objectFit: 'cover',
                         display: 'block',
+                        borderRadius: '24px',
+
                         transition: 'transform 0.8s cubic-bezier(0.2, 1, 0.3, 1)',
                       }}
                       className="gallery-img"

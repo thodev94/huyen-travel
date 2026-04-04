@@ -49,13 +49,13 @@ const Services: React.FC = () => {
                 width={cardWidth}
                 height={cardHeight}
                 radius={20}
-                depth={4}
+                depth={10}
                 blur={0.5}
-                chromaticAberration={8}
+                chromaticAberration={1}
               >
                 <div className="card" style={{ padding: isMobile ? '20px 25px' : '30px 40px', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                   <h3 style={{ textTransform: 'uppercase', letterSpacing: '1px', fontSize: isMobile ? '1.1rem' : '1.3rem', color: 'var(--accent)' }}>{s.title}</h3>
-                  <p style={{ marginTop: '10px', fontSize: isMobile ? '0.85rem' : '0.9rem', color: 'var(--textMain)' }}>{s.desc}</p>
+                  <p style={{ marginTop: '10px', fontSize: isMobile ? '0.85rem' : '0.9rem', color: 'var(--text)' }}>{s.desc}</p>
                 </div>
               </GlassElement>
             </div>

@@ -22,39 +22,42 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <nav className={`navbar-wrapper`}>
-      <GlassElement
-        width={width}
-        height={80}
-        radius={0}
-        depth={5}
-        blur={0.8}
-        debug={false}
+    <nav className="navbar-wrapper">
+      <div 
+        className={`navbar ${isScrolled ? 'scrolled' : ''}`}
+        style={{
+          width: '100%',
+          height: '80px',
+          backdropFilter: 'blur(20px) saturate(180%)',
+          backgroundColor: isScrolled ? 'rgba(0, 0, 0, 0.7)' : 'rgba(0, 0, 0, 0.3)',
+          borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          transition: 'background-color 0.4s ease'
+        }}
       >
-        <div className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
-          <div className="logo">
-            <span style={{ fontWeight: 'bold', color: 'red' }}>HUYEN PORTFOLIO.</span>
-          </div>
-
-          <div className="nav-links">
-            <a href="#hero">Profile</a>
-            <a href="#about">About</a>
-            <a href="#services">Services</a>
-            <a href="#gallery">Journal</a>
-            <a href="#contact">Contact</a>
-          </div>
-
-          <button className={`mobile-menu-btn ${isMenuOpen ? 'open' : ''}`} onClick={toggleMenu}>
-            <span></span>
-            <span></span>
-            <span></span>
-          </button>
+        <div className="logo" style={{ position: 'absolute', left: '20px' }}>
+          <span style={{ fontWeight: 'bold', color: 'red' }}>HUYEN PORTFOLIO.</span>
         </div>
-      </GlassElement >
+
+        <div className="nav-links">
+          <a href="#hero">Profile</a>
+          <a href="#about">About</a>
+          <a href="#services">Services</a>
+          <a href="#gallery">Journal</a>
+          <a href="#contact">Contact</a>
+        </div>
+
+        <button className={`mobile-menu-btn ${isMenuOpen ? 'open' : ''}`} onClick={toggleMenu}>
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
 
       {/* Mobile Navigation */}
-      <div className={`mobile-nav  ${isMenuOpen ? 'open' : ''}`}>
-
+      <div className={`mobile-nav ${isMenuOpen ? 'open' : ''}`}>
         <div className="mobile-nav-inner">
           <a href="#hero" onClick={closeMenu}>Profile</a>
           <a href="#about" onClick={closeMenu}>About</a>
@@ -63,7 +66,7 @@ const Navbar: React.FC = () => {
           <a href="#contact" onClick={closeMenu}>Contact</a>
         </div>
       </div>
-    </nav >
+    </nav>
   );
 };
 

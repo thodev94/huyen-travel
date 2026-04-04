@@ -38,7 +38,7 @@ const About: React.FC = () => {
 
           {/* Box 2: Stats */}
           <div style={{ gridColumn: isMobile ? 'span 1' : 'span 1', gridRow: 'span 1' }}>
-            <GlassElement width={isMobile ? getFullWidth() : 285} height={200} radius={24} depth={5} blur={0.2}>
+            <GlassElement width={isMobile ? getFullWidth() : 285} height={200} radius={24} depth={10} blur={0.2}>
               <div style={{ padding: '30px', textAlign: 'center' }}>
                 <h2 style={{ fontSize: isMobile ? '2.5rem' : '3rem', margin: 0, color: 'var(--accent)' }}>4.9+</h2>
                 <p style={{ color: 'var(--accent)' }}>Avg. Rating</p>
@@ -49,7 +49,7 @@ const About: React.FC = () => {
 
           {/* Box 3: Skills */}
           <div style={{ gridColumn: isMobile ? 'span 1' : 'span 1', gridRow: isMobile ? 'span 1' : 'span 2' }}>
-            <GlassElement width={isMobile ? getFullWidth() : 285} height={isMobile ? 250 : 420} radius={24} depth={5} blur={0.2}>
+            <GlassElement width={isMobile ? getFullWidth() : 285} height={isMobile ? 250 : 420} radius={24} depth={10} blur={0.2}>
               <div style={{ padding: '30px' }}>
                 <h3 style={{ color: 'var(--accent)', marginBottom: '15px' }}>Personal Perks</h3>
                 <ul style={{ listStyle: 'none', lineHeight: '1.8' }}>
@@ -65,7 +65,7 @@ const About: React.FC = () => {
 
           {/* Box 4: Philosophy */}
           <div style={{ gridColumn: isMobile ? 'span 1' : 'span 3', gridRow: 'span 1' }}>
-            <GlassElement width={isMobile ? getFullWidth() : 895} height={200} radius={24} depth={5} blur={0.1}>
+            <GlassElement width={isMobile ? getFullWidth() : 895} height={200} radius={24} depth={10} blur={0.1}>
               <div style={{ padding: '30px' }}>
                 <h3 style={{ color: 'var(--accent)', marginBottom: '10px' }}>Guiding Style</h3>
                 <p style={{ fontStyle: 'italic', fontSize: isMobile ? '0.9rem' : '1rem' }}>

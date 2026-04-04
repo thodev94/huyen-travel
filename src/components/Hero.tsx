@@ -17,13 +17,13 @@ const Hero: React.FC = () => {
 
       <div className="hero-content">
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
-          <GlassElement
+            <GlassElement
             width={glassWidth}
             height={glassHeight}
             radius={isMobile ? 12 : 24}
             depth={isMobile ? 30 : 60}
-            blur={0.5}
-            chromaticAberration={8}
+            blur={0.1}
+            chromaticAberration={2}
           >
             <div className="hero-inner-container">
               {/* Badge chứng thực */}
@@ -47,9 +47,9 @@ const Hero: React.FC = () => {
                   width={isMobile ? 130 : 150}
                   height={50}
                   radius={16}
-                  depth={2}
+                  depth={8}
                   blur={0.1}
-                  chromaticAberration={8}
+                  chromaticAberration={0.5}
                 >
                   <button className="nav-btn" style={{ background: 'transparent', border: 'none', color: 'white', cursor: 'pointer', width: '100%', height: '100%', fontWeight: '600' }}>Start Journey</button>
                 </GlassElement>
@@ -60,7 +60,7 @@ const Hero: React.FC = () => {
                   radius={16}
                   depth={2}
                   blur={0.1}
-                  chromaticAberration={8}
+                  chromaticAberration={0.5}
                 >
                   <button className="nav-btn" style={{ background: 'transparent', border: 'none', color: 'white', cursor: 'pointer', width: '100%', height: '100%', fontWeight: '600' }}>View Tour</button>
                 </GlassElement>
