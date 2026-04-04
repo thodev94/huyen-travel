@@ -9,7 +9,7 @@ const Hero: React.FC = () => {
       <div className="hero-bg-overlay" />
 
       <div className="hero-content">
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', padding: '0 10px' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
           <div className="glass-panel" style={{ width: '100%', maxWidth: '900px', padding: 'clamp(20px, 5vw, 40px) 20px' }}>
             <div className="hero-inner-container">
               {/* Badge chứng thực */}

@@ -34,17 +34,37 @@ const Services: React.FC = () => {
   const isMobile = width < 768;
 
   return (
-    <section id="services" className="services" ref={sectionRef} style={{ padding: isMobile ? '60px 15px' : '100px 50px' }}>
-      <div className="services-inner">
-        <h2 className="section-title" style={{ textAlign: isMobile ? 'center' : 'left' }}>Expertise</h2>
-        <div className="service-grid">
+    <section id="services" className="services" ref={sectionRef} style={{ padding: isMobile ? '40px 15px' : '80px 20px', background: 'rgba(0, 0, 0, 0.4)' }}>
+      <div className="services-inner" style={{ maxWidth: '1240px', margin: '0 auto' }}>
+        <h2 className="section-title" style={{ textAlign: isMobile ? 'center' : 'left', color: 'white' }}>Expertise</h2>
+        <div className="service-grid" style={{ 
+          display: 'grid', 
+          gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)', 
+          gap: '15px' 
+        }}>
           {services.map((s, i) => (
-            <div key={i} className="card-container" style={{ display: 'flex', justifyContent: 'center' }}>
-              <div className="glass-panel" style={{ width: '100%', minHeight: '220px', padding: '10px', borderRadius: '10px' }}>
-                <div className="card" style={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '10px' }}>
-                  <h3 style={{ textTransform: 'uppercase', letterSpacing: '1px', color: 'var(--accent)' }}>{s.title}</h3>
-                  <p style={{ marginTop: '10px', fontSize: '0.9rem', color: 'var(--text)' }}>{s.desc}</p>
-                </div>
+            <div key={i} className="card-container">
+              <div className="glass-panel" style={{ 
+                width: '100%', 
+                minHeight: isMobile ? '140px' : '160px', 
+                padding: '15px',
+                borderRadius: '12px',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center'
+              }}>
+                <h3 style={{ 
+                  textTransform: 'uppercase', 
+                  letterSpacing: '1px', 
+                  color: 'var(--accent)', 
+                  fontSize: '1rem',
+                  marginBottom: '8px'
+                }}>{s.title}</h3>
+                <p style={{ 
+                  fontSize: '0.85rem', 
+                  color: 'rgba(255,255,255,0.7)',
+                  lineHeight: '1.4'
+                }}>{s.desc}</p>
               </div>
             </div>
           ))}
