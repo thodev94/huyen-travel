@@ -73,7 +73,7 @@ const Contact: React.FC = () => {
         </div>
 
         <div style={{ marginTop: '80px', borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '30px', display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: isMobile ? '10px' : '0', justifyContent: 'space-between', opacity: 0.3, fontSize: '0.7rem', letterSpacing: '1px', textTransform: 'uppercase', textAlign: 'center' }}>
-          <span>© 2026 HUYEN PORTFOLIO</span>
+          <span>© 2026 HUYEN TOUR</span>
           <span>SAIGON, VIETNAM</span>
         </div>
       </div>
