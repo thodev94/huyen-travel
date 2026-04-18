@@ -30,10 +30,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "lint": "next lint"
   },
   "browserslist": [
     ">0.2%",

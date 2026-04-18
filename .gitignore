@@ -1,7 +1,27 @@
-node_modules
+# dependencies
+/node_modules
+
+# next.js
+.next
+out
+
+# build output (nếu có dùng tool khác)
 dist
- .next
 build
-.env
-.DS_Store
+
+# environment variables
+.env*
+!.env.example
+
+# logs
 *.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# OS
+.DS_Store
+
+# misc
+coverage
+.vercel
