@@ -1,5 +1,6 @@
 import React from 'react';
 import { useWindowSize } from '../hooks/useWindowSize';
+import './Gallery.css';
 
 const galleryImages = [
   "https://images.unsplash.com/photo-1583417319070-4a69db38a482?q=80&w=600&auto=format&fit=crop",
@@ -18,11 +19,11 @@ const Gallery: React.FC = () => {
     display: 'grid',
     gridTemplateColumns: isMobile ? '1fr' : 'repeat(4, 285px)',
     gridTemplateRows: isMobile ? 'auto' : 'repeat(3, 200px)',
-    gap: '20px',
+    gap: '16px',
     justifyContent: 'center',
     margin: '0 auto',
     width: isMobile ? '100%' : 'max-content',
-    padding: isMobile ? '0 20px' : '0'
+    padding: isMobile ? '0 15px' : '0'
   };
 
   const galleryItems = [
@@ -35,10 +36,10 @@ const Gallery: React.FC = () => {
   ];
 
   return (
-    <section id="gallery" className="gallery" style={{ padding: isMobile ? '60px 0' : '100px 0', background: 'rgba(0, 0, 0, 0.4)' }}>
+    <section id="gallery" className="gallery">
       <div className="gallery-inner">
         <div style={{ maxWidth: '1240px', margin: '0 auto', padding: '0 20px' }}>
-          <h2 className="section-title" style={{ textAlign: isMobile ? 'center' : 'left', marginBottom: '60px', color: 'white' }}>Saigon Journal</h2>
+          <h2 className="section-title text-center" style={{ width: '100%', marginBottom: '60px' }}>Travel Journal</h2>
         </div>
 
         <div style={bentoGridStyle}>
@@ -53,6 +54,7 @@ const Gallery: React.FC = () => {
                   gridRow: isMobile ? 'span 1' : `span ${config.spanR}`,
                   position: 'relative',
                   padding: '10px',
+                  background: 'var(--bg-pure)',
                   height: isMobile ? '280px' : '100%'
                 }}
               >
@@ -61,11 +63,11 @@ const Gallery: React.FC = () => {
                   height: '100%',
                   overflow: 'hidden',
                   position: 'relative',
-                  borderRadius: '16px'
+                  borderRadius: '12px'
                 }}>
                   <img
                     src={img}
-                    alt={`Saigon view ${index + 1}`}
+                    alt={`Vietnam view ${index + 1}`}
                     loading="lazy"
                     style={{
                       width: '100%',
@@ -82,14 +84,15 @@ const Gallery: React.FC = () => {
                     left: 0,
                     width: '100%',
                     padding: '20px',
-                    background: 'linear-gradient(transparent, rgba(0,0,0,0.85))',
+                    background: 'linear-gradient(transparent, rgba(0,0,0,0.7))',
                     color: 'white',
-                    fontSize: '0.7rem',
-                    letterSpacing: '2px',
+                    fontSize: '0.75rem',
+                    fontWeight: 700,
+                    letterSpacing: '1px',
                     textTransform: 'uppercase',
                     zIndex: 2
                   }}>
-                    Saigon // 0{index + 1}
+                    Moments // 0{index + 1}
                   </div>
                 </div>
               </div>

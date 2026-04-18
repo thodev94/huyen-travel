@@ -1,0 +1,44 @@
+/* --- HERO --- */
+.hero {
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: 
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.65) 85%, var(--bg-main) 100%),
+    url('https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=80&w=2000&auto=format&fit=crop');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  max-width: 900px;
+  padding: 0 20px;
+}
+.hero-main-title {
+  font-size: var(--font-4xl);
+  font-weight: 900;
+  line-height: 1.1;
+  color: #FFFFFF;
+  margin-bottom: 24px;
+  letter-spacing: -1px;
+}
+.hero-main-title span {
+  background: var(--grad-warm-glow);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+.hero-sub {
+  font-size: var(--font-lg);
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.7;
+  max-width: 650px;
+  margin: 0 auto 40px auto;
+}

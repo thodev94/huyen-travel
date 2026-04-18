@@ -1,0 +1,82 @@
+.floating-contact {
+  position: fixed;
+  bottom: 40px;
+  right: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  z-index: 9999;
+}
+
+.float-btn {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  cursor: pointer;
+  text-decoration: none;
+  position: relative;
+}
+
+/* Tooltip on hover */
+.float-btn::before {
+  content: attr(title);
+  position: absolute;
+  right: 70px;
+  background: var(--bg-pure);
+  color: var(--text-primary);
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  pointer-events: none;
+  border: 1px solid var(--border-color);
+}
+
+.float-btn:hover::before {
+  opacity: 1;
+  visibility: visible;
+  right: 75px; /* Slide effect */
+}
+
+.float-btn:hover {
+  transform: scale(1.1) translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+}
+
+.float-btn.whatsapp {
+  background: linear-gradient(135deg, #25D366, #128C7E);
+}
+
+.float-btn.sms {
+  background: linear-gradient(135deg, #E07A5F, #C44536); /* Heritage Clay gradient */
+}
+
+@media (max-width: 1024px) {
+  .floating-contact {
+    bottom: 100px; /* Sit comfortably right above Mobile Bottom Nav */
+    right: 20px;
+    gap: 12px;
+  }
+  .float-btn {
+    width: 50px;
+    height: 50px;
+  }
+  .float-btn svg {
+    width: 24px;
+    height: 24px;
+  }
+  .float-btn::before {
+    display: none; /* Hide tooltips on mobile */
+  }
+}

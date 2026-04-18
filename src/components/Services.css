@@ -1,0 +1,72 @@
+.services {
+  background: var(--bg-soft);
+  padding: 80px 20px; 
+  position: relative;
+  z-index: 10;
+}
+.services-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+/* --- TOURS CARD --- */
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+}
+@media (max-width: 1024px) {
+  .service-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 768px) {
+  .services {
+    padding: 60px 15px; 
+  }
+  .service-grid { grid-template-columns: 1fr; }
+}
+
+.card-container {
+  height: 100%;
+}
+.service-card {
+  background: var(--bg-pure);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+  border-radius: 12px;
+  padding: 0; /* Reset for full width image */
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.service-img-wrapper {
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+}
+
+.service-img-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.2, 1, 0.3, 1);
+}
+
+.card-content {
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+.service-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(47, 93, 80, 0.08);
+  border-color: var(--color-secondary-teal);
+}
+
+.service-card:hover .service-img-wrapper img {
+  transform: scale(1.05);
+}

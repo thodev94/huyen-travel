@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useWindowSize } from '../hooks/useWindowSize';
+import './Navbar.css';
 
 const Navbar: React.FC = () => {
   const { width } = useWindowSize();
@@ -12,7 +13,6 @@ const Navbar: React.FC = () => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
     window.addEventListener('scroll', handleScroll);
 
-    // Active Section Tracking
     const sections = ['hero', 'about', 'services', 'gallery', 'contact'];
     const observers = sections.map(id => {
       const el = document.getElementById(id);
@@ -40,21 +40,20 @@ const Navbar: React.FC = () => {
   const closeMenu = () => setIsMenuOpen(false);
 
   const getLinkStyle = (id: string) => ({
-    color: activeSection === id ? 'var(--accent)' : 'white',
+    color: activeSection === id ? 'var(--color-primary-bright)' : 'var(--text-secondary)',
     textDecoration: 'none',
-    fontWeight: '600',
-    fontSize: '0.75rem',
-    letterSpacing: '2px',
+    fontWeight: '700',
+    fontSize: '0.85rem',
+    letterSpacing: '1px',
     textTransform: 'uppercase' as const,
     transition: 'color 0.3s ease',
-    position: 'relative' as const,
-    opacity: activeSection === id ? 1 : 0.7
+    position: 'relative' as const
   });
 
   const navLinks = [
     { id: 'hero', label: 'Profile' },
     { id: 'about', label: 'About' },
-    { id: 'services', label: 'Services' },
+    { id: 'services', label: 'Tours' },
     { id: 'gallery', label: 'Journal' },
     { id: 'contact', label: 'Contact' }
   ];
@@ -66,28 +65,24 @@ const Navbar: React.FC = () => {
         style={{
           width: '100%',
           height: '80px',
-          backdropFilter: 'blur(20px) saturate(180%)',
-          backgroundColor: isScrolled ? 'rgba(0, 0, 0, 0.7)' : 'rgba(0, 0, 0, 0.3)',
-          borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
           display: 'flex',
-          justifyContent: isMobile ? 'space-between' : 'center',
+          justifyContent: isMobile ? 'space-between' : 'space-between',
           alignItems: 'center',
-          transition: 'background-color 0.4s ease',
-          gap: 16,
-          padding: isMobile ? '0 20px' : '0'
+          gap: 16
         }}
       >
-        <div className="logo" style={{ marginRight: isMobile ? '0' : '40px' }}>
-          <span style={{ fontWeight: 'bold', color: 'red', fontSize: '1rem', letterSpacing: '2px' }}>HUYEN TOUR.</span>
-        </div>
+        <a href="#hero" className="logo" style={{ textDecoration: 'none' }}>
+          <span style={{ fontWeight: '900', color: 'var(--color-accent-orange)', fontSize: '1.2rem', letterSpacing: '2px' }}>HUYEN</span>
+          <span style={{ fontWeight: '900', color: 'var(--color-primary-deep)', fontSize: '1.2rem', letterSpacing: '2px' }}>TOUR.</span>
+        </a>
 
         {!isMobile && (
-          <div className="nav-links" style={{ display: 'flex', gap: '30px' }}>
+          <div className="nav-links">
             {navLinks.map(link => (
               <a key={link.id} href={`#${link.id}`} style={getLinkStyle(link.id)}>
                 {link.label}
                 {activeSection === link.id && (
-                  <span style={{ position: 'absolute', bottom: '25px', left: 0, width: '100%', height: '2px', backgroundColor: 'var(--accent)' }} />
+                  <span style={{ position: 'absolute', bottom: '-8px', left: 0, width: '100%', height: '3px', borderRadius: '2px', backgroundColor: 'var(--color-accent-orange)' }} />
                 )}
               </a>
             ))}
@@ -99,15 +94,14 @@ const Navbar: React.FC = () => {
           onClick={toggleMenu}
           style={{ display: isMobile ? 'block' : 'none', background: 'transparent', border: 'none', cursor: 'pointer' }}
         >
-          <span></span>
-          <span></span>
-          <span></span>
+          <span style={{ background: isScrolled ? 'var(--color-primary-deep)' : 'var(--text-primary)' }}></span>
+          <span style={{ background: isScrolled ? 'var(--color-primary-deep)' : 'var(--text-primary)' }}></span>
+          <span style={{ background: isScrolled ? 'var(--color-primary-deep)' : 'var(--text-primary)' }}></span>
         </button>
       </div>
 
       {/* Mobile Navigation */}
       <div 
-        className={`mobile-nav ${isMenuOpen ? 'open' : ''}`}
         style={{
           position: 'fixed',
           top: 0,
@@ -115,25 +109,28 @@ const Navbar: React.FC = () => {
           width: '100%',
           height: '100vh',
           zIndex: 999,
-          transition: 'left 0.6s cubic-bezier(0.2, 1, 0.3, 1)',
+          transition: 'left 0.4s cubic-bezier(0.2, 1, 0.3, 1)',
           display: 'flex',
           flexDirection: 'column',
-          backdropFilter: 'blur(30px) saturate(200%)',
-          backgroundColor: 'rgba(0, 0, 0, 0.9)',
+          backgroundColor: 'var(--bg-pure)',
+          boxShadow: '10px 0 30px rgba(0,0,0,0.1)'
         }}
       >
-        <div style={{ padding: '25px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
-          <span style={{ fontWeight: 'bold', color: 'red', fontSize: '1rem', letterSpacing: '2px' }}>HUYEN TOUR.</span>
-          <button onClick={closeMenu} style={{ background: 'transparent', border: 'none', color: 'white', fontSize: '2rem', cursor: 'pointer' }}>×</button>
+        <div style={{ padding: '25px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid rgba(0,0,0,0.05)' }}>
+          <div>
+            <span style={{ fontWeight: '900', color: 'var(--color-accent-orange)', fontSize: '1.2rem', letterSpacing: '2px' }}>HUYEN</span>
+            <span style={{ fontWeight: '900', color: 'var(--color-primary-deep)', fontSize: '1.2rem', letterSpacing: '2px' }}>TOUR.</span>
+          </div>
+          <button onClick={closeMenu} style={{ background: 'transparent', border: 'none', color: 'var(--color-primary-deep)', fontSize: '2.5rem', cursor: 'pointer', lineHeight: 1 }}>×</button>
         </div>
         
-        <div className="mobile-nav-inner" style={{ 
+        <div style={{ 
           flex: 1, 
           display: 'flex', 
           flexDirection: 'column', 
           justifyContent: 'center', 
           alignItems: 'center', 
-          gap: '40px' 
+          gap: '30px' 
         }}>
           {navLinks.map(link => (
             <a 
@@ -141,19 +138,15 @@ const Navbar: React.FC = () => {
               href={`#${link.id}`} 
               onClick={closeMenu}
               style={{
-                ...getLinkStyle(link.id),
-                fontSize: '2rem',
-                color: activeSection === link.id ? 'var(--accent)' : 'white',
-                opacity: activeSection === link.id ? 1 : 0.5,
-                transform: activeSection === link.id ? 'scale(1.1)' : 'scale(1)',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '15px'
+                textDecoration: 'none',
+                fontWeight: '800',
+                fontSize: '1.8rem',
+                textTransform: 'uppercase',
+                letterSpacing: '2px',
+                color: activeSection === link.id ? 'var(--color-accent-orange)' : 'var(--color-primary-deep)',
+                transition: 'all 0.3s'
               }}
             >
-              {activeSection === link.id && (
-                <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'var(--accent)' }} />
-              )}
               {link.label}
             </a>
           ))}
