@@ -87,13 +87,19 @@ body {
 }
 
 /* --- GLASS PANELS / CARDS --- */
+.services {
+  background: var(--bg-soft);
+  padding: 80px 20px; 
+  position: relative;
+  z-index: 100; /* Increased to allow search popups to stay on top */
+}
+
 .glass-panel {
   background: var(--bg-pure);
   border: 1px solid var(--border-color);
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(47, 93, 80, 0.05); /* Soft green shadow */
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  overflow: hidden;
 }
 
 .glass-panel:hover {

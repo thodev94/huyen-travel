@@ -33,7 +33,7 @@ const App: React.FC = () => {
         <TourDetail tourId={selectedTourId} onClose={() => setSelectedTourId(null)} />
       ) : (
         <>
-          <Navbar />
+          <Navbar onSelectTour={setSelectedTourId} />
           <Hero />
           <About />
           <Services onSelectTour={setSelectedTourId} />
