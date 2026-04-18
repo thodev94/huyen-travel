@@ -1,6 +1,11 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
 import { useWindowSize } from '../hooks/useWindowSize';
 import './Gallery.css';
+
+gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 const galleryImages = [
   "https://images.unsplash.com/photo-1583417319070-4a69db38a482?q=80&w=600&auto=format&fit=crop",
@@ -12,8 +17,28 @@ const galleryImages = [
 ];
 
 const Gallery: React.FC = () => {
+  const sectionRef = useRef<HTMLElement>(null);
   const { width } = useWindowSize();
   const isMobile = width < 768;
+
+  useGSAP(() => {
+    gsap.fromTo(
+      '.gallery-anim',
+      { opacity: 0, scale: isMobile ? 0.95 : 0.9, y: isMobile ? 20 : 30 },
+      {
+        opacity: 1,
+        scale: 1,
+        y: 0,
+        duration: isMobile ? 0.5 : 0.8,
+        stagger: isMobile ? 0.05 : 0.1,
+        ease: 'back.out(1.2)',
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: isMobile ? 'top 90%' : 'top 80%',
+        }
+      }
+    );
+  }, { scope: sectionRef });
 
   const bentoGridStyle: React.CSSProperties = {
     display: 'grid',
@@ -36,10 +61,10 @@ const Gallery: React.FC = () => {
   ];
 
   return (
-    <section id="gallery" className="gallery">
+    <section id="gallery" className="gallery" ref={sectionRef}>
       <div className="gallery-inner">
         <div style={{ maxWidth: '1240px', margin: '0 auto', padding: '0 20px' }}>
-          <h2 className="section-title text-center" style={{ width: '100%', marginBottom: '60px' }}>Travel Journal</h2>
+          <h2 className="section-title text-center gallery-anim" style={{ width: '100%', marginBottom: '60px' }}>Travel Journal</h2>
         </div>
 
         <div style={bentoGridStyle}>
@@ -48,7 +73,7 @@ const Gallery: React.FC = () => {
             return (
               <div
                 key={index}
-                className="glass-panel"
+                className="glass-panel gallery-anim"
                 style={{
                   gridColumn: isMobile ? 'span 1' : `span ${config.spanC}`,
                   gridRow: isMobile ? 'span 1' : `span ${config.spanR}`,

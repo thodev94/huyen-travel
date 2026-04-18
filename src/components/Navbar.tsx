@@ -1,13 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
 import { useWindowSize } from '../hooks/useWindowSize';
 import './Navbar.css';
 
+gsap.registerPlugin(useGSAP);
+
 const Navbar: React.FC = () => {
+  const navRef = useRef<HTMLElement>(null);
   const { width } = useWindowSize();
   const isMobile = width < 768;
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
+
+  useGSAP(() => {
+    const tl = gsap.timeline();
+    tl.from('.nav-logo-anim', { x: isMobile ? -10 : -20, opacity: 0, duration: isMobile ? 0.4 : 0.8, ease: 'power3.out' })
+      .from('.nav-link-anim', { y: isMobile ? -5 : -10, opacity: 0, duration: isMobile ? 0.3 : 0.5, stagger: 0.05, ease: 'power2.out' }, '-=0.2');
+  }, { scope: navRef });
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -40,7 +51,9 @@ const Navbar: React.FC = () => {
   const closeMenu = () => setIsMenuOpen(false);
 
   const getLinkStyle = (id: string) => ({
-    color: activeSection === id ? 'var(--color-primary-bright)' : 'var(--text-secondary)',
+    color: activeSection === id 
+      ? 'var(--color-accent-orange)' 
+      : (!isScrolled ? 'rgba(255,255,255,0.95)' : 'var(--text-secondary)'),
     textDecoration: 'none',
     fontWeight: '700',
     fontSize: '0.85rem',
@@ -59,7 +72,7 @@ const Navbar: React.FC = () => {
   ];
 
   return (
-    <nav className="navbar-wrapper">
+    <nav className="navbar-wrapper" ref={navRef}>
       <div
         className={`navbar ${isScrolled ? 'scrolled' : ''}`}
         style={{
@@ -71,15 +84,15 @@ const Navbar: React.FC = () => {
           gap: 16
         }}
       >
-        <a href="#hero" className="logo" style={{ textDecoration: 'none' }}>
-          <span style={{ fontWeight: '900', color: 'var(--color-accent-orange)', fontSize: '1.2rem', letterSpacing: '2px' }}>HUYEN</span>
-          <span style={{ fontWeight: '900', color: 'var(--color-primary-deep)', fontSize: '1.2rem', letterSpacing: '2px' }}>TOUR.</span>
+        <a href="#hero" className="logo nav-logo-anim" style={{ textDecoration: 'none' }}>
+          <span style={{ fontWeight: '900', color: 'var(--color-accent-orange)', fontSize: '1.2rem', letterSpacing: '2px' }}>WIND</span>
+          <span style={{ fontWeight: '900', color: !isScrolled ? '#FFFFFF' : 'var(--color-primary-deep)', fontSize: '1.2rem', letterSpacing: '2px', transition: 'color 0.3s' }}>TOUR.</span>
         </a>
 
         {!isMobile && (
           <div className="nav-links">
             {navLinks.map(link => (
-              <a key={link.id} href={`#${link.id}`} style={getLinkStyle(link.id)}>
+              <a key={link.id} href={`#${link.id}`} className="nav-link-anim" style={getLinkStyle(link.id)}>
                 {link.label}
                 {activeSection === link.id && (
                   <span style={{ position: 'absolute', bottom: '-8px', left: 0, width: '100%', height: '3px', borderRadius: '2px', backgroundColor: 'var(--color-accent-orange)' }} />
@@ -89,19 +102,19 @@ const Navbar: React.FC = () => {
           </div>
         )}
 
-        <button 
-          className={`mobile-menu-btn ${isMenuOpen ? 'open' : ''}`} 
+        <button
+          className={`mobile-menu-btn ${isMenuOpen ? 'open' : ''}`}
           onClick={toggleMenu}
           style={{ display: isMobile ? 'block' : 'none', background: 'transparent', border: 'none', cursor: 'pointer' }}
         >
-          <span style={{ background: isScrolled ? 'var(--color-primary-deep)' : 'var(--text-primary)' }}></span>
-          <span style={{ background: isScrolled ? 'var(--color-primary-deep)' : 'var(--text-primary)' }}></span>
-          <span style={{ background: isScrolled ? 'var(--color-primary-deep)' : 'var(--text-primary)' }}></span>
+          <span style={{ background: !isScrolled ? '#FFFFFF' : 'var(--color-primary-deep)' }}></span>
+          <span style={{ background: !isScrolled ? '#FFFFFF' : 'var(--color-primary-deep)' }}></span>
+          <span style={{ background: !isScrolled ? '#FFFFFF' : 'var(--color-primary-deep)' }}></span>
         </button>
       </div>
 
       {/* Mobile Navigation */}
-      <div 
+      <div
         style={{
           position: 'fixed',
           top: 0,
@@ -118,24 +131,24 @@ const Navbar: React.FC = () => {
       >
         <div style={{ padding: '25px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid rgba(0,0,0,0.05)' }}>
           <div>
-            <span style={{ fontWeight: '900', color: 'var(--color-accent-orange)', fontSize: '1.2rem', letterSpacing: '2px' }}>HUYEN</span>
+            <span style={{ fontWeight: '900', color: 'var(--color-accent-orange)', fontSize: '1.2rem', letterSpacing: '2px' }}>WIND</span>
             <span style={{ fontWeight: '900', color: 'var(--color-primary-deep)', fontSize: '1.2rem', letterSpacing: '2px' }}>TOUR.</span>
           </div>
           <button onClick={closeMenu} style={{ background: 'transparent', border: 'none', color: 'var(--color-primary-deep)', fontSize: '2.5rem', cursor: 'pointer', lineHeight: 1 }}>×</button>
         </div>
-        
-        <div style={{ 
-          flex: 1, 
-          display: 'flex', 
-          flexDirection: 'column', 
-          justifyContent: 'center', 
-          alignItems: 'center', 
-          gap: '30px' 
+
+        <div style={{
+          flex: 1,
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          gap: '30px'
         }}>
           {navLinks.map(link => (
-            <a 
-              key={link.id} 
-              href={`#${link.id}`} 
+            <a
+              key={link.id}
+              href={`#${link.id}`}
               onClick={closeMenu}
               style={{
                 textDecoration: 'none',

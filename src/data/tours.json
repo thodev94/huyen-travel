@@ -856,14 +856,14 @@
         "html": "<strong>✅ Tour Highlights:</strong>"
       },
       {
-        "type": "list-unordered",
+        "type": "list-ordered",
         "items": [
           "Scenic Drive through the countryside with glimpses of rural life",
           "Historical Introduction from a knowledgeable English-speaking guide",
           "Explore Original Tunnel Systems including hidden entrances, trap doors, kitchens, and bunkers",
           "Try a Shooting Range (Optional) with AK-47s and other weapons (extra cost)",
           "Walk through jungle trails once used for guerrilla warfare",
-          "Enjoy tea &amp; cassava, the wartime staple food of soldiers"
+          "Enjoy tea & cassava, the wartime staple food of soldiers"
         ]
       },
       {
@@ -877,7 +877,7 @@
         "html": "Driving back to the city and experiencing the old Saigon where are non-touristy places and immerse yourself in the local lifestyle."
       },
       {
-        "type": "list-unordered",
+        "type": "list-ordered",
         "items": [
           "Exploring Binh Tay Market offers more than just shopping, it's a sensory journey steeped in local flavors and vibrant colors, where one can savor delectable street food, witness the ebb and flow of daily life, and uncover treasures both mundane and exotic.",
           "Finally, for those who seek a glimpse into the city's spiritual and cultural heritage, Thien Hau Pagoda stands as a revered sanctuary, offering not just a visual feast for the senses but also a spiritual haven where history, faith, and artistry intertwine in harmonious splendor."
@@ -962,7 +962,7 @@
         "html": "<strong>✅ Tour Highlights:</strong>"
       },
       {
-        "type": "list-unordered",
+        "type": "list-ordered",
         "items": [
           "Scenic Drive through the countryside with glimpses of rural life",
           "Historical Introduction from a knowledgeable English-speaking guide",

@@ -42,7 +42,7 @@ const Contact: React.FC = () => {
           {/* Column 1: Brand & Tagline */}
           <div style={{ gridColumn: isMobile ? 'span 1' : 'span 2' }}>
             <a href="#hero" style={{ textDecoration: 'none', display: 'inline-block', marginBottom: '20px' }}>
-              <span style={{ fontWeight: '900', color: 'var(--color-accent-orange)', fontSize: '1.5rem', letterSpacing: '2px' }}>HUYEN</span>
+              <span style={{ fontWeight: '900', color: 'var(--color-accent-orange)', fontSize: '1.5rem', letterSpacing: '2px' }}>WIND</span>
               <span style={{ fontWeight: '900', color: 'var(--color-primary-deep)', fontSize: '1.5rem', letterSpacing: '2px' }}>TOUR.</span>
             </a>
             <p style={{ color: 'var(--text-secondary)', lineHeight: '1.7', fontSize: '0.95rem', maxWidth: '300px' }}>

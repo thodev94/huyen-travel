@@ -1,7 +1,12 @@
 import React, { useRef, useState } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
 import { useWindowSize } from '../hooks/useWindowSize';
 import toursData from '../data/tours.json';
 import './Services.css';
+
+gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 interface ServicesProps {
   onSelectTour: (tourId: string) => void;
@@ -28,13 +33,31 @@ const Services: React.FC<ServicesProps> = ({ onSelectTour }) => {
     ? toursData 
     : toursData.filter(t => t.category === activeCategory);
 
+  useGSAP(() => {
+    gsap.fromTo(
+      '.services-anim',
+      { opacity: 0, y: isMobile ? 30 : 50 },
+      { 
+        opacity: 1, 
+        y: 0, 
+        duration: isMobile ? 0.5 : 0.8, 
+        stagger: isMobile ? 0.08 : 0.15,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: isMobile ? 'top 90%' : 'top 80%',
+        }
+      }
+    );
+  }, { scope: sectionRef, dependencies: [activeCategory] }); // Re-animate when category changes
+
   return (
     <section id="services" className="services" ref={sectionRef}>
       <div className="services-inner">
-        <h2 className="section-title">Our Tours</h2>
+        <h2 className="section-title services-anim">Our Tours</h2>
         
         {/* Category Menu */}
-        <div style={{
+        <div className="services-anim" style={{
           display: 'flex',
           gap: '12px',
           justifyContent: isMobile ? 'center' : 'flex-start',
@@ -59,7 +82,7 @@ const Services: React.FC<ServicesProps> = ({ onSelectTour }) => {
             const coverImage = BANNER_IMAGES[originalIndex % BANNER_IMAGES.length];
             
             return (
-              <div key={s.id} className="card-container" onClick={() => onSelectTour(s.id)} style={{ cursor: 'pointer' }}>
+              <div key={s.id} className="card-container services-anim" onClick={() => onSelectTour(s.id)} style={{ cursor: 'pointer' }}>
                 <div className="service-card">
                   
                   <div className="service-img-wrapper">

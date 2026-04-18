@@ -1,7 +1,11 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useRef } from 'react';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
 import toursData from '../data/tours.json';
 import { renderNode, DocNode } from '../utils/NodeMapper';
 import { useWindowSize } from '../hooks/useWindowSize';
+
+gsap.registerPlugin(useGSAP);
 
 interface TourDetailProps {
   tourId: string;
@@ -18,10 +22,22 @@ const BANNER_IMAGES = [
 ];
 
 const TourDetail: React.FC<TourDetailProps> = ({ tourId, onClose }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
   const { width } = useWindowSize();
   const isMobile = width < 768;
   const tourIndex = toursData.findIndex(t => t.id === tourId);
   const tour = toursData[tourIndex];
+
+  useGSAP(() => {
+    const tl = gsap.timeline();
+    tl.from('.detail-anim', {
+      opacity: 0,
+      y: isMobile ? 15 : 30,
+      duration: isMobile ? 0.4 : 0.8,
+      stagger: isMobile ? 0.05 : 0.1,
+      ease: 'power3.out'
+    });
+  }, { scope: containerRef });
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -38,7 +54,7 @@ const TourDetail: React.FC<TourDetailProps> = ({ tourId, onClose }) => {
   const smsLink = `sms:${phoneNumber}?body=Hi,+I+am+interested+in+the+${encodeURIComponent(tour.title)}+tour.`;
 
   return (
-    <div style={{
+    <div ref={containerRef} style={{
       width: '100%',
       minHeight: '100vh',
       background: 'var(--bg-soft)',
@@ -96,7 +112,7 @@ const TourDetail: React.FC<TourDetailProps> = ({ tourId, onClose }) => {
       }}>
 
         {/* Title */}
-        <h1 style={{ 
+        <h1 className="detail-anim" style={{ 
           fontSize: isMobile ? '2.2rem' : '3.8rem', 
           color: 'var(--color-primary-deep)', 
           fontWeight: 900,
@@ -106,7 +122,7 @@ const TourDetail: React.FC<TourDetailProps> = ({ tourId, onClose }) => {
           {tour.title}
         </h1>
         
-        <div className="tag" style={{ 
+        <div className="tag detail-anim" style={{ 
           display: 'inline-block',
           marginBottom: '40px'
         }}>
@@ -114,7 +130,7 @@ const TourDetail: React.FC<TourDetailProps> = ({ tourId, onClose }) => {
         </div>
 
         {/* Action Buttons */}
-        <div style={{ 
+        <div className="detail-anim" style={{ 
           display: 'flex', 
           gap: '15px', 
           marginBottom: '50px',
@@ -147,7 +163,7 @@ const TourDetail: React.FC<TourDetailProps> = ({ tourId, onClose }) => {
         </div>
 
         {/* Content Body */}
-        <div className="tour-content" style={{
+        <div className="tour-content detail-anim" style={{
           background: 'var(--bg-pure)',
           padding: isMobile ? '30px 20px' : '50px',
           borderRadius: '24px',

@@ -1,13 +1,37 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
 import { useWindowSize } from '../hooks/useWindowSize';
 import aboutData from '../data/about.json';
 import { renderNode, DocNode } from '../utils/NodeMapper';
 import './About.css';
 
+gsap.registerPlugin(ScrollTrigger, useGSAP);
+
 const About: React.FC = () => {
+  const sectionRef = useRef<HTMLElement>(null);
   const { width } = useWindowSize();
   const isMobile = width < 768;
   const [isExpanded, setIsExpanded] = useState(false);
+
+  useGSAP(() => {
+    gsap.fromTo(
+      '.about-anim',
+      { opacity: 0, y: isMobile ? 30 : 50 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: isMobile ? 0.5 : 0.8,
+        stagger: isMobile ? 0.08 : 0.15,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: isMobile ? 'top 90%' : 'top 80%',
+        }
+      }
+    );
+  }, { scope: sectionRef });
 
   const bentoGridStyle: React.CSSProperties = {
     display: 'grid',
@@ -20,13 +44,13 @@ const About: React.FC = () => {
   const journeyNodes: DocNode[] = (aboutData as any)['My Journey into the Tourism Business']?.nodes || [];
 
   return (
-    <section id="about" className="about">
+    <section id="about" className="about" ref={sectionRef}>
       <div className="about-inner">
-        <h2 className="section-title">About Me</h2>
+        <h2 className="section-title about-anim">About Me</h2>
 
         <div className="bento-grid" style={bentoGridStyle}>
           {/* Box 1: Langs */}
-          <div className="glass-panel" style={{ padding: '24px', gridColumn: isMobile ? 'span 1' : 'span 2' }}>
+          <div className="glass-panel about-anim" style={{ padding: '24px', gridColumn: isMobile ? 'span 1' : 'span 2' }}>
             <h3 style={{ color: 'var(--color-primary-deep)', marginBottom: '15px' }}>Languages</h3>
             <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
               <span className="tag">English (Fluent)</span>
@@ -39,7 +63,7 @@ const About: React.FC = () => {
             href="https://www.withlocals.com/host/huyenbc46ed92ab/"
             target="_blank"
             rel="noopener noreferrer"
-            className="glass-panel"
+            className="glass-panel about-anim"
             style={{
               padding: '24px',
               textAlign: 'center',
@@ -59,7 +83,7 @@ const About: React.FC = () => {
           </a>
 
           {/* Box 3: Skills */}
-          <div className="glass-panel" style={{ padding: '24px', gridRow: isMobile ? 'span 1' : 'span 2' }}>
+          <div className="glass-panel about-anim" style={{ padding: '24px', gridRow: isMobile ? 'span 1' : 'span 2' }}>
             <h3 style={{ color: 'var(--color-primary-deep)', marginBottom: '15px' }}>Persk & Skills</h3>
             <ul style={{ listStyle: 'none', lineHeight: '2.2', padding: 0, color: 'var(--text-secondary)' }}>
               <li><span style={{ color: 'var(--color-secondary-teal)' }}>✓</span> Licensed Professional Guide</li>
@@ -71,7 +95,7 @@ const About: React.FC = () => {
           </div>
 
           {/* Box 4: My Story */}
-          <div className="glass-panel" style={{ padding: '30px', gridColumn: isMobile ? 'span 1' : 'span 3', position: 'relative' }}>
+          <div className="glass-panel about-anim" style={{ padding: '30px', gridColumn: isMobile ? 'span 1' : 'span 3', position: 'relative' }}>
             <div style={{
               maxHeight: isExpanded ? '5000px' : '280px',
               overflow: 'hidden',
