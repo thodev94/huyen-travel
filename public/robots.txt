@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Sitemap (adjust if your production host differs)
+Sitemap: http://localhost:3002/sitemap.xml

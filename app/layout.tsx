@@ -30,7 +30,13 @@ export const metadata = {
     title: 'Huyen Tour — Authentic Vietnam tours',
     description: 'Licensed guide Huyen — Explore authentic Vietnam tours',
   },
+  robots: {
+    index: true,
+    follow: true
+  }
 };
+
+export const metadataBase = new URL(process.env.NEXT_PUBLIC_METADATA_BASE ?? 'http://localhost:3002');
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
