@@ -1,5 +1,5 @@
 import React from 'react';
-import './NodeMapper.css';
+import Image from 'next/image';
 
 export interface DocNode {
   type: string;
@@ -116,10 +116,7 @@ export const renderNode = (node: DocNode, index: number) => {
 
                 {/* Image Box */}
                 <div className="itinerary-item-right">
-                  <img src={imgSrc} alt={`Stop ${i + 1}`} className="itinerary-img" style={{
-                    width: '100%',
-                    maxWidth: '800px',
-                    height: '280px',
+                  <Image src={imgSrc} alt={`Stop ${i + 1}`} width={800} height={280} style={{
                     objectFit: 'cover',
                     borderRadius: '16px',
                     boxShadow: '0 10px 30px rgba(0,0,0,0.08)'
@@ -132,7 +129,8 @@ export const renderNode = (node: DocNode, index: number) => {
       );
 
     case 'image':
-      return <img key={index} src={node.src} alt="" style={{ maxWidth: '100%', borderRadius: '12px', margin: '30px 0', boxShadow: '0 8px 25px rgba(0,0,0,0.05)' }} />;
+      const imgSrc = node.src || TEMPORARY_IMAGES[0];
+      return <Image key={index} src={imgSrc} alt="" width={800} height={450} style={{ maxWidth: '100%', borderRadius: '12px', margin: '30px 0', boxShadow: '0 8px 25px rgba(0,0,0,0.05)' }} />;
     
     case 'table':
       return (

@@ -1,9 +1,10 @@
+"use client";
 import React, { useRef } from 'react';
+import Image from 'next/image';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import { useWindowSize } from '../hooks/useWindowSize';
-import './Gallery.css';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -90,16 +91,14 @@ const Gallery: React.FC = () => {
                   position: 'relative',
                   borderRadius: '12px'
                 }}>
-                  <img
+                  <Image
                     src={img}
                     alt={`Vietnam view ${index + 1}`}
-                    loading="lazy"
+                    fill
                     style={{
-                      width: '100%',
-                      height: '100%',
                       objectFit: 'cover',
                       display: 'block',
-                      transition: 'transform 0.8s cubic-bezier(0.2, 1, 0.3, 1)',
+                      transition: 'transform 0.8s cubic-bezier(0.2, 1, 0.3, 1)'
                     }}
                     className="gallery-img"
                   />

@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -9,7 +10,7 @@ import BackgroundCanvas from './components/BackgroundCanvas';
 import TourDetail from './components/TourDetail';
 import FloatingContact from './components/FloatingContact';
 import MobileBottomNav from './components/MobileBottomNav';
-import './styles.css';
+// global styles are imported from app/globals.css for Next.js
 
 const App: React.FC = () => {
   const [selectedTourId, setSelectedTourId] = useState<string | null>(null);

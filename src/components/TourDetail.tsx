@@ -1,4 +1,7 @@
+"use client";
 import React, { useEffect, useMemo, useRef } from 'react';
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import toursData from '../data/tours.json';
@@ -9,7 +12,7 @@ gsap.registerPlugin(useGSAP);
 
 interface TourDetailProps {
   tourId: string;
-  onClose: () => void;
+  onClose?: () => void;
 }
 
 const BANNER_IMAGES = [
@@ -22,6 +25,7 @@ const BANNER_IMAGES = [
 ];
 
 const TourDetail: React.FC<TourDetailProps> = ({ tourId, onClose }) => {
+  const router = useRouter();
   const containerRef = useRef<HTMLDivElement>(null);
   const { width } = useWindowSize();
   const isMobile = width < 768;
@@ -70,10 +74,11 @@ const TourDetail: React.FC<TourDetailProps> = ({ tourId, onClose }) => {
         minHeight: '250px',
         maxHeight: '600px'
       }}>
-        <img 
-          src={bannerImg} 
+        <Image
+          src={bannerImg}
           alt={tour.title}
-          style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+          fill
+          style={{ objectFit: 'cover' }}
         />
         {/* Dark overlay for contrast */}
         <div style={{ 
@@ -84,7 +89,7 @@ const TourDetail: React.FC<TourDetailProps> = ({ tourId, onClose }) => {
         {/* Floating Back Button */}
         <div style={{ position: 'absolute', top: isMobile ? '20px' : '40px', left: isMobile ? '20px' : '40px', zIndex: 10 }}>
           <button 
-            onClick={onClose}
+            onClick={() => (onClose ? onClose() : router.push('/'))}
             style={{ 
               display: 'flex', alignItems: 'center', gap: '8px',
               background: 'rgba(255,255,255,0.2)', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.4)',
@@ -145,7 +150,7 @@ const TourDetail: React.FC<TourDetailProps> = ({ tourId, onClose }) => {
               gap: '10px'
             }}
             >
-              <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" style={{ width: '22px', filter: 'brightness(0) invert(1)' }} />
+              <Image src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" width={22} height={22} style={{ filter: 'brightness(0) invert(1)' }} />
               WhatsApp
             </button>
           </a>

@@ -1,6 +1,6 @@
+"use client";
 import React from 'react';
 import { useWindowSize } from '../hooks/useWindowSize';
-import './Contact.css';
 
 const Contact: React.FC = () => {
   const { width } = useWindowSize();

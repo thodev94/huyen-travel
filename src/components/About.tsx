@@ -1,11 +1,12 @@
+"use client";
 import React, { useState, useRef } from 'react';
+import Image from 'next/image';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import { useWindowSize } from '../hooks/useWindowSize';
 import aboutData from '../data/about.json';
 import { renderNode, DocNode } from '../utils/NodeMapper';
-import './About.css';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -103,10 +104,13 @@ const About: React.FC = () => {
               position: 'relative'
             }}>
               {journeyNodes.length > 0 && renderNode(journeyNodes[0], 0)}
-              <img
+              <Image
                 src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=300&h=300&fit=crop"
                 alt="Huyen - Tour Guide"
+                width={300}
+                height={300}
                 className="journey-avatar"
+                style={{ objectFit: 'cover' }}
               />
               {journeyNodes.slice(1).map((node, i) => renderNode(node, i + 1))}
 

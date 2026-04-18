@@ -1,10 +1,11 @@
+"use client";
 import React, { useState, useEffect, useRef } from 'react';
+import Image from 'next/image';
 import { createPortal } from 'react-dom';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { useWindowSize } from '../hooks/useWindowSize';
 import toursData from '../data/tours.json';
-import './Navbar.css';
 
 gsap.registerPlugin(useGSAP);
 
@@ -199,7 +200,7 @@ const Navbar: React.FC<NavbarProps> = ({ onSelectTour }) => {
                       <div key={tour.id} onClick={() => { onSelectTour(tour.id); setShowSuggestions(false); setSearchQuery(''); }}
                         style={{ display: 'flex', alignItems: 'center', gap: '12px', padding: '10px', borderRadius: '10px', cursor: 'pointer', transition: 'background 0.2s' }}
                         onMouseOver={(e) => e.currentTarget.style.background = 'rgba(0,0,0,0.05)'} onMouseOut={(e) => e.currentTarget.style.background = 'transparent'}>
-                        <img src={thumb} alt={tour.title} style={{ width: '45px', height: '45px', objectFit: 'cover', borderRadius: '8px' }} />
+                        <Image src={thumb} alt={tour.title} width={45} height={45} style={{ objectFit: 'cover', borderRadius: '8px' }} />
                         <div style={{ flex: 1, overflow: 'hidden' }}>
                           <div style={{ fontWeight: '700', fontSize: '0.85rem', color: 'var(--color-primary-deep)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{tour.title}</div>
                           <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', textTransform: 'capitalize' }}>{tour.category} Tours</div>
@@ -306,7 +307,7 @@ const Navbar: React.FC<NavbarProps> = ({ onSelectTour }) => {
                   return (
                     <div key={tour.id} onClick={() => { onSelectTour(tour.id); closeMenu(); setShowSuggestions(false); setSearchQuery(''); }}
                       style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '10px', borderRadius: '10px' }}>
-                      <img src={thumb} alt={tour.title} style={{ width: '40px', height: '40px', objectFit: 'cover', borderRadius: '8px' }} />
+                      <Image src={thumb} alt={tour.title} width={40} height={40} style={{ objectFit: 'cover', borderRadius: '8px' }} />
                       <div style={{ flex: 1, overflow: 'hidden' }}>
                         <div style={{ fontWeight: '700', fontSize: '0.8rem', color: 'var(--color-primary-deep)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{tour.title}</div>
                       </div>

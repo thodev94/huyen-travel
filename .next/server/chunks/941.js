@@ -1,0 +1,714 @@
+exports.id = 941;
+exports.ids = [941];
+exports.modules = {
+
+/***/ 3889:
+/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
+
+Promise.resolve(/* import() eager */).then(__webpack_require__.t.bind(__webpack_require__, 4249, 23));
+Promise.resolve(/* import() eager */).then(__webpack_require__.t.bind(__webpack_require__, 4564, 23));
+Promise.resolve(/* import() eager */).then(__webpack_require__.t.bind(__webpack_require__, 885, 23));
+Promise.resolve(/* import() eager */).then(__webpack_require__.t.bind(__webpack_require__, 772, 23));
+Promise.resolve(/* import() eager */).then(__webpack_require__.t.bind(__webpack_require__, 8262, 23))
+
+/***/ }),
+
+/***/ 8548:
+/***/ (() => {
+
+
+
+/***/ }),
+
+/***/ 2086:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(6786);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(8038);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var next_image__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(8421);
+/* harmony import */ var next_image__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(next_image__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var next_navigation__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(9483);
+/* harmony import */ var next_navigation__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(next_navigation__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var gsap__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(7278);
+/* harmony import */ var _gsap_react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(7954);
+/* harmony import */ var _gsap_react__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_gsap_react__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _data_tours_json__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(9937);
+/* harmony import */ var _utils_NodeMapper__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(4545);
+/* harmony import */ var _hooks_useWindowSize__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(6043);
+/* __next_internal_client_entry_do_not_use__ default auto */ 
+
+
+
+
+
+
+
+
+gsap__WEBPACK_IMPORTED_MODULE_8__/* ["default"] */ .ZP.registerPlugin(_gsap_react__WEBPACK_IMPORTED_MODULE_4__.useGSAP);
+const BANNER_IMAGES = [
+    "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=2000&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1528127269322-539801943592?q=80&w=2000&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=2000&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1583417319070-4a69db38a482?q=80&w=2000&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=80&w=2000&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1534008897995-27a23e859048?q=80&w=2000&auto=format&fit=crop" // Sapa
+];
+const TourDetail = ({ tourId, onClose })=>{
+    const router = (0,next_navigation__WEBPACK_IMPORTED_MODULE_3__.useRouter)();
+    const containerRef = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(null);
+    const { width } = (0,_hooks_useWindowSize__WEBPACK_IMPORTED_MODULE_7__/* .useWindowSize */ .i)();
+    const isMobile = width < 768;
+    const tourIndex = _data_tours_json__WEBPACK_IMPORTED_MODULE_5__.findIndex((t)=>t.id === tourId);
+    const tour = _data_tours_json__WEBPACK_IMPORTED_MODULE_5__[tourIndex];
+    (0,_gsap_react__WEBPACK_IMPORTED_MODULE_4__.useGSAP)(()=>{
+        const tl = gsap__WEBPACK_IMPORTED_MODULE_8__/* ["default"] */ .ZP.timeline();
+        tl.from(".detail-anim", {
+            opacity: 0,
+            y: isMobile ? 15 : 30,
+            duration: isMobile ? 0.4 : 0.8,
+            stagger: isMobile ? 0.05 : 0.1,
+            ease: "power3.out"
+        });
+    }, {
+        scope: containerRef
+    });
+    (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(()=>{
+        window.scrollTo(0, 0);
+    }, []);
+    const bannerImg = (0,react__WEBPACK_IMPORTED_MODULE_1__.useMemo)(()=>{
+        return BANNER_IMAGES[Math.max(0, tourIndex) % BANNER_IMAGES.length];
+    }, [
+        tourIndex
+    ]);
+    if (!tour) return null;
+    const phoneNumber = "+84364399290";
+    const whatsappLink = `https://wa.me/${phoneNumber.replace("+", "")}?text=Hi,+I+am+interested+in+the+${encodeURIComponent(tour.title)}+tour.`;
+    const smsLink = `sms:${phoneNumber}?body=Hi,+I+am+interested+in+the+${encodeURIComponent(tour.title)}+tour.`;
+    return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+        ref: containerRef,
+        style: {
+            width: "100%",
+            minHeight: "100vh",
+            background: "var(--bg-soft)",
+            paddingBottom: "20px",
+            /* Reduced padding since footer is right below */ overflowX: "hidden"
+        },
+        children: [
+            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                style: {
+                    position: "relative",
+                    width: "100%",
+                    height: isMobile ? "35vh" : "50vh",
+                    minHeight: "250px",
+                    maxHeight: "600px"
+                },
+                children: [
+                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_image__WEBPACK_IMPORTED_MODULE_2___default()), {
+                        src: bannerImg,
+                        alt: tour.title,
+                        fill: true,
+                        style: {
+                            objectFit: "cover"
+                        }
+                    }),
+                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                        style: {
+                            position: "absolute",
+                            top: 0,
+                            left: 0,
+                            right: 0,
+                            bottom: 0,
+                            background: "linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 40%, rgba(0,0,0,0.2) 100%)"
+                        }
+                    }),
+                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                        style: {
+                            position: "absolute",
+                            top: isMobile ? "20px" : "40px",
+                            left: isMobile ? "20px" : "40px",
+                            zIndex: 10
+                        },
+                        children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("button", {
+                            onClick: ()=>onClose ? onClose() : router.push("/"),
+                            style: {
+                                display: "flex",
+                                alignItems: "center",
+                                gap: "8px",
+                                background: "rgba(255,255,255,0.2)",
+                                backdropFilter: "blur(10px)",
+                                border: "1px solid rgba(255,255,255,0.4)",
+                                color: "white",
+                                padding: "10px 20px",
+                                borderRadius: "30px",
+                                fontWeight: 600,
+                                cursor: "pointer",
+                                boxShadow: "0 4px 15px rgba(0,0,0,0.1)",
+                                transition: "all 0.3s ease"
+                            },
+                            onMouseOver: (e)=>e.currentTarget.style.background = "rgba(255,255,255,0.3)",
+                            onMouseOut: (e)=>e.currentTarget.style.background = "rgba(255,255,255,0.2)",
+                            children: [
+                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("span", {
+                                    style: {
+                                        fontSize: "1.2rem"
+                                    },
+                                    children: "←"
+                                }),
+                                " Back to Tours"
+                            ]
+                        })
+                    })
+                ]
+            }),
+            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                style: {
+                    width: "100%",
+                    margin: isMobile ? "-40px 0 0 0" : "-80px 0 0 0",
+                    background: "var(--bg-main)",
+                    borderRadius: isMobile ? "24px 24px 0 0" : "40px 40px 0 0",
+                    padding: isMobile ? "40px 20px" : "80px 50px",
+                    position: "relative",
+                    zIndex: 5,
+                    boxShadow: "0 -10px 40px rgba(0,0,0,0.08)"
+                },
+                children: [
+                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("h1", {
+                        className: "detail-anim",
+                        style: {
+                            fontSize: isMobile ? "2.2rem" : "3.8rem",
+                            color: "var(--color-primary-deep)",
+                            fontWeight: 900,
+                            marginBottom: "15px",
+                            lineHeight: 1.1
+                        },
+                        children: tour.title
+                    }),
+                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                        className: "tag detail-anim",
+                        style: {
+                            display: "inline-block",
+                            marginBottom: "40px"
+                        },
+                        children: tour.category
+                    }),
+                    /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                        className: "detail-anim",
+                        style: {
+                            display: "flex",
+                            gap: "15px",
+                            marginBottom: "50px",
+                            flexWrap: "wrap"
+                        },
+                        children: [
+                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("a", {
+                                href: whatsappLink,
+                                target: "_blank",
+                                rel: "noopener noreferrer",
+                                style: {
+                                    textDecoration: "none"
+                                },
+                                children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("button", {
+                                    className: "btn-primary",
+                                    style: {
+                                        backgroundColor: "#25D366",
+                                        boxShadow: "0 4px 15px rgba(37, 211, 102, 0.3)",
+                                        display: "flex",
+                                        alignItems: "center",
+                                        gap: "10px"
+                                    },
+                                    children: [
+                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_image__WEBPACK_IMPORTED_MODULE_2___default()), {
+                                            src: "https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg",
+                                            alt: "WhatsApp",
+                                            width: 22,
+                                            height: 22,
+                                            style: {
+                                                filter: "brightness(0) invert(1)"
+                                            }
+                                        }),
+                                        "WhatsApp"
+                                    ]
+                                })
+                            }),
+                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("a", {
+                                href: smsLink,
+                                style: {
+                                    textDecoration: "none"
+                                },
+                                children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("button", {
+                                    className: "btn-accent",
+                                    style: {
+                                        display: "flex",
+                                        alignItems: "center",
+                                        gap: "10px"
+                                    },
+                                    children: [
+                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("span", {
+                                            style: {
+                                                fontSize: "1.2rem"
+                                            },
+                                            children: "✉️"
+                                        }),
+                                        " SMS"
+                                    ]
+                                })
+                            })
+                        ]
+                    }),
+                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                        className: "tour-content detail-anim",
+                        style: {
+                            background: "var(--bg-pure)",
+                            padding: isMobile ? "30px 20px" : "50px",
+                            borderRadius: "24px",
+                            boxShadow: "0 10px 40px rgba(47, 93, 80, 0.05)",
+                            border: "1px solid var(--border-color)",
+                            fontSize: "1.1rem",
+                            color: "var(--text-secondary)"
+                        },
+                        children: tour.nodes.map((node, index)=>(0,_utils_NodeMapper__WEBPACK_IMPORTED_MODULE_6__/* .renderNode */ .$)(node, index))
+                    })
+                ]
+            })
+        ]
+    });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TourDetail);
+
+
+/***/ }),
+
+/***/ 6043:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   i: () => (/* binding */ useWindowSize)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(8038);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+const useWindowSize = ()=>{
+    const [windowSize, setWindowSize] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+        width:  false ? 0 : 1920,
+        height:  false ? 0 : 1080
+    });
+    (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(()=>{
+        const handleResize = ()=>{
+            setWindowSize({
+                width: window.innerWidth,
+                height: window.innerHeight
+            });
+        };
+        window.addEventListener("resize", handleResize);
+        return ()=>window.removeEventListener("resize", handleResize);
+    }, []);
+    return windowSize;
+};
+
+
+/***/ }),
+
+/***/ 4545:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   $: () => (/* binding */ renderNode)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(6786);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(8038);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var next_image__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(8421);
+/* harmony import */ var next_image__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(next_image__WEBPACK_IMPORTED_MODULE_2__);
+
+
+
+const TEMPORARY_IMAGES = [
+    "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=600&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1528127269322-539801943592?q=80&w=600&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=600&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?q=80&w=600&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1583417319070-4a69db38a482?q=80&w=600&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=80&w=600&auto=format&fit=crop"
+];
+const renderNode = (node, index)=>{
+    switch(node.type){
+        case "heading":
+            const HTag = `h${node.level}`;
+            return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(HTag, {
+                style: {
+                    color: "var(--color-primary-deep)",
+                    marginTop: "40px",
+                    marginBottom: "20px"
+                },
+                children: node.text
+            }, index);
+        case "paragraph":
+            if (node.html) {
+                return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
+                    dangerouslySetInnerHTML: {
+                        __html: node.html
+                    },
+                    style: {
+                        marginBottom: "20px",
+                        lineHeight: "1.8",
+                        color: "var(--text-secondary)"
+                    }
+                }, index);
+            }
+            return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
+                style: {
+                    marginBottom: "20px",
+                    lineHeight: "1.8",
+                    color: "var(--text-secondary)"
+                },
+                children: node.text
+            }, index);
+        case "list-unordered":
+            return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("ul", {
+                style: {
+                    marginBottom: "30px",
+                    paddingLeft: "25px",
+                    lineHeight: "1.8",
+                    color: "var(--text-secondary)"
+                },
+                children: node.items?.map((item, i)=>/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("li", {
+                        style: {
+                            marginBottom: "10px"
+                        },
+                        children: item
+                    }, i))
+            }, index);
+        case "list-ordered":
+            // Render as a zigzag Itinerary Timeline
+            return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                className: "itinerary-timeline",
+                style: {
+                    position: "relative",
+                    margin: "60px 0",
+                    padding: "20px 0"
+                },
+                children: [
+                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                        className: "itinerary-timeline-line",
+                        style: {
+                            position: "absolute",
+                            left: "50%",
+                            top: 0,
+                            bottom: 0,
+                            width: "4px",
+                            background: "var(--border-color)",
+                            transform: "translateX(-50%)",
+                            zIndex: 1
+                        }
+                    }),
+                    node.items?.map((item, i)=>{
+                        const isEven = i % 2 === 0;
+                        const imgSrc = TEMPORARY_IMAGES[i % TEMPORARY_IMAGES.length];
+                        return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                            className: `itinerary-item ${isEven ? "even" : "odd"}`,
+                            children: [
+                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                                    className: "itinerary-step-marker",
+                                    style: {
+                                        position: "absolute",
+                                        left: "50%",
+                                        top: "50%",
+                                        transform: "translate(-50%, -50%)",
+                                        width: "44px",
+                                        height: "44px",
+                                        borderRadius: "50%",
+                                        background: "var(--color-primary-bright)",
+                                        color: "white",
+                                        display: "flex",
+                                        alignItems: "center",
+                                        justifyContent: "center",
+                                        fontWeight: "bold",
+                                        zIndex: 2,
+                                        boxShadow: "0 0 0 6px var(--bg-pure)"
+                                    },
+                                    children: i + 1
+                                }),
+                                i < (node.items?.length || 0) - 1 && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                                    className: "itinerary-arrow",
+                                    style: {
+                                        position: "absolute",
+                                        left: "50%",
+                                        top: "calc(50% + 35px)",
+                                        transform: "translateX(-50%)",
+                                        color: "var(--color-accent-orange)",
+                                        fontSize: "1.5rem",
+                                        zIndex: 2,
+                                        textShadow: "0 2px 5px rgba(0,0,0,0.1)"
+                                    },
+                                    children: "↓"
+                                }),
+                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                                    className: "itinerary-item-left",
+                                    children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                                        className: "itinerary-text-box",
+                                        style: {
+                                            background: "var(--bg-main)",
+                                            padding: "30px",
+                                            borderRadius: "16px",
+                                            boxShadow: "0 4px 15px rgba(0,0,0,0.03)",
+                                            border: "1px solid var(--border-color)",
+                                            width: "100%",
+                                            maxWidth: "800px"
+                                        },
+                                        children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
+                                            style: {
+                                                color: "var(--text-secondary)",
+                                                lineHeight: "1.7",
+                                                margin: 0
+                                            },
+                                            children: item
+                                        })
+                                    })
+                                }),
+                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                                    className: "itinerary-item-right",
+                                    children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_image__WEBPACK_IMPORTED_MODULE_2___default()), {
+                                        src: imgSrc,
+                                        alt: `Stop ${i + 1}`,
+                                        width: 800,
+                                        height: 280,
+                                        style: {
+                                            objectFit: "cover",
+                                            borderRadius: "16px",
+                                            boxShadow: "0 10px 30px rgba(0,0,0,0.08)"
+                                        }
+                                    })
+                                })
+                            ]
+                        }, i);
+                    })
+                ]
+            }, index);
+        case "image":
+            const imgSrc = node.src || TEMPORARY_IMAGES[0];
+            return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_image__WEBPACK_IMPORTED_MODULE_2___default()), {
+                src: imgSrc,
+                alt: "",
+                width: 800,
+                height: 450,
+                style: {
+                    maxWidth: "100%",
+                    borderRadius: "12px",
+                    margin: "30px 0",
+                    boxShadow: "0 8px 25px rgba(0,0,0,0.05)"
+                }
+            }, index);
+        case "table":
+            return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                style: {
+                    overflowX: "auto",
+                    marginBottom: "30px",
+                    borderRadius: "10px",
+                    border: "1px solid var(--border-color)"
+                },
+                children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("table", {
+                    style: {
+                        width: "100%",
+                        borderCollapse: "collapse",
+                        color: "var(--text-primary)",
+                        textAlign: "left"
+                    },
+                    children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("tbody", {
+                        children: node.rows?.map((row, r)=>/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("tr", {
+                                style: {
+                                    borderBottom: "1px solid var(--border-color)",
+                                    background: r % 2 === 0 ? "var(--bg-pure)" : "var(--bg-main)"
+                                },
+                                children: row.map((cell, c)=>/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("td", {
+                                        style: {
+                                            padding: "15px"
+                                        },
+                                        children: cell
+                                    }, c))
+                            }, r))
+                    })
+                })
+            }, index);
+        default:
+            if (node.text) {
+                return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("span", {
+                    children: node.text
+                }, index);
+            }
+            return null;
+    }
+};
+
+
+/***/ }),
+
+/***/ 5200:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ RootLayout),
+/* harmony export */   metadata: () => (/* binding */ metadata)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(6786);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(6261);
+/* harmony import */ var _src_styles_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(7969);
+/* harmony import */ var _src_styles_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_src_styles_css__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _src_components_Navbar_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(1903);
+/* harmony import */ var _src_components_Navbar_css__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_src_components_Navbar_css__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _src_components_Hero_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(4306);
+/* harmony import */ var _src_components_Hero_css__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_src_components_Hero_css__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _src_components_About_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(7202);
+/* harmony import */ var _src_components_About_css__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_src_components_About_css__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _src_components_Services_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(1595);
+/* harmony import */ var _src_components_Services_css__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_src_components_Services_css__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _src_components_Gallery_css__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(9324);
+/* harmony import */ var _src_components_Gallery_css__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_src_components_Gallery_css__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _src_components_Contact_css__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(4065);
+/* harmony import */ var _src_components_Contact_css__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_src_components_Contact_css__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _src_components_FloatingContact_css__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(9444);
+/* harmony import */ var _src_components_FloatingContact_css__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_src_components_FloatingContact_css__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _src_components_MobileBottomNav_css__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(3928);
+/* harmony import */ var _src_components_MobileBottomNav_css__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_src_components_MobileBottomNav_css__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var _src_utils_NodeMapper_css__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(8597);
+/* harmony import */ var _src_utils_NodeMapper_css__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_src_utils_NodeMapper_css__WEBPACK_IMPORTED_MODULE_11__);
+
+
+
+
+
+
+
+
+
+
+
+
+const metadata = {
+    title: "Huyen Tour — Authentic Vietnam tours",
+    description: "Licensed guide Huyen — Explore authentic Vietnam tours",
+    openGraph: {
+        title: "Huyen Tour — Authentic Vietnam tours",
+        description: "Licensed guide Huyen — Explore authentic Vietnam tours",
+        url: "/",
+        images: [
+            {
+                url: "/images/AS11-40-5865HR.webp",
+                width: 1200,
+                height: 630
+            }
+        ]
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: "Huyen Tour — Authentic Vietnam tours",
+        description: "Licensed guide Huyen — Explore authentic Vietnam tours"
+    }
+};
+function RootLayout({ children }) {
+    return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("html", {
+        lang: "en",
+        children: [
+            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("head", {}),
+            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("body", {
+                children: children
+            })
+        ]
+    });
+}
+
+
+/***/ }),
+
+/***/ 7202:
+/***/ (() => {
+
+
+
+/***/ }),
+
+/***/ 4065:
+/***/ (() => {
+
+
+
+/***/ }),
+
+/***/ 9444:
+/***/ (() => {
+
+
+
+/***/ }),
+
+/***/ 9324:
+/***/ (() => {
+
+
+
+/***/ }),
+
+/***/ 4306:
+/***/ (() => {
+
+
+
+/***/ }),
+
+/***/ 3928:
+/***/ (() => {
+
+
+
+/***/ }),
+
+/***/ 1903:
+/***/ (() => {
+
+
+
+/***/ }),
+
+/***/ 1595:
+/***/ (() => {
+
+
+
+/***/ }),
+
+/***/ 7969:
+/***/ (() => {
+
+
+
+/***/ }),
+
+/***/ 8597:
+/***/ (() => {
+
+
+
+/***/ }),
+
+/***/ 9937:
+/***/ ((module) => {
+
+"use strict";
+module.exports = JSON.parse('[{"id":"ben-tre-can-tho-2n1d","category":"mekong","title":"BEN TRE - CAN THO 2N1D","nodes":[{"type":"paragraph","text":"MEKONG DELTA","html":"<strong>MEKONG DELTA</strong>"},{"type":"paragraph","text":"Ben Tre and Can Tho","html":"<a id=\\"_Hlk177318542\\"></a><strong>Ben Tre and Can Tho</strong>"},{"type":"paragraph","text":"Xin Chao,","html":"Xin Chao,"},{"type":"paragraph","text":"Welcome to Vietnam!","html":"Welcome to Vietnam!"},{"type":"paragraph","text":"Ben Tre","html":"<strong>Ben Tre</strong>"},{"type":"paragraph","text":"Known as the \\"Land of Coconut Trees,\\" this province is a treasure trove for adventurers seeking an authentic glimpse into local life and a serene escape into nature\'s embrace.","html":"Known as the \\"Land of Coconut Trees,\\" this province is a treasure trove for adventurers seeking an authentic glimpse into local life and a serene escape into nature\'s embrace."},{"type":"paragraph","text":"Itinerary.","html":"<strong>Itinerary</strong>."},{"type":"list-ordered","items":["Explore Traditional Brick KilnsWitness the fascinating, hands-on process of brickmaking as locals produces thousands of bricks using age-old, manual techniques that reflect the region’s deep-rooted craftsmanship.","Discover the Coconut Candy WorkshopVisit a local coconut candy workshop to learn how every part of the coconut is used in daily life—from sweet treats made with coconut milk to handcrafted souvenirs made from coconut fiber. This stop offers a deeper understanding of the coconut tree’s vital role in local culture.","Meet a Traditional Mat-Weaving FamilyStep into the home of a family with over 50 years of experience in weaving traditional mats. Watch the intricate process firsthand and hear stories of how this cherished craft has been preserved across generations.","Ride a Xe Lam – Vietnam’s Vintage CharmHop aboard a Xe Lam, a classic Vietnamese three-wheeled vehicle, for a nostalgic and immersive ride through the peaceful suburbs. It\'s a fun and authentic way to take in the local scenery.","Sampan Paddle Through Palm-Shaded CanalsGlide gently through quiet waterways on a traditional sampan, surrounded by a lush canopy of water palms—a tranquil and unforgettable experience in the Mekong Delta’s natural beauty."]},{"type":"paragraph","text":"Driving to Can Tho city and stay overnight there","html":"Driving to Can Tho city and stay overnight there"},{"type":"paragraph","text":"Can Tho","html":"<strong>Can Tho</strong>"},{"type":"paragraph","text":"The floating markets of Can Tho represent a captivating tapestry of Vietnamese culture and commerce, drawing travelers and locals alike into a vibrant world where boats laden with fresh produce and goods navigate through a maze of waterways.","html":"The floating markets of Can Tho represent a captivating tapestry of Vietnamese culture and commerce, drawing travelers and locals alike into a vibrant world where boats laden with fresh produce and goods navigate through a maze of waterways."},{"type":"list-ordered","items":["Engage in the vibrant commerce—haggle and barter in a friendly manner with the sellers. Taste the delicious tropical fruits, savor steaming bowls of pho or noodle soups prepared on the floating kitchens or indulge in local snacks like banh mi and Vietnamese coffee, all served from boats bobbing on the river.","Then enjoy the outdoors. It involves traveling long distances on a bicycle, about 30-45 minutes to visit the Gian Gua relic. The Gian Gua relic site in Vietnam stands out for its uniqueness, where the colossal trunks and branches of a tree intricately weave together to create a colossal Gian Gua, serving as the cradle of revolution with a rich tradition of heroic and resilient struggles by the army and people of Can Tho","Visiting the Pagoda Vinh Trang while returning. Renowned as one of the most majestic and picturesque pagodas in the region, Vinh Trang beckons visitors with its timeless beauty and profound tranquility"]},{"type":"paragraph","text":"Then the driver and tour guide will drive you back to the hotel/ terminal/ cruise ship port.","html":"<a id=\\"_Hlk227315238\\"></a>Then the driver and tour guide will drive you back to the hotel/ terminal/ cruise ship port."},{"type":"paragraph","text":"The itinerary is fully flexible and can be adjusted to suit your preferences—if there are places, you’re less interested in, we’re happy to skip or substitute them. There are no tourist traps, no forced shopping stops. This experience is all about your comfort and genuine exploration.","html":"<br /><a id=\\"_Hlk227310811\\"></a><em>The itinerary is fully flexible and can be adjusted to suit your preferences—if there are places, you’re less interested in, we’re happy to skip or substitute them. There are no tourist traps, no forced shopping stops. This experience is all about your comfort and genuine exploration. </em>"},{"type":"paragraph","text":"Together we will make wonderful days.","html":"Together we will make wonderful days."},{"type":"paragraph","text":"Regards,","html":"<br />Regards,"},{"type":"paragraph","text":"HUYEN BUI","html":"<br /><strong>HUYEN BUI</strong>"}],"brief":"MEKONG DELTA\\n\\nBen Tre and Can Tho\\n\\nXin Chao,\\n\\n\\n\\nWelcome to Vietnam!\\n\\n\\n\\nBen Tre\\n\\nKnown as the \\"Land of Coconut Trees,\\" this province is a treasure trov..."},{"id":"ben-tre-can-tho-chau-doc-3n2d","category":"mekong","title":"BEN TRE CAN THO CHAU DOC 3N2D","nodes":[{"type":"paragraph","text":"Mekong Mosaic Experience","html":"<strong>Mekong Mosaic Experience</strong>"},{"type":"paragraph","text":"Ben Tre - Can Tho - Chau Doc","html":"<strong>Ben Tre - Can Tho - Chau Doc  </strong>"},{"type":"paragraph","text":"Xin Chao,","html":"Xin Chao,"},{"type":"paragraph","text":"Welcome to Vietnam!","html":"Welcome to Vietnam!"},{"type":"list-unordered","items":["Ben Tre province"]},{"type":"paragraph","text":"Known as the \\"Land of Coconut Trees,\\" this province is a treasure trove for adventurers seeking an authentic glimpse into local life and a serene escape into nature\'s embrace.","html":"Known as the \\"Land of Coconut Trees,\\" this province is a treasure trove for adventurers seeking an authentic glimpse into local life and a serene escape into nature\'s embrace."},{"type":"paragraph","text":"After two hours of driving, we will board a private boat to explore a variety of locations along the Mekong River.","html":"After two hours of driving, we will board a private boat to explore a variety of locations along the Mekong River."},{"type":"paragraph","text":"Tour Itinerary","html":"<strong>Tour Itinerary</strong>"},{"type":"list-ordered","items":["Witness how local people produce thousands of bricks in a very manual technique at the brick kiln","Coconut candy workshop is another interesting point to visit on the day, which people understand much more on how the coconut trees play important role for the local habitat, spending time there to observe people produce candy from coconut milk and souvenir stuffs from coconut fiber","Visiting a local family with over 50 years’ experience in making traditional mats and still standing till these days","Let’s your hair down with Xe Lam, this vehicle offers an authentic and immersive way to explore the sights, sounds, and energy of Vietnam\'s suburban landscapes","Paddling a classic sampan through a serene and lush canopy of palm trees"]},{"type":"paragraph","text":"Driving to Can Tho city and stay overnight there","html":"Driving to Can Tho city and stay overnight there"},{"type":"list-unordered","items":["Can Tho city"]},{"type":"paragraph","text":"The floating markets of Can Tho represent a captivating tapestry of Vietnamese culture and commerce, drawing travelers and locals alike into a vibrant world where boats laden with fresh produce and goods navigate through a maze of waterways.","html":"The floating markets of Can Tho represent a captivating tapestry of Vietnamese culture and commerce, drawing travelers and locals alike into a vibrant world where boats laden with fresh produce and goods navigate through a maze of waterways."},{"type":"paragraph","text":"Engage in the vibrant commerce—haggle and barter in a friendly manner with the sellers. Taste the delicious tropical fruits, savor steaming bowls of pho or noodle soups prepared on the floating kitchens or indulge in local snacks like banh mi and Vietnamese coffee, all served from boats bobbing on the river.","html":"Engage in the vibrant commerce—haggle and barter in a friendly manner with the sellers. Taste the delicious tropical fruits, savor steaming bowls of pho or noodle soups prepared on the floating kitchens or indulge in local snacks like banh mi and Vietnamese coffee, all served from boats bobbing on the river."},{"type":"paragraph","text":"Driving to Chau Doc town in the afternoon","html":"Driving to Chau Doc town in the afternoon"},{"type":"list-unordered","items":["Chau Doc town"]},{"type":"paragraph","text":"Arrival and Chau Doc Nature Exploration","html":"<strong>Arrival and Chau Doc Nature Exploration</strong>"},{"type":"list-ordered","items":["Tra Su Cajuput Forest: After breakfast, head to the Tra Su Cajuput Forest. Enjoy a peaceful boat ride through the forest’s waterways, observing the diverse bird species and lush greenery. It\'s a serene experience that brings you close to nature.","Sunset at Sam Mountain: Stay on Sam Mountain to enjoy a breathtaking sunset. The view of the sun setting over the vast expanse of the Mekong Delta is truly mesmerizing.","Night Market: End your day with a visit to the night market. Browse through stalls selling local handicrafts, souvenirs, and street food. It\'s a lively place to soak in the local culture and perhaps pick up a memento of your trip."]},{"type":"paragraph","text":"Welcome to Chau Doc! Upon arrival, check into your hotel and get settled.","html":"Welcome to Chau Doc! Upon arrival, check into your hotel and get settled."},{"type":"paragraph","text":"Stay overnight in Chau Doc","html":"Stay overnight <strong>in Chau Doc</strong>"},{"type":"paragraph","text":"Departure and Cultural Exploration","html":"<strong>Departure and Cultural Exploration</strong>"},{"type":"list-ordered","items":["Chau Doc Market: Start your day with a visit to the bustling Chau Doc Market. Here, you can see locals trading fresh produce, fish, and other goods. It\'s a perfect spot to experience the daily life of Chau Doc residents.","Floating Fish Farms: Take a boat tour to the floating fish farms. Witness how fish are raised in cages beneath floating homes and learn about the aquaculture practices that sustain the local economy","Visit a Local Cham Village: Explore a nearby village to experience the rural lifestyle of the Mekong Delta. Interact with local villagers and learn about their daily activities and traditions.","Cave Pagoda (Chua Hang): Explore the Cave Pagoda, nestled into the side of Sam Mountain. This mystical temple is a fascinating site with intricate carvings and serene ambiance."]},{"type":"paragraph","text":"Check out of your hotel and take with your unforgettable memories of this charming and diverse region.","html":"Check out of your hotel and take with your unforgettable memories of this charming and diverse region."},{"type":"paragraph","text":"Dinner/Lunch at a Local Restaurant: Enjoy a delicious dinner featuring the unique flavors of the Mekong Delta. Cay Dua/ Crocodile restaurant.","html":"<strong>Dinner/Lunch at a Local Restaurant:</strong> Enjoy a delicious dinner featuring the unique flavors of the Mekong Delta. Cay Dua/ Crocodile restaurant."},{"type":"paragraph","text":"Driving back to the city","html":"Driving back to the city"},{"type":"paragraph","text":"Then the driver and tour guide will take you back to the hotel/ terminal/ cruise ship port.","html":"<a id=\\"_Hlk227315238\\"></a>Then the driver and tour guide will take you back to the hotel/ terminal/ cruise ship port."},{"type":"paragraph","text":"The itinerary is fully flexible and can be adjusted to suit your preferences—if there are places, you’re less interested in, we’re happy to skip or substitute them. There are no tourist traps, no forced shopping stops. This experience is all about your comfort and genuine exploration.","html":"<br /><a id=\\"_Hlk227310811\\"></a><em>The itinerary is fully flexible and can be adjusted to suit your preferences—if there are places, you’re less interested in, we’re happy to skip or substitute them. There are no tourist traps, no forced shopping stops. This experience is all about your comfort and genuine exploration. </em>"},{"type":"paragraph","text":"Together we will make wonderful days.","html":"Together we will make wonderful days."},{"type":"paragraph","text":"Regards,","html":"<br />Regards,"},{"type":"paragraph","text":"HUYEN BUI","html":"<br /><strong>HUYEN BUI</strong>"}],"brief":"Mekong Mosaic Experience\\n\\nBen Tre - Can Tho - Chau Doc  \\n\\n\\n\\nXin Chao,\\n\\nWelcome to Vietnam!\\n\\n\\n\\nBen Tre province\\n\\n\\n\\nKnown as the \\"Land of Coconut Trees,..."},{"id":"ben-tre","category":"mekong","title":"BEN TRE","nodes":[{"type":"paragraph","text":"MEKONG DELTA","html":"<strong>MEKONG DELTA</strong>"},{"type":"paragraph","text":"WELCOME TO BEN TRE","html":"<strong>WELCOME TO BEN TRE</strong>"},{"type":"paragraph","text":"Xin Chao,","html":"Xin Chao,"},{"type":"paragraph","text":"Welcome to Vietnam!","html":"Welcome to Vietnam!"},{"type":"paragraph","text":"Known as the \\"Land of Coconut Trees,\\" this province is a treasure trove for adventurers seeking an authentic glimpse into local life and a serene escape into nature\'s embrace.","html":"Known as the \\"Land of Coconut Trees,\\" this province is a treasure trove for adventurers seeking an authentic glimpse into local life and a serene escape into nature\'s embrace."},{"type":"paragraph","text":"After two hours of driving, we will board a private boat to explore numerous locations along the Mekong River.","html":"After two hours of driving, we will board a private boat to explore numerous locations along the Mekong River."},{"type":"paragraph","text":"Itinerary.","html":"<strong>Itinerary</strong>."},{"type":"paragraph","text":"Tour Highlights:","html":"<br /><strong>Tour Highlights:</strong>"},{"type":"list-ordered","items":["Traditional Brick Kiln VisitExperience the age-old method of brick-making as local artisans demonstrate how thousands of bricks are crafted entirely by hand. This stop offers a glimpse into a labor-intensive tradition that has supported generations.","Coconut Candy WorkshopDiscover the many uses of the coconut tree at this fascinating workshop. Watch as locals skillfully transform coconut milk into sweet candy and repurpose coconut husks into handmade souvenirs. Learn how this versatile tree plays a vital role in daily life and the local economy.","Traditional Mat Weaving FamilyMeet a local family who has been weaving traditional mats for over 50 years. Observe their expert techniques, passed down through generations, and gain insight into a craft that still thrives in modern times.","Ride in a Xe Lam (Local Tuk-Tuk)Hop aboard a Xe Lam, a traditional Vietnamese three-wheeled vehicle, and cruise through the countryside. This fun and authentic ride allows you to soak in the vibrant sounds, sights, and rhythms of suburban Vietnam.","Sampan Boat Ride Through Water Coconut PalmsDrift peacefully along narrow canals in a traditional sampan boat. Paddle under a lush canopy of water coconut palms, taking in the tranquility and natural beauty of the Mekong Delta."]},{"type":"paragraph","text":"Lunch &amp; LeisureEnjoy lunch at a local restaurant and take time to shop based on your personal interests—no pressure, no tourist traps.","html":"<strong>Lunch &amp; Leisure</strong><br />Enjoy lunch at a local restaurant and take time to shop based on your personal interests—no pressure, no tourist traps."},{"type":"paragraph","text":"Then the driver and tour guide will take you back to the hotel/ terminal/ cruise ship port.","html":"<a id=\\"_Hlk227315238\\"></a>Then the driver and tour guide will take you back to the hotel/ terminal/ cruise ship port."},{"type":"paragraph","text":"The itinerary is fully flexible and can be adjusted to suit your preferences—if there are places, you’re less interested in, we’re happy to skip or substitute them. There are no tourist traps, no forced shopping stops. This experience is all about your comfort and genuine exploration.","html":"<br /><a id=\\"_Hlk227310811\\"></a><em>The itinerary is fully flexible and can be adjusted to suit your preferences—if there are places, you’re less interested in, we’re happy to skip or substitute them. There are no tourist traps, no forced shopping stops. This experience is all about your comfort and genuine exploration. </em>"},{"type":"paragraph","text":"Together we will make wonderful days.","html":"Together we will make wonderful days."},{"type":"paragraph","text":"Regards,","html":"<br />Regards,"},{"type":"paragraph","text":"HUYEN BUI","html":"<br /><strong>HUYEN BUI</strong>"}],"brief":"MEKONG DELTA\\n\\nWELCOME TO BEN TRE\\n\\n\\n\\nXin Chao,\\n\\n\\n\\nWelcome to Vietnam!\\n\\n\\n\\nKnown as the \\"Land of Coconut Trees,\\" this province is a treasure trove for ad..."},{"id":"my-tho","category":"mekong","title":"MY THO","nodes":[{"type":"paragraph","text":"MEKONG DELTA","html":"<strong>MEKONG DELTA</strong>"},{"type":"paragraph","text":"WELCOME TO MY THO","html":"<strong>WELCOME TO MY THO</strong>"},{"type":"paragraph","text":"Xin Chao,","html":"Xin Chao,"},{"type":"paragraph","text":"Welcome to Vietnam!","html":"Welcome to Vietnam!"},{"type":"paragraph","text":"A day to Mỹ Tho is an immersion into the heart of the Mekong Delta, where the rhythm of life is intricately tied to the river. Visitors can revel in the picturesque scenery of verdant rice paddies, coconut groves, and stilt houses as they cruise along the Mekong\'s gentle waters on traditional wooden boats.","html":"A day to Mỹ Tho is an immersion into the heart of the Mekong Delta, where the rhythm of life is intricately tied to the river. Visitors can revel in the picturesque scenery of verdant rice paddies, coconut groves, and stilt houses as they cruise along the Mekong\'s gentle waters on traditional wooden boats."},{"type":"paragraph","text":"After a 90-minute ride, we will board a private boat to see a variety of locations along the Mekong River.","html":"After a 90-minute ride, we will board a private boat to see a variety of locations along the Mekong River."},{"type":"paragraph","text":"Tour Highlights:","html":"<strong>Tour Highlights:</strong>"},{"type":"list-ordered","items":["Xep Canal Boat Ride &amp; Honey Tea ExperienceBegin your day with a peaceful boat trip along the scenic Xep Canal. Enjoy the calm surroundings as you sip on freshly brewed honey tea. During this visit, you’ll gain insight into how local residents adapt and thrive on this remote island, living in harmony with nature.","Coconut Candy WorkshopDiscover the many uses of the coconut tree at a traditional candy-making workshop. Watch as skilled locals transform coconut milk into sweet treats and craft small souvenirs from coconut husks and fibers. Learn how this iconic tree supports the local economy and culture.","Sampan Ride Under Palm CanopyGlide along narrow waterways in a classic wooden sampan, paddled gently through a lush tunnel of water coconut palms. This tranquil experience offers a serene escape into the peaceful beauty of the Mekong Delta’s natural landscape.","Tuk-Tuk Ride Through the CountrysideHop on a traditional tuk-tuk for a fun and immersive ride through rural villages. This lively journey offers a front-row seat to everyday life, filled with local sights, sounds, and authentic charm.","Vĩnh Tràng Pagoda VisitOn the way back, stop at Vĩnh Tràng Pagoda—one of the region’s most stunning and revered temples. Surrounded by manicured gardens and towering Buddha statues, the pagoda offers a peaceful and spiritual moment to conclude your day."]},{"type":"paragraph","text":"Lunch &amp; Personal TimeEnjoy lunch at a local restaurant and take time to shop for local items, only if you choose—there’s no pressure or commercial stops.","html":"<strong>Lunch &amp; Personal Time</strong><br />Enjoy lunch at a local restaurant and take time to shop for local items, only if you choose—there’s no pressure or commercial stops."},{"type":"paragraph","text":"Return TransferAfter the tour, your driver and guide will return you to your hotel, cruise port, or terminal.","html":"<strong>Return Transfer</strong><br />After the tour, your driver and guide will return you to your hotel, cruise port, or terminal."},{"type":"paragraph","text":"Then the driver and tour guide will take you back to the hotel/ terminal/ cruise ship port.","html":"<a id=\\"_Hlk227315238\\"></a>Then the driver and tour guide will take you back to the hotel/ terminal/ cruise ship port."},{"type":"paragraph","text":"The itinerary is fully flexible and can be adjusted to suit your preferences—if there are places, you’re less interested in, we’re happy to skip or substitute them. There are no tourist traps, no forced shopping stops. This experience is all about your comfort and genuine exploration.","html":"<br /><a id=\\"_Hlk227310811\\"></a><em>The itinerary is fully flexible and can be adjusted to suit your preferences—if there are places, you’re less interested in, we’re happy to skip or substitute them. There are no tourist traps, no forced shopping stops. This experience is all about your comfort and genuine exploration. </em>"},{"type":"paragraph","text":"Together we will make wonderful days.","html":"Together we will make wonderful days."},{"type":"paragraph","text":"Regards,","html":"<br />Regards,"},{"type":"paragraph","text":"HUYEN BUI","html":"<br /><strong>HUYEN BUI</strong>"}],"brief":"MEKONG DELTA\\n\\nWELCOME TO MY THO\\n\\nXin Chao,\\n\\n\\n\\nWelcome to Vietnam!\\n\\n\\n\\nA day to Mỹ Tho is an immersion into the heart of the Mekong Delta, where the rhy..."},{"id":"sa-dec","category":"mekong","title":"SA DEC","nodes":[{"type":"paragraph","text":"🌸 Sa Dec","html":"<strong>🌸 Sa Dec </strong>"},{"type":"paragraph","text":"Heritage &amp; Flower Village Tour","html":"<strong>Heritage &amp; Flower Village Tour </strong>"},{"type":"paragraph","text":"Xin Chao,","html":"Xin Chao,"},{"type":"paragraph","text":"Welcome to Vietnam!","html":"Welcome to Vietnam!"},{"type":"paragraph","text":"Step into the charming riverside town of Sa Dec, where history, literature, and floral beauty come together in perfect harmony. Famously featured in Marguerite Duras’ novel \\"The Lover\\", Sa Dec offers a blend of French colonial charm, ancient traditions, and vibrant local culture.","html":"Step into the charming riverside town of <strong>Sa Dec</strong>, where history, literature, and floral beauty come together in perfect harmony. Famously featured in <strong>Marguerite Duras’ novel \\"The Lover\\"</strong>, Sa Dec offers a blend of French colonial charm, ancient traditions, and vibrant local culture."},{"type":"paragraph","text":"Wander through elegant colonial-era homes, explore centuries-old pagodas, and stroll among blooming fields in one of Vietnam’s most iconic flower villages. With every step, you’ll uncover stories that echo through Sa Dec’s poetic streets.","html":"Wander through elegant colonial-era homes, explore centuries-old pagodas, and stroll among blooming fields in one of Vietnam’s most iconic flower villages. With every step, you’ll uncover stories that echo through Sa Dec’s poetic streets."},{"type":"paragraph","text":"🗺️ Tour Itinerary Highlights:","html":"<strong>🗺️ Tour Itinerary Highlights:</strong>"},{"type":"list-ordered","items":["Huynh Thuy Le Ancient HouseDiscover the real-life setting of \\"The Lover\\", Marguerite Durras\' iconic novel. This elegant home belonged to Mr. Huynh Thuy Le, the inspiration for the main character. With its blend of French and Chinese architecture, the house remains beautifully preserved—offering a hauntingly romantic atmosphere as if time has stood still.","Sa Dec Flower Village (Tan Quy Dong)Known as the “Land of Baby Flowers”, this 100-year-old flower village stretches over 510 hectares along the Tien River. Walk among a sea of vibrant blooms, bonsai trees, and ornamental plants—a true paradise for flower lovers and photographers.","La Sen Pagoda (Phuoc Kien Tu)Nicknamed the “King Lotus Pagoda”, this peaceful temple is famous for its giant lotus leaves—large enough to hold the weight of a child or even an adult! Built before the reign of King Thieu Tri, this pagoda is a blend of spirituality, folklore, and natural wonder."]},{"type":"paragraph","text":"Lunch &amp; Leisure Time","html":"<strong>Lunch &amp; Leisure Time</strong>"},{"type":"paragraph","text":"Enjoy a local lunch (customized to your preference) and take time for relaxed shopping or personal exploration. Whether you’re in the mood for local snacks, souvenirs, or simply soaking in the atmosphere, your guide will tailor the experience to suit your pace.","html":"Enjoy a local lunch (customized to your preference) and take time for relaxed <strong>shopping or personal exploration</strong>. Whether you’re in the mood for local snacks, souvenirs, or simply soaking in the atmosphere, your guide will tailor the experience to suit your pace."},{"type":"paragraph","text":"🚐 Return Journey","html":"<strong>🚐 Return Journey</strong>"},{"type":"paragraph","text":"After a day filled with discovery and beauty, your guide and driver will escort you back to your hotel, cruise port, or terminal.","html":"After a day filled with discovery and beauty, your guide and driver will escort you back to your <strong>hotel, cruise port, or terminal</strong>."},{"type":"paragraph","text":"The itinerary is fully flexible and can be adjusted to suit your preferences—if there are places, you’re less interested in, we’re happy to skip or substitute them. There are no tourist traps, no forced shopping stops. This experience is all about your comfort and genuine exploration.","html":"<a id=\\"_Hlk227310811\\"></a><em>The itinerary is fully flexible and can be adjusted to suit your preferences—if there are places, you’re less interested in, we’re happy to skip or substitute them. There are no tourist traps, no forced shopping stops. This experience is all about your comfort and genuine exploration. </em>"},{"type":"paragraph","text":"Together we will make wonderful days.","html":"Together we will make wonderful days."},{"type":"paragraph","text":"Regards,","html":"<br />Regards,"},{"type":"paragraph","text":"HUYEN BUI","html":"<br /><strong>HUYEN BUI</strong>"}],"brief":"🌸 Sa Dec \\n\\nHeritage & Flower Village Tour \\n\\nXin Chao,\\n\\n\\n\\nWelcome to Vietnam!\\n\\n\\n\\nStep into the charming riverside town of Sa Dec, where history, liter..."},{"id":"binh-quoi-peninsula","category":"Saigon","title":"Binh Quoi Peninsula","nodes":[{"type":"paragraph","text":"Binh Quoi Peninsula","html":"<strong>Binh Quoi Peninsula </strong>"},{"type":"paragraph","text":"Getaway the city","html":"<strong>Getaway the city</strong>"},{"type":"paragraph","text":"A hidden gem awaiting discovery.","html":"<strong><em>A hidden gem awaiting discovery.</em></strong>"},{"type":"paragraph","text":"Xin Chao,","html":"Xin Chao,"},{"type":"paragraph","text":"Welcome to Saigon!","html":"Welcome to Saigon!"},{"type":"paragraph","text":"This enchanting peninsula boasts a unique blend of natural beauty, cultural heritage, and recreational activities, making it a must-visit destination for travelers seeking an authentic Saigon experience.  Whether you\'re looking to immerse yourself in the local culture, savor delicious cuisine, or simply unwind amidst serene surroundings, it promises a journey filled with charm and tranquility, offers an escape from the hustle and bustle of urban life.","html":"This enchanting peninsula boasts a unique blend of natural beauty, cultural heritage, and recreational activities, making it a must-visit destination for travelers seeking an authentic Saigon experience.  Whether you\'re looking to immerse yourself in the local culture, savor delicious cuisine, or simply unwind amidst serene surroundings, it promises a journey filled with charm and tranquility, offers an escape from the hustle and bustle of urban life."},{"type":"paragraph","text":"Top of Form","html":"<strong>Top of Form</strong>"},{"type":"paragraph","text":"Bottom of Form","html":"<strong>Bottom of Form</strong>"},{"type":"paragraph","text":"The itinerary:","html":"<strong>The itinerary:</strong>"},{"type":"list-ordered","items":["Great view of Saigon River from Water Bus, offers a unique and scenic way to explore the bustling metropolis, offering stunning views of the city\'s skyline and riverside attractions, provides an exciting opportunity to experience the city from a different perspective.","Visiting one of the oldest apartments of Saigon city named Thanh Da","Browsing through a local market offers a glimpse into everyday life in Saigon. These markets are frequented by locals shopping for fresh produce, meats, and household items, providing visitors with an opportunity to observe the rhythms of daily life in the city.","Chilling out with Vietnamese coffee","Cao Dai temple is a significant religious site located in Tay Ninh province, near Ho Chi Minh City in Vietnam. It is the holy temple of the Cao Dai religion, which is a syncretic belief system that combines elements of Buddhism, Taoism, Confucianism, Christianity, Islam, and native Vietnamese spiritualism.","Hanging out at Binh Quoi Village, where is most Saigonese are likely to have pleasure time at the weekend. The village is renowned for its picturesque landscapes, lush gardens, and tranquil waterways, providing a serene escape from the urban hustle and bustle."]},{"type":"paragraph","text":"Have lunch in vit nuong 7 Duc/ Chao vit Thanh Da, well-known local eateries","html":"Have lunch in vit nuong 7 Duc/ Chao vit Thanh Da, well-known local eateries"},{"type":"paragraph","text":"Back to the city by bus/grab","html":"Back to the city by bus/grab"},{"type":"paragraph","text":"The itinerary is fully flexible and can be adjusted to suit your preferences—if there are places, you’re less interested in, we’re happy to skip or substitute them. There are no tourist traps, no forced shopping stops.","html":"<em>The itinerary is fully flexible and can be adjusted to suit your preferences—if there are places, you’re less interested in, we’re happy to skip or substitute them. There are no tourist traps, no forced shopping stops. </em>"},{"type":"paragraph","text":"This experience is all about your comfort and genuine exploration.","html":"<em>This experience is all about your comfort and genuine exploration.</em>"},{"type":"paragraph","text":"Together we will make wonderful days.Regards,","html":"Together we will make wonderful days.<br />Regards,"},{"type":"paragraph","text":"HUYEN BUI","html":"<br /><strong>HUYEN BUI</strong>"}],"brief":"Binh Quoi Peninsula \\n\\nGetaway the city\\n\\nA hidden gem awaiting discovery.\\n\\n\\n\\n\\n\\nXin Chao,\\n\\n\\n\\nWelcome to Saigon!\\n\\nThis enchanting peninsula boasts a uniq..."},{"id":"can-gio-island","category":"Saigon","title":"Can Gio Island","nodes":[{"type":"paragraph","text":"Can Gio Island","html":"<strong>Can Gio Island</strong>"},{"type":"paragraph","text":"Wilderness Escape","html":"<strong>Wilderness Escape</strong>"},{"type":"paragraph","text":"Xin Chao,","html":"Xin Chao,"},{"type":"paragraph","text":"Welcome to Saigon!","html":"Welcome to Saigon!"},{"type":"paragraph","text":"A Can Gio journey offers an immersive experience, inviting adventurers to discover its diverse ecosystems, vibrant wildlife, and the historical significance that makes it a gem among Vietnam\'s destinations. Whether it\'s wandering through the UNESCO-listed biosphere reserve, encountering rare species.","html":"A Can Gio journey offers an immersive experience, inviting adventurers to discover its diverse ecosystems, vibrant wildlife, and the historical significance that makes it a gem among Vietnam\'s destinations. Whether it\'s wandering through the UNESCO-listed biosphere reserve, encountering rare species."},{"type":"paragraph","text":"✅ Tour Highlights:","html":"<strong>✅ Tour Highlights:</strong>"},{"type":"list-ordered","items":["Binh Khanh Ferry Crossing: Start your adventure with a ferry ride across the river, leaving the city behind as you enter the gateway to the mangrove forests.","Canoe through Sac Forest: Immerse yourself in the vast mangrove ecosystem by canoe, navigating winding canals to visit the legendary historical Base Area.","Encounter Wildlife: Visit the crocodile sanctuary and meet a clever herd of over 1,000 long-tailed monkeys in their natural jungle habitat.","Vam Sat Eco-Tourism Exploration: Discover the Bat Sanctuary and the Bird Sanctuary, home to over 20,000 birds and rare species in a UNESCO-protected biosphere.","Tang Bong Tower Viewpoint: Conquer the 26-meter high tower for a breathtaking panoramic view of the endless green canopy stretching to the horizon."]},{"type":"paragraph","text":"Then the driver and tour guide will take you back to the hotel/ terminal/ cruise ship port.","html":"Then the driver and tour guide will take you back to the hotel/ terminal/ cruise ship port."},{"type":"paragraph","text":"The itinerary is fully flexible and can be adjusted to suit your preferences—if there are places, you’re less interested in, we’re happy to skip or substitute them. There are no tourist traps, no forced shopping stops.","html":"<br /><em>The itinerary is fully flexible and can be adjusted to suit your preferences—if there are places, you’re less interested in, we’re happy to skip or substitute them. There are no tourist traps, no forced shopping stops. </em>"},{"type":"paragraph","text":"This experience is all about your comfort and genuine exploration.","html":"<em>This experience is all about your comfort and genuine exploration.</em>"},{"type":"paragraph","text":"Together we will have wonderful days. Regards,","html":"Together we will have wonderful days.<br />Regards,"},{"type":"paragraph","text":"HUYEN BUI","html":"<br /><strong>HUYEN BUI</strong>"}],"brief":"Can Gio Island\\n\\nWilderness Escape\\n\\n\\n\\nXin Chao,\\n\\n\\n\\nWelcome to Saigon!\\n\\n\\n\\nA Can Gio journey offers an immersive experience, inviting adventurers to disc..."},{"id":"cu-chi-cho-lon","category":"Saigon","title":"CU CHI CHO LON","nodes":[{"type":"paragraph","text":"Cu Chi tunnel and Cho Lon town","html":"<strong>Cu Chi tunnel and Cho Lon town</strong>"},{"type":"paragraph","text":"Welcome to Saigon!","html":"Welcome to Saigon!"},{"type":"paragraph","text":"Overview:","html":"<strong>Overview:</strong>"},{"type":"paragraph","text":"Step back in time and explore one of Vietnam’s most iconic wartime landmarks. The Cu Chi Tunnels offer a fascinating look into the resilience, ingenuity, and endurance of the Vietnamese people during the Vietnam War. This underground network spans over 200 km and was used by the Viet Cong for shelter, communication, and combat operations.","html":"Step back in time and explore one of Vietnam’s most iconic wartime landmarks. The <strong>Cu Chi Tunnels</strong> offer a fascinating look into the resilience, ingenuity, and endurance of the Vietnamese people during the Vietnam War. This underground network spans over 200 km and was used by the Viet Cong for shelter, communication, and combat operations."},{"type":"paragraph","text":"Whether you\'re a history enthusiast or a curious traveler, this tour offers an eye-opening experience that brings Vietnam’s past to life.","html":"Whether you\'re a history enthusiast or a curious traveler, this tour offers an eye-opening experience that brings Vietnam’s past to life."},{"type":"paragraph","text":"Leaving the hotel at 6am/7am and traveling to Cu Chi Tunnel. Driving through the vibrant city and the leaful rubber plantation then arriving in a peaceful village of Saigon suburban.","html":"Leaving the hotel at 6am/7am and traveling to Cu Chi Tunnel. Driving through the vibrant city and the leaful rubber plantation then arriving in a peaceful village of Saigon suburban."},{"type":"paragraph","text":"Short documentary film that provides people a glimpse of Cu Chi inhabitant life during the US invading, gain a comprehensive understanding of the historical context and the impact of Vietnam war.","html":"Short documentary film that provides people a glimpse of Cu Chi inhabitant life during the US invading, gain a comprehensive understanding of the historical context and the impact of Vietnam war."},{"type":"paragraph","text":"✅ Tour Highlights:","html":"<strong>✅ Tour Highlights:</strong>"},{"type":"list-ordered","items":["Scenic Drive through the countryside with glimpses of rural life","Historical Introduction from a knowledgeable English-speaking guide","Explore Original Tunnel Systems including hidden entrances, trap doors, kitchens, and bunkers","Try a Shooting Range (Optional) with AK-47s and other weapons (extra cost)","Walk through jungle trails once used for guerrilla warfare","Enjoy tea & cassava, the wartime staple food of soldiers"]},{"type":"paragraph","text":"Having tasting lunch at the local restaurant.","html":"<strong>Having tasting lunch at the local restaurant.</strong>"},{"type":"paragraph","text":"Driving back to the city and experiencing the old Saigon where are non-touristy places and immerse yourself in the local lifestyle.","html":"Driving back to the city and experiencing the old Saigon where are non-touristy places and immerse yourself in the local lifestyle."},{"type":"list-ordered","items":["Exploring Binh Tay Market offers more than just shopping, it\'s a sensory journey steeped in local flavors and vibrant colors, where one can savor delectable street food, witness the ebb and flow of daily life, and uncover treasures both mundane and exotic.","Finally, for those who seek a glimpse into the city\'s spiritual and cultural heritage, Thien Hau Pagoda stands as a revered sanctuary, offering not just a visual feast for the senses but also a spiritual haven where history, faith, and artistry intertwine in harmonious splendor."]},{"type":"paragraph","text":"Then the driver and tour guide will take you back to the hotel/ terminal/ cruise ship port.","html":"Then the driver and tour guide will take you back to the hotel/ terminal/ cruise ship port."},{"type":"paragraph","text":"The itinerary is fully flexible and can be adjusted to suit your preferences—if there are places, you’re less interested in, we’re happy to skip or substitute them. There are no tourist traps, no forced shopping stops.","html":"<br /><em>The itinerary is fully flexible and can be adjusted to suit your preferences—if there are places, you’re less interested in, we’re happy to skip or substitute them. There are no tourist traps, no forced shopping stops. </em>"},{"type":"paragraph","text":"This experience is all about your comfort and genuine exploration.","html":"<em>This experience is all about your comfort and genuine exploration.</em>"},{"type":"paragraph","text":"Together we will make wonderful days.Regards,","html":"Together we will make wonderful days.<br />Regards,"},{"type":"paragraph","text":"HUYEN BUI","html":"<br /><strong>HUYEN BUI</strong>"}],"brief":"Cu Chi tunnel and Cho Lon town\\n\\nWelcome to Saigon!\\n\\n\\n\\nOverview:\\n\\nStep back in time and explore one of Vietnam’s most iconic wartime landmarks. The Cu ..."},{"id":"cu-chi-half-day","category":"Saigon","title":"CU CHI half day","nodes":[{"type":"paragraph","text":"Cu Chi Tunnels Tour","html":"<strong>Cu Chi Tunnels Tour </strong>"},{"type":"paragraph","text":"Journey into Vietnam\'s Underground History","html":"<strong>Journey into Vietnam\'s Underground History</strong>"},{"type":"paragraph","text":"Welcome to Saigon!","html":"<a id=\\"_Hlk152241923\\"></a>Welcome to Saigon!"},{"type":"paragraph","text":"Overview:","html":"<strong>Overview:</strong>"},{"type":"paragraph","text":"Step back in time and explore one of Vietnam’s most iconic wartime landmarks. The Cu Chi Tunnels offer a fascinating look into the resilience, ingenuity, and endurance of the Vietnamese people during the Vietnam War. This underground network spans over 200 km and was used by the Viet Cong for shelter, communication, and combat operations.","html":"Step back in time and explore one of Vietnam’s most iconic wartime landmarks. The <strong>Cu Chi Tunnels</strong> offer a fascinating look into the resilience, ingenuity, and endurance of the Vietnamese people during the Vietnam War. This underground network spans over 200 km and was used by the Viet Cong for shelter, communication, and combat operations."},{"type":"paragraph","text":"Whether you\'re a history enthusiast or a curious traveler, this tour offers an eye-opening experience that brings Vietnam’s past to life.","html":"Whether you\'re a history enthusiast or a curious traveler, this tour offers an eye-opening experience that brings Vietnam’s past to life."},{"type":"paragraph","text":"Leaving the hotel at 6am/7am and traveling to Cu Chi Tunnel. Driving through the vibrant city and the leaful rubber plantation then arriving in a peaceful village of Saigon suburban.","html":"Leaving the hotel at 6am/7am and traveling to Cu Chi Tunnel. Driving through the vibrant city and the leaful rubber plantation then arriving in a peaceful village of Saigon suburban."},{"type":"paragraph","text":"Short documentary film that provides people a glimpse of Cu Chi inhabitant life during the US invading, gain a comprehensive understanding of the historical context and the impact of Vietnam war.","html":"Short documentary film that provides people a glimpse of Cu Chi inhabitant life during the US invading, gain a comprehensive understanding of the historical context and the impact of Vietnam war."},{"type":"paragraph","text":"✅ Tour Highlights:","html":"<strong>✅ Tour Highlights:</strong>"},{"type":"list-ordered","items":["Scenic Drive through the countryside with glimpses of rural life","Historical Introduction from a knowledgeable English-speaking guide","Explore Original Tunnel Systems including hidden entrances, trap doors, kitchens, and bunkers","Try a Shooting Range (Optional) with AK-47s and other weapons (extra cost)","Walk through jungle trails once used for guerrilla warfare","Enjoy tea &amp; cassava, the wartime staple food of soldiers"]},{"type":"paragraph","text":"Driving back to the city and browsing around Dan Sinh market, also known as the War Surplus Market or the American Market, is a unique marketplace in Ho Chi Minh City. The market has become a spot for tourists interested in history, military artifacts, or those seeking unique souvenirs.","html":"<a id=\\"_Hlk152242084\\"></a>Driving back to the city and browsing around Dan Sinh market, also known as the War Surplus Market or the American Market, is a unique marketplace in Ho Chi Minh City. The market has become a spot for tourists interested in history, military artifacts, or those seeking unique souvenirs."},{"type":"paragraph","text":"Then the driver and tour guide will take you back to the hotel/ terminal/ cruise ship port.","html":"Then the driver and tour guide will take you back to the hotel/ terminal/ cruise ship port."},{"type":"paragraph","text":"The itinerary is fully flexible and can be adjusted to suit your preferences—if there are places, you’re less interested in, we’re happy to skip or substitute them. There are no tourist traps, no forced shopping stops.","html":"<br /><em>The itinerary is fully flexible and can be adjusted to suit your preferences—if there are places, you’re less interested in, we’re happy to skip or substitute them. There are no tourist traps, no forced shopping stops. </em>"},{"type":"paragraph","text":"This experience is all about your comfort and genuine exploration.","html":"<em>This experience is all about your comfort and genuine exploration.</em>"},{"type":"paragraph","text":"Together we will make wonderful days.Regards,","html":"Together we will make wonderful days.<br />Regards,"},{"type":"paragraph","text":"HUYEN BUI","html":"<br /><strong>HUYEN BUI</strong>"}],"brief":"\\n\\nCu Chi Tunnels Tour \\n\\nJourney into Vietnam\'s Underground History\\n\\nWelcome to Saigon!\\n\\n\\n\\nOverview:\\n\\nStep back in time and explore one of Vietnam’s mo..."},{"id":"cu-chi-me-kong","category":"Saigon","title":"CU CHI ME KONG","nodes":[{"type":"paragraph","text":"Cu Chi Tunnels + Mekong Delta Full-Day","html":"<a id=\\"_Hlk152241923\\"></a><strong>Cu Chi Tunnels + Mekong Delta Full-Day</strong>"},{"type":"paragraph","text":"\\"Into the Earth, Onto the River\\"","html":"<strong>\\"Into the Earth, Onto the River\\"</strong>"},{"type":"paragraph","text":"Welcome to Saigon!","html":"Welcome to Saigon!"},{"type":"paragraph","text":"Overview:","html":"<strong>Overview:</strong>"},{"type":"paragraph","text":"Step back in time and explore one of Vietnam’s most iconic wartime landmarks. The Cu Chi Tunnels offer a fascinating look into the resilience, ingenuity, and endurance of the Vietnamese people during the Vietnam War. This underground network spans over 200 km and was used by the Viet Cong for shelter, communication, and combat operations.","html":"Step back in time and explore one of Vietnam’s most iconic wartime landmarks. The <strong>Cu Chi Tunnels</strong> offer a fascinating look into the resilience, ingenuity, and endurance of the Vietnamese people during the Vietnam War. This underground network spans over 200 km and was used by the Viet Cong for shelter, communication, and combat operations."},{"type":"paragraph","text":"Whether you\'re a history enthusiast or a curious traveler, this tour offers an eye-opening experience that brings Vietnam’s past to life.","html":"Whether you\'re a history enthusiast or a curious traveler, this tour offers an eye-opening experience that brings Vietnam’s past to life."},{"type":"paragraph","text":"Leaving the hotel at 6am/7am and traveling to Cu Chi Tunnel. Driving through the vibrant city and the leaful rubber plantation then arriving in a peaceful village of Saigon suburban.","html":"Leaving the hotel at 6am/7am and traveling to Cu Chi Tunnel. Driving through the vibrant city and the leaful rubber plantation then arriving in a peaceful village of Saigon suburban."},{"type":"paragraph","text":"Short documentary film that provides people a glimpse of Cu Chi inhabitant life during the US invading, gain a comprehensive understanding of the historical context and the impact of Vietnam war.","html":"Short documentary film that provides people a glimpse of Cu Chi inhabitant life during the US invading, gain a comprehensive understanding of the historical context and the impact of Vietnam war."},{"type":"paragraph","text":"✅ Tour Highlights:","html":"<strong>✅ Tour Highlights:</strong>"},{"type":"list-unordered","items":["Scenic Drive through the countryside with glimpses of rural life","Historical Introduction from a knowledgeable English-speaking guide","Explore Original Tunnel Systems including hidden entrances, trap doors, kitchens, and bunkers","Try a Shooting Range (Optional) with AK-47s and other weapons (extra cost)","Walk through jungle trails once used for guerrilla warfare","Enjoy tea &amp; cassava, the wartime staple food of soldiers"]},{"type":"paragraph","text":"Driving to Mekong Delta.","html":"<strong>Driving to Mekong Delta.</strong>"},{"type":"paragraph","text":"After a 90-minute ride, we will board a private boat to see a variety of locations along the Mekong River.","html":"After a 90-minute ride, we will board a private boat to see a variety of locations along the Mekong River."},{"type":"list-ordered","items":["Visiting Xep canal and its surroundings by boat, having a pleasure time in with sipping their honey tea and comprehending how they may survive on a remote island.","Another fascinating place to visit throughout the day is the coconut candy workshop, where visitors can learn more about the significance of coconut trees for the local ecosystem and spend time watching people produce candies from coconut milk and trinkets made of coconut fiber.","Paddling a classic sampan through a serene and lush canopy of palm trees. As the gentle rhythm of paddles guides the traditional wooden boat along the narrow, meandering canals, visitors are transported into a world of tranquility and natural splendor.","A Xe lam ride invites passengers to embark on an exhilarating journey filled with sights, sounds, and a touch of local flair."]},{"type":"paragraph","text":"Then the driver and tour guide will take you back to the hotel/ terminal/ cruise ship port.","html":"Then the driver and tour guide will take you back to the hotel/ terminal/ cruise ship port."},{"type":"paragraph","text":"The itinerary is fully flexible and can be adjusted to suit your preferences—if there are places, you’re less interested in, we’re happy to skip or substitute them. There are no tourist traps, no forced shopping stops.","html":"<br /><em>The itinerary is fully flexible and can be adjusted to suit your preferences—if there are places, you’re less interested in, we’re happy to skip or substitute them. There are no tourist traps, no forced shopping stops. </em>"},{"type":"paragraph","text":"This experience is all about your comfort and genuine exploration.","html":"<em>This experience is all about your comfort and genuine exploration.</em>"},{"type":"paragraph","text":"Together we will make wonderful days.Regards,","html":"Together we will make wonderful days.<br />Regards,"},{"type":"paragraph","text":"HUYEN BUI","html":"<br /><strong>HUYEN BUI</strong>"}],"brief":"Cu Chi Tunnels + Mekong Delta Full-Day\\n\\n\\"Into the Earth, Onto the River\\"\\n\\nWelcome to Saigon!\\n\\n\\n\\nOverview:\\n\\nStep back in time and explore one of Vietna..."},{"id":"dong-nai","category":"Saigon","title":"Dong Nai","nodes":[{"type":"paragraph","text":"Mystic Dong Nai","html":"<strong>Mystic Dong Nai</strong>"},{"type":"paragraph","text":"Explore the Hidden Charms of Dong Nai: A Day Tour from Ho Chi Minh City","html":"<strong>Explore the Hidden Charms of Dong Nai: A Day Tour from Ho Chi Minh City</strong>"},{"type":"paragraph","text":"Just a short drive—or scenic train ride—from the bustling heart of Ho Chi Minh City, Dong Nai offers an unforgettable escape into Vietnam’s natural beauty, cultural depth, and rich history. Perfect for nature lovers, culture seekers, and curious travelers, this full-day tour is designed to showcase the very best of this fascinating province.","html":"Just a short drive—or scenic train ride—from the bustling heart of Ho Chi Minh City, Dong Nai offers an unforgettable escape into Vietnam’s natural beauty, cultural depth, and rich history. Perfect for nature lovers, culture seekers, and curious travelers, this full-day tour is designed to showcase the very best of this fascinating province."},{"type":"paragraph","text":"Morning: Scenic Train Ride to Bien Hoa","html":"<strong>Morning: Scenic Train Ride to Bien Hoa</strong>"},{"type":"paragraph","text":"Departure from Ho Chi Minh City (Suggested time: 7:30 AM)Kickstart your journey with a relaxing one-hour train ride to Bien Hoa City. Travel comfortably in air-conditioned carriages as you glide past the vibrant cityscape and into the peaceful countryside. This stress-free option lets you avoid traffic while soaking in the beauty of southern Vietnam.","html":"Departure from Ho Chi Minh City (Suggested time: 7:30 AM)<br />Kickstart your journey with a relaxing one-hour train ride to Bien Hoa City. Travel comfortably in air-conditioned carriages as you glide past the vibrant cityscape and into the peaceful countryside. This stress-free option lets you avoid traffic while soaking in the beauty of southern Vietnam."},{"type":"paragraph","text":"Discover Tan Trieu Pomelo Village","html":"<strong>Discover Tan Trieu Pomelo Village</strong>"},{"type":"paragraph","text":"Arrival &amp; village tour (Approx. 9:00 AM - 11:00 AM)Welcome to Tan Trieu, the “Pomelo Capital” of southern Vietnam! Wander through lush orchards bursting with fragrant pomelo trees and learn about the traditional farming techniques that make these fruits so special. Don’t miss the chance to taste the famous Tan Trieu pomelo—juicy, tangy, and uniquely delicious.","html":"Arrival &amp; village tour (Approx. 9:00 AM - 11:00 AM)<br />Welcome to Tan Trieu, the “Pomelo Capital” of southern Vietnam! Wander through lush orchards bursting with fragrant pomelo trees and learn about the traditional farming techniques that make these fruits so special. Don’t miss the chance to taste the famous Tan Trieu pomelo—juicy, tangy, and uniquely delicious."},{"type":"paragraph","text":"Visit the Ancient House of Vo Ha Thanh","html":"<strong>Visit the Ancient House of Vo Ha Thanh</strong>"},{"type":"paragraph","text":"Cultural immersion (11:30 AM - 12:30 PM)Step into the past at this beautifully preserved ancestral home. The Ancient House of Vo Ha Thanh is more than a building—it’s a story of heritage, craftsmanship, and the enduring spirit of Dong Nai. Explore its antique interiors, learn about traditional Vietnamese architecture, and feel the quiet charm of rural life.","html":"Cultural immersion (11:30 AM - 12:30 PM)<br />Step into the past at this beautifully preserved ancestral home. The Ancient House of Vo Ha Thanh is more than a building—it’s a story of heritage, craftsmanship, and the enduring spirit of Dong Nai. Explore its antique interiors, learn about traditional Vietnamese architecture, and feel the quiet charm of rural life."},{"type":"paragraph","text":"Tân Vạn – Hóa An Pottery Village","html":"<strong>Tân Vạn – Hóa An Pottery Village</strong>"},{"type":"paragraph","text":"Nestled along the Đồng Nai River in Biên Hòa City, Tân Vạn – Hóa An Pottery Village is a hidden gem for travelers seeking authentic cultural experiences in southern Vietnam. With roots dating back to the late 19th century, this traditional village is known for its beautifully handcrafted ceramics made from rich local clay and fired in age-old kilns. As you explore the village, you’ll witness skilled artisans shaping jars, pots, and vases by hand—each piece telling a story of heritage and craftsmanship. A visit here offers not only a deeper appreciation for Vietnam’s ceramic artistry but also a peaceful escape into the rhythms of rural life, where tradition is kept alive through passion and creativity.","html":"Nestled along the Đồng Nai River in Biên Hòa City, Tân Vạn – Hóa An Pottery Village is a hidden gem for travelers seeking authentic cultural experiences in southern Vietnam. With roots dating back to the late 19th century, this traditional village is known for its beautifully handcrafted ceramics made from rich local clay and fired in age-old kilns. As you explore the village, you’ll witness skilled artisans shaping jars, pots, and vases by hand—each piece telling a story of heritage and craftsmanship. A visit here offers not only a deeper appreciation for Vietnam’s ceramic artistry but also a peaceful escape into the rhythms of rural life, where tradition is kept alive through passion and creativity."},{"type":"paragraph","text":"Coffee Break at the Oldest Racket Café","html":"<strong>Coffee Break at the Oldest Racket Café</strong>"},{"type":"paragraph","text":"Leisure &amp; refreshment (1:00 PM - 2:00 PM)End your journey with a visit to one of Dong Nai’s most iconic landmarks—the oldest racket café in the region. Established in the early 1900s, this vintage spot retains the soul of old Vietnam. Sip on freshly brewed coffee as you soak in the nostalgic ambiance and listen to stories from a bygone era.","html":"Leisure &amp; refreshment (1:00 PM - 2:00 PM)<br />End your journey with a visit to one of Dong Nai’s most iconic landmarks—the oldest racket café in the region. Established in the early 1900s, this vintage spot retains the soul of old Vietnam. Sip on freshly brewed coffee as you soak in the nostalgic ambiance and listen to stories from a bygone era."},{"type":"paragraph","text":"Bửu Phong Pagoda","html":"<strong>Bửu Phong Pagoda</strong>"},{"type":"paragraph","text":"This is a prominent temple of the Northern Buddhist tradition, located on Bình Điện Mountain in Biên Hòa City, Đồng Nai Province. It is considered one of the oldest temples in the region, estimated to be around 400 years old. The pagoda is also well-known for its collection of ancient artifacts and intricately carved statues, showcasing distinctive East Asian artistic styles.","html":"This is a prominent temple of the Northern Buddhist tradition, located on Bình Điện Mountain in Biên Hòa City, Đồng Nai Province. It is considered one of the oldest temples in the region, estimated to be around 400 years old. The pagoda is also well-known for its collection of ancient artifacts and intricately carved statues, showcasing distinctive East Asian artistic styles."},{"type":"paragraph","text":"Return to Ho Chi Minh City","html":"<strong>Return to Ho Chi Minh City</strong>"},{"type":"paragraph","text":"Departure from Bien Hoa Station (Suggested: 2:30 PM)Relax on the return train ride, reflecting on the cultural gems and natural wonders you\'ve discovered during your day in Dong Nai.","html":"Departure from Bien Hoa Station (Suggested: 2:30 PM)<br />Relax on the return train ride, reflecting on the cultural gems and natural wonders you\'ve discovered during your day in Dong Nai."},{"type":"paragraph","text":"The itinerary is fully flexible and can be adjusted to suit your preferences—if there are places, you’re less interested in, we’re happy to skip or substitute them. There are no tourist traps, no forced shopping stops.","html":"<em>The itinerary is fully flexible and can be adjusted to suit your preferences—if there are places, you’re less interested in, we’re happy to skip or substitute them. There are no tourist traps, no forced shopping stops. </em>"},{"type":"paragraph","text":"This experience is all about your comfort and genuine exploration.","html":"<em>This experience is all about your comfort and genuine exploration.</em>"},{"type":"paragraph","text":"Together we will have wonderful days.Regards,","html":"Together we will have wonderful days.<br />Regards,"},{"type":"paragraph","text":"HUYEN BUI","html":"<br /><strong>HUYEN BUI</strong>"}],"brief":"\\n\\nMystic Dong Nai\\n\\n\\n\\nExplore the Hidden Charms of Dong Nai: A Day Tour from Ho Chi Minh City\\n\\nJust a short drive—or scenic train ride—from the bustlin..."},{"id":"sai-gon-city-full","category":"Saigon","title":"SAI GON CITY full","nodes":[{"type":"paragraph","text":"SAI GON","html":"<strong>SAI GON</strong>"},{"type":"paragraph","text":"DIVERSE CULTURE and HIDDEN GEMS","html":"<strong> DIVERSE CULTURE and HIDDEN GEMS</strong>"},{"type":"paragraph","text":"Xin chao,","html":"Xin chao,"},{"type":"paragraph","text":"Welcome to Vietnam!","html":"Welcome to Vietnam!"},{"type":"paragraph","text":"Saigon\'s charm is not just found in its historical sites. The city\'s bustling streets and vibrant markets offer a sensory feast, bustling with vendors selling local delicacies, vibrant textiles, and an array of goods, providing a glimpse into daily life in this thriving city.","html":"Saigon\'s charm is not just found in its historical sites. The city\'s bustling streets and vibrant markets offer a sensory feast, bustling with vendors selling local delicacies, vibrant textiles, and an array of goods, providing a glimpse into daily life in this thriving city."},{"type":"paragraph","text":"Cultural &amp; Historical Journey Through Saigon","html":"<strong><br />Cultural &amp; Historical Journey Through Saigon</strong>"},{"type":"list-ordered","items":["Experience the Vibrant Local LifeStart your day with an authentic immersion into Saigon’s rich cultural diversity by exploring a traditional Vietnamese market—either on foot or by rickshaw (optional). Spend about 45 minutes soaking in the bustling atmosphere, colorful stalls, and local interactions.","Visit the Sacred Thien Hau TempleStep into one of the oldest spiritual landmarks in the city—Thien Hau Temple. Light incense sticks and take a quiet moment to reflect or make a wish in this tranquil, centuries-old sanctuary.","Uncover Hidden History at the Weapon BunkerDiscover a little-known but significant historical site—a covert bunker once used by the Saigon Commandos during the 1968 Tet Offensive to store weapons and supplies. A must-see for history enthusiasts.","Relax with Traditional Vietnamese CoffeeTake a break at a cozy local café and savor a Vietnamese drip coffee, a cherished daily ritual and cultural experience in itself.","Taste Vietnam’s Culinary IconsEnjoy a delicious local lunch featuring two of Vietnam’s most iconic dishes: Phở or Bánh Mì—served at one of the city’s best-loved eateries.","Explore Vietnam’s Past and PresentWar Remnants Museum: Delve into powerful and emotional exhibits that portray the harsh realities and aftermath of the Vietnam War.","Reunification Palace (optional inside/outside visit): Once a symbol of political power, this historic site offers a window into Vietnam’s complex political history.","CIA House: Visit the rooftop where the last American helicopter evacuation took place on April 29, 1975—the iconic final moments of the Vietnam War."]},{"type":"paragraph","text":"At the end of the day, let your hair down and relax with Spa in the city named “Temple leaf” (optional)","html":"At the end of the day, let your hair down and relax with Spa in the city named “Temple leaf” (optional)"},{"type":"paragraph","text":"Then the driver and tour guide will take you back to the hotel/ terminal/ cruise ship port.","html":"<a id=\\"_Hlk227315238\\"></a>Then the driver and tour guide will take you back to the hotel/ terminal/ cruise ship port."},{"type":"paragraph","text":"The itinerary is fully flexible and can be adjusted to suit your preferences—if there are places, you’re less interested in, we’re happy to skip or substitute them. There are no tourist traps, no forced shopping stops. This experience is all about your comfort and genuine exploration.","html":"<br /><a id=\\"_Hlk227310811\\"></a><em>The itinerary is fully flexible and can be adjusted to suit your preferences—if there are places, you’re less interested in, we’re happy to skip or substitute them. There are no tourist traps, no forced shopping stops. This experience is all about your comfort and genuine exploration. </em>"},{"type":"paragraph","text":"Together we will make wonderful days.","html":"Together we will make wonderful days."},{"type":"paragraph","text":"Regards,","html":"<br />Regards,"},{"type":"paragraph","text":"HUYEN BUI","html":"<br /><strong>HUYEN BUI</strong>"}],"brief":"SAI GON\\n\\n\\n\\n DIVERSE CULTURE and HIDDEN GEMS\\n\\n\\n\\nXin chao,\\n\\nWelcome to Vietnam!\\n\\n\\n\\nSaigon\'s charm is not just found in its historical sites. The city\'s ..."},{"id":"vung-tau","category":"Saigon","title":"VUNG TAU","nodes":[{"type":"paragraph","text":"Vung Tau Beach Day Tour","html":"<strong>Vung Tau Beach Day Tour </strong>"},{"type":"paragraph","text":"A Coastal Escape from Ho Chi Minh City","html":"<strong>A Coastal Escape from Ho Chi Minh City</strong>"},{"type":"paragraph","text":"Xin Chao,","html":"Xin Chao,"},{"type":"paragraph","text":"Welcome to Vietnam!","html":"Welcome to Vietnam!"},{"type":"paragraph","text":"Leave the hustle and bustle of Ho Chi Minh City behind and enjoy a relaxing coastal getaway with a 2-hour scenic drive to Vung Tau, one of Vietnam’s most beloved seaside resort towns. Known for its golden sandy beaches and crystal-clear waters, Vung Tau offers an idyllic retreat with a perfect mix of culture, history, and natural beauty.","html":"Leave the hustle and bustle of Ho Chi Minh City behind and enjoy a relaxing coastal getaway with a <strong>2-hour scenic drive</strong> to <strong>Vung Tau</strong>, one of Vietnam’s most beloved seaside resort towns. Known for its <strong>golden sandy beaches</strong> and <strong>crystal-clear waters</strong>, Vung Tau offers an idyllic retreat with a perfect mix of culture, history, and natural beauty."},{"type":"paragraph","text":"🗺️ Tour Itinerary Highlights:","html":"<strong>🗺️ Tour Itinerary Highlights:</strong>"},{"type":"list-ordered","items":["Long Son Big House (Ong Tran Temple)Step into local heritage at this national cultural and historical site. Rich in spiritual significance, it offers a peaceful atmosphere and insight into traditional Vietnamese architecture and customs.","White Palace (Bach Dinh)Discover colonial history at this elegant mansion, originally built in 1898 on the ruins of a former Nguyen Dynasty fortress. Once a retreat for French Governor General Paul Doumer, it now houses fascinating artifacts and offers panoramic sea views.","Vung Tau LighthousePerched on a picturesque hilltop, the Vung Tau Lighthouse offers stunning 360-degree views of the coast and sea. Built by the French in the late 19th century, this enduring beacon is a favorite for photo lovers and history enthusiasts alike.","Worldwide Arms MuseumExplore a unique private collection of over 2,000 weapons, uniforms, and military artifacts from the 17th to 20th centuries. Items come from countries such as the UK, France, Russia, Japan, and beyond—making it a must-visit for history buffs.","Relax at a Local Seaside CaféEnd your tour on a tranquil note by enjoying a refreshing drink at a cozy café overlooking the ocean—an ideal spot to soak in the sea breeze and unwind."]},{"type":"paragraph","text":"🚐 Tour End &amp; Return","html":"<strong>🚐 Tour End &amp; Return</strong>"},{"type":"paragraph","text":"Then the driver and tour guide will take you back to the hotel/ terminal/ cruise ship port.","html":"Then the driver and tour guide will take you back to the hotel/ terminal/ cruise ship port."},{"type":"paragraph","text":"The itinerary is fully flexible and can be adjusted to suit your preferences—if there are places, you’re less interested in, we’re happy to skip or substitute them. There are no tourist traps, no forced shopping stops. This experience is all about your comfort and genuine exploration.","html":"<br /><a id=\\"_Hlk227310811\\"></a><em>The itinerary is fully flexible and can be adjusted to suit your preferences—if there are places, you’re less interested in, we’re happy to skip or substitute them. There are no tourist traps, no forced shopping stops. This experience is all about your comfort and genuine exploration. </em>"},{"type":"paragraph","text":"Together we will make wonderful days.","html":"Together we will make wonderful days."},{"type":"paragraph","text":"Regards,","html":"<br />Regards,"},{"type":"paragraph","text":"HUYEN BUI","html":"<br /><strong>HUYEN BUI</strong>"}],"brief":"Vung Tau Beach Day Tour \\n\\nA Coastal Escape from Ho Chi Minh City\\n\\nXin Chao,\\n\\n\\n\\nWelcome to Vietnam!\\n\\n\\n\\nLeave the hustle and bustle of Ho Chi Minh City ..."}]');
+
+/***/ })
+
+};
+;

@@ -1,11 +1,12 @@
+"use client";
 import React, { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 import { createPortal } from 'react-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import { useWindowSize } from '../hooks/useWindowSize';
 import toursData from '../data/tours.json';
-import './Services.css';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -187,7 +188,7 @@ const Services: React.FC<ServicesProps> = ({ onSelectTour }) => {
                 border: '1px solid rgba(0,0,0,0.05)',
                 background: '#FFFFFF'
               }}>
-                {searchResults.map((tour) => {
+                  {searchResults.map((tour) => {
                   const originalIndex = toursData.findIndex(t => t.id === tour.id);
                   const thumb = BANNER_IMAGES[originalIndex % BANNER_IMAGES.length];
                   return (
@@ -208,7 +209,7 @@ const Services: React.FC<ServicesProps> = ({ onSelectTour }) => {
                         cursor: 'pointer'
                       }}
                     >
-                      <img src={thumb} alt={tour.title} style={{ width: '50px', height: '50px', objectFit: 'cover', borderRadius: '10px' }} />
+                      <Image src={thumb} alt={tour.title} width={50} height={50} style={{ objectFit: 'cover', borderRadius: '10px' }} />
                       <div style={{ flex: 1 }}>
                         <div style={{ fontWeight: 'bold', fontSize: '0.85rem', color: 'var(--color-primary-deep)' }}>{tour.title}</div>
                         <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', textTransform: 'capitalize' }}>{tour.category} Tours</div>
@@ -247,11 +248,17 @@ const Services: React.FC<ServicesProps> = ({ onSelectTour }) => {
             const coverImage = BANNER_IMAGES[originalIndex % BANNER_IMAGES.length];
 
             return (
-              <div key={s.id} className="card-container tour-card-anim" onClick={() => onSelectTour(s.id)} style={{ cursor: 'pointer' }}>
+              <a
+                key={s.id}
+                href={`/tours/${s.id}`}
+                onClick={(e) => { e.preventDefault(); onSelectTour(s.id); }}
+                className="card-container tour-card-anim"
+                style={{ cursor: 'pointer', textDecoration: 'none' }}
+              >
                 <div className="service-card">
 
                   <div className="service-img-wrapper">
-                    <img src={coverImage} alt={s.title} loading="lazy" />
+                    <Image src={coverImage} alt={s.title} fill style={{ objectFit: 'cover' }} />
                   </div>
 
                   <div className="card-content">
@@ -290,7 +297,7 @@ const Services: React.FC<ServicesProps> = ({ onSelectTour }) => {
                     </div>
                   </div>
                 </div>
-              </div>
+              </a>
             );
           })}
         </div>
