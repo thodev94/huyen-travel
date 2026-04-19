@@ -24,7 +24,8 @@
         "name": "next"
       }
     ],
-    "module": "esnext"
+    "module": "esnext",
+    "target": "ES2017"
   },
   "exclude": [
     "node_modules"

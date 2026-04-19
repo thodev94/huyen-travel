@@ -3,10 +3,11 @@ import Image from 'next/image';
 import toursData from '../../../src/data/tours.json';
 import { renderNode } from '../../../src/utils/NodeMapper';
 
-export async function generateMetadata({ params }: { params: { id: string } }) {
-  const tour = (toursData as any).find((t: any) => t.id === params.id);
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
+  const p = await params;
+  const tour = (toursData as any).find((t: any) => t.id === p.id);
   const base = process.env.NEXT_PUBLIC_METADATA_BASE ?? 'http://localhost:3002';
-  const url = `${base}/tours/${params.id}`;
+  const url = `${base}/tours/${p.id}`;
   const image = `${base}/images/AS11-40-5865HR.webp`;
   return {
     title: tour ? `${tour.title} — Huyen Tour` : 'Tour Detail',
@@ -20,8 +21,9 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
   };
 }
 
-export default function TourPage({ params }: { params: { id: string } }) {
-  const tour = (toursData as any).find((t: any) => t.id === params.id);
+export default async function TourPage({ params }: { params: Promise<{ id: string }> }) {
+  const p = await params;
+  const tour = (toursData as any).find((t: any) => t.id === p.id);
   if (!tour) return <div style={{ padding: 40 }}>Tour not found</div>;
 
   const phone = '+84364399290';
