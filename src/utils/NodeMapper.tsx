@@ -9,6 +9,7 @@ export interface DocNode {
   items?: string[];
   src?: string;
   rows?: string[][];
+  
 }
 
 const TEMPORARY_IMAGES = [
@@ -135,7 +136,17 @@ export const renderNode = (node: DocNode, index: number) => {
       );
 
     case 'image':
-      return <Image key={index} src={node.src} alt="" width={800} height={450} style={{ maxWidth: '100%', borderRadius: '12px', margin: '30px 0', boxShadow: '0 8px 25px rgba(0,0,0,0.05)' }} />;
+      if (!node.src) return null;
+      return (
+        <Image
+          key={index}
+          src={node.src}
+          alt={node?.text || ''}
+          width={800}
+          height={450}
+          style={{ maxWidth: '100%', borderRadius: '12px', margin: '30px 0', boxShadow: '0 8px 25px rgba(0,0,0,0.05)' }}
+        />
+      );
     
     case 'table':
       return (
