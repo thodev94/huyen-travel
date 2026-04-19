@@ -26,7 +26,7 @@ const BANNER_IMAGES = [
 const Services: React.FC<ServicesProps> = ({ onSelectTour }) => {
   const sectionRef = useRef<HTMLElement>(null);
   const { width } = useWindowSize();
-  const isMobile = width < 768;
+  const isMobile = width <= 768;
   const [activeCategory, setActiveCategory] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [showSuggestions, setShowSuggestions] = useState(false);
@@ -209,7 +209,15 @@ const Services: React.FC<ServicesProps> = ({ onSelectTour }) => {
                         cursor: 'pointer'
                       }}
                     >
-                      <Image src={thumb} alt={tour.title} width={50} height={50} style={{ objectFit: 'cover', borderRadius: '10px' }} />
+                      <Image
+                        src={thumb}
+                        alt={tour.title}
+                        width={50}
+                        height={50}
+                        sizes="50px"
+                        quality={60}
+                        style={{ objectFit: 'cover', borderRadius: '10px' }}
+                      />
                       <div style={{ flex: 1 }}>
                         <div style={{ fontWeight: 'bold', fontSize: '0.85rem', color: 'var(--color-primary-deep)' }}>{tour.title}</div>
                         <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', textTransform: 'capitalize' }}>{tour.category} Tours</div>
@@ -258,7 +266,14 @@ const Services: React.FC<ServicesProps> = ({ onSelectTour }) => {
                 <div className="service-card">
 
                   <div className="service-img-wrapper">
-                    <Image src={coverImage} alt={s.title} fill style={{ objectFit: 'cover' }} />
+                    <Image
+                      src={coverImage}
+                      alt={s.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      quality={75}
+                      style={{ objectFit: 'cover' }}
+                    />
                   </div>
 
                   <div className="card-content">

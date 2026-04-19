@@ -28,17 +28,18 @@ const TourDetail: React.FC<TourDetailProps> = ({ tourId, onClose }) => {
   const router = useRouter();
   const containerRef = useRef<HTMLDivElement>(null);
   const { width } = useWindowSize();
-  const isMobile = width < 768;
+  const isMobile = width <= 768;
   const tourIndex = toursData.findIndex(t => t.id === tourId);
   const tour = toursData[tourIndex];
 
   useGSAP(() => {
+    if (isMobile) return; // disable detail animations on mobile
     const tl = gsap.timeline();
     tl.from('.detail-anim', {
       opacity: 0,
-      y: isMobile ? 15 : 30,
-      duration: isMobile ? 0.4 : 0.8,
-      stagger: isMobile ? 0.05 : 0.1,
+      y: 30,
+      duration: 0.8,
+      stagger: 0.1,
       ease: 'power3.out'
     });
   }, { scope: containerRef });
@@ -93,7 +94,7 @@ const TourDetail: React.FC<TourDetailProps> = ({ tourId, onClose }) => {
             style={{ 
               display: 'flex', alignItems: 'center', gap: '8px',
               background: 'rgba(255,255,255,0.2)', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.4)',
-              color: 'white', padding: '10px 20px', borderRadius: '30px', fontWeight: 600, cursor: 'pointer',
+              color: 'white', padding:'10px 20px', borderRadius: '30px', fontWeight: 600, cursor: 'pointer',
               boxShadow: '0 4px 15px rgba(0,0,0,0.1)', transition: 'all 0.3s ease'
             }}
             onMouseOver={(e) => e.currentTarget.style.background = 'rgba(255,255,255,0.3)'}
@@ -109,8 +110,8 @@ const TourDetail: React.FC<TourDetailProps> = ({ tourId, onClose }) => {
         width: '100%', 
         margin: isMobile ? '-40px 0 0 0' : '-80px 0 0 0', 
         background: 'var(--bg-main)',
-        borderRadius: isMobile ? '24px 24px 0 0' : '40px 40px 0 0',
-        padding: isMobile ? '40px 20px' : '80px 50px',
+        borderRadius: isMobile ? '16px 16px 0 0' : '40px 40px 0 0',
+        padding: isMobile ? '20px 10px' : '80px 50px',
         position: 'relative',
         zIndex: 5,
         boxShadow: '0 -10px 40px rgba(0,0,0,0.08)'
@@ -129,7 +130,7 @@ const TourDetail: React.FC<TourDetailProps> = ({ tourId, onClose }) => {
         
         <div className="tag detail-anim" style={{ 
           display: 'inline-block',
-          marginBottom: '40px'
+          marginBottom: isMobile ? '20px' : '40px'
         }}>
           {tour.category}
         </div>
@@ -138,7 +139,7 @@ const TourDetail: React.FC<TourDetailProps> = ({ tourId, onClose }) => {
         <div className="detail-anim" style={{ 
           display: 'flex', 
           gap: '15px', 
-          marginBottom: '50px',
+          marginBottom: isMobile ? '20px' : '50px',
           flexWrap: 'wrap'
         }}>
           <a href={whatsappLink} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
@@ -170,8 +171,8 @@ const TourDetail: React.FC<TourDetailProps> = ({ tourId, onClose }) => {
         {/* Content Body */}
         <div className="tour-content detail-anim" style={{
           background: 'var(--bg-pure)',
-          padding: isMobile ? '30px 20px' : '50px',
-          borderRadius: '24px',
+          padding: isMobile ? '10px 20px' : '50px',
+          borderRadius: isMobile ? '16px' : '24px',
           boxShadow: '0 10px 40px rgba(47, 93, 80, 0.05)',
           border: '1px solid var(--border-color)',
           fontSize: '1.1rem',

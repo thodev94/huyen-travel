@@ -20,22 +20,23 @@ const galleryImages = [
 const Gallery: React.FC = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const { width } = useWindowSize();
-  const isMobile = width < 768;
+  const isMobile = width <= 768;
 
   useGSAP(() => {
+    if (isMobile) return; // disable GSAP animations on small screens
     gsap.fromTo(
       '.gallery-anim',
-      { opacity: 0, scale: isMobile ? 0.95 : 0.9, y: isMobile ? 20 : 30 },
+      { opacity: 0, scale: 0.9, y: 30 },
       {
         opacity: 1,
         scale: 1,
         y: 0,
-        duration: isMobile ? 0.5 : 0.8,
-        stagger: isMobile ? 0.05 : 0.1,
+        duration: 0.8,
+        stagger: 0.1,
         ease: 'back.out(1.2)',
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: isMobile ? 'top 90%' : 'top 80%',
+          start: 'top 80%',
         }
       }
     );
@@ -49,7 +50,6 @@ const Gallery: React.FC = () => {
     justifyContent: 'center',
     margin: '0 auto',
     width: isMobile ? '100%' : 'max-content',
-    padding: isMobile ? '0 15px' : '0'
   };
 
   const galleryItems = [
@@ -65,10 +65,10 @@ const Gallery: React.FC = () => {
     <section id="gallery" className="gallery" ref={sectionRef}>
       <div className="gallery-inner">
         <div style={{ maxWidth: '1240px', margin: '0 auto', padding: '0 20px' }}>
-          <h2 className="section-title text-center gallery-anim" style={{ width: '100%', marginBottom: '60px' }}>Travel Journal</h2>
+          <h2 className="section-title text-center gallery-anim" style={{ width: '100%', marginBottom: '30px' }}>Travel Journal</h2>
         </div>
 
-        <div style={bentoGridStyle}>
+        <div className="gallery-grid" style={bentoGridStyle}>
           {galleryImages.map((img, index) => {
             const config = galleryItems[index % galleryItems.length];
             return (
@@ -79,7 +79,6 @@ const Gallery: React.FC = () => {
                   gridColumn: isMobile ? 'span 1' : `span ${config.spanC}`,
                   gridRow: isMobile ? 'span 1' : `span ${config.spanR}`,
                   position: 'relative',
-                  padding: '10px',
                   background: 'var(--bg-pure)',
                   height: isMobile ? '280px' : '100%'
                 }}
@@ -95,6 +94,8 @@ const Gallery: React.FC = () => {
                     src={img}
                     alt={`Vietnam view ${index + 1}`}
                     fill
+                    sizes="(max-width: 768px) 100vw, 285px"
+                    quality={75}
                     style={{
                       objectFit: 'cover',
                       display: 'block',

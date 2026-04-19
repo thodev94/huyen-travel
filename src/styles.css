@@ -232,12 +232,17 @@ body {
   /* Heritage gold background */
   color: #72522B;
   /* Darker gold/brown text */
-  padding: 6px 14px;
+  padding: 6px 10px;
   border-radius: 6px;
   font-size: 0.8rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1px;
+  @media (max-width: 768px) {
+    font-size: 0.7rem;
+    padding: 5px 6px;
+    
+  }
 }
 
 /* Custom Scrollbar */
@@ -256,4 +261,27 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-secondary-teal);
+}
+
+/* Responsive gallery: force single column on mobile and reduce hover/animation effects */
+@media (max-width: 768px) {
+  .gallery-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    grid-auto-rows: auto !important;
+    gap: 16px !important;
+    width: 100% !important;
+    justify-content: stretch !important;
+  }
+
+  /* disable hover lift on small screens */
+  .gallery-inner .glass-panel:hover {
+    transform: none !important;
+    box-shadow: 0 4px 20px rgba(47, 93, 80, 0.05) !important;
+  }
+
+  /* avoid image transition/transform effects on mobile */
+  .gallery-img {
+    transition: none !important;
+  }
 }

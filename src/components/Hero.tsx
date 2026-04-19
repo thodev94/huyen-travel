@@ -9,7 +9,7 @@ gsap.registerPlugin(useGSAP);
 const Hero: React.FC = () => {
   const heroRef = useRef<HTMLDivElement>(null);
   const { width } = useWindowSize();
-  const isMobile = width < 768;
+  const isMobile = width <= 768;
 
   useGSAP(() => {
     gsap.fromTo(
@@ -38,7 +38,7 @@ const Hero: React.FC = () => {
           </h1>
 
           {/* Badge */}
-          <div className="hero-anim" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '10px', marginBottom: '25px', marginTop: '5px' }}>
+          <div className="hero-anim" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '10px', marginBottom: isMobile ? 10: '25px', marginTop: '5px' }}>
             <span className="tag">Licensed Professional Guide</span>
             <span className="tag">8+ Years Experience</span>
           </div>
@@ -48,7 +48,7 @@ const Hero: React.FC = () => {
             the real side of Ho Chi Minh City and the Mekong Delta through storytelling and hidden gems.
           </p>
 
-          <div className="hero-anim" style={{ display: 'flex', gap: '20px', flexWrap: 'wrap', justifyContent: 'center', marginTop: '20px' }}>
+          <div className="hero-anim" style={{ display: 'flex', gap: '20px', flexWrap: 'wrap', justifyContent: 'center', marginTop:  isMobile ? 10 : '20px' }}>
             <button className="btn-primary" onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}>
               Start Journey
             </button>

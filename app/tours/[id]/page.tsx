@@ -33,7 +33,7 @@ export default function TourPage({ params }: { params: { id: string } }) {
   return (
     <div style={{ width: '100%', minHeight: '100vh', background: 'var(--bg-soft)', paddingBottom: 20 }}>
       <div style={{ position: 'relative', width: '100%', height: '50vh', minHeight: 250, maxHeight: 600 }}>
-        <Image src={tour.image || '/images/AS11-40-5865HR.webp'} alt={tour.title} fill style={{ objectFit: 'cover' }} />
+        <Image src={tour.image || '/images/AS11-40-5865HR.webp'} alt={tour?.title || "Tour Image"} fill style={{ objectFit: 'cover' }} />
 
         <div style={{ position: 'absolute', top: 40, left: 40, zIndex: 10 }}>
           <a href="/" style={{ textDecoration: 'none' }}>

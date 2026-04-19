@@ -20,7 +20,7 @@
 }
 @media (max-width: 768px) {
   .services {
-    padding: 60px 15px; 
+    padding: 10px 15px; 
   }
   .service-grid { grid-template-columns: 1fr; }
 }

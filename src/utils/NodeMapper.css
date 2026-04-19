@@ -21,6 +21,12 @@
 .itinerary-item.even .itinerary-item-right { padding-left: 40px; justify-content: flex-start; }
 .itinerary-item.odd .itinerary-item-left { padding-left: 40px; justify-content: flex-start; }
 .itinerary-item.odd .itinerary-item-right { padding-right: 40px; justify-content: flex-end; }
+ 
+ .imageItem {
+    object-fit: cover;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  }
 
 @media (max-width: 768px) {
   .itinerary-timeline-line {
@@ -73,5 +79,9 @@
   .itinerary-text-box p {
     font-size: 0.85rem !important;
     line-height: 1.5 !important;
+  }
+   .imageItem {
+    object-fit: cover;
+    width: 100% !important;
   }
 }

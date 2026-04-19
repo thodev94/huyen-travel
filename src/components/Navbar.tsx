@@ -25,7 +25,7 @@ interface NavbarProps {
 const Navbar: React.FC<NavbarProps> = ({ onSelectTour }) => {
   const navRef = useRef<HTMLElement>(null);
   const { width } = useWindowSize();
-  const isMobile = width < 768;
+  const isMobile = width <= 768;
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
@@ -82,9 +82,10 @@ const Navbar: React.FC<NavbarProps> = ({ onSelectTour }) => {
       ).slice(0, 5);
 
   useGSAP(() => {
+    if (isMobile) return; // skip GSAP animations on mobile
     const tl = gsap.timeline();
-    tl.from('.nav-logo-anim', { x: isMobile ? -10 : -20, opacity: 0, duration: isMobile ? 0.4 : 0.8, ease: 'power3.out' })
-      .from('.nav-link-anim', { y: isMobile ? -5 : -10, opacity: 0, duration: isMobile ? 0.3 : 0.5, stagger: 0.05, ease: 'power2.out' }, '-=0.2');
+    tl.from('.nav-logo-anim', { x: -20, opacity: 0, duration: 0.8, ease: 'power3.out' })
+      .from('.nav-link-anim', { y: -10, opacity: 0, duration: 0.5, stagger: 0.05, ease: 'power2.out' }, '-=0.2');
   }, { scope: navRef });
 
   useEffect(() => {
@@ -144,7 +145,7 @@ const Navbar: React.FC<NavbarProps> = ({ onSelectTour }) => {
         className={`navbar ${isScrolled ? 'scrolled' : ''}`}
         style={{
           width: '100%',
-          height: '80px',
+          height: isMobile ? '50px' : '60px',
           display: 'flex',
           justifyContent: isMobile ? 'space-between' : 'space-between',
           alignItems: 'center',
@@ -152,7 +153,7 @@ const Navbar: React.FC<NavbarProps> = ({ onSelectTour }) => {
         }}
       >
         <a href="#hero" className="logo nav-logo-anim" style={{ textDecoration: 'none' }}>
-          <span style={{ fontWeight: '900', color: 'var(--color-accent-orange)', fontSize: '1.2rem', letterSpacing: '2px' }}>WIND</span>
+          <span style={{ fontWeight: '900', color: 'var(--color-accent-orange)', fontSize: '1.2rem', letterSpacing: '2px' }}>WINDS</span>
           <span style={{ fontWeight: '900', color: !isScrolled ? '#FFFFFF' : 'var(--color-primary-deep)', fontSize: '1.2rem', letterSpacing: '2px', transition: 'color 0.3s' }}>TOUR.</span>
         </a>
 
@@ -200,7 +201,7 @@ const Navbar: React.FC<NavbarProps> = ({ onSelectTour }) => {
                       <div key={tour.id} onClick={() => { onSelectTour(tour.id); setShowSuggestions(false); setSearchQuery(''); }}
                         style={{ display: 'flex', alignItems: 'center', gap: '12px', padding: '10px', borderRadius: '10px', cursor: 'pointer', transition: 'background 0.2s' }}
                         onMouseOver={(e) => e.currentTarget.style.background = 'rgba(0,0,0,0.05)'} onMouseOut={(e) => e.currentTarget.style.background = 'transparent'}>
-                        <Image src={thumb} alt={tour.title} width={45} height={45} style={{ objectFit: 'cover', borderRadius: '8px' }} />
+                        <Image src={thumb} alt={tour.title} width={45} height={45} sizes="45px" quality={60} style={{ objectFit: 'cover', borderRadius: '8px' }} />
                         <div style={{ flex: 1, overflow: 'hidden' }}>
                           <div style={{ fontWeight: '700', fontSize: '0.85rem', color: 'var(--color-primary-deep)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{tour.title}</div>
                           <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', textTransform: 'capitalize' }}>{tour.category} Tours</div>
@@ -256,7 +257,7 @@ const Navbar: React.FC<NavbarProps> = ({ onSelectTour }) => {
       >
         <div style={{ padding: '25px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid rgba(0,0,0,0.05)' }}>
           <div>
-            <span style={{ fontWeight: '900', color: 'var(--color-accent-orange)', fontSize: '1.2rem', letterSpacing: '2px' }}>WIND</span>
+            <span style={{ fontWeight: '900', color: 'var(--color-accent-orange)', fontSize: '1.2rem', letterSpacing: '2px' }}>WINDS</span>
             <span style={{ fontWeight: '900', color: 'var(--color-primary-deep)', fontSize: '1.2rem', letterSpacing: '2px' }}>TOUR.</span>
           </div>
           <button onClick={closeMenu} style={{ background: 'transparent', border: 'none', color: 'var(--color-primary-deep)', fontSize: '2.5rem', cursor: 'pointer', lineHeight: 1 }}>×</button>
@@ -307,7 +308,7 @@ const Navbar: React.FC<NavbarProps> = ({ onSelectTour }) => {
                   return (
                     <div key={tour.id} onClick={() => { onSelectTour(tour.id); closeMenu(); setShowSuggestions(false); setSearchQuery(''); }}
                       style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '10px', borderRadius: '10px' }}>
-                      <Image src={thumb} alt={tour.title} width={40} height={40} style={{ objectFit: 'cover', borderRadius: '8px' }} />
+                      <Image src={thumb} alt={tour.title} width={40} height={40} sizes="40px" quality={60} style={{ objectFit: 'cover', borderRadius: '8px' }} />
                       <div style={{ flex: 1, overflow: 'hidden' }}>
                         <div style={{ fontWeight: '700', fontSize: '0.8rem', color: 'var(--color-primary-deep)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{tour.title}</div>
                       </div>

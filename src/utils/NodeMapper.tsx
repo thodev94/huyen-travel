@@ -116,11 +116,17 @@ export const renderNode = (node: DocNode, index: number) => {
 
                 {/* Image Box */}
                 <div className="itinerary-item-right">
-                  <Image src={imgSrc} alt={`Stop ${i + 1}`} width={800} height={280} style={{
-                    objectFit: 'cover',
-                    borderRadius: '16px',
-                    boxShadow: '0 10px 30px rgba(0,0,0,0.08)'
-                  }} />
+                  <Image
+                    src={imgSrc}
+                    alt={`Stop ${i + 1}`}
+                    width={800}
+                    height={280}
+                    sizes="(max-width: 768px) 100vw, 300px"
+                    priority={i === 0}
+                    placeholder="blur"
+                    blurDataURL="/placeholder.png"
+                    className="imageItem"
+                  />
                 </div>
               </div>
             );
@@ -129,8 +135,7 @@ export const renderNode = (node: DocNode, index: number) => {
       );
 
     case 'image':
-      const imgSrc = node.src || TEMPORARY_IMAGES[0];
-      return <Image key={index} src={imgSrc} alt="" width={800} height={450} style={{ maxWidth: '100%', borderRadius: '12px', margin: '30px 0', boxShadow: '0 8px 25px rgba(0,0,0,0.05)' }} />;
+      return <Image key={index} src={node.src} alt="" width={800} height={450} style={{ maxWidth: '100%', borderRadius: '12px', margin: '30px 0', boxShadow: '0 8px 25px rgba(0,0,0,0.05)' }} />;
     
     case 'table':
       return (
