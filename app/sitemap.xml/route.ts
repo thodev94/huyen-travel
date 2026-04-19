@@ -1,6 +1,6 @@
 import toursData from '../../src/data/tours.json';
 
-const BASE = process.env.NEXT_PUBLIC_METADATA_BASE ?? 'http://localhost:3002';
+const BASE = process.env.NEXT_PUBLIC_METADATA_BASE ?? 'http://localhost:3000';
 
 export async function GET() {
   const urls = [

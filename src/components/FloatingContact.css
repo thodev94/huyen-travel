@@ -59,7 +59,7 @@
 }
 
 .float-btn.sms {
-  background: linear-gradient(135deg, #E07A5F, #C44536); /* Heritage Clay gradient */
+  background: linear-gradient(135deg, var(--color-primary-bright), var(--color-accent-orange));
 }
 
 @media (max-width: 1024px) {

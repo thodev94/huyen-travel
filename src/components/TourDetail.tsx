@@ -130,16 +130,16 @@ const TourDetail: React.FC<TourDetailProps> = ({ tourId, onClose }) => {
         
         <div className="tag detail-anim" style={{ 
           display: 'inline-block',
-          marginBottom: isMobile ? '20px' : '40px'
+          marginBottom: isMobile ? '10px' : '40px'
         }}>
           {tour.category}
         </div>
 
         {/* Action Buttons */}
-        <div className="detail-anim" style={{ 
+        {/* <div className="detail-anim" style={{ 
           display: 'flex', 
           gap: '15px', 
-          marginBottom: isMobile ? '20px' : '50px',
+          marginBottom: isMobile ? '10px' : '50px',
           flexWrap: 'wrap'
         }}>
           <a href={whatsappLink} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
@@ -166,17 +166,17 @@ const TourDetail: React.FC<TourDetailProps> = ({ tourId, onClose }) => {
               <span style={{ fontSize: '1.2rem' }}>✉️</span> SMS
             </button>
           </a>
-        </div>
+        </div> */}
 
         {/* Content Body */}
         <div className="tour-content detail-anim" style={{
-          background: 'var(--bg-pure)',
+          background: 'var(--bg-black)',
           padding: isMobile ? '10px 20px' : '50px',
           borderRadius: isMobile ? '16px' : '24px',
           boxShadow: '0 10px 40px rgba(47, 93, 80, 0.05)',
           border: '1px solid var(--border-color)',
           fontSize: '1.1rem',
-          color: 'var(--text-secondary)'
+          color: 'var(--text-dark)'
         }}>
           {(tour.nodes as DocNode[]).map((node, index) => renderNode(node, index))}
         </div>

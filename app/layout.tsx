@@ -40,10 +40,44 @@ export const metadata = {
 // metadataBase is now included in the metadata object for Next.js v14 compatibility
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const BASE = process.env.NEXT_PUBLIC_METADATA_BASE ?? 'http://localhost:3002';
+
+  const ld = {
+    "@context": "https://schema.org",
+    "@type": "TravelAgency",
+    "name": "Huyen Tour",
+    "description": "Licensed guide Huyen — Explore authentic Vietnam tours",
+    "url": BASE,
+    "telephone": "+84364399290",
+    "logo": `${BASE}/images/AS11-40-5865HR.webp`,
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Ho Chi Minh City",
+      "addressCountry": "VN"
+    }
+  };
+
   return (
     <html lang="en">
-      <head />
-      <body>{children}</body>
+      <head>
+        {/* Basic viewport and canonical for SEO */}
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        {/* Primary meta description for search engines */}
+        <meta name="description" content={metadata.description} />
+        <meta name="theme-color" content="#780000" />
+        <link rel="canonical" href={BASE} />
+
+        {/* Preconnect to image CDNs used by the site to improve LCP */}
+        <link rel="preconnect" href="https://images.unsplash.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://upload.wikimedia.org" crossOrigin="anonymous" />
+
+        {/* Structured data (JSON-LD) */}
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }} />
+      </head>
+      <body>
+        <a href="#main" className="skip-link">Skip to content</a>
+        {children}
+      </body>
     </html>
   );
 }

@@ -27,13 +27,27 @@ export default async function TourPage({ params }: { params: Promise<{ id: strin
   if (!tour) return <div style={{ padding: 40 }}>Tour not found</div>;
 
   const phone = '+84364399290';
-  const whatsapp = `https://wa.me/${phone.replace('+', '')}?text=Hi,+I+am+interested+in+the+${encodeURIComponent(
+  const whatsapp = `https://wa.me/${phone.replace('+', '')}?text=${encodeURIComponent(
     tour.title
-  )}+tour.`;
-  const sms = `sms:${phone}?body=Hi,+I+am+interested+in+the+${encodeURIComponent(tour.title)}+tour.`;
+  )}`;
+  const sms = `sms:${phone}?body=${encodeURIComponent(tour.title)}`;
+
+  const base = process.env.NEXT_PUBLIC_METADATA_BASE ?? 'http://localhost:3002';
+  const url = `${base}/tours/${p.id}`;
+
+  const breadcrumb = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": base },
+      { "@type": "ListItem", "position": 2, "name": "Tours", "item": `${base}/tours` },
+      { "@type": "ListItem", "position": 3, "name": tour.title, "item": url }
+    ]
+  };
 
   return (
     <div style={{ width: '100%', minHeight: '100vh', background: 'var(--bg-soft)', paddingBottom: 20 }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
       <div style={{ position: 'relative', width: '100%', height: '50vh', minHeight: 250, maxHeight: 600 }}>
         <Image src={tour.image || '/images/AS11-40-5865HR.webp'} alt={tour?.title || "Tour Image"} fill style={{ objectFit: 'cover' }} />
 

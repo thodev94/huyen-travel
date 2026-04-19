@@ -1,46 +1,31 @@
 :root {
-  /* Primary Colors (Forest Green) */
-  --color-primary-bright: #3A7D6A;
-  --color-primary-deep: #2F5D50;
+  /* Brand palette (from provided image) */
+  --color-primary-bright: #2d741f; /* Crimson Blaze (lighter primary red) */
+  --color-primary-deep: #d31622; /* Gochujang Red (deep primary) */
 
-  /* Secondary Colors (Earth & Sand) */
-  --color-secondary-teal: #A47148;
-  /* Repurposed to Earth Brown for compatibility */
-  --color-secondary-light: #D8B08C;
-  /* Sand Beige */
-  --color-warm-sand: #F2CC8F;
-  /* Heritage Gold */
-
-  /* Accent Colors (Clay, Gold, Brick) */
-  --color-accent-orange: #E07A5F;
-  /* Clay Orange */
-  --color-accent-light-orange: #F2CC8F;
-  /* Heritage Gold */
-  --color-accent-coral: #C44536;
-  /* Brick Red */
+  /* Accent / Secondary */
+  --color-accent-orange: #eb1f26; /* Varden (accent red) */
+  --color-secondary-teal: #003049; /* Cosmos blue (dark contrast) */
+  --color-secondary-light: #669BBC; /* Blue Marble (lighter contrast) */
 
   /* Backgrounds */
-  --bg-pure: #FFFFFF;
-  /* Cards */
-  --bg-main: #FAF7F2;
-  /* Main Neutral */
-  --bg-soft: #F0EAE3;
-  /* Section Accent */
-
+  --bg-pure: #f8f4f1;
+  --bg-main: #FEF7F5; /* warm, light background */
+  --bg-soft: #F3EFEA;
+  --bg-black: #2B2B2B;
+  --text-dark: #FFFFFF;
   /* Text Colors */
   --text-primary: #2B2B2B;
   --text-secondary: #5C5C5C;
   --text-muted: #8A8A8A;
 
   /* Borders */
-  --border-color: #E5DED6;
+  --border-color: #E9E4E2;
 
   /* Gradients */
   --grad-ocean: linear-gradient(135deg, var(--color-primary-deep), var(--color-primary-bright));
-  /* Forest Gradient */
   --grad-sunset: linear-gradient(135deg, var(--color-secondary-teal), var(--color-accent-orange));
-  /* Earth Gradient */
-  --grad-warm-glow: linear-gradient(135deg, var(--color-accent-light-orange), var(--color-secondary-teal));
+  --grad-warm-glow: linear-gradient(135deg, var(--color-accent-orange), var( --color-primary-deep));
 
   /* Typography System (Fluid) */
   --font-xs: clamp(0.75rem, 0.8vw, 0.8rem);
@@ -89,6 +74,29 @@ body {
   color: var(--text-primary);
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+}
+
+/* Skip link for keyboard users */
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.skip-link:focus {
+  position: fixed;
+  left: 12px;
+  top: 12px;
+  width: auto;
+  height: auto;
+  padding: 8px 12px;
+  background: var(--color-primary-deep);
+  color: var(--bg-pure);
+  z-index: 99999;
+  border-radius: 6px;
+  text-decoration: none;
 }
 
 .main-wrapper {

@@ -108,13 +108,13 @@ const About: React.FC = () => {
         transition: 'max-height 0.8s ease-in-out',
         position: 'relative'
       }}>
-        {journeyNodes.length > 0 && renderNode(journeyNodes[0], 0)}
+        {journeyNodes.length > 0 && renderNode(journeyNodes[0], 0, true)}
         <img
           src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=300&h=300&fit=crop"
           alt="Huyen - Tour Guide"
           className="journey-avatar"
         />
-        {journeyNodes.slice(1).map((node, i) => renderNode(node, i + 1))}
+        {journeyNodes.slice(1).map((node, i) => renderNode(node, i + 1, true))}
 
         {!isExpanded && (
           <div style={{

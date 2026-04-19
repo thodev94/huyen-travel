@@ -1,5 +1,6 @@
 "use client";
 import React, { useRef } from 'react';
+import Image from 'next/image';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { useWindowSize } from '../hooks/useWindowSize';
@@ -28,6 +29,18 @@ const Hero: React.FC = () => {
 
   return (
     <section id="hero" className="hero" ref={heroRef}>
+
+      <div className="hero-bg" aria-hidden="true">
+        <Image
+          src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=80&w=2000&auto=format&fit=crop"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          style={{ objectFit: 'cover', objectPosition: 'center' }}
+        />
+        <div className="hero-overlay" aria-hidden="true" />
+      </div>
 
       <div className="hero-content">
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>

@@ -6,7 +6,6 @@ import About from './components/About';
 import Services from './components/Services';
 import Gallery from './components/Gallery';
 import Contact from './components/Contact';
-import BackgroundCanvas from './components/BackgroundCanvas';
 import TourDetail from './components/TourDetail';
 import FloatingContact from './components/FloatingContact';
 import MobileBottomNav from './components/MobileBottomNav';
@@ -28,7 +27,7 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="main-wrapper">
+    <main id="main" className="main-wrapper">
       {/* <BackgroundCanvas /> */}
       {selectedTourId ? (
         <TourDetail tourId={selectedTourId} onClose={() => setSelectedTourId(null)} />
@@ -44,7 +43,7 @@ const App: React.FC = () => {
       <Contact />
       <MobileBottomNav onNavigate={handleMobileNav} />
       <FloatingContact />
-    </div>
+    </main>
   );
 };
 

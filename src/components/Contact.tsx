@@ -128,7 +128,7 @@ const Contact: React.FC = () => {
 
         {/* Bottom Bar */}
         <div style={{
-          borderTop: '1px solid #E0E0E0',
+          borderTop: '1px solid var(--border-color)',
           padding: '25px 0',
           display: 'flex',
           flexDirection: isMobile ? 'column' : 'row',

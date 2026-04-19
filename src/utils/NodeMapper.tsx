@@ -21,7 +21,7 @@ const TEMPORARY_IMAGES = [
   "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=80&w=600&auto=format&fit=crop"
 ];
 
-export const renderNode = (node: DocNode, index: number) => {
+export const renderNode = (node: DocNode, index: number, isWhiteBackground?: boolean) => {
   switch (node.type) {
     case 'heading':
       const HTag = `h${node.level}` as keyof JSX.IntrinsicElements;
@@ -29,13 +29,13 @@ export const renderNode = (node: DocNode, index: number) => {
     
     case 'paragraph':
       if (node.html) {
-        return <p key={index} dangerouslySetInnerHTML={{ __html: node.html }} style={{ marginBottom: '20px', lineHeight: '1.8', color: 'var(--text-secondary)' }} />;
+        return <p key={index} dangerouslySetInnerHTML={{ __html: node.html }} style={{ marginBottom: '10px', lineHeight: '1.5', color: !isWhiteBackground ?   'var(--text-dark)' :'var(--text-secondary)'  }} />;
       }
-      return <p key={index} style={{ marginBottom: '20px', lineHeight: '1.8', color: 'var(--text-secondary)' }}>{node.text}</p>;
+      return <p key={index} style={{ marginBottom: '10px', lineHeight: '1.5', color: !isWhiteBackground ? 'var(--text-dark)' : 'var(--text-secondary)' }}>{node.text}</p>;
     
     case 'list-unordered':
       return (
-        <ul key={index} style={{ marginBottom: '30px', paddingLeft: '25px', lineHeight: '1.8', color: 'var(--text-secondary)' }}>
+        <ul key={index} style={{ marginBottom: '20px', paddingLeft: '25px', lineHeight: '1.5', color: !isWhiteBackground ? 'var(--text-dark)' : 'var(--text-secondary)' }}>
           {node.items?.map((item, i) => (
             <li key={i} style={{ marginBottom: '10px' }}>{item}</li>
           ))}
@@ -45,7 +45,7 @@ export const renderNode = (node: DocNode, index: number) => {
     case 'list-ordered':
       // Render as a zigzag Itinerary Timeline
       return (
-        <div key={index} className="itinerary-timeline" style={{ position: 'relative', margin: '60px 0', padding: '20px 0' }}>
+        <div key={index} className="itinerary-timeline" style={{ position: 'relative', margin: '30px 0', padding: '20px 0' }}>
           {/* Vertical Line */}
           <div className="itinerary-timeline-line" style={{
             position: 'absolute',
@@ -144,7 +144,7 @@ export const renderNode = (node: DocNode, index: number) => {
           alt={node?.text || ''}
           width={800}
           height={450}
-          style={{ maxWidth: '100%', borderRadius: '12px', margin: '30px 0', boxShadow: '0 8px 25px rgba(0,0,0,0.05)' }}
+          style={{ maxWidth: '100%', borderRadius: '12px', margin: '20px 0', boxShadow: '0 8px 25px rgba(0,0,0,0.05)' }}
         />
       );
     

@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
 
 export const useWindowSize = () => {
+  // Use a stable default so server and the client's initial render match.
+  // Update to actual window dimensions after mount to avoid hydration mismatches.
   const [windowSize, setWindowSize] = useState({
-    width: typeof window !== 'undefined' ? window.innerWidth : 1920,
-    height: typeof window !== 'undefined' ? window.innerHeight : 1080,
+    width: 1920,
+    height: 1080,
   });
 
   useEffect(() => {
@@ -13,6 +15,9 @@ export const useWindowSize = () => {
         height: window.innerHeight,
       });
     };
+
+    // Set initial size on mount
+    handleResize();
 
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
