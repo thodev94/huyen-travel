@@ -1,11 +1,16 @@
 "use client";
-import React, { useEffect, useMemo, useRef } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import toursData from '../data/tours.json';
 import { renderNode, DocNode } from '../utils/NodeMapper';
+import imageMapData from '../data/imageMap.json';
+import stepImagesData from '../data/stepImages.json';
+
+const imageMap: Record<string, string[]> = imageMapData;
+const stepImagesMap: Record<string, string[]> = stepImagesData;
 import { useWindowSize } from '../hooks/useWindowSize';
 
 gsap.registerPlugin(useGSAP);
@@ -49,8 +54,14 @@ const TourDetail: React.FC<TourDetailProps> = ({ tourId, onClose }) => {
   }, []);
 
   const bannerImg = useMemo(() => {
+    if (!tour) return BANNER_IMAGES[0];
+    const folder = (tour as any).folder as keyof typeof imageMap;
+    const folderImages = imageMap[folder] || [];
+    if (folderImages.length > 0) {
+      return folderImages[0];
+    }
     return BANNER_IMAGES[Math.max(0, tourIndex) % BANNER_IMAGES.length];
-  }, [tourIndex]);
+  }, [tour, tourIndex]);
 
   if (!tour) return null;
 
@@ -79,7 +90,9 @@ const TourDetail: React.FC<TourDetailProps> = ({ tourId, onClose }) => {
           src={bannerImg}
           alt={tour.title}
           fill
-          style={{ objectFit: 'cover' }}
+          sizes="100vw"
+          priority
+          style={{ objectFit: 'cover', objectPosition: 'center' }}
         />
         {/* Dark overlay for contrast */}
         <div style={{ 
@@ -178,9 +191,88 @@ const TourDetail: React.FC<TourDetailProps> = ({ tourId, onClose }) => {
           fontSize: '1.1rem',
           color: 'var(--text-dark)'
         }}>
-          {(tour.nodes as DocNode[]).map((node, index) => renderNode(node, index))}
+          {(() => {
+            const folder = (tour as any).folder as keyof typeof stepImagesMap;
+            const stepImages = stepImagesMap[folder] || [];
+            return (tour.nodes as DocNode[]).map((node, index) => renderNode(node, index, false, stepImages));
+          })()}
         </div>
 
+        {/* Gallery for this tour */}
+        {tour && (() => {
+          const folder = (tour as any).folder as keyof typeof imageMap;
+          const folderImages = imageMap[folder] || [];
+          if (folderImages.length > 1) {
+            return <TourGallerySlider images={folderImages.slice(1)} title={tour.title} />;
+          }
+          return null;
+        })()}
+
+      </div>
+    </div>
+  );
+};
+
+// Extracted Component for Slider
+const TourGallerySlider: React.FC<{ images: string[], title: string }> = ({ images, title }) => {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const { width } = useWindowSize();
+  const isMobile = width <= 768;
+
+  return (
+    <div className="tour-gallery detail-anim" style={{ marginTop: '40px' }}>
+      <h3 style={{ color: 'var(--color-primary-deep)', marginBottom: '20px', fontSize: '1.8rem', fontWeight: 'bold' }}>Gallery</h3>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+        {/* Main Image */}
+        <div style={{
+          position: 'relative',
+          width: '100%',
+          height: isMobile ? '250px' : '500px',
+          borderRadius: '16px',
+          overflow: 'hidden',
+          boxShadow: '0 10px 30px rgba(0,0,0,0.1)',
+          background: 'var(--bg-black)'
+        }}>
+          <Image
+            key={activeIndex}
+            src={images[activeIndex]}
+            alt={`${title} main gallery image`}
+            fill
+            style={{ objectFit: 'contain' }}
+            sizes="(max-width: 768px) 100vw, 1200px"
+          />
+        </div>
+
+        {/* Thumbnails */}
+        <div style={{
+          display: 'flex',
+          gap: '10px',
+          overflowX: 'auto',
+          paddingBottom: '10px',
+          WebkitOverflowScrolling: 'touch',
+          scrollbarWidth: 'thin'
+        }}>
+          {images.map((img, idx) => (
+            <div
+              key={idx}
+              onClick={() => setActiveIndex(idx)}
+              style={{
+                position: 'relative',
+                flex: '0 0 auto',
+                width: isMobile ? '80px' : '120px',
+                height: isMobile ? '60px' : '80px',
+                borderRadius: '8px',
+                overflow: 'hidden',
+                cursor: 'pointer',
+                border: activeIndex === idx ? '3px solid var(--color-accent-orange)' : '3px solid transparent',
+                opacity: activeIndex === idx ? 1 : 0.5,
+                transition: 'all 0.3s ease'
+              }}
+            >
+              <Image src={img} alt={`${title} thumbnail ${idx + 1}`} fill style={{ objectFit: 'cover' }} sizes="120px" />
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

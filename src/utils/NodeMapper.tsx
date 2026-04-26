@@ -9,7 +9,7 @@ export interface DocNode {
   items?: string[];
   src?: string;
   rows?: string[][];
-  
+
 }
 
 const TEMPORARY_IMAGES = [
@@ -21,18 +21,18 @@ const TEMPORARY_IMAGES = [
   "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=80&w=600&auto=format&fit=crop"
 ];
 
-export const renderNode = (node: DocNode, index: number, isWhiteBackground?: boolean) => {
+export const renderNode = (node: DocNode, index: number, isWhiteBackground?: boolean, stepImages?: string[]) => {
   switch (node.type) {
     case 'heading':
       const HTag = `h${node.level}` as keyof JSX.IntrinsicElements;
       return <HTag key={index} style={{ color: 'var(--color-primary-deep)', marginTop: '40px', marginBottom: '20px' }}>{node.text}</HTag>;
-    
+
     case 'paragraph':
       if (node.html) {
-        return <p key={index} dangerouslySetInnerHTML={{ __html: node.html }} style={{ marginBottom: '10px', lineHeight: '1.5', color: !isWhiteBackground ?   'var(--text-dark)' :'var(--text-secondary)'  }} />;
+        return <p key={index} dangerouslySetInnerHTML={{ __html: node.html }} style={{ marginBottom: '10px', lineHeight: '1.5', color: !isWhiteBackground ? 'var(--text-dark)' : 'var(--text-secondary)' }} />;
       }
       return <p key={index} style={{ marginBottom: '10px', lineHeight: '1.5', color: !isWhiteBackground ? 'var(--text-dark)' : 'var(--text-secondary)' }}>{node.text}</p>;
-    
+
     case 'list-unordered':
       return (
         <ul key={index} style={{ marginBottom: '20px', paddingLeft: '25px', lineHeight: '1.5', color: !isWhiteBackground ? 'var(--text-dark)' : 'var(--text-secondary)' }}>
@@ -41,36 +41,51 @@ export const renderNode = (node: DocNode, index: number, isWhiteBackground?: boo
           ))}
         </ul>
       );
-      
+
     case 'list-ordered':
-      // Render as a zigzag Itinerary Timeline
+      // Render as a clean Vertical Itinerary Timeline (No images, straight layout)
       return (
-        <div key={index} className="itinerary-timeline" style={{ position: 'relative', margin: '30px 0', padding: '20px 0' }}>
-          {/* Vertical Line */}
-          <div className="itinerary-timeline-line" style={{
+        <div key={index} className="itinerary-timeline-vertical" style={{ position: 'relative', margin: '30px 0' }}>
+          {/* Continuous Vertical Line */}
+          <div style={{
             position: 'absolute',
-            left: '50%',
-            top: 0,
-            bottom: 0,
-            width: '4px',
-            background: 'var(--border-color)',
-            transform: 'translateX(-50%)',
-            zIndex: 1
+            left: '15px',
+            top: '30px',
+            bottom: '30px',
+            width: '2px',
+            background: 'linear-gradient(to bottom, var(--color-primary-bright), var(--color-accent-orange))',
+            zIndex: 1,
+            opacity: 0.5
           }}></div>
 
           {node.items?.map((item, i) => {
-            const isEven = i % 2 === 0;
-            const imgSrc = TEMPORARY_IMAGES[i % TEMPORARY_IMAGES.length];
             return (
-              <div key={i} className={`itinerary-item ${isEven ? 'even' : 'odd'}`}>
+              <div key={i} style={{ display: 'flex', position: 'relative', marginBottom: i === (node.items?.length || 0) - 1 ? '0' : '30px', maxWidth: '800px' }}>
+
+                {/* Intuitive Step Arrow / Connector below the circle */}
+                {/* {i < (node.items?.length || 0) - 1 && (
+                  <div style={{
+                    position: 'absolute',
+                    left: '8px',
+                    bottom: '-22px',
+                    color: 'var(--color-accent-orange)',
+                    fontSize: '1rem',
+                    zIndex: 2,
+                    background: 'var(--bg-black)',
+                    height: '20px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    lineHeight: 1
+                  }}>
+                    ↓
+                  </div>
+                )} */}
+
                 {/* Step Circle Marker */}
-                <div className="itinerary-step-marker" style={{
-                  position: 'absolute',
-                  left: '50%',
-                  top: '50%',
-                  transform: 'translate(-50%, -50%)',
-                  width: '44px',
-                  height: '44px',
+                <div style={{
+                  width: '32px',
+                  height: '32px',
                   borderRadius: '50%',
                   background: 'var(--color-primary-bright)',
                   color: 'white',
@@ -78,57 +93,51 @@ export const renderNode = (node: DocNode, index: number, isWhiteBackground?: boo
                   alignItems: 'center',
                   justifyContent: 'center',
                   fontWeight: 'bold',
+                  fontSize: '0.9rem',
                   zIndex: 2,
-                  boxShadow: '0 0 0 6px var(--bg-pure)'
+                  boxShadow: '0 0 0 6px var(--bg-black)',
+                  flexShrink: 0,
+                  marginRight: '20px',
+                  marginTop: '10px'
                 }}>
                   {i + 1}
                 </div>
 
-                {/* Arrow pointing down below the step (except last item) */}
-                {i < (node.items?.length || 0) - 1 && (
-                  <div className="itinerary-arrow" style={{
-                    position: 'absolute',
-                    left: '50%',
-                    top: 'calc(50% + 35px)',
-                    transform: 'translateX(-50%)',
-                    color: 'var(--color-accent-orange)',
-                    fontSize: '1.5rem',
-                    zIndex: 2,
-                    textShadow: '0 2px 5px rgba(0,0,0,0.1)'
-                  }}>
-                    ↓
-                  </div>
-                )}
-
                 {/* Content Box */}
-                <div className="itinerary-item-left">
-                  <div className="itinerary-text-box" style={{
-                    background: 'var(--bg-main)',
-                    padding: '30px',
-                    borderRadius: '16px',
-                    boxShadow: '0 4px 15px rgba(0,0,0,0.03)',
-                    border: '1px solid var(--border-color)',
-                    width: '100%',
-                    maxWidth: '800px'
-                  }}>
-                    <p style={{ color: 'var(--text-secondary)', lineHeight: '1.7', margin: 0 }}>{item}</p>
-                  </div>
+                <div style={{
+                  background: 'var(--bg-main)',
+                  padding: '20px 25px',
+                  borderRadius: '16px',
+                  border: '1px solid var(--border-color)',
+                  flex: 1,
+                  boxShadow: '0 4px 15px rgba(0,0,0,0.03)',
+                  position: 'relative'
+                }}>
+                  {/* Small Speech Bubble Arrow */}
+                  <div style={{
+                    position: 'absolute',
+                    left: '-8px',
+                    top: '16px',
+                    width: '0',
+                    height: '0',
+                    borderTop: '8px solid transparent',
+                    borderBottom: '8px solid transparent',
+                    borderRight: '8px solid var(--border-color)'
+                  }}></div>
+                  <div style={{
+                    position: 'absolute',
+                    left: '-7px',
+                    top: '16px',
+                    width: '0',
+                    height: '0',
+                    borderTop: '8px solid transparent',
+                    borderBottom: '8px solid transparent',
+                    borderRight: '8px solid var(--bg-main)'
+                  }}></div>
+
+                  <p style={{ color: 'var(--text-secondary)', lineHeight: '1.7', margin: 0 }}>{item}</p>
                 </div>
 
-                {/* Image Box */}
-                <div className="itinerary-item-right">
-                  <Image
-                    src={imgSrc}
-                    alt={`Stop ${i + 1}`}
-                    width={800}
-                    height={280}
-                    sizes="(max-width: 768px) 100vw, 300px"
-                    priority={i === 0}
-                    placeholder="blur"
-                    blurDataURL="/placeholder.png"
-                    className="imageItem"
-                  />
-                </div>
               </div>
             );
           })}
@@ -147,7 +156,7 @@ export const renderNode = (node: DocNode, index: number, isWhiteBackground?: boo
           style={{ maxWidth: '100%', borderRadius: '12px', margin: '20px 0', boxShadow: '0 8px 25px rgba(0,0,0,0.05)' }}
         />
       );
-    
+
     case 'table':
       return (
         <div key={index} style={{ overflowX: 'auto', marginBottom: '30px', borderRadius: '10px', border: '1px solid var(--border-color)' }}>

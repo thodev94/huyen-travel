@@ -6,7 +6,9 @@ import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { useWindowSize } from '../hooks/useWindowSize';
 import toursData from '../data/tours.json';
+import imageMapData from '../data/imageMap.json';
 
+const imageMap: Record<string, string[]> = imageMapData;
 const BANNER_IMAGES = [
   "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=600&auto=format&fit=crop",
   "https://images.unsplash.com/photo-1528127269322-539801943592?q=80&w=600&auto=format&fit=crop",
@@ -197,8 +199,9 @@ const Navbar: React.FC<NavbarProps> = ({ onSelectTour }) => {
                   zIndex: 20000, background: 'var(--bg-pure)', border: '1px solid var(--border-color)'
                 }}>
                   {searchResults.map((tour) => {
-                    const originalIndex = toursData.findIndex(t => t.id === tour.id);
-                    const thumb = BANNER_IMAGES[originalIndex % BANNER_IMAGES.length];
+                    const folder = (tour as any).folder as keyof typeof imageMap;
+                    const folderImages = imageMap[folder] || [];
+                    const thumb = folderImages.length > 0 ? folderImages[0] : BANNER_IMAGES[0];
                       return (
                     <div key={tour.id} role="option" aria-selected={false} onClick={() => { onSelectTour(tour.id); setShowSuggestions(false); setSearchQuery(''); }}
                         style={{ display: 'flex', alignItems: 'center', gap: '12px', padding: '10px', borderRadius: '10px', cursor: 'pointer', transition: 'background 0.2s' }}
@@ -312,8 +315,9 @@ const Navbar: React.FC<NavbarProps> = ({ onSelectTour }) => {
                 maxHeight: '200px', overflowY: 'auto'
               }}>
                 {searchResults.map((tour) => {
-                  const originalIndex = toursData.findIndex(t => t.id === tour.id);
-                  const thumb = BANNER_IMAGES[originalIndex % BANNER_IMAGES.length];
+                  const folder = (tour as any).folder as keyof typeof imageMap;
+                  const folderImages = imageMap[folder] || [];
+                  const thumb = folderImages.length > 0 ? folderImages[0] : BANNER_IMAGES[0];
                   return (
                     <div key={tour.id} role="option" aria-selected={false} onClick={() => { onSelectTour(tour.id); closeMenu(); setShowSuggestions(false); setSearchQuery(''); }}
                       style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '10px', borderRadius: '10px' }}>

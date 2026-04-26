@@ -7,6 +7,9 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import { useWindowSize } from '../hooks/useWindowSize';
 import toursData from '../data/tours.json';
+import imageMapData from '../data/imageMap.json';
+
+const imageMap: Record<string, string[]> = imageMapData;
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -189,8 +192,9 @@ const Services: React.FC<ServicesProps> = ({ onSelectTour }) => {
                 background: '#FFFFFF'
               }}>
                   {searchResults.map((tour) => {
-                  const originalIndex = toursData.findIndex(t => t.id === tour.id);
-                  const thumb = BANNER_IMAGES[originalIndex % BANNER_IMAGES.length];
+                  const folder = tour.folder as keyof typeof imageMap;
+                  const folderImages = imageMap[folder] || [];
+                  const thumb = folderImages.length > 0 ? folderImages[0] : BANNER_IMAGES[0];
                   return (
                     <div
                       key={tour.id}
@@ -252,8 +256,9 @@ const Services: React.FC<ServicesProps> = ({ onSelectTour }) => {
 
         <div className="service-grid">
           {filteredTours.map(s => {
-            const originalIndex = toursData.findIndex(t => t.id === s.id);
-            const coverImage = BANNER_IMAGES[originalIndex % BANNER_IMAGES.length];
+            const folder = (s as any).folder as keyof typeof imageMap;
+            const folderImages = imageMap[folder] || [];
+            const coverImage = folderImages.length > 0 ? folderImages[0] : BANNER_IMAGES[0];
 
             return (
               <a
