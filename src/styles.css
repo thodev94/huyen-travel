@@ -1,16 +1,22 @@
 :root {
   /* Brand palette (from provided image) */
-  --color-primary-bright: #2d741f; /* Crimson Blaze (lighter primary red) */
-  --color-primary-deep: #d31622; /* Gochujang Red (deep primary) */
+  --color-primary-bright: #2d741f;
+  /* Crimson Blaze (lighter primary red) */
+  --color-primary-deep: #eb0000;
+  /* Gochujang Red (deep primary) */
 
   /* Accent / Secondary */
-  --color-accent-orange: #eb1f26; /* Varden (accent red) */
-  --color-secondary-teal: #003049; /* Cosmos blue (dark contrast) */
-  --color-secondary-light: #669BBC; /* Blue Marble (lighter contrast) */
+  --color-accent-orange: #eb0000;
+  /* Varden (accent red) */
+  --color-secondary-teal: #003049;
+  /* Cosmos blue (dark contrast) */
+  --color-secondary-light: #669BBC;
+  /* Blue Marble (lighter contrast) */
 
   /* Backgrounds */
   --bg-pure: #f8f4f1;
-  --bg-main: #FEF7F5; /* warm, light background */
+  --bg-main: #FEF7F5;
+  /* warm, light background */
   --bg-soft: #F3EFEA;
   --bg-black: #2B2B2B;
   --text-dark: #FFFFFF;
@@ -25,7 +31,7 @@
   /* Gradients */
   --grad-ocean: linear-gradient(135deg, var(--color-primary-deep), var(--color-primary-bright));
   --grad-sunset: linear-gradient(135deg, var(--color-secondary-teal), var(--color-accent-orange));
-  --grad-warm-glow: linear-gradient(135deg, var(--color-accent-orange), var( --color-primary-deep));
+  --grad-warm-glow: linear-gradient(135deg, var(--color-accent-orange), var(--color-primary-deep));
 
   /* Typography System (Fluid) */
   --font-xs: clamp(0.75rem, 0.8vw, 0.8rem);
@@ -69,7 +75,7 @@ html {
 }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  font-family: 'Montserrat', sans-serif;
   background: var(--bg-main);
   color: var(--text-primary);
   overflow-x: hidden;
@@ -85,6 +91,7 @@ body {
   height: 1px;
   overflow: hidden;
 }
+
 .skip-link:focus {
   position: fixed;
   left: 12px;
@@ -238,7 +245,7 @@ body {
 .tag {
   background: var(--color-accent-light-orange);
   /* Heritage gold background */
-  color: #72522B;
+  color: var(--color-primary-deep);
   /* Darker gold/brown text */
   padding: 6px 10px;
   border-radius: 6px;
@@ -246,10 +253,11 @@ body {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1px;
+
   @media (max-width: 768px) {
     font-size: 0.7rem;
     padding: 5px 6px;
-    
+
   }
 }
 
@@ -291,5 +299,68 @@ body {
   /* avoid image transition/transform effects on mobile */
   .gallery-img {
     transition: none !important;
+  }
+}
+
+/* --- ITINERARY LIST WITH IMAGE --- */
+.list-ordered-container {
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+  margin: 40px 0;
+  align-items: stretch;
+}
+
+.itinerary-timeline-vertical {
+  flex: 0 0 calc(50% - 20px);
+  width: calc(50% - 20px);
+  position: relative;
+}
+
+.list-step-image {
+  flex: 0 0 calc(50% - 20px);
+  width: calc(50% - 20px);
+  max-width: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+  background: var(--bg-black);
+  display: flex;
+}
+
+.list-step-image img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.list-step-image:hover img {
+  transform: scale(1.05);
+}
+
+@media (max-width: 1024px) {
+  .list-ordered-container {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .itinerary-timeline-vertical,
+  .list-step-image {
+    flex: 1 1 auto;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .list-step-image {
+    min-height: 400px;
+    /* Fixed height for mobile because the image uses fill */
+  }
+
+  .list-step-image img {
+    height: 100%;
+    /* Ensure it fills the min-height */
   }
 }

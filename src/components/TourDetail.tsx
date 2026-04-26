@@ -12,12 +12,14 @@ import stepImagesData from '../data/stepImages.json';
 const imageMap: Record<string, string[]> = imageMapData;
 const stepImagesMap: Record<string, string[]> = stepImagesData;
 import { useWindowSize } from '../hooks/useWindowSize';
+import Gallery from './Gallery';
 
 gsap.registerPlugin(useGSAP);
 
 interface TourDetailProps {
   tourId: string;
   onClose?: () => void;
+  onSelectTour?: (id: string) => void;
 }
 
 const BANNER_IMAGES = [
@@ -29,7 +31,7 @@ const BANNER_IMAGES = [
   "https://images.unsplash.com/photo-1534008897995-27a23e859048?q=80&w=2000&auto=format&fit=crop"  // Sapa
 ];
 
-const TourDetail: React.FC<TourDetailProps> = ({ tourId, onClose }) => {
+const TourDetail: React.FC<TourDetailProps> = ({ tourId, onClose, onSelectTour }) => {
   const router = useRouter();
   const containerRef = useRef<HTMLDivElement>(null);
   const { width } = useWindowSize();
@@ -50,8 +52,8 @@ const TourDetail: React.FC<TourDetailProps> = ({ tourId, onClose }) => {
   }, { scope: containerRef });
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [tourId]);
 
   const bannerImg = useMemo(() => {
     if (!tour) return BANNER_IMAGES[0];
@@ -65,7 +67,7 @@ const TourDetail: React.FC<TourDetailProps> = ({ tourId, onClose }) => {
 
   if (!tour) return null;
 
-  const phoneNumber = '+84364399290'; 
+  const phoneNumber = '+84364399290';
   const whatsappLink = `https://wa.me/${phoneNumber.replace('+', '')}?text=Hi,+I+am+interested+in+the+${encodeURIComponent(tour.title)}+tour.`;
   const smsLink = `sms:${phoneNumber}?body=Hi,+I+am+interested+in+the+${encodeURIComponent(tour.title)}+tour.`;
 
@@ -75,9 +77,10 @@ const TourDetail: React.FC<TourDetailProps> = ({ tourId, onClose }) => {
       minHeight: '100vh',
       background: 'var(--bg-soft)',
       paddingBottom: '20px', /* Reduced padding since footer is right below */
-      overflowX: 'hidden'
+      overflowX: 'hidden',
+
     }}>
-      
+
       {/* Banner Area */}
       <div style={{
         position: 'relative',
@@ -95,19 +98,20 @@ const TourDetail: React.FC<TourDetailProps> = ({ tourId, onClose }) => {
           style={{ objectFit: 'cover', objectPosition: 'center' }}
         />
         {/* Dark overlay for contrast */}
-        <div style={{ 
-          position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, 
-          background: 'linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 40%, rgba(0,0,0,0.2) 100%)' 
+        <div style={{
+          position: 'absolute', top: 0, left: 0, right: 0, bottom: 0,
+          background: 'linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 40%, rgba(0,0,0,0.2) 100%)',
+
         }} />
 
         {/* Floating Back Button */}
         <div style={{ position: 'absolute', top: isMobile ? '20px' : '40px', left: isMobile ? '20px' : '40px', zIndex: 10 }}>
-          <button 
+          <button
             onClick={() => (onClose ? onClose() : router.push('/'))}
-            style={{ 
+            style={{
               display: 'flex', alignItems: 'center', gap: '8px',
               background: 'rgba(255,255,255,0.2)', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.4)',
-              color: 'white', padding:'10px 20px', borderRadius: '30px', fontWeight: 600, cursor: 'pointer',
+              color: 'white', padding: '10px 20px', borderRadius: '30px', fontWeight: 600, cursor: 'pointer',
               boxShadow: '0 4px 15px rgba(0,0,0,0.1)', transition: 'all 0.3s ease'
             }}
             onMouseOver={(e) => e.currentTarget.style.background = 'rgba(255,255,255,0.3)'}
@@ -119,29 +123,29 @@ const TourDetail: React.FC<TourDetailProps> = ({ tourId, onClose }) => {
       </div>
 
       {/* Main Content Area overlapping the banner */}
-      <div style={{ 
-        width: '100%', 
-        margin: isMobile ? '-40px 0 0 0' : '-80px 0 0 0', 
+      <div style={{
+        width: '100%',
+        margin: isMobile ? '-40px 0 0 0' : '-80px 0 0 0',
         background: 'var(--bg-main)',
         borderRadius: isMobile ? '16px 16px 0 0' : '40px 40px 0 0',
         padding: isMobile ? '20px 10px' : '80px 50px',
         position: 'relative',
         zIndex: 5,
-        boxShadow: '0 -10px 40px rgba(0,0,0,0.08)'
+        boxShadow: '0 -10px 40px rgba(0,0,0,0.08)',
       }}>
 
         {/* Title */}
-        <h1 className="detail-anim" style={{ 
-          fontSize: isMobile ? '2.2rem' : '3.8rem', 
-          color: 'var(--color-primary-deep)', 
+        <h1 className="detail-anim" style={{
+          fontSize: isMobile ? '2.2rem' : '3.8rem',
+          color: 'var(--color-primary-deep)',
           fontWeight: 900,
           marginBottom: '15px',
           lineHeight: 1.1
         }}>
           {tour.title}
         </h1>
-        
-        <div className="tag detail-anim" style={{ 
+
+        <div className="tag detail-anim" style={{
           display: 'inline-block',
           marginBottom: isMobile ? '10px' : '40px'
         }}>
@@ -190,92 +194,30 @@ const TourDetail: React.FC<TourDetailProps> = ({ tourId, onClose }) => {
           border: '1px solid var(--border-color)',
           fontSize: '1.1rem',
           color: 'var(--text-dark)'
+
         }}>
           {(() => {
             const folder = (tour as any).folder as keyof typeof stepImagesMap;
             const stepImages = stepImagesMap[folder] || [];
-            return (tour.nodes as DocNode[]).map((node, index) => renderNode(node, index, false, stepImages));
+            let listOrderedCount = 0;
+            return (tour.nodes as DocNode[]).map((node, index) => {
+              let currentListIndex = -1;
+              if (node.type === 'list-ordered') {
+                currentListIndex = listOrderedCount;
+                listOrderedCount++;
+              }
+              return renderNode(node, index, false, stepImages, currentListIndex);
+            });
           })()}
         </div>
 
         {/* Gallery for this tour */}
-        {tour && (() => {
-          const folder = (tour as any).folder as keyof typeof imageMap;
-          const folderImages = imageMap[folder] || [];
-          if (folderImages.length > 1) {
-            return <TourGallerySlider images={folderImages.slice(1)} title={tour.title} />;
-          }
-          return null;
-        })()}
+        <Gallery onSelectTour={onSelectTour} />
 
       </div>
     </div>
   );
 };
 
-// Extracted Component for Slider
-const TourGallerySlider: React.FC<{ images: string[], title: string }> = ({ images, title }) => {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const { width } = useWindowSize();
-  const isMobile = width <= 768;
-
-  return (
-    <div className="tour-gallery detail-anim" style={{ marginTop: '40px' }}>
-      <h3 style={{ color: 'var(--color-primary-deep)', marginBottom: '20px', fontSize: '1.8rem', fontWeight: 'bold' }}>Gallery</h3>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
-        {/* Main Image */}
-        <div style={{
-          position: 'relative',
-          width: '100%',
-          height: isMobile ? '250px' : '500px',
-          borderRadius: '16px',
-          overflow: 'hidden',
-          boxShadow: '0 10px 30px rgba(0,0,0,0.1)',
-          background: 'var(--bg-black)'
-        }}>
-          <Image
-            key={activeIndex}
-            src={images[activeIndex]}
-            alt={`${title} main gallery image`}
-            fill
-            style={{ objectFit: 'contain' }}
-            sizes="(max-width: 768px) 100vw, 1200px"
-          />
-        </div>
-
-        {/* Thumbnails */}
-        <div style={{
-          display: 'flex',
-          gap: '10px',
-          overflowX: 'auto',
-          paddingBottom: '10px',
-          WebkitOverflowScrolling: 'touch',
-          scrollbarWidth: 'thin'
-        }}>
-          {images.map((img, idx) => (
-            <div
-              key={idx}
-              onClick={() => setActiveIndex(idx)}
-              style={{
-                position: 'relative',
-                flex: '0 0 auto',
-                width: isMobile ? '80px' : '120px',
-                height: isMobile ? '60px' : '80px',
-                borderRadius: '8px',
-                overflow: 'hidden',
-                cursor: 'pointer',
-                border: activeIndex === idx ? '3px solid var(--color-accent-orange)' : '3px solid transparent',
-                opacity: activeIndex === idx ? 1 : 0.5,
-                transition: 'all 0.3s ease'
-              }}
-            >
-              <Image src={img} alt={`${title} thumbnail ${idx + 1}`} fill style={{ objectFit: 'cover' }} sizes="120px" />
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-};
 
 export default TourDetail;

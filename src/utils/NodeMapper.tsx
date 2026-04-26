@@ -1,4 +1,5 @@
-import React from 'react';
+"use client";
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 
 export interface DocNode {
@@ -21,7 +22,58 @@ const TEMPORARY_IMAGES = [
   "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=80&w=600&auto=format&fit=crop"
 ];
 
-export const renderNode = (node: DocNode, index: number, isWhiteBackground?: boolean, stepImages?: string[]) => {
+const AutoSlider = ({ images }: { images: string[] }) => {
+  const [shuffledImages, setShuffledImages] = useState<string[]>(images);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    if (!images || images.length <= 1) {
+      setMounted(true);
+      return;
+    }
+    // Shuffle images array using Fisher-Yates algorithm
+    const shuffled = [...images];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    setShuffledImages(shuffled);
+    setMounted(true);
+  }, [images]);
+
+  useEffect(() => {
+    if (!mounted || shuffledImages.length <= 1) return;
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % shuffledImages.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [mounted, shuffledImages]);
+
+  if (!images || images.length === 0) return null;
+
+  const displayImages = mounted ? shuffledImages : images;
+
+  return (
+    <div className="list-step-image" style={{ position: 'relative' }}>
+      {displayImages.map((src, idx) => (
+        <Image 
+          key={src}
+          src={src} 
+          alt="Itinerary step illustration"
+          fill
+          style={{ 
+            objectFit: 'cover',
+            opacity: mounted ? (currentIndex === idx ? 1 : 0) : (idx === 0 ? 1 : 0),
+            transition: 'opacity 1s ease-in-out'
+          }}
+        />
+      ))}
+    </div>
+  );
+};
+
+export const renderNode = (node: DocNode, index: number, isWhiteBackground?: boolean, stepImages?: string[], listIndex?: number) => {
   switch (node.type) {
     case 'heading':
       const HTag = `h${node.level}` as keyof JSX.IntrinsicElements;
@@ -43,104 +95,93 @@ export const renderNode = (node: DocNode, index: number, isWhiteBackground?: boo
       );
 
     case 'list-ordered':
-      // Render as a clean Vertical Itinerary Timeline (No images, straight layout)
+      // Render as a clean Vertical Itinerary Timeline with an image on the side
+      const listImage = (listIndex !== undefined && listIndex !== -1 && stepImages && stepImages[listIndex]) ? stepImages[listIndex] : null;
+      
       return (
-        <div key={index} className="itinerary-timeline-vertical" style={{ position: 'relative', margin: '30px 0' }}>
-          {/* Continuous Vertical Line */}
-          <div style={{
-            position: 'absolute',
-            left: '15px',
-            top: '30px',
-            bottom: '30px',
-            width: '2px',
-            background: 'linear-gradient(to bottom, var(--color-primary-bright), var(--color-accent-orange))',
-            zIndex: 1,
-            opacity: 0.5
-          }}></div>
+        <div key={index} className="list-ordered-container">
+          <div className="itinerary-timeline-vertical">
+            {/* Continuous Vertical Line */}
+            <div style={{
+              position: 'absolute',
+              left: '15px',
+              top: '30px',
+              bottom: '30px',
+              width: '2px',
+              background: 'linear-gradient(to bottom, var(--color-primary-bright), var(--color-accent-orange))',
+              zIndex: 1,
+              opacity: 0.5
+            }}></div>
 
-          {node.items?.map((item, i) => {
-            return (
-              <div key={i} style={{ display: 'flex', position: 'relative', marginBottom: i === (node.items?.length || 0) - 1 ? '0' : '30px', maxWidth: '800px' }}>
+            {node.items?.map((item, i) => {
+              return (
+                <div key={i} style={{ display: 'flex', position: 'relative', marginBottom: i === (node.items?.length || 0) - 1 ? '0' : '30px', width: "100%" }}>
 
-                {/* Intuitive Step Arrow / Connector below the circle */}
-                {/* {i < (node.items?.length || 0) - 1 && (
+                  {/* Step Circle Marker */}
                   <div style={{
-                    position: 'absolute',
-                    left: '8px',
-                    bottom: '-22px',
-                    color: 'var(--color-accent-orange)',
-                    fontSize: '1rem',
-                    zIndex: 2,
-                    background: 'var(--bg-black)',
-                    height: '20px',
+                    width: '32px',
+                    height: '32px',
+                    borderRadius: '50%',
+                    background: 'var(--color-primary-bright)',
+                    color: 'white',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    lineHeight: 1
+                    fontWeight: 'bold',
+                    fontSize: '0.9rem',
+                    zIndex: 2,
+                    boxShadow: '0 0 0 6px var(--bg-black)',
+                    flexShrink: 0,
+                    marginRight: '20px',
+                    marginTop: '10px'
                   }}>
-                    ↓
+                    {i + 1}
                   </div>
-                )} */}
 
-                {/* Step Circle Marker */}
-                <div style={{
-                  width: '32px',
-                  height: '32px',
-                  borderRadius: '50%',
-                  background: 'var(--color-primary-bright)',
-                  color: 'white',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontWeight: 'bold',
-                  fontSize: '0.9rem',
-                  zIndex: 2,
-                  boxShadow: '0 0 0 6px var(--bg-black)',
-                  flexShrink: 0,
-                  marginRight: '20px',
-                  marginTop: '10px'
-                }}>
-                  {i + 1}
-                </div>
-
-                {/* Content Box */}
-                <div style={{
-                  background: 'var(--bg-main)',
-                  padding: '20px 25px',
-                  borderRadius: '16px',
-                  border: '1px solid var(--border-color)',
-                  flex: 1,
-                  boxShadow: '0 4px 15px rgba(0,0,0,0.03)',
-                  position: 'relative'
-                }}>
-                  {/* Small Speech Bubble Arrow */}
+                  {/* Content Box */}
                   <div style={{
-                    position: 'absolute',
-                    left: '-8px',
-                    top: '16px',
-                    width: '0',
-                    height: '0',
-                    borderTop: '8px solid transparent',
-                    borderBottom: '8px solid transparent',
-                    borderRight: '8px solid var(--border-color)'
-                  }}></div>
-                  <div style={{
-                    position: 'absolute',
-                    left: '-7px',
-                    top: '16px',
-                    width: '0',
-                    height: '0',
-                    borderTop: '8px solid transparent',
-                    borderBottom: '8px solid transparent',
-                    borderRight: '8px solid var(--bg-main)'
-                  }}></div>
+                    background: 'var(--bg-main)',
+                    padding: '20px 25px',
+                    borderRadius: '16px',
+                    border: '1px solid var(--border-color)',
+                    flex: 1,
+                    boxShadow: '0 4px 15px rgba(0,0,0,0.03)',
+                    position: 'relative'
+                  }}>
+                    {/* Small Speech Bubble Arrow */}
+                    <div style={{
+                      position: 'absolute',
+                      left: '-8px',
+                      top: '16px',
+                      width: '0',
+                      height: '0',
+                      borderTop: '8px solid transparent',
+                      borderBottom: '8px solid transparent',
+                      borderRight: '8px solid var(--border-color)'
+                    }}></div>
+                    <div style={{
+                      position: 'absolute',
+                      left: '-7px',
+                      top: '16px',
+                      width: '0',
+                      height: '0',
+                      borderTop: '8px solid transparent',
+                      borderBottom: '8px solid transparent',
+                      borderRight: '8px solid var(--bg-main)'
+                    }}></div>
 
-                  <p style={{ color: 'var(--text-secondary)', lineHeight: '1.7', margin: 0 }}>{item}</p>
+                    <p style={{ color: 'var(--text-primary)', lineHeight: '1.7', margin: 0 }}>{item}</p>
+                  </div>
+
                 </div>
+              );
+            })}
+          </div>
 
-              </div>
-            );
-          })}
+          {/* List Slider beside the steps */}
+          {stepImages && stepImages.length > 0 && (
+            <AutoSlider images={stepImages} />
+          )}
         </div>
       );
 

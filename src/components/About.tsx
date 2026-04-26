@@ -110,7 +110,7 @@ const About: React.FC = () => {
       }}>
         {journeyNodes.length > 0 && renderNode(journeyNodes[0], 0, true)}
         <img
-          src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=300&h=300&fit=crop"
+          src="/images/avatar/avatar.png"
           alt="Huyen - Tour Guide"
           className="journey-avatar"
         />

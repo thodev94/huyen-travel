@@ -30,14 +30,14 @@ const App: React.FC = () => {
     <main id="main" className="main-wrapper">
       {/* <BackgroundCanvas /> */}
       {selectedTourId ? (
-        <TourDetail tourId={selectedTourId} onClose={() => setSelectedTourId(null)} />
+        <TourDetail tourId={selectedTourId} onClose={() => setSelectedTourId(null)} onSelectTour={setSelectedTourId} />
       ) : (
         <>
           <Navbar onSelectTour={setSelectedTourId} />
-          <Hero />
+          <Hero onSelectTour={setSelectedTourId} />
           <About />
           <Services onSelectTour={setSelectedTourId} />
-          <Gallery />
+          <div style={{ maxWidth: "1240px", margin: "0 auto" }}> <Gallery onSelectTour={setSelectedTourId} /></div>
         </>
       )}
       <Contact />
