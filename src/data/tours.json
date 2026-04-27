@@ -543,7 +543,7 @@
   {
     "id": "binh-quoi-peninsula",
     "category": "Saigon",
-    "title": "Binh Quoi Peninsula",
+    "title": "BINH QUOI PENINSULA",
     "nodes": [
       {
         "type": "paragraph",
@@ -636,9 +636,150 @@
     "folder": "binhquoi_thanhda"
   },
   {
+    "id": "cu-chi-tunnels-options",
+    "category": "Saigon",
+    "title": "CU CHI TUNNELS",
+    "folder": "cuchi",
+    "brief": "CU CHI TUNNELS & CUSTOM EXTENSIONS\n\nJourney into Vietnam's Underground History\n\nWelcome to Saigon!\n\nOverview:\n\nStep back in time and explore one of Vietnam’s most iconic wartime landmarks. The Cu Chi Tunnels offer a fascinating look...",
+    "nodes": [
+      {
+        "type": "paragraph",
+        "text": "CU CHI TUNNELS & CUSTOM EXTENSIONS",
+        "html": "<strong>CU CHI TUNNELS & CUSTOM EXTENSIONS</strong>"
+      },
+      {
+        "type": "paragraph",
+        "text": "Journey into Vietnam's Underground History",
+        "html": "<strong>Journey into Vietnam's Underground History</strong>"
+      },
+      {
+        "type": "paragraph",
+        "text": "Welcome to Saigon!",
+        "html": "Welcome to Saigon!"
+      },
+      {
+        "type": "paragraph",
+        "text": "Overview:",
+        "html": "<strong>Overview:</strong>"
+      },
+      {
+        "type": "paragraph",
+        "text": "Step back in time and explore one of Vietnam’s most iconic wartime landmarks. The Cu Chi Tunnels offer a fascinating look into the resilience, ingenuity, and endurance of the Vietnamese people during the Vietnam War. This underground network spans over 200 km and was used by the Viet Cong for shelter, communication, and combat operations.",
+        "html": "Step back in time and explore one of Vietnam’s most iconic wartime landmarks. The <strong>Cu Chi Tunnels</strong> offer a fascinating look into the resilience, ingenuity, and endurance of the Vietnamese people during the Vietnam War. This underground network spans over 200 km and was used by the Viet Cong for shelter, communication, and combat operations."
+      },
+      {
+        "type": "paragraph",
+        "text": "Whether you're a history enthusiast or a curious traveler, this tour offers an eye-opening experience that brings Vietnam’s past to life.",
+        "html": "Whether you're a history enthusiast or a curious traveler, this tour offers an eye-opening experience that brings Vietnam’s past to life."
+      },
+      {
+        "type": "paragraph",
+        "text": "Leaving the hotel at 6am/7am and traveling to Cu Chi Tunnel. Driving through the vibrant city and the leaful rubber plantation then arriving in a peaceful village of Saigon suburban.",
+        "html": "Leaving the hotel at 6am/7am and traveling to Cu Chi Tunnel. Driving through the vibrant city and the leaful rubber plantation then arriving in a peaceful village of Saigon suburban."
+      },
+      {
+        "type": "paragraph",
+        "text": "Short documentary film that provides people a glimpse of Cu Chi inhabitant life during the US invading, gain a comprehensive understanding of the historical context and the impact of Vietnam war.",
+        "html": "Short documentary film that provides people a glimpse of Cu Chi inhabitant life during the US invading, gain a comprehensive understanding of the historical context and the impact of Vietnam war."
+      },
+      {
+        "type": "paragraph",
+        "text": "✅ Cu Chi Tour Highlights:",
+        "html": "<strong>✅ Cu Chi Tour Highlights:</strong>"
+      },
+      {
+        "type": "list-ordered",
+        "items": [
+          "Scenic Drive through the countryside with glimpses of rural life",
+          "Historical Introduction from a knowledgeable English-speaking guide",
+          "Explore Original Tunnel Systems including hidden entrances, trap doors, kitchens, and bunkers",
+          "Try a Shooting Range (Optional) with AK-47s and other weapons (extra cost)",
+          "Walk through jungle trails once used for guerrilla warfare",
+          "Enjoy tea & cassava, the wartime staple food of soldiers"
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "After exploring the tunnels, you can choose one of the following extended options to complete your day:",
+        "html": "<strong>After exploring the tunnels, you can choose one of the following extended options to complete your day:</strong>"
+      },
+      {
+        "type": "paragraph",
+        "text": "OPTION 1: CU CHI HALF DAY",
+        "html": "<br/><strong>OPTION 1: CU CHI HALF DAY</strong>"
+      },
+      {
+        "type": "paragraph",
+        "text": "Driving back to the city and browsing around Dan Sinh market, also known as the War Surplus Market or the American Market, is a unique marketplace in Ho Chi Minh City. The market has become a spot for tourists interested in history, military artifacts, or those seeking unique souvenirs.",
+        "html": "Driving back to the city and browsing around Dan Sinh market, also known as the War Surplus Market or the American Market, is a unique marketplace in Ho Chi Minh City. The market has become a spot for tourists interested in history, military artifacts, or those seeking unique souvenirs."
+      },
+      {
+        "type": "paragraph",
+        "text": "OPTION 2: CU CHI + CHO LON TOWN",
+        "html": "<br/><strong>OPTION 2: CU CHI + CHO LON TOWN</strong>"
+      },
+      {
+        "type": "paragraph",
+        "text": "Having tasting lunch at the local restaurant. Driving back to the city and experiencing the old Saigon where are non-touristy places and immerse yourself in the local lifestyle.",
+        "html": "Having tasting lunch at the local restaurant. Driving back to the city and experiencing the old Saigon where are non-touristy places and immerse yourself in the local lifestyle."
+      },
+      {
+        "type": "list-ordered",
+        "items": [
+          "Exploring Binh Tay Market offers more than just shopping, it's a sensory journey steeped in local flavors and vibrant colors, where one can savor delectable street food, witness the ebb and flow of daily life, and uncover treasures both mundane and exotic.",
+          "Finally, for those who seek a glimpse into the city's spiritual and cultural heritage, Thien Hau Pagoda stands as a revered sanctuary, offering not just a visual feast for the senses but also a spiritual haven where history, faith, and artistry intertwine in harmonious splendor."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "OPTION 3: CU CHI + MEKONG DELTA FULL-DAY",
+        "html": "<br/><strong>OPTION 3: CU CHI + MEKONG DELTA FULL-DAY</strong>"
+      },
+      {
+        "type": "paragraph",
+        "text": "Driving to Mekong Delta. After a 90-minute ride, we will board a private boat to see a variety of locations along the Mekong River.",
+        "html": "<strong>Driving to Mekong Delta.</strong> After a 90-minute ride, we will board a private boat to see a variety of locations along the Mekong River."
+      },
+      {
+        "type": "list-ordered",
+        "items": [
+          "Visiting Xep canal and its surroundings by boat, having a pleasure time in with sipping their honey tea and comprehending how they may survive on a remote island.",
+          "Another fascinating place to visit throughout the day is the coconut candy workshop, where visitors can learn more about the significance of coconut trees for the local ecosystem and spend time watching people produce candies from coconut milk and trinkets made of coconut fiber.",
+          "Paddling a classic sampan through a serene and lush canopy of palm trees. As the gentle rhythm of paddles guides the traditional wooden boat along the narrow, meandering canals, visitors are transported into a world of tranquility and natural splendor.",
+          "A Xe lam ride invites passengers to embark on an exhilarating journey filled with sights, sounds, and a touch of local flair."
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "Then the driver and tour guide will take you back to the hotel/ terminal/ cruise ship port.",
+        "html": "<br/>Then the driver and tour guide will take you back to the hotel/ terminal/ cruise ship port."
+      },
+      {
+        "type": "paragraph",
+        "text": "The itinerary is fully flexible and can be adjusted to suit your preferences—if there are places, you’re less interested in, we’re happy to skip or substitute them. There are no tourist traps, no forced shopping stops.",
+        "html": "<em>The itinerary is fully flexible and can be adjusted to suit your preferences—if there are places, you’re less interested in, we’re happy to skip or substitute them. There are no tourist traps, no forced shopping stops. </em>"
+      },
+      {
+        "type": "paragraph",
+        "text": "This experience is all about your comfort and genuine exploration.",
+        "html": "<em>This experience is all about your comfort and genuine exploration.</em>"
+      },
+      {
+        "type": "paragraph",
+        "text": "Together we will make wonderful days.Regards,",
+        "html": "Together we will make wonderful days.<br />Regards,"
+      },
+      {
+        "type": "paragraph",
+        "text": "HUYEN BUI",
+        "html": "<br /><strong>HUYEN BUI</strong>"
+      }
+    ]
+  },
+  {
     "id": "can-gio-island",
     "category": "Saigon",
-    "title": "Can Gio Island",
+    "title": "CAN GIO ISLAND",
     "nodes": [
       {
         "type": "paragraph",
@@ -710,315 +851,9 @@
     "folder": "cangio"
   },
   {
-    "id": "cu-chi-cho-lon",
-    "category": "Saigon",
-    "title": "CU CHI CHO LON",
-    "nodes": [
-      {
-        "type": "paragraph",
-        "text": "Cu Chi tunnel and Cho Lon town",
-        "html": "<strong>Cu Chi tunnel and Cho Lon town</strong>"
-      },
-      {
-        "type": "paragraph",
-        "text": "Welcome to Saigon!",
-        "html": "Welcome to Saigon!"
-      },
-      {
-        "type": "paragraph",
-        "text": "Overview:",
-        "html": "<strong>Overview:</strong>"
-      },
-      {
-        "type": "paragraph",
-        "text": "Step back in time and explore one of Vietnam’s most iconic wartime landmarks. The Cu Chi Tunnels offer a fascinating look into the resilience, ingenuity, and endurance of the Vietnamese people during the Vietnam War. This underground network spans over 200 km and was used by the Viet Cong for shelter, communication, and combat operations.",
-        "html": "Step back in time and explore one of Vietnam’s most iconic wartime landmarks. The <strong>Cu Chi Tunnels</strong> offer a fascinating look into the resilience, ingenuity, and endurance of the Vietnamese people during the Vietnam War. This underground network spans over 200 km and was used by the Viet Cong for shelter, communication, and combat operations."
-      },
-      {
-        "type": "paragraph",
-        "text": "Whether you're a history enthusiast or a curious traveler, this tour offers an eye-opening experience that brings Vietnam’s past to life.",
-        "html": "Whether you're a history enthusiast or a curious traveler, this tour offers an eye-opening experience that brings Vietnam’s past to life."
-      },
-      {
-        "type": "paragraph",
-        "text": "Leaving the hotel at 6am/7am and traveling to Cu Chi Tunnel. Driving through the vibrant city and the leaful rubber plantation then arriving in a peaceful village of Saigon suburban.",
-        "html": "Leaving the hotel at 6am/7am and traveling to Cu Chi Tunnel. Driving through the vibrant city and the leaful rubber plantation then arriving in a peaceful village of Saigon suburban."
-      },
-      {
-        "type": "paragraph",
-        "text": "Short documentary film that provides people a glimpse of Cu Chi inhabitant life during the US invading, gain a comprehensive understanding of the historical context and the impact of Vietnam war.",
-        "html": "Short documentary film that provides people a glimpse of Cu Chi inhabitant life during the US invading, gain a comprehensive understanding of the historical context and the impact of Vietnam war."
-      },
-      {
-        "type": "paragraph",
-        "text": "✅ Tour Highlights:",
-        "html": "<strong>✅ Tour Highlights:</strong>"
-      },
-      {
-        "type": "list-ordered",
-        "items": [
-          "Scenic Drive through the countryside with glimpses of rural life",
-          "Historical Introduction from a knowledgeable English-speaking guide",
-          "Explore Original Tunnel Systems including hidden entrances, trap doors, kitchens, and bunkers",
-          "Try a Shooting Range (Optional) with AK-47s and other weapons (extra cost)",
-          "Walk through jungle trails once used for guerrilla warfare",
-          "Enjoy tea & cassava, the wartime staple food of soldiers"
-        ]
-      },
-      {
-        "type": "paragraph",
-        "text": "Having tasting lunch at the local restaurant.",
-        "html": "<strong>Having tasting lunch at the local restaurant.</strong>"
-      },
-      {
-        "type": "paragraph",
-        "text": "Driving back to the city and experiencing the old Saigon where are non-touristy places and immerse yourself in the local lifestyle.",
-        "html": "Driving back to the city and experiencing the old Saigon where are non-touristy places and immerse yourself in the local lifestyle."
-      },
-      {
-        "type": "list-ordered",
-        "items": [
-          "Exploring Binh Tay Market offers more than just shopping, it's a sensory journey steeped in local flavors and vibrant colors, where one can savor delectable street food, witness the ebb and flow of daily life, and uncover treasures both mundane and exotic.",
-          "Finally, for those who seek a glimpse into the city's spiritual and cultural heritage, Thien Hau Pagoda stands as a revered sanctuary, offering not just a visual feast for the senses but also a spiritual haven where history, faith, and artistry intertwine in harmonious splendor."
-        ]
-      },
-      {
-        "type": "paragraph",
-        "text": "Then the driver and tour guide will take you back to the hotel/ terminal/ cruise ship port.",
-        "html": "Then the driver and tour guide will take you back to the hotel/ terminal/ cruise ship port."
-      },
-      {
-        "type": "paragraph",
-        "text": "The itinerary is fully flexible and can be adjusted to suit your preferences—if there are places, you’re less interested in, we’re happy to skip or substitute them. There are no tourist traps, no forced shopping stops.",
-        "html": "<br /><em>The itinerary is fully flexible and can be adjusted to suit your preferences—if there are places, you’re less interested in, we’re happy to skip or substitute them. There are no tourist traps, no forced shopping stops. </em>"
-      },
-      {
-        "type": "paragraph",
-        "text": "This experience is all about your comfort and genuine exploration.",
-        "html": "<em>This experience is all about your comfort and genuine exploration.</em>"
-      },
-      {
-        "type": "paragraph",
-        "text": "Together we will make wonderful days.Regards,",
-        "html": "Together we will make wonderful days.<br />Regards,"
-      },
-      {
-        "type": "paragraph",
-        "text": "HUYEN BUI",
-        "html": "<br /><strong>HUYEN BUI</strong>"
-      }
-    ],
-    "brief": "Cu Chi tunnel and Cho Lon town\n\nWelcome to Saigon!\n\n\n\nOverview:\n\nStep back in time and explore one of Vietnam’s most iconic wartime landmarks. The Cu ...",
-    "folder": "cuchi"
-  },
-  {
-    "id": "cu-chi-half-day",
-    "category": "Saigon",
-    "title": "CU CHI half day",
-    "nodes": [
-      {
-        "type": "paragraph",
-        "text": "Cu Chi Tunnels Tour",
-        "html": "<strong>Cu Chi Tunnels Tour </strong>"
-      },
-      {
-        "type": "paragraph",
-        "text": "Journey into Vietnam's Underground History",
-        "html": "<strong>Journey into Vietnam's Underground History</strong>"
-      },
-      {
-        "type": "paragraph",
-        "text": "Welcome to Saigon!",
-        "html": "<a id=\"_Hlk152241923\"></a>Welcome to Saigon!"
-      },
-      {
-        "type": "paragraph",
-        "text": "Overview:",
-        "html": "<strong>Overview:</strong>"
-      },
-      {
-        "type": "paragraph",
-        "text": "Step back in time and explore one of Vietnam’s most iconic wartime landmarks. The Cu Chi Tunnels offer a fascinating look into the resilience, ingenuity, and endurance of the Vietnamese people during the Vietnam War. This underground network spans over 200 km and was used by the Viet Cong for shelter, communication, and combat operations.",
-        "html": "Step back in time and explore one of Vietnam’s most iconic wartime landmarks. The <strong>Cu Chi Tunnels</strong> offer a fascinating look into the resilience, ingenuity, and endurance of the Vietnamese people during the Vietnam War. This underground network spans over 200 km and was used by the Viet Cong for shelter, communication, and combat operations."
-      },
-      {
-        "type": "paragraph",
-        "text": "Whether you're a history enthusiast or a curious traveler, this tour offers an eye-opening experience that brings Vietnam’s past to life.",
-        "html": "Whether you're a history enthusiast or a curious traveler, this tour offers an eye-opening experience that brings Vietnam’s past to life."
-      },
-      {
-        "type": "paragraph",
-        "text": "Leaving the hotel at 6am/7am and traveling to Cu Chi Tunnel. Driving through the vibrant city and the leaful rubber plantation then arriving in a peaceful village of Saigon suburban.",
-        "html": "Leaving the hotel at 6am/7am and traveling to Cu Chi Tunnel. Driving through the vibrant city and the leaful rubber plantation then arriving in a peaceful village of Saigon suburban."
-      },
-      {
-        "type": "paragraph",
-        "text": "Short documentary film that provides people a glimpse of Cu Chi inhabitant life during the US invading, gain a comprehensive understanding of the historical context and the impact of Vietnam war.",
-        "html": "Short documentary film that provides people a glimpse of Cu Chi inhabitant life during the US invading, gain a comprehensive understanding of the historical context and the impact of Vietnam war."
-      },
-      {
-        "type": "paragraph",
-        "text": "✅ Tour Highlights:",
-        "html": "<strong>✅ Tour Highlights:</strong>"
-      },
-      {
-        "type": "list-ordered",
-        "items": [
-          "Scenic Drive through the countryside with glimpses of rural life",
-          "Historical Introduction from a knowledgeable English-speaking guide",
-          "Explore Original Tunnel Systems including hidden entrances, trap doors, kitchens, and bunkers",
-          "Try a Shooting Range (Optional) with AK-47s and other weapons (extra cost)",
-          "Walk through jungle trails once used for guerrilla warfare",
-          "Enjoy tea &amp; cassava, the wartime staple food of soldiers"
-        ]
-      },
-      {
-        "type": "paragraph",
-        "text": "Driving back to the city and browsing around Dan Sinh market, also known as the War Surplus Market or the American Market, is a unique marketplace in Ho Chi Minh City. The market has become a spot for tourists interested in history, military artifacts, or those seeking unique souvenirs.",
-        "html": "<a id=\"_Hlk152242084\"></a>Driving back to the city and browsing around Dan Sinh market, also known as the War Surplus Market or the American Market, is a unique marketplace in Ho Chi Minh City. The market has become a spot for tourists interested in history, military artifacts, or those seeking unique souvenirs."
-      },
-      {
-        "type": "paragraph",
-        "text": "Then the driver and tour guide will take you back to the hotel/ terminal/ cruise ship port.",
-        "html": "Then the driver and tour guide will take you back to the hotel/ terminal/ cruise ship port."
-      },
-      {
-        "type": "paragraph",
-        "text": "The itinerary is fully flexible and can be adjusted to suit your preferences—if there are places, you’re less interested in, we’re happy to skip or substitute them. There are no tourist traps, no forced shopping stops.",
-        "html": "<br /><em>The itinerary is fully flexible and can be adjusted to suit your preferences—if there are places, you’re less interested in, we’re happy to skip or substitute them. There are no tourist traps, no forced shopping stops. </em>"
-      },
-      {
-        "type": "paragraph",
-        "text": "This experience is all about your comfort and genuine exploration.",
-        "html": "<em>This experience is all about your comfort and genuine exploration.</em>"
-      },
-      {
-        "type": "paragraph",
-        "text": "Together we will make wonderful days.Regards,",
-        "html": "Together we will make wonderful days.<br />Regards,"
-      },
-      {
-        "type": "paragraph",
-        "text": "HUYEN BUI",
-        "html": "<br /><strong>HUYEN BUI</strong>"
-      }
-    ],
-    "brief": "\n\nCu Chi Tunnels Tour \n\nJourney into Vietnam's Underground History\n\nWelcome to Saigon!\n\n\n\nOverview:\n\nStep back in time and explore one of Vietnam’s mo...",
-    "folder": "cuchi"
-  },
-  {
-    "id": "cu-chi-me-kong",
-    "category": "Saigon",
-    "title": "CU CHI ME KONG",
-    "nodes": [
-      {
-        "type": "paragraph",
-        "text": "Cu Chi Tunnels + Mekong Delta Full-Day",
-        "html": "<a id=\"_Hlk152241923\"></a><strong>Cu Chi Tunnels + Mekong Delta Full-Day</strong>"
-      },
-      {
-        "type": "paragraph",
-        "text": "\"Into the Earth, Onto the River\"",
-        "html": "<strong>\"Into the Earth, Onto the River\"</strong>"
-      },
-      {
-        "type": "paragraph",
-        "text": "Welcome to Saigon!",
-        "html": "Welcome to Saigon!"
-      },
-      {
-        "type": "paragraph",
-        "text": "Overview:",
-        "html": "<strong>Overview:</strong>"
-      },
-      {
-        "type": "paragraph",
-        "text": "Step back in time and explore one of Vietnam’s most iconic wartime landmarks. The Cu Chi Tunnels offer a fascinating look into the resilience, ingenuity, and endurance of the Vietnamese people during the Vietnam War. This underground network spans over 200 km and was used by the Viet Cong for shelter, communication, and combat operations.",
-        "html": "Step back in time and explore one of Vietnam’s most iconic wartime landmarks. The <strong>Cu Chi Tunnels</strong> offer a fascinating look into the resilience, ingenuity, and endurance of the Vietnamese people during the Vietnam War. This underground network spans over 200 km and was used by the Viet Cong for shelter, communication, and combat operations."
-      },
-      {
-        "type": "paragraph",
-        "text": "Whether you're a history enthusiast or a curious traveler, this tour offers an eye-opening experience that brings Vietnam’s past to life.",
-        "html": "Whether you're a history enthusiast or a curious traveler, this tour offers an eye-opening experience that brings Vietnam’s past to life."
-      },
-      {
-        "type": "paragraph",
-        "text": "Leaving the hotel at 6am/7am and traveling to Cu Chi Tunnel. Driving through the vibrant city and the leaful rubber plantation then arriving in a peaceful village of Saigon suburban.",
-        "html": "Leaving the hotel at 6am/7am and traveling to Cu Chi Tunnel. Driving through the vibrant city and the leaful rubber plantation then arriving in a peaceful village of Saigon suburban."
-      },
-      {
-        "type": "paragraph",
-        "text": "Short documentary film that provides people a glimpse of Cu Chi inhabitant life during the US invading, gain a comprehensive understanding of the historical context and the impact of Vietnam war.",
-        "html": "Short documentary film that provides people a glimpse of Cu Chi inhabitant life during the US invading, gain a comprehensive understanding of the historical context and the impact of Vietnam war."
-      },
-      {
-        "type": "paragraph",
-        "text": "✅ Tour Highlights:",
-        "html": "<strong>✅ Tour Highlights:</strong>"
-      },
-      {
-        "type": "list-unordered",
-        "items": [
-          "Scenic Drive through the countryside with glimpses of rural life",
-          "Historical Introduction from a knowledgeable English-speaking guide",
-          "Explore Original Tunnel Systems including hidden entrances, trap doors, kitchens, and bunkers",
-          "Try a Shooting Range (Optional) with AK-47s and other weapons (extra cost)",
-          "Walk through jungle trails once used for guerrilla warfare",
-          "Enjoy tea &amp; cassava, the wartime staple food of soldiers"
-        ]
-      },
-      {
-        "type": "paragraph",
-        "text": "Driving to Mekong Delta.",
-        "html": "<strong>Driving to Mekong Delta.</strong>"
-      },
-      {
-        "type": "paragraph",
-        "text": "After a 90-minute ride, we will board a private boat to see a variety of locations along the Mekong River.",
-        "html": "After a 90-minute ride, we will board a private boat to see a variety of locations along the Mekong River."
-      },
-      {
-        "type": "list-ordered",
-        "items": [
-          "Visiting Xep canal and its surroundings by boat, having a pleasure time in with sipping their honey tea and comprehending how they may survive on a remote island.",
-          "Another fascinating place to visit throughout the day is the coconut candy workshop, where visitors can learn more about the significance of coconut trees for the local ecosystem and spend time watching people produce candies from coconut milk and trinkets made of coconut fiber.",
-          "Paddling a classic sampan through a serene and lush canopy of palm trees. As the gentle rhythm of paddles guides the traditional wooden boat along the narrow, meandering canals, visitors are transported into a world of tranquility and natural splendor.",
-          "A Xe lam ride invites passengers to embark on an exhilarating journey filled with sights, sounds, and a touch of local flair."
-        ]
-      },
-      {
-        "type": "paragraph",
-        "text": "Then the driver and tour guide will take you back to the hotel/ terminal/ cruise ship port.",
-        "html": "Then the driver and tour guide will take you back to the hotel/ terminal/ cruise ship port."
-      },
-      {
-        "type": "paragraph",
-        "text": "The itinerary is fully flexible and can be adjusted to suit your preferences—if there are places, you’re less interested in, we’re happy to skip or substitute them. There are no tourist traps, no forced shopping stops.",
-        "html": "<br /><em>The itinerary is fully flexible and can be adjusted to suit your preferences—if there are places, you’re less interested in, we’re happy to skip or substitute them. There are no tourist traps, no forced shopping stops. </em>"
-      },
-      {
-        "type": "paragraph",
-        "text": "This experience is all about your comfort and genuine exploration.",
-        "html": "<em>This experience is all about your comfort and genuine exploration.</em>"
-      },
-      {
-        "type": "paragraph",
-        "text": "Together we will make wonderful days.Regards,",
-        "html": "Together we will make wonderful days.<br />Regards,"
-      },
-      {
-        "type": "paragraph",
-        "text": "HUYEN BUI",
-        "html": "<br /><strong>HUYEN BUI</strong>"
-      }
-    ],
-    "brief": "Cu Chi Tunnels + Mekong Delta Full-Day\n\n\"Into the Earth, Onto the River\"\n\nWelcome to Saigon!\n\n\n\nOverview:\n\nStep back in time and explore one of Vietna...",
-    "folder": "cuchi"
-  },
-  {
     "id": "dong-nai",
     "category": "Saigon",
-    "title": "Dong Nai",
+    "title": "DONG NAI",
     "nodes": [
       {
         "type": "paragraph",
@@ -1079,7 +914,7 @@
   {
     "id": "sai-gon-city-full",
     "category": "Saigon",
-    "title": "SAI GON CITY full",
+    "title": "SAI GON CITY",
     "nodes": [
       {
         "type": "paragraph",
