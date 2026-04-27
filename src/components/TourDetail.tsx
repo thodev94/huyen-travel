@@ -55,15 +55,6 @@ const TourDetail: React.FC<TourDetailProps> = ({ tourId, onClose, onSelectTour }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [tourId]);
 
-  const bannerImg = useMemo(() => {
-    if (!tour) return BANNER_IMAGES[0];
-    const folder = (tour as any).folder as keyof typeof imageMap;
-    const folderImages = imageMap[folder] || [];
-    if (folderImages.length > 0) {
-      return folderImages[0];
-    }
-    return BANNER_IMAGES[Math.max(0, tourIndex) % BANNER_IMAGES.length];
-  }, [tour, tourIndex]);
 
   if (!tour) return null;
 
@@ -76,62 +67,21 @@ const TourDetail: React.FC<TourDetailProps> = ({ tourId, onClose, onSelectTour }
       width: '100%',
       minHeight: '100vh',
       background: 'var(--bg-soft)',
-      paddingBottom: '20px', /* Reduced padding since footer is right below */
+      // paddingBottom: '20px', /* Reduced padding since footer is right below */
+      paddingTop: isMobile ? '50px' : '100px', /* Added for fixed navbar */
       overflowX: 'hidden',
 
     }}>
 
-      {/* Banner Area */}
-      <div style={{
-        position: 'relative',
-        width: '100%',
-        height: isMobile ? '35vh' : '50vh',
-        minHeight: '250px',
-        maxHeight: '600px'
-      }}>
-        <Image
-          src={bannerImg}
-          alt={tour.title}
-          fill
-          sizes="100vw"
-          priority
-          style={{ objectFit: 'cover', objectPosition: 'center' }}
-        />
-        {/* Dark overlay for contrast */}
-        <div style={{
-          position: 'absolute', top: 0, left: 0, right: 0, bottom: 0,
-          background: 'linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 40%, rgba(0,0,0,0.2) 100%)',
-
-        }} />
-
-        {/* Floating Back Button */}
-        <div style={{ position: 'absolute', top: isMobile ? '20px' : '40px', left: isMobile ? '20px' : '40px', zIndex: 10 }}>
-          <button
-            onClick={() => (onClose ? onClose() : router.push('/'))}
-            style={{
-              display: 'flex', alignItems: 'center', gap: '8px',
-              background: 'rgba(255,255,255,0.2)', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.4)',
-              color: 'white', padding: '10px 20px', borderRadius: '30px', fontWeight: 600, cursor: 'pointer',
-              boxShadow: '0 4px 15px rgba(0,0,0,0.1)', transition: 'all 0.3s ease'
-            }}
-            onMouseOver={(e) => e.currentTarget.style.background = 'rgba(255,255,255,0.3)'}
-            onMouseOut={(e) => e.currentTarget.style.background = 'rgba(255,255,255,0.2)'}
-          >
-            <span style={{ fontSize: '1.2rem' }}>←</span> Back to Tours
-          </button>
-        </div>
-      </div>
-
-      {/* Main Content Area overlapping the banner */}
       <div style={{
         width: '100%',
-        margin: isMobile ? '-40px 0 0 0' : '-80px 0 0 0',
-        background: 'var(--bg-main)',
-        borderRadius: isMobile ? '16px 16px 0 0' : '40px 40px 0 0',
-        padding: isMobile ? '20px 10px' : '80px 50px',
+        background: 'var(--bg-soft)',
+        padding: '20px 10px',
         position: 'relative',
         zIndex: 5,
         boxShadow: '0 -10px 40px rgba(0,0,0,0.08)',
+        maxWidth: "1536px",
+        margin: '0 auto',
       }}>
 
         {/* Title */}
@@ -152,38 +102,6 @@ const TourDetail: React.FC<TourDetailProps> = ({ tourId, onClose, onSelectTour }
           {tour.category}
         </div>
 
-        {/* Action Buttons */}
-        {/* <div className="detail-anim" style={{ 
-          display: 'flex', 
-          gap: '15px', 
-          marginBottom: isMobile ? '10px' : '50px',
-          flexWrap: 'wrap'
-        }}>
-          <a href={whatsappLink} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
-            <button className="btn-primary" style={{ 
-              backgroundColor: '#25D366', 
-              boxShadow: '0 4px 15px rgba(37, 211, 102, 0.3)',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '10px'
-            }}
-            >
-              <Image src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" width={22} height={22} style={{ filter: 'brightness(0) invert(1)' }} />
-              WhatsApp
-            </button>
-          </a>
-          
-          <a href={smsLink} style={{ textDecoration: 'none' }}>
-            <button className="btn-accent" style={{ 
-              display: 'flex',
-              alignItems: 'center',
-              gap: '10px'
-            }}
-            >
-              <span style={{ fontSize: '1.2rem' }}>✉️</span> SMS
-            </button>
-          </a>
-        </div> */}
 
         {/* Content Body */}
         <div className="tour-content detail-anim" style={{

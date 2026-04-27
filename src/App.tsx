@@ -29,15 +29,16 @@ const App: React.FC = () => {
   return (
     <main id="main" className="main-wrapper">
       {/* <BackgroundCanvas /> */}
+      <Navbar onSelectTour={setSelectedTourId} onNavigate={handleMobileNav} />
+
       {selectedTourId ? (
         <TourDetail tourId={selectedTourId} onClose={() => setSelectedTourId(null)} onSelectTour={setSelectedTourId} />
       ) : (
         <>
-          <Navbar onSelectTour={setSelectedTourId} />
           <Hero onSelectTour={setSelectedTourId} />
           <About />
           <Services onSelectTour={setSelectedTourId} />
-          <div style={{ maxWidth: "1240px", margin: "0 auto" }}> <Gallery onSelectTour={setSelectedTourId} /></div>
+          <div style={{ maxWidth: "1536px", margin: "0 auto" }}> <Gallery onSelectTour={setSelectedTourId} /></div>
         </>
       )}
       <Contact />

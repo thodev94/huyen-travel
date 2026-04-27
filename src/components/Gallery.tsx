@@ -128,7 +128,7 @@ const Gallery: React.FC<GalleryProps> = ({ onSelectTour }) => {
       `}</style>
       <div style={{ margin: '0 auto' }}>
         <h2 className="section-title text-center" style={{ marginBottom: '60px', color: 'red' }}>
-          Discover Our Tours
+          Discover your good time
         </h2>
 
         <div ref={containerRef} style={{ position: 'relative' }}>

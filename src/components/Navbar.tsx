@@ -20,9 +20,10 @@ const BANNER_IMAGES = [
 
 interface NavbarProps {
   onSelectTour: (id: string) => void;
+  onNavigate?: (id: string) => void;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ onSelectTour }) => {
+const Navbar: React.FC<NavbarProps> = ({ onSelectTour, onNavigate }) => {
   const navRef = useRef<HTMLElement>(null);
   const { width } = useWindowSize();
   const isMobile = width <= 768;
@@ -53,7 +54,7 @@ const Navbar: React.FC<NavbarProps> = ({ onSelectTour }) => {
       window.addEventListener('resize', updateCoords);
       window.addEventListener('scroll', updateCoords);
     }
-    
+
     return () => {
       window.removeEventListener('resize', updateCoords);
       window.removeEventListener('scroll', updateCoords);
@@ -65,7 +66,7 @@ const Navbar: React.FC<NavbarProps> = ({ onSelectTour }) => {
       const target = event.target as Node;
       const isOutsideSearch = searchRef.current && !searchRef.current.contains(target);
       const isOutsideSuggestions = suggestionsRef.current && !suggestionsRef.current.contains(target);
-      
+
       if (isOutsideSearch && isOutsideSuggestions) {
         setShowSuggestions(false);
       }
@@ -74,12 +75,12 @@ const Navbar: React.FC<NavbarProps> = ({ onSelectTour }) => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const searchResults = searchQuery.trim() === '' 
-    ? [] 
-    : toursData.filter(t => 
-        t.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
-        t.category.toLowerCase().includes(searchQuery.toLowerCase())
-      ).slice(0, 5);
+  const searchResults = searchQuery.trim() === ''
+    ? []
+    : toursData.filter(t =>
+      t.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      t.category.toLowerCase().includes(searchQuery.toLowerCase())
+    ).slice(0, 5);
 
   useGSAP(() => {
     if (isMobile) return; // skip GSAP animations on mobile
@@ -119,9 +120,9 @@ const Navbar: React.FC<NavbarProps> = ({ onSelectTour }) => {
   const closeMenu = () => setIsMenuOpen(false);
 
   const getLinkStyle = (id: string) => ({
-    color: activeSection === id 
-      ? 'var(--color-accent-orange)' 
-      : (!isScrolled ? 'rgba(255,255,255,0.95)' : 'var(--text-secondary)'),
+    color: activeSection === id
+      ? 'var(--color-accent-orange)'
+      : 'var(--text-secondary)',
     textDecoration: 'none',
     fontWeight: '700',
     fontSize: '0.85rem',
@@ -151,87 +152,99 @@ const Navbar: React.FC<NavbarProps> = ({ onSelectTour }) => {
           display: 'flex',
           justifyContent: isMobile ? 'space-between' : 'space-between',
           alignItems: 'center',
+          background: 'rgba(250, 247, 242, 0.98)',
           gap: 16
         }}
       >
-        <a href="#hero" className="logo nav-logo-anim" style={{ textDecoration: 'none' }}>
+        <a href="#hero" className="logo nav-logo-anim" style={{ textDecoration: 'none' }} onClick={(e) => {
+          if (onNavigate) {
+            e.preventDefault();
+            onNavigate('hero');
+          }
+        }}>
           <span style={{ fontWeight: '900', color: 'var(--color-accent-orange)', fontSize: '1.2rem', letterSpacing: '2px' }}>WINDS</span>
-          <span style={{ fontWeight: '900', color: !isScrolled ? 'var(--bg-pure)' : 'var(--text-primary)', fontSize: '1.2rem', letterSpacing: '2px', transition: 'color 0.3s' }}>TOUR.</span>
+          <span style={{ fontWeight: '900', color: '#494540', fontSize: '1.2rem', letterSpacing: '2px', transition: 'color 0.3s' }}>TOUR.</span>
         </a>
 
-        {!isMobile && (
-          <div style={{ display: 'flex', alignItems: 'center', gap: '30px' }}>
-            {/* Desktop Search - Now on the left */}
-            <div ref={searchRef} style={{ position: 'relative', zIndex: 10 }}>
-              <input 
-                ref={inputRef}
-                aria-label="Search tours"
-                aria-controls="search-suggestions"
-                type="text" 
-                placeholder="Search..." 
-                value={searchQuery}
-                onChange={(e) => {
-                  setSearchQuery(e.target.value);
-                  setShowSuggestions(true);
-                }}
-                onFocus={() => setShowSuggestions(true)}
-                style={{
-                  width: '180px',
-                  padding: '8px 15px 8px 35px',
-                  borderRadius: '20px',
-                  border: isScrolled ? '1px solid var(--border-color)' : '1px solid rgba(255,255,255,0.3)',
-                  background: isScrolled ? 'var(--bg-pure)' : 'rgba(255,255,255,0.1)',
-                  color: isScrolled ? 'var(--text-primary)' : 'var(--bg-pure)',
-                  fontSize: '0.85rem',
-                  outline: 'none',
-                  transition: 'all 0.3s'
-                }}
-              />
-              <span style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', fontSize: '0.9rem', opacity: 0.6 }}>🔍</span>
-              
-              {showSuggestions && searchResults.length > 0 && createPortal(
-                <div id="search-suggestions" role="listbox" aria-label="Search suggestions" ref={suggestionsRef} className="glass-panel" style={{
-                  position: 'absolute', 
-                  top: coords.top + 10, 
-                  left: isMobile ? coords.left : coords.left - (320 - coords.width), /* Align right on desktop */
-                  width: '320px',
-                  padding: '10px', borderRadius: '15px', boxShadow: '0 10px 40px rgba(0,0,0,0.15)',
-                  zIndex: 20000, background: 'var(--bg-pure)', border: '1px solid var(--border-color)'
-                }}>
-                  {searchResults.map((tour) => {
-                    const folder = (tour as any).folder as keyof typeof imageMap;
-                    const folderImages = imageMap[folder] || [];
-                    const thumb = folderImages.length > 0 ? folderImages[0] : BANNER_IMAGES[0];
-                      return (
-                    <div key={tour.id} role="option" aria-selected={false} onClick={() => { onSelectTour(tour.id); setShowSuggestions(false); setSearchQuery(''); }}
-                        style={{ display: 'flex', alignItems: 'center', gap: '12px', padding: '10px', borderRadius: '10px', cursor: 'pointer', transition: 'background 0.2s' }}
-                        onMouseOver={(e) => e.currentTarget.style.background = 'rgba(0,0,0,0.05)'} onMouseOut={(e) => e.currentTarget.style.background = 'transparent'}>
-                        <Image src={thumb} alt={tour.title} width={45} height={45} sizes="45px" quality={60} style={{ objectFit: 'cover', borderRadius: '8px' }} />
-                        <div style={{ flex: 1, overflow: 'hidden' }}>
-                          <div style={{ fontWeight: '700', fontSize: '0.85rem', color: 'var(--color-primary-deep)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{tour.title}</div>
-                          <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', textTransform: 'capitalize' }}>{tour.category} Tours</div>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>,
-                document.body
-              )}
-            </div>
 
-            {/* Nav Links - Now on the right */}
-            <div className="nav-links">
-              {navLinks.map(link => (
-                  <a key={link.id} href={`#${link.id}`} className="nav-link-anim" style={getLinkStyle(link.id)} onClick={() => setActiveSection(link.id)}>
-                    {link.label}
-                    {activeSection === link.id && (
-                      <span style={{ position: 'absolute', bottom: '-8px', left: 0, width: '100%', height: '3px', borderRadius: '2px', backgroundColor: 'var(--color-accent-orange)' }} />
-                    )}
-                  </a>
-                ))}
-            </div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '30px' }}>
+          {/* Desktop Search - Now on the left */}
+          <div ref={searchRef} style={{ position: 'relative', zIndex: 10 }}>
+            <input
+              ref={inputRef}
+              aria-label="Search tours"
+              aria-controls="search-suggestions"
+              type="text"
+              placeholder="Search..."
+              value={searchQuery}
+              onChange={(e) => {
+                setSearchQuery(e.target.value);
+                setShowSuggestions(true);
+              }}
+              onFocus={() => setShowSuggestions(true)}
+              style={{
+                width: '180px',
+                padding: '8px 15px 8px 35px',
+                borderRadius: '20px',
+                border: '1px solid var(--border-color)',
+                background: 'var(--bg-pure)',
+                color: 'var(--text-primary)',
+                fontSize: '0.85rem',
+                outline: 'none',
+                transition: 'all 0.3s'
+              }}
+            />
+            <span style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', fontSize: '0.9rem', opacity: 0.6 }}>🔍</span>
+
+            {showSuggestions && searchResults.length > 0 && createPortal(
+              <div id="search-suggestions" role="listbox" aria-label="Search suggestions" ref={suggestionsRef} className="glass-panel" style={{
+                position: 'absolute',
+                top: coords.top + 10,
+                left: !isMobile ? coords.left : inputRef.current?.getBoundingClientRect().left - (320 - coords.width), /* Align right on desktop */
+                width: '320px',
+                padding: '10px', borderRadius: '15px', boxShadow: '0 10px 40px rgba(0,0,0,0.15)',
+                zIndex: 20000, background: 'var(--bg-pure)', border: '1px solid var(--border-color)'
+              }}>
+                {searchResults.map((tour) => {
+                  const folder = (tour as any).folder as keyof typeof imageMap;
+                  const folderImages = imageMap[folder] || [];
+                  const thumb = folderImages.length > 0 ? folderImages[0] : BANNER_IMAGES[0];
+                  return (
+                    <div key={tour.id} role="option" aria-selected={false} onClick={() => { onSelectTour(tour.id); setShowSuggestions(false); setSearchQuery(''); }}
+                      style={{ display: 'flex', alignItems: 'center', gap: '12px', padding: '10px', borderRadius: '10px', cursor: 'pointer', transition: 'background 0.2s' }}
+                      onMouseOver={(e) => e.currentTarget.style.background = 'rgba(0,0,0,0.05)'} onMouseOut={(e) => e.currentTarget.style.background = 'transparent'}>
+                      <Image src={thumb} alt={tour.title} width={45} height={45} sizes="45px" quality={60} style={{ objectFit: 'cover', borderRadius: '8px' }} />
+                      <div style={{ flex: 1, overflow: 'hidden' }}>
+                        <div style={{ fontWeight: '700', fontSize: '0.85rem', color: 'var(--color-primary-deep)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{tour.title}</div>
+                        <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', textTransform: 'capitalize' }}>{tour.category} Tours</div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>,
+              document.body
+            )}
           </div>
-        )}
+
+          {/* Nav Links - Now on the right */}
+          <div className="nav-links">
+            {navLinks.map(link => (
+              <a key={link.id} href={`#${link.id}`} className="nav-link-anim" style={getLinkStyle(link.id)} onClick={(e) => {
+                if (onNavigate) {
+                  e.preventDefault();
+                  onNavigate(link.id);
+                }
+                setActiveSection(link.id);
+              }}>
+                {link.label}
+                {activeSection === link.id && (
+                  <span style={{ position: 'absolute', bottom: '-8px', left: 0, width: '100%', height: '3px', borderRadius: '2px', backgroundColor: 'var(--color-accent-orange)' }} />
+                )}
+              </a>
+            ))}
+          </div>
+        </div>
+
 
         <button
           className={`mobile-menu-btn ${isMenuOpen ? 'open' : ''}`}
@@ -241,9 +254,9 @@ const Navbar: React.FC<NavbarProps> = ({ onSelectTour }) => {
           aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
           style={{ display: isMobile ? 'block' : 'none', background: 'transparent', border: 'none', cursor: 'pointer' }}
         >
-          <span style={{ background: !isScrolled ? 'var(--bg-pure)' : 'var(--color-primary-deep)' }}></span>
-          <span style={{ background: !isScrolled ? 'var(--bg-pure)' : 'var(--color-primary-deep)' }}></span>
-          <span style={{ background: !isScrolled ? 'var(--bg-pure)' : 'var(--color-primary-deep)' }}></span>
+          <span style={{ background: 'var(--color-primary-deep)' }}></span>
+          <span style={{ background: 'var(--color-primary-deep)' }}></span>
+          <span style={{ background: 'var(--color-primary-deep)' }}></span>
         </button>
       </div>
 
@@ -286,9 +299,9 @@ const Navbar: React.FC<NavbarProps> = ({ onSelectTour }) => {
         }}>
           {/* Mobile Search */}
           <div style={{ position: 'relative', width: '100%', maxWidth: '300px' }}>
-            <input 
-              type="text" 
-              placeholder="Search tours..." 
+            <input
+              type="text"
+              placeholder="Search tours..."
               value={searchQuery}
               onChange={(e) => {
                 setSearchQuery(e.target.value);
@@ -306,7 +319,7 @@ const Navbar: React.FC<NavbarProps> = ({ onSelectTour }) => {
               }}
             />
             <span style={{ position: 'absolute', left: '15px', top: '50%', transform: 'translateY(-50%)' }}>🔍</span>
-            
+
             {showSuggestions && searchResults.length > 0 && (
               <div id="search-suggestions" role="listbox" aria-label="Search suggestions" style={{
                 position: 'absolute', top: 'calc(100% + 5px)', left: 0, right: 0,
@@ -336,7 +349,14 @@ const Navbar: React.FC<NavbarProps> = ({ onSelectTour }) => {
             <a
               key={link.id}
               href={`#${link.id}`}
-              onClick={() => { setActiveSection(link.id); closeMenu(); }}
+              onClick={(e) => {
+                if (onNavigate) {
+                  e.preventDefault();
+                  onNavigate(link.id);
+                }
+                setActiveSection(link.id);
+                closeMenu();
+              }}
               style={{
                 textDecoration: 'none',
                 fontWeight: '800',

@@ -43,7 +43,7 @@
   --font-3xl: clamp(2.5rem, 5vw, 3.5rem);
   --font-4xl: clamp(3rem, 7vw, 4.5rem);
 
-  --max-width: 1240px;
+  --max-width: 1536px;
 }
 
 html {
@@ -305,21 +305,22 @@ body {
 /* --- ITINERARY LIST WITH IMAGE --- */
 .list-ordered-container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   gap: 40px;
   margin: 40px 0;
   align-items: stretch;
 }
 
 .itinerary-timeline-vertical {
-  flex: 0 0 calc(50% - 20px);
-  width: calc(50% - 20px);
+  flex: 1 1 auto;
+  width: 100%;
   position: relative;
 }
 
 .list-step-image {
-  flex: 0 0 calc(50% - 20px);
-  width: calc(50% - 20px);
+  flex: 1 1 auto;
+  width: 100%;
+  min-height: 400px;
   max-width: 100%;
   border-radius: 20px;
   overflow: hidden;
@@ -342,25 +343,105 @@ body {
 
 @media (max-width: 1024px) {
   .list-ordered-container {
-    flex-direction: column;
     gap: 30px;
   }
 
-  .itinerary-timeline-vertical,
   .list-step-image {
-    flex: 1 1 auto;
-    width: 100%;
-    max-width: 100%;
-    margin: 0 auto;
+    min-height: 300px;
+  }
+}
+
+.itinerary-step-wrapper {
+  display: flex;
+  position: relative;
+  width: 100%;
+}
+
+.itinerary-step-marker {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--color-primary-bright);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 0.9rem;
+  z-index: 2;
+  box-shadow: 0 0 0 6px var(--bg-black);
+  flex-shrink: 0;
+  margin-right: 20px;
+  margin-top: 10px;
+}
+
+.itinerary-content-box {
+  background: var(--bg-main);
+  padding: 20px 25px;
+  border-radius: 16px;
+  border: 1px solid var(--border-color);
+  flex: 1;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+  position: relative;
+}
+
+.itinerary-speech-arrow {
+  position: absolute;
+  left: -8px;
+  top: 16px;
+  width: 0;
+  height: 0;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-right: 8px solid var(--border-color);
+}
+
+.itinerary-speech-arrow::after {
+  content: '';
+  position: absolute;
+  left: 1px;
+  top: -8px;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-right: 8px solid var(--bg-main);
+}
+
+.itinerary-vertical-line {
+  position: absolute;
+  left: 15px;
+  top: 30px;
+  bottom: 30px;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--color-primary-bright), var(--color-accent-orange));
+  z-index: 1;
+  opacity: 0.5;
+}
+
+@media (max-width: 768px) {
+  .itinerary-step-marker {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    margin: 0;
+    width: 28px;
+    height: 28px;
+    font-size: 0.8rem;
+    box-shadow: none;
+    border-radius: 50%;
+    z-index: 10;
   }
 
-  .list-step-image {
-    min-height: 400px;
-    /* Fixed height for mobile because the image uses fill */
+  .itinerary-content-box {
+    padding: 15;
+    /* space for absolute marker */
+    font-size: 0.95rem;
   }
 
-  .list-step-image img {
-    height: 100%;
-    /* Ensure it fills the min-height */
+  .itinerary-speech-arrow {
+    display: none;
+  }
+
+  .itinerary-vertical-line {
+    display: none;
   }
 }

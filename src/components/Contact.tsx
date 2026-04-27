@@ -10,7 +10,7 @@ const Contact: React.FC = () => {
     color: 'var(--text-secondary)',
     textDecoration: 'none',
     fontSize: '0.95rem',
-    marginBottom: !isMobile  ? '15px' : '5px'  ,
+    marginBottom: !isMobile ? '15px' : '5px',
     display: 'block',
     transition: 'color 0.3s ease',
   };
@@ -29,14 +29,14 @@ const Contact: React.FC = () => {
       paddingTop: isMobile ? '20px' : '80px',
       borderTop: '1px solid rgba(0, 0, 0, 0.05)'
     }}>
-      <div style={{ maxWidth: '1240px', margin: '0 auto', padding: '0 20px' }}>
+      <div style={{ maxWidth: '1536px', margin: '0 auto', padding: '0 20px' }}>
 
         {/* Main Footer Content */}
         <div style={{
           display: 'grid',
           gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fit, minmax(200px, 1fr))',
-          gap:  isMobile ? '20px' :'40px',
-          marginBottom:  isMobile ? '20px' :'60px'
+          gap: isMobile ? '20px' : '40px',
+          marginBottom: isMobile ? '20px' : '60px'
         }}>
 
           {/* Column 1: Brand & Tagline */}
@@ -49,25 +49,25 @@ const Contact: React.FC = () => {
               Your local compass in Vietnam. Specializing in authentic storytelling, cultural immersions, and uncovering hidden gems you won't find in guidebooks.
             </p>
           </div>
-              {/* Column 2: Contact Info */}
+          {/* Column 2: Contact Info */}
           <div>
-            <h4 style={{ color: 'var(--text-primary)', fontSize: '1.1rem', fontWeight: 800, marginBottom: !isMobile  ?'25px' : '5px' }}>Contact Info</h4>
-            <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', marginBottom: !isMobile  ?'15px' : '5px' }}>
+            <h4 style={{ color: 'var(--text-primary)', fontSize: '1.1rem', fontWeight: 800, marginBottom: !isMobile ? '25px' : '5px' }}>Contact Info</h4>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', marginBottom: !isMobile ? '15px' : '5px' }}>
               <strong>Email:</strong><br />
               <a href="mailto:guide@huyentour.com" style={{ color: 'var(--color-primary-deep)', textDecoration: 'none' }}>guide@huyentour.com</a>
             </p>
-            <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', marginBottom: !isMobile  ?'15px' : '5px' }}>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', marginBottom: !isMobile ? '15px' : '5px' }}>
               <strong>WhatsApp:</strong><br />
               +84 364399290
             </p>
-            <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', marginBottom: !isMobile  ?'15px' : '5px' }}>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', marginBottom: !isMobile ? '15px' : '5px' }}>
               <strong>Location:</strong><br />
               Ho Chi Minh City, Vietnam
             </p>
           </div>
 
           {/* Column 3: Quick Links */}
-         {!isMobile && <div>
+          {!isMobile && <div>
             <h4 style={{ color: 'var(--text-primary)', fontSize: '1.1rem', fontWeight: 800, marginBottom: '25px' }}>Quick Links</h4>
             <a href="#hero" style={linkStyle} className="footer-link">Home</a>
             <a href="#about" style={linkStyle} className="footer-link">About Me</a>
@@ -77,18 +77,18 @@ const Contact: React.FC = () => {
 
           {/* Column 4: Support Links */}
           <div>
-            <h4 style={{ color: 'var(--text-primary)', fontSize: '1.1rem', fontWeight: 800, marginBottom:  isMobile ? '5px' : '25px' }}>Support</h4>
+            <h4 style={{ color: 'var(--text-primary)', fontSize: '1.1rem', fontWeight: 800, marginBottom: isMobile ? '5px' : '25px' }}>Support</h4>
             <a href="#" style={linkStyle} className="footer-link">FAQ</a>
             <a href="#" style={linkStyle} className="footer-link">Booking Policy</a>
             <a href="#" style={linkStyle} className="footer-link">Privacy Policy</a>
           </div>
 
-      
+
 
           {/* Column 5: Newsletter */}
           <div style={{ gridColumn: isMobile ? 'span 1' : 'span 2' }}>
-            <h4 style={{ color: 'var(--text-primary)', fontSize: '1.1rem', fontWeight: 800, marginBottom:  isMobile ? '10px' : '20px' }}>Join the Journey</h4>
-            <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', marginBottom:  isMobile ? '10px' : '20px', lineHeight: '1.6' }}>
+            <h4 style={{ color: 'var(--text-primary)', fontSize: '1.1rem', fontWeight: 800, marginBottom: isMobile ? '10px' : '20px' }}>Join the Journey</h4>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', marginBottom: isMobile ? '10px' : '20px', lineHeight: '1.6' }}>
               Subscribe to get exclusive travel tips and updates on new hidden destinations.
             </p>
             <div style={{ display: 'flex', gap: '10px', flexDirection: isMobile ? 'column' : 'row' }}>

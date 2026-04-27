@@ -94,7 +94,7 @@ const Hero: React.FC<HeroProps> = ({ onSelectTour }) => {
           </div>
         </div>
 
-        <div className="hero-image-side hero-anim">
+        {!isMobile && <div className="hero-image-side hero-anim">
           {(() => {
             const currentTour = tours[activeIndex];
             const folder = (currentTour as any).folder as keyof typeof imageMap;
@@ -145,7 +145,7 @@ const Hero: React.FC<HeroProps> = ({ onSelectTour }) => {
               </div>
             );
           })()}
-        </div>
+        </div>}
       </div>
     </section >
   );

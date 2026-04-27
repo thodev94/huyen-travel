@@ -7,48 +7,71 @@
   width: 100%;
   position: relative;
 }
-.itinerary-item-left, .itinerary-item-right {
+
+.itinerary-item-left,
+.itinerary-item-right {
   width: 45%;
   display: flex;
 }
+
 .itinerary-item.even {
   flex-direction: row;
 }
+
 .itinerary-item.odd {
   flex-direction: row-reverse;
 }
-.itinerary-item.even .itinerary-item-left { padding-right: 40px; justify-content: flex-end; }
-.itinerary-item.even .itinerary-item-right { padding-left: 40px; justify-content: flex-start; }
-.itinerary-item.odd .itinerary-item-left { padding-left: 40px; justify-content: flex-start; }
-.itinerary-item.odd .itinerary-item-right { padding-right: 40px; justify-content: flex-end; }
- 
- .imageItem {
-    object-fit: cover;
-    border-radius: 16px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-  }
+
+.itinerary-item.even .itinerary-item-left {
+  padding-right: 40px;
+  justify-content: flex-end;
+}
+
+.itinerary-item.even .itinerary-item-right {
+  padding-left: 40px;
+  justify-content: flex-start;
+}
+
+.itinerary-item.odd .itinerary-item-left {
+  padding-left: 40px;
+  justify-content: flex-start;
+}
+
+.itinerary-item.odd .itinerary-item-right {
+  padding-right: 40px;
+  justify-content: flex-end;
+}
+
+.imageItem {
+  object-fit: cover;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
 
 @media (max-width: 768px) {
   .itinerary-timeline-line {
     left: 15px !important;
   }
+
   .itinerary-item {
     flex-direction: column-reverse !important;
     align-items: flex-start !important;
     padding-left: 40px !important;
     margin-bottom: 30px !important;
   }
-  .itinerary-item-left, .itinerary-item-right {
+
+  .itinerary-item-left,
+  .itinerary-item-right {
     width: 100% !important;
     max-width: 100% !important;
     padding: 0 !important;
     justify-content: flex-start !important;
     margin-bottom: 0 !important;
   }
-  
+
   .itinerary-step-marker {
-    left: 15px !important;
-    top: 0 !important;
+    left: 4px !important;
+    top: -4px !important;
     transform: translate(-50%, 0) !important;
     z-index: 5 !important;
     width: 28px !important;
@@ -56,31 +79,33 @@
     font-size: 0.8rem !important;
     box-shadow: 0 0 0 3px var(--bg-pure) !important;
   }
+
   .itinerary-arrow {
     left: 15px !important;
     top: 35px !important;
     z-index: 5 !important;
     font-size: 1rem !important;
   }
-  
+
   /* Make them seamless cards */
   .itinerary-img {
     height: 180px !important;
     border-radius: 16px 16px 0 0 !important;
     margin-bottom: 0 !important;
   }
-  
+
   .itinerary-text-box {
     padding: 15px 20px !important;
     border-radius: 0 0 16px 16px !important;
     border-top: none !important;
   }
-  
+
   .itinerary-text-box p {
     font-size: 0.85rem !important;
     line-height: 1.5 !important;
   }
-   .imageItem {
+
+  .imageItem {
     object-fit: cover;
     width: 100% !important;
   }

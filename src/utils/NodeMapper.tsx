@@ -13,19 +13,16 @@ export interface DocNode {
 
 }
 
-const TEMPORARY_IMAGES = [
-  "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=600&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1528127269322-539801943592?q=80&w=600&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=600&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?q=80&w=600&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1583417319070-4a69db38a482?q=80&w=600&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=80&w=600&auto=format&fit=crop"
-];
+import { useWindowSize } from '../hooks/useWindowSize';
 
 const AutoSlider = ({ images }: { images: string[] }) => {
   const [shuffledImages, setShuffledImages] = useState<string[]>(images);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [mounted, setMounted] = useState(false);
+  const { width } = useWindowSize();
+  const isMobile = width <= 768;
+  const isLarge = width >= 1600; // Show 3 images on screens 1600px and up (like 1920px)
+  const itemsToShow = isMobile ? 1 : (isLarge ? 3 : 2);
 
   useEffect(() => {
     if (!images || images.length <= 1) {
@@ -42,33 +39,82 @@ const AutoSlider = ({ images }: { images: string[] }) => {
     setMounted(true);
   }, [images]);
 
-  useEffect(() => {
-    if (!mounted || shuffledImages.length <= 1) return;
-    const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % shuffledImages.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, [mounted, shuffledImages]);
-
   if (!images || images.length === 0) return null;
 
   const displayImages = mounted ? shuffledImages : images;
+  const maxIndex = Math.max(0, displayImages.length - itemsToShow);
+
+  const nextSlide = () => {
+    setCurrentIndex(prev => prev >= maxIndex ? 0 : prev + 1);
+  };
+
+  const prevSlide = () => {
+    setCurrentIndex(prev => prev <= 0 ? maxIndex : prev - 1);
+  };
 
   return (
-    <div className="list-step-image" style={{ position: 'relative' }}>
-      {displayImages.map((src, idx) => (
-        <Image 
-          key={src}
-          src={src} 
-          alt="Itinerary step illustration"
-          fill
-          style={{ 
-            objectFit: 'cover',
-            opacity: mounted ? (currentIndex === idx ? 1 : 0) : (idx === 0 ? 1 : 0),
-            transition: 'opacity 1s ease-in-out'
-          }}
-        />
-      ))}
+    <div className="list-step-image" style={{
+      position: 'relative',
+      display: 'flex',
+      overflow: 'hidden',
+      background: 'transparent',
+      boxShadow: 'none',
+      borderRadius: 0,
+      minHeight: isMobile ? '300px' : '400px'
+    }}>
+      <div style={{
+        display: 'flex',
+        width: '100%',
+        flex: 1,
+        transition: 'transform 0.5s ease-in-out',
+        transform: `translateX(-${currentIndex * (100 / itemsToShow)}%)`
+      }}>
+        {displayImages.map((src, idx) => (
+          <div key={idx} style={{
+            flex: `0 0 ${100 / itemsToShow}%`,
+            position: 'relative',
+            height: '100%',
+            padding: itemsToShow > 1 ? '0 10px' : '0'
+          }}>
+            <div style={{
+              position: 'relative',
+              width: '100%',
+              height: '100%',
+              borderRadius: '20px',
+              overflow: 'hidden',
+              boxShadow: '0 15px 35px rgba(0, 0, 0, 0.12)'
+            }}>
+              <Image
+                src={src}
+                alt="Itinerary step illustration"
+                fill
+                style={{ objectFit: 'cover' }}
+              />
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {images.length > 1 && (
+        <>
+          <button onClick={prevSlide} aria-label="Previous image" style={{
+            position: 'absolute', top: '50%', transform: 'translateY(-50%)', left: itemsToShow > 1 ? '20px' : '10px', zIndex: 10,
+            background: 'rgba(255,255,255,0.85)', border: 'none', borderRadius: '50%',
+            width: '40px', height: '40px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
+            boxShadow: '0 4px 12px rgba(0,0,0,0.2)', color: 'var(--color-primary-deep)', fontSize: '1.5rem', fontWeight: 'bold'
+          }}>
+            &#8249;
+          </button>
+          <button onClick={nextSlide} aria-label="Next image" style={{
+            position: 'absolute', top: '50%', transform: 'translateY(-50%)', right: itemsToShow > 1 ? '20px' : '10px', zIndex: 10,
+            background: 'rgba(255,255,255,0.85)', border: 'none', borderRadius: '50%',
+            width: '40px', height: '40px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
+            boxShadow: '0 4px 12px rgba(0,0,0,0.2)', color: 'var(--color-primary-deep)', fontSize: '1.5rem', fontWeight: 'bold'
+          }}>
+            &#8250;
+          </button>
+        </>
+      )}
     </div>
   );
 };
@@ -97,78 +143,30 @@ export const renderNode = (node: DocNode, index: number, isWhiteBackground?: boo
     case 'list-ordered':
       // Render as a clean Vertical Itinerary Timeline with an image on the side
       const listImage = (listIndex !== undefined && listIndex !== -1 && stepImages && stepImages[listIndex]) ? stepImages[listIndex] : null;
-      
+
       return (
         <div key={index} className="list-ordered-container">
+          {/* List Slider beside the steps */}
+          {stepImages && stepImages.length > 0 && listIndex == 0 && (
+            <AutoSlider images={stepImages} />
+          )}
           <div className="itinerary-timeline-vertical">
             {/* Continuous Vertical Line */}
-            <div style={{
-              position: 'absolute',
-              left: '15px',
-              top: '30px',
-              bottom: '30px',
-              width: '2px',
-              background: 'linear-gradient(to bottom, var(--color-primary-bright), var(--color-accent-orange))',
-              zIndex: 1,
-              opacity: 0.5
-            }}></div>
+            <div className="itinerary-vertical-line"></div>
 
             {node.items?.map((item, i) => {
               return (
-                <div key={i} style={{ display: 'flex', position: 'relative', marginBottom: i === (node.items?.length || 0) - 1 ? '0' : '30px', width: "100%" }}>
+                <div key={i} className="itinerary-step-wrapper" style={{ marginBottom: i === (node.items?.length || 0) - 1 ? '0' : '30px' }}>
 
                   {/* Step Circle Marker */}
-                  <div style={{
-                    width: '32px',
-                    height: '32px',
-                    borderRadius: '50%',
-                    background: 'var(--color-primary-bright)',
-                    color: 'white',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    fontWeight: 'bold',
-                    fontSize: '0.9rem',
-                    zIndex: 2,
-                    boxShadow: '0 0 0 6px var(--bg-black)',
-                    flexShrink: 0,
-                    marginRight: '20px',
-                    marginTop: '10px'
-                  }}>
+                  <div className="itinerary-step-marker">
                     {i + 1}
                   </div>
 
                   {/* Content Box */}
-                  <div style={{
-                    background: 'var(--bg-main)',
-                    padding: '20px 25px',
-                    borderRadius: '16px',
-                    border: '1px solid var(--border-color)',
-                    flex: 1,
-                    boxShadow: '0 4px 15px rgba(0,0,0,0.03)',
-                    position: 'relative'
-                  }}>
+                  <div className="itinerary-content-box">
                     {/* Small Speech Bubble Arrow */}
-                    <div style={{
-                      position: 'absolute',
-                      left: '-8px',
-                      top: '16px',
-                      width: '0',
-                      height: '0',
-                      borderTop: '8px solid transparent',
-                      borderBottom: '8px solid transparent',
-                      borderRight: '8px solid var(--border-color)'
-                    }}></div>
-                    <div style={{
-                      position: 'absolute',
-                      left: '-7px',
-                      top: '16px',
-                      width: '0',
-                      height: '0',
-                      borderTop: '8px solid transparent',
-                      borderBottom: '8px solid transparent',
-                      borderRight: '8px solid var(--bg-main)'
-                    }}></div>
+                    <div className="itinerary-speech-arrow"></div>
 
                     <p style={{ color: 'var(--text-primary)', lineHeight: '1.7', margin: 0 }}>{item}</p>
                   </div>
@@ -178,10 +176,7 @@ export const renderNode = (node: DocNode, index: number, isWhiteBackground?: boo
             })}
           </div>
 
-          {/* List Slider beside the steps */}
-          {stepImages && stepImages.length > 0 && (
-            <AutoSlider images={stepImages} />
-          )}
+
         </div>
       );
 
