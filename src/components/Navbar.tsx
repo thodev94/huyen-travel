@@ -200,7 +200,7 @@ const Navbar: React.FC<NavbarProps> = ({ onSelectTour, onNavigate }) => {
               <div id="search-suggestions" role="listbox" aria-label="Search suggestions" ref={suggestionsRef} className="glass-panel" style={{
                 position: 'absolute',
                 top: coords.top + 10,
-                left: !isMobile ? coords.left : inputRef.current?.getBoundingClientRect().left - (320 - coords.width), /* Align right on desktop */
+                left: !isMobile ? coords.left : inputRef?.current ? inputRef?.current?.getBoundingClientRect().left - (320 - coords.width) : coords.left, /* Align right on desktop */
                 width: '320px',
                 padding: '10px', borderRadius: '15px', boxShadow: '0 10px 40px rgba(0,0,0,0.15)',
                 zIndex: 20000, background: 'var(--bg-pure)', border: '1px solid var(--border-color)'
