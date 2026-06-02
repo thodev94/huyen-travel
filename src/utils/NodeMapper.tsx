@@ -126,57 +126,138 @@ export const renderNode = (node: DocNode, index: number, isWhiteBackground?: boo
       return <HTag key={index} style={{ color: 'var(--color-primary-deep)', marginTop: '40px', marginBottom: '20px' }}>{node.text}</HTag>;
 
     case 'paragraph':
-      if (node.html) {
-        return <p key={index} dangerouslySetInnerHTML={{ __html: node.html }} style={{ marginBottom: '10px', lineHeight: '1.5', color: !isWhiteBackground ? 'var(--text-dark)' : 'var(--text-secondary)' }} />;
+      if (node.text && (
+        node.text.toLowerCase().includes('itinerary') || 
+        node.text.toLowerCase().includes('highlights') ||
+        node.text.toLowerCase().includes('hành trình')
+      )) {
+        return (
+          <h2 key={index} style={{
+            fontSize: '1.45rem',
+            fontWeight: 800,
+            color: '#0F172A',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px',
+            marginTop: '36px',
+            marginBottom: '20px'
+          }}>
+            <span style={{
+              width: '26px',
+              height: '26px',
+              borderRadius: '50%',
+              backgroundColor: 'rgba(34, 197, 94, 0.1)',
+              color: '#22C55E',
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '0.85rem',
+              fontWeight: 'bold'
+            }}>✓</span>
+            {node.text.replace('✅', '').replace('🗺️', '').trim()}
+          </h2>
+        );
       }
-      return <p key={index} style={{ marginBottom: '10px', lineHeight: '1.5', color: !isWhiteBackground ? 'var(--text-dark)' : 'var(--text-secondary)' }}>{node.text}</p>;
+      if (node.html) {
+        return <p key={index} dangerouslySetInnerHTML={{ __html: node.html }} style={{ marginBottom: '12px', lineHeight: '1.6', color: '#475569', fontSize: '1.02rem' }} />;
+      }
+      return <p key={index} style={{ marginBottom: '12px', lineHeight: '1.6', color: '#475569', fontSize: '1.02rem' }}>{node.text}</p>;
 
     case 'list-unordered':
       return (
-        <ul key={index} style={{ marginBottom: '20px', paddingLeft: '25px', lineHeight: '1.5', color: !isWhiteBackground ? 'var(--text-dark)' : 'var(--text-secondary)' }}>
+        <ul key={index} style={{ marginBottom: '20px', paddingLeft: '20px', lineHeight: '1.6', color: '#475569' }}>
           {node.items?.map((item, i) => (
-            <li key={i} style={{ marginBottom: '10px' }}>{item}</li>
+            <li key={i} style={{ marginBottom: '8px' }}>{item}</li>
           ))}
         </ul>
       );
 
     case 'list-ordered':
-      // Render as a clean Vertical Itinerary Timeline with an image on the side
-      const listImage = (listIndex !== undefined && listIndex !== -1 && stepImages && stepImages[listIndex]) ? stepImages[listIndex] : null;
-
       return (
-        <div key={index} className="list-ordered-container">
-          {/* List Slider beside the steps */}
-          {stepImages && stepImages.length > 0 && listIndex == 0 && (
-            <AutoSlider images={stepImages} />
-          )}
-          <div className="itinerary-timeline-vertical">
-            {/* Continuous Vertical Line */}
-            <div className="itinerary-vertical-line"></div>
+        <div key={index} className="itinerary-timeline-vertical" style={{
+          position: 'relative',
+          paddingLeft: '32px',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '24px',
+          marginTop: '24px',
+          marginBottom: '32px'
+        }}>
+          {/* Continuous Vertical Line */}
+          <div style={{
+            position: 'absolute',
+            left: '11px',
+            top: '12px',
+            bottom: '12px',
+            width: '2px',
+            backgroundColor: '#E2E8F0',
+          }} />
 
-            {node.items?.map((item, i) => {
-              return (
-                <div key={i} className="itinerary-step-wrapper" style={{ marginBottom: i === (node.items?.length || 0) - 1 ? '0' : '30px' }}>
+          {node.items?.map((item, i) => {
+            const parts = item.split(':');
+            const stepTitle = parts[0]?.trim();
+            const stepDesc = parts.slice(1).join(':')?.trim();
 
-                  {/* Step Circle Marker */}
-                  <div className="itinerary-step-marker">
-                    {i + 1}
-                  </div>
-
-                  {/* Content Box */}
-                  <div className="itinerary-content-box">
-                    {/* Small Speech Bubble Arrow */}
-                    <div className="itinerary-speech-arrow"></div>
-
-                    <p style={{ color: 'var(--text-primary)', lineHeight: '1.7', margin: 0 }}>{item}</p>
-                  </div>
-
+            return (
+              <div key={i} style={{
+                position: 'relative',
+                display: 'flex',
+                alignItems: 'flex-start',
+              }}>
+                {/* Step Circle Marker */}
+                <div style={{
+                  position: 'absolute',
+                  left: '-32px',
+                  top: '4px',
+                  width: '24px',
+                  height: '24px',
+                  borderRadius: '50%',
+                  backgroundColor: '#16A34A',
+                  color: '#FFFFFF',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: '0.75rem',
+                  fontWeight: 'bold',
+                  zIndex: 2,
+                }}>
+                  {i + 1}
                 </div>
-              );
-            })}
-          </div>
 
-
+                {/* Content Box */}
+                <div style={{
+                  width: '100%',
+                  backgroundColor: '#FFFFFF',
+                  borderRadius: '16px',
+                  padding: '18px 24px',
+                  boxShadow: '0 4px 15px rgba(0, 0, 0, 0.02)',
+                  border: '1px solid rgba(0, 0, 0, 0.03)',
+                  marginLeft: '12px'
+                }}>
+                  <h4 style={{
+                    fontSize: '1.05rem',
+                    fontWeight: 700,
+                    color: '#0F172A',
+                    margin: '0 0 6px 0',
+                    lineHeight: '1.3'
+                  }}>
+                    {stepTitle}
+                  </h4>
+                  {stepDesc && (
+                    <p style={{
+                      fontSize: '0.92rem',
+                      color: '#64748B',
+                      margin: 0,
+                      lineHeight: '1.5',
+                      fontWeight: 400
+                    }}>
+                      {stepDesc}
+                    </p>
+                  )}
+                </div>
+              </div>
+            );
+          })}
         </div>
       );
 

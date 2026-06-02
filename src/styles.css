@@ -6,8 +6,9 @@
   /* Gochujang Red (deep primary) */
 
   /* Accent / Secondary */
-  --color-accent-orange: #eb0000;
-  /* Varden (accent red) */
+  --color-accent-orange: #D4380D;
+  /* Burnt orange / terracotta accent */
+  --color-accent-light-orange: rgba(212, 56, 13, 0.08);
   --color-secondary-teal: #003049;
   /* Cosmos blue (dark contrast) */
   --color-secondary-light: #669BBC;
@@ -432,7 +433,7 @@ body {
   }
 
   .itinerary-content-box {
-    padding: 15;
+    padding: 15px;
     /* space for absolute marker */
     font-size: 0.95rem;
   }

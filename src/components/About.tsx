@@ -53,11 +53,34 @@ const About: React.FC = () => {
   const journeyNodes: DocNode[] = (aboutData as any)['My Journey into the Tourism Business']?.nodes || [];
 
   const box1 = (
-    <div className="glass-panel about-anim" style={{ padding: '24px', gridColumn: mobileRender ? 'span 1' : 'span 2' }}>
-      <h3 style={{ color: 'var(--color-primary-deep)', marginBottom: '15px' }}>Languages</h3>
+    <div className="glass-panel about-anim" style={{
+      padding: '24px',
+      gridColumn: mobileRender ? 'span 1' : 'span 2',
+      background: '#FFFFFF',
+      borderRadius: '24px',
+      borderTop: '4px solid #E53935',
+      boxShadow: '0 10px 30px rgba(0, 0, 0, 0.04)'
+    }}>
+      <h3 style={{ color: '#E53935', marginBottom: '15px', fontWeight: '800' }}>Languages</h3>
       <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
-        <span className="tag">English (Fluent)</span>
-        <span className="tag">Vietnamese (Native)</span>
+        <span className="tag" style={{
+          background: '#FEF2F2',
+          border: '1px solid #FCA5A5',
+          color: '#EF4444',
+          borderRadius: '8px',
+          padding: '8px 16px',
+          fontWeight: '700',
+          fontSize: '0.85rem'
+        }}>ENGLISH (FLUENT)</span>
+        <span className="tag" style={{
+          background: '#FFFBEB',
+          border: '1px solid #FDE68A',
+          color: '#D97706',
+          borderRadius: '8px',
+          padding: '8px 16px',
+          fontWeight: '700',
+          fontSize: '0.85rem'
+        }}>VIETNAMESE (NATIVE)</span>
       </div>
     </div>
   );
@@ -74,34 +97,65 @@ const About: React.FC = () => {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
+        alignItems: 'center',
         textDecoration: 'none',
-        cursor: 'pointer'
+        cursor: 'pointer',
+        background: '#10B981',
+        borderRadius: '24px',
+        color: '#FFFFFF',
+        boxShadow: '0 10px 30px rgba(0, 0, 0, 0.04)'
       }}
     >
-      <h2 style={{ fontSize: '3rem', margin: 0, color: 'var(--color-primary-bright)' }}>4.9+</h2>
-      <p style={{ color: 'var(--text-secondary)', fontWeight: 600 }}>Avg. Rating</p>
-      <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>350+ Reviews</p>
-      <div style={{ fontSize: '0.75rem', color: 'var(--color-accent-orange)', marginTop: '10px', fontWeight: 'bold', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '4px' }}>
-        View on Withlocals <span>↗</span>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+        <h2 style={{ fontSize: '3rem', margin: 0, color: '#FFFFFF', fontWeight: '800' }}>4.9+</h2>
+        <span style={{ fontSize: '2.2rem', color: '#FBBF24' }}>★</span>
+      </div>
+      <p style={{ color: '#FFFFFF', fontWeight: 700, margin: '2px 0 0' }}>Avg. Rating</p>
+      <p style={{ fontSize: '0.85rem', color: 'rgba(255, 255, 255, 0.8)', margin: '2px 0 12px' }}>350+ Reviews</p>
+      <div style={{
+        background: '#FFFFFF',
+        color: '#0F172A',
+        border: '2px solid #0F172A',
+        padding: '8px 20px',
+        borderRadius: '30px',
+        fontSize: '0.75rem',
+        fontWeight: '800',
+        textTransform: 'uppercase',
+        letterSpacing: '0.5px'
+      }}>
+        View on Withlocals ↗
       </div>
     </a>
   );
 
   const box3 = (
-    <div className="glass-panel about-anim" style={{ padding: '24px', gridRow: mobileRender ? 'span 1' : 'span 2' }}>
-      <h3 style={{ color: 'var(--color-primary-deep)', marginBottom: '15px' }}>Persk & Skills</h3>
-      <ul style={{ listStyle: 'none', lineHeight: '2.2', padding: 0, color: 'var(--text-secondary)' }}>
-        <li><span style={{ color: 'var(--color-secondary-teal)' }}>✓</span> Licensed Professional Guide</li>
-        <li><span style={{ color: 'var(--color-secondary-teal)' }}>✓</span> Tourism Degree</li>
-        <li><span style={{ color: 'var(--color-secondary-teal)' }}>✓</span> Photography Assistant</li>
-        <li><span style={{ color: 'var(--color-secondary-teal)' }}>✓</span> SIM Card & Local Logistics</li>
-        <li><span style={{ color: 'var(--color-secondary-teal)' }}>✓</span> Hidden Gems Specialist</li>
+    <div className="glass-panel about-anim" style={{
+      padding: '24px',
+      gridRow: mobileRender ? 'span 1' : 'span 2',
+      background: '#FFFFFF',
+      borderRadius: '24px',
+      boxShadow: '0 10px 30px rgba(0, 0, 0, 0.04)'
+    }}>
+      <h3 style={{ color: '#E53935', marginBottom: '20px', fontWeight: '800' }}>Perks & Skills</h3>
+      <ul style={{ listStyle: 'none', lineHeight: '2.5', padding: 0, color: 'var(--text-secondary)' }}>
+        <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><span style={{ color: '#E53935', fontWeight: 'bold' }}>✓</span> Licensed Professional Guide</li>
+        <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><span style={{ color: '#E53935', fontWeight: 'bold' }}>✓</span> Tourism Degree</li>
+        <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><span style={{ color: '#E53935', fontWeight: 'bold' }}>✓</span> Photography Assistant</li>
+        <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><span style={{ color: '#E53935', fontWeight: 'bold' }}>✓</span> SIM Card & Local Logistics</li>
+        <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><span style={{ color: '#E53935', fontWeight: 'bold' }}>✓</span> Hidden Gems Specialist</li>
       </ul>
     </div>
   );
 
   const box4 = (
-    <div className="glass-panel about-anim" style={{ padding: '30px', gridColumn: mobileRender ? 'span 1' : 'span 3', position: 'relative' }}>
+    <div className="glass-panel about-anim" style={{
+      padding: '30px',
+      gridColumn: mobileRender ? 'span 1' : 'span 3',
+      position: 'relative',
+      background: '#FFFFFF',
+      borderRadius: '24px',
+      boxShadow: '0 10px 30px rgba(0, 0, 0, 0.04)'
+    }}>
       <div style={{
         maxHeight: isExpanded ? '5000px' : '280px',
         overflow: 'hidden',
@@ -123,7 +177,7 @@ const About: React.FC = () => {
             left: 0,
             width: '100%',
             height: '100px',
-            background: 'linear-gradient(to bottom, rgba(255,255,255,0) 0%, var(--bg-pure) 90%)',
+            background: 'linear-gradient(to bottom, rgba(255,255,255,0) 0%, #FFFFFF 90%)',
             pointerEvents: 'none'
           }}></div>
         )}
@@ -132,11 +186,16 @@ const About: React.FC = () => {
       <div style={{ textAlign: 'center', marginTop: '15px' }}>
         <button
           onClick={() => setIsExpanded(!isExpanded)}
-          className="btn-secondary"
           style={{
-            padding: '8px 24px',
+            padding: '10px 30px',
             fontSize: '0.9rem',
-            borderRadius: '20px'
+            borderRadius: '20px',
+            background: '#E53935',
+            color: '#FFFFFF',
+            border: 'none',
+            fontWeight: '700',
+            cursor: 'pointer',
+            boxShadow: '0 4px 15px rgba(229, 57, 53, 0.2)'
           }}
         >
           {isExpanded ? 'Read Less ↑' : 'Read More ↓'}

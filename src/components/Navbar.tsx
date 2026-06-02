@@ -162,8 +162,8 @@ const Navbar: React.FC<NavbarProps> = ({ onSelectTour, onNavigate }) => {
             onNavigate('hero');
           }
         }}>
-          <span style={{ fontWeight: '900', color: 'var(--color-accent-orange)', fontSize: '1.2rem', letterSpacing: '2px' }}>WINDS</span>
-          <span style={{ fontWeight: '900', color: '#494540', fontSize: '1.2rem', letterSpacing: '2px', transition: 'color 0.3s' }}>TOUR.</span>
+          <span style={{ fontWeight: '900', color: 'var(--color-accent-orange)', fontSize: '1.2rem', letterSpacing: '2px' }}>WIND</span>
+          <span style={{ fontWeight: '900', color: 'var(--color-primary-deep)', fontSize: '1.2rem', letterSpacing: '2px', transition: 'color 0.3s' }}>TOURS.</span>
         </a>
 
 
@@ -282,8 +282,8 @@ const Navbar: React.FC<NavbarProps> = ({ onSelectTour, onNavigate }) => {
       >
         <div style={{ padding: '25px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid rgba(0,0,0,0.05)' }}>
           <div>
-            <span style={{ fontWeight: '900', color: 'var(--color-accent-orange)', fontSize: '1.2rem', letterSpacing: '2px' }}>WINDS</span>
-            <span style={{ fontWeight: '900', color: 'var(--color-primary-deep)', fontSize: '1.2rem', letterSpacing: '2px' }}>TOUR.</span>
+            <span style={{ fontWeight: '900', color: 'var(--color-accent-orange)', fontSize: '1.2rem', letterSpacing: '2px' }}>WIND</span>
+            <span style={{ fontWeight: '900', color: 'var(--color-primary-deep)', fontSize: '1.2rem', letterSpacing: '2px' }}>TOURS.</span>
           </div>
           <button onClick={closeMenu} style={{ background: 'transparent', border: 'none', color: 'var(--color-primary-deep)', fontSize: '2.5rem', cursor: 'pointer', lineHeight: 1 }}>×</button>
         </div>

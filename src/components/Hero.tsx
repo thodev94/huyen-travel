@@ -53,48 +53,87 @@ const Hero: React.FC<HeroProps> = ({ onSelectTour }) => {
     );
   }, { dependencies: [activeIndex], scope: heroRef });
 
+  const toursCount = tours.length;
+
   return (
     <section id="hero" className="hero" ref={heroRef}>
       <div className="hero-bg" aria-hidden="true">
-        <Image
-          src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=80&w=2000&auto=format&fit=crop"
-          alt="Background"
-          fill
-          priority
-          sizes="100vw"
-          style={{ objectFit: 'cover', objectPosition: 'center', opacity: 0.5 }}
-        />
         <div className="hero-overlay" aria-hidden="true" />
       </div>
 
       <div className="hero-content">
         <div className="hero-text-side">
-          <h1 className="hero-main-title hero-anim">
-            Explore <br />
-            <span>Authentic Vietnam</span>
-          </h1>
-
           <div className="badges hero-anim">
-            <span className="tag">Licensed Professional Guide</span>
-            <span className="tag">8+ Years Experience</span>
+            <span className="tag-hero tag-guide">
+              <span className="star-icon">★</span> LICENSED PROFESSIONAL GUIDE
+            </span>
+            <span className="tag-hero tag-experience">8+ YEARS EXPERIENCE</span>
           </div>
 
+          <h1 className="hero-main-title hero-anim">
+            EXPLORE
+            <br />
+            <span className="highlight">AUTHENTIC</span>
+            <br />
+            VIETNAM
+          </h1>
+
           <p className="hero-sub hero-anim">
-            I am <strong>Huyen (Wind)</strong> — a licensed guide with a passion for showing
-            the real side of Ho Chi Minh City and the Mekong Delta through storytelling and hidden gems.
+            I am <strong>Huyen (Wind)</strong> — a licensed guide with a passion for showing the real side of Ho Chi Minh City and the Mekong Delta through storytelling and hidden gems.
           </p>
 
           <div className="hero-buttons hero-anim">
-            <button className="btn-primary" onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}>
-              Start Journey
+            <button className="btn-hero-cta" onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}>
+              <span>Start Journey</span>
+              <span className="arrow">→</span>
             </button>
-            <button className="btn-secondary" onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}>
+            <button className="btn-hero-secondary" onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}>
               Learn My Story
             </button>
           </div>
+
+          <div className="hero-stats hero-anim">
+            <div className="stat-item">
+              <div className="stat-icon icon-places">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
+              </div>
+              <div className="stat-text">
+                <div className="stat-number">{toursCount.toLocaleString()}</div>
+                <div className="stat-label">Travel places</div>
+              </div>
+            </div>
+
+            <div className="stat-item">
+              <div className="stat-icon icon-features">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                </svg>
+              </div>
+              <div className="stat-text">
+                <div className="stat-number">Features</div>
+                <div className="stat-label">Local experiences</div>
+              </div>
+            </div>
+
+            <div className="stat-item">
+              <div className="stat-icon icon-story">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+                  <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+                </svg>
+              </div>
+              <div className="stat-text">
+                <div className="stat-number">Our story</div>
+                <div className="stat-label">Local-first tours</div>
+              </div>
+            </div>
+          </div>
         </div>
 
-        {!isMobile && <div className="hero-image-side hero-anim">
+        {!isMobile && <div className="hero-right hero-anim">
           {(() => {
             const currentTour = tours[activeIndex];
             const folder = (currentTour as any).folder as keyof typeof imageMap;
@@ -102,52 +141,52 @@ const Hero: React.FC<HeroProps> = ({ onSelectTour }) => {
             const imageUrl = images.length > 0 ? images[0] : "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=2000&auto=format&fit=crop";
 
             return (
-              <div
-                className="hero-image-wrapper"
-                onClick={() => onSelectTour && onSelectTour(currentTour.id)}
-                style={{ cursor: 'pointer' }}
-              >
-                <Image
-                  key={activeIndex}
-                  className="hero-slider-img"
-                  src={imageUrl}
-                  alt={currentTour.title}
-                  fill
-                  priority
-                  sizes="(max-width: 1200px) 100vw, 60vw"
-                  style={{ objectFit: 'cover', objectPosition: 'center' }}
-                />
-                <div className="hero-image-overlay"></div>
-                <div className="hero-tour-hover-overlay">
-                  <h3 style={{ margin: 0, fontSize: '1.5rem', color: 'white' }}>{currentTour.title}</h3>
-                  <p style={{
-                    margin: '5px 0 0 0',
-                    fontSize: '0.9rem',
+              <div className="hero-arch-container" onClick={() => onSelectTour && onSelectTour(currentTour.id)}>
+                {/* SVG TextPath running on top of the arch */}
+                <svg className="hero-arch-text-svg" viewBox="0 0 380 520" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <defs>
+                    <path id="archTextPath" d="M 35,200 A 155,155 0 0,1 345,200" fill="none" />
+                  </defs>
+                  <text className="arch-curved-text">
+                    <textPath href="#archTextPath" startOffset="50%" textAnchor="middle">
+                      ★ TOP RATED LOCAL EXPERIENCES IN VIETNAM ★
+                    </textPath>
+                  </text>
+                </svg>
 
-                    borderRadius: "5px",
-                    padding: "5px",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}><span style={{
-                    color: '#ffff',
-                    backgroundColor: "var(--color-primary-deep)",
-                    width: "max-content",
-                    margin: "0 auto",
-                    borderRadius: "6px",
-                    padding: "0 10px",
-                    height: "34px",
-                    lineHeight: '34px',
-                    border: "#ffff",
+                {/* Đường outline vòm lớn bao ngoài */}
+                <div className="hero-arch-outline" />
 
-                  }}>Click to view details &rarr;</span></p>
+                {/* Khung vòm chứa ảnh chính */}
+                <div className="hero-arch-frame">
+                  <Image
+                    key={activeIndex}
+                    className="hero-arch-img hero-slider-img"
+                    src={imageUrl}
+                    alt={currentTour.title}
+                    fill
+                    priority
+                    sizes="(max-width: 1200px) 340px, 340px"
+                    style={{ objectFit: 'cover', objectPosition: 'center' }}
+                  />
+                </div>
+
+                {/* Card "Highly Rated" nổi bên phải */}
+                <div className="highly-rated-card">
+                  <div className="rating-star-badge">
+                    <span className="star-icon">★</span>
+                  </div>
+                  <div className="card-info">
+                    <h4 className="card-title">Highly Rated</h4>
+                    <p className="card-subtitle">Best travel & relaxing experiences</p>
+                  </div>
                 </div>
               </div>
             );
           })()}
         </div>}
       </div>
-    </section >
+    </section>
   );
 };
 

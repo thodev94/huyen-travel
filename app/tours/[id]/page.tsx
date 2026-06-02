@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import toursData from '../../../src/data/tours.json';
-import { renderNode } from '../../../src/utils/NodeMapper';
+import TourContent from '../../../src/components/TourContent';
 
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
   const p = await params;
@@ -78,7 +78,7 @@ export default async function TourPage({ params }: { params: Promise<{ id: strin
         </div>
 
         <div style={{ background: 'var(--bg-pure)', padding: 50, borderRadius: 24, boxShadow: '0 10px 40px rgba(47, 93, 80, 0.05)', border: '1px solid var(--border-color)', fontSize: '1.1rem', color: 'var(--text-secondary)' }}>
-          {(tour.nodes as any[]).map((node: any, idx: number) => renderNode(node, idx))}
+          <TourContent nodes={(tour.nodes as any[]) || []} />
         </div>
       </div>
     </div>

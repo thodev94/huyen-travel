@@ -8,6 +8,7 @@ import { useGSAP } from '@gsap/react';
 import { useWindowSize } from '../hooks/useWindowSize';
 import toursData from '../data/tours.json';
 import imageMapData from '../data/imageMap.json';
+import './Services.css';
 
 const imageMap: Record<string, string[]> = imageMapData;
 
@@ -133,15 +134,8 @@ const Services: React.FC<ServicesProps> = ({ onSelectTour }) => {
       <div className="services-inner">
         <h2 className="section-title services-entry-anim">Our Tours</h2>
 
-        <div className="services-toolbar services-entry-anim" style={{
-          display: 'flex',
-          flexDirection: isMobile ? 'column' : 'row',
-          justifyContent: 'space-between',
-          alignItems: isMobile ? 'stretch' : 'center',
-          gap: '20px',
-          marginBottom: '40px'
-        }}>
-          {/* Search Bar container with ref */}
+        <div className="services-toolbar services-entry-anim">
+          {/* Search Bar */}
           <div ref={searchRef} className="tour-card-anim search-input-wrapper" style={{
             position: 'relative',
             width: '100%',
@@ -160,17 +154,6 @@ const Services: React.FC<ServicesProps> = ({ onSelectTour }) => {
                   setShowSuggestions(true);
                 }}
                 onFocus={() => setShowSuggestions(true)}
-                style={{
-                  width: '100%',
-                  padding: '12px 15px 12px 45px',
-                  borderRadius: '30px',
-                  border: '1px solid var(--border-color)',
-                  background: 'var(--bg-pure)',
-                  fontSize: '0.95rem',
-                  boxShadow: '0 4px 15px rgba(0,0,0,0.05)',
-                  outline: 'none',
-                  transition: 'all 0.3s ease'
-                }}
               />
               <span style={{ position: 'absolute', left: '15px', top: '50%', transform: 'translateY(-50%)', fontSize: '1rem', opacity: 0.5 }}>🔍</span>
             </div>
@@ -234,19 +217,13 @@ const Services: React.FC<ServicesProps> = ({ onSelectTour }) => {
             )}
           </div>
 
-          {/* Category Menu */}
-          <div className="services-entry-anim" style={{
-            display: 'flex',
-            gap: '10px',
-            justifyContent: isMobile ? 'flex-start' : 'flex-end',
-            flexWrap: 'wrap'
-          }}>
+          {/* Category Menu — Now using CSS classes */}
+          <div className="services-categories services-entry-anim">
             {categories.map(cat => (
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
-                className={activeCategory === cat ? 'btn-primary' : 'btn-secondary'}
-                style={{ padding: '6px 20px', textTransform: 'capitalize', fontSize: '0.9rem' }}
+                className={`category-btn ${activeCategory === cat ? 'active' : ''}`}
               >
                 {cat}
               </button>
@@ -282,38 +259,17 @@ const Services: React.FC<ServicesProps> = ({ onSelectTour }) => {
                   </div>
 
                   <div className="card-content">
-                    <div className="tag" style={{
-                      alignSelf: 'flex-start',
-                      marginBottom: '15px'
-                    }}>
-                      {s.category}
+                    <div style={{ alignSelf: 'flex-start', marginBottom: '15px' }}>
+                      <span className={s.category.toLowerCase() === 'saigon' ? 'tag-badge saigon' : 'tag-badge'}>
+                        {s.category}
+                      </span>
                     </div>
-                    <h3 style={{
-                      color: 'var(--color-primary-deep)',
-                      fontSize: '1.25rem',
-                      marginBottom: '15px',
-                      lineHeight: '1.3'
-                    }}>{s.title}</h3>
-                    <p style={{
-                      fontSize: '0.9rem',
-                      color: 'var(--text-secondary)',
-                      lineHeight: '1.6',
-                      flexGrow: 1,
-                      marginBottom: '20px'
-                    }}>{s.brief}</p>
+                    <h3 className="card-title">{s.title}</h3>
+                    <p className="card-brief">{s.brief}</p>
 
-                    <div style={{
-                      marginTop: 'auto',
-                      alignSelf: 'flex-start',
-                      color: 'var(--color-accent-orange)',
-                      fontSize: '0.95rem',
-                      fontWeight: 'bold',
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '8px'
-                    }}>
+                    <div className="card-link">
                       View Experiences
-                      <span style={{ fontSize: '1.2rem', transition: 'transform 0.3s' }} className="arrow">→</span>
+                      <span className="arrow">→</span>
                     </div>
                   </div>
                 </div>
