@@ -116,6 +116,17 @@ const Navbar: React.FC<NavbarProps> = ({ onSelectTour, onNavigate }) => {
     };
   }, []);
 
+  useEffect(() => {
+    if (activeSection && typeof window !== 'undefined') {
+      if (document.getElementById('hero')) {
+        const newHash = `#${activeSection}`;
+        if (window.location.hash !== newHash) {
+          window.history.replaceState(null, "", newHash);
+        }
+      }
+    }
+  }, [activeSection]);
+
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const closeMenu = () => setIsMenuOpen(false);
 
@@ -235,6 +246,9 @@ const Navbar: React.FC<NavbarProps> = ({ onSelectTour, onNavigate }) => {
                   onNavigate(link.id);
                 }
                 setActiveSection(link.id);
+                if (typeof window !== 'undefined') {
+                  window.history.replaceState(null, "", `#${link.id}`);
+                }
               }}>
                 {link.label}
                 {activeSection === link.id && (
@@ -355,6 +369,9 @@ const Navbar: React.FC<NavbarProps> = ({ onSelectTour, onNavigate }) => {
                   onNavigate(link.id);
                 }
                 setActiveSection(link.id);
+                if (typeof window !== 'undefined') {
+                  window.history.replaceState(null, "", `#${link.id}`);
+                }
                 closeMenu();
               }}
               style={{

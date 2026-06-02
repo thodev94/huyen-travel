@@ -36,6 +36,9 @@ const MobileBottomNav: React.FC<MobileBottomNavProps> = ({ onNavigate }) => {
     } else {
       document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
     }
+    if (typeof window !== 'undefined') {
+      window.history.replaceState(null, "", `#${id}`);
+    }
   };
 
   return (

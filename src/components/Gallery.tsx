@@ -21,20 +21,32 @@ const Gallery: React.FC<GalleryProps> = ({ onSelectTour }) => {
   // Keep all tours
   const tours = toursData;
 
-  const handleNext = () => setActiveIndex((prev) => (prev + 1) % tours.length);
-  const handlePrev = () => setActiveIndex((prev) => (prev - 1 + tours.length) % tours.length);
-
-  // Auto scroll thumbnails when activeIndex changes
-  useEffect(() => {
-    if (thumbnailsRef.current && thumbnailsRef.current.children[activeIndex]) {
-      const activeElement = thumbnailsRef.current.children[activeIndex] as HTMLElement;
+  const scrollThumbnailIntoView = (index: number) => {
+    if (thumbnailsRef.current && thumbnailsRef.current.children[index]) {
+      const activeElement = thumbnailsRef.current.children[index] as HTMLElement;
       activeElement.scrollIntoView({
         behavior: 'smooth',
         block: 'nearest',
         inline: 'center'
       });
     }
-  }, [activeIndex]);
+  };
+
+  const handleNext = () => {
+    setActiveIndex((prev) => {
+      const next = (prev + 1) % tours.length;
+      scrollThumbnailIntoView(next);
+      return next;
+    });
+  };
+
+  const handlePrev = () => {
+    setActiveIndex((prev) => {
+      const p = (prev - 1 + tours.length) % tours.length;
+      scrollThumbnailIntoView(p);
+      return p;
+    });
+  };
 
   if (tours.length === 0) return null;
 
@@ -106,7 +118,10 @@ const Gallery: React.FC<GalleryProps> = ({ onSelectTour }) => {
             return (
               <div
                 key={t.id}
-                onClick={() => setActiveIndex(index)}
+                onClick={() => {
+                  setActiveIndex(index);
+                  scrollThumbnailIntoView(index);
+                }}
                 className={`tour-thumbnail ${activeIndex === index ? 'active' : ''}`}
               >
                 <Image src={thumbUrl} alt={t.title} fill style={{ objectFit: 'cover' }} sizes="160px" />
