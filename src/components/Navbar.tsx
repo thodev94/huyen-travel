@@ -205,7 +205,12 @@ const Navbar: React.FC<NavbarProps> = ({ onSelectTour, onNavigate }) => {
                 transition: 'all 0.3s'
               }}
             />
-            <span style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', fontSize: '0.9rem', opacity: 0.6 }}>🔍</span>
+            <span style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', display: 'flex', alignItems: 'center', opacity: 0.6 }}>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+            </span>
 
             {showSuggestions && searchResults.length > 0 && createPortal(
               <div id="search-suggestions" role="listbox" aria-label="Search suggestions" ref={suggestionsRef} className="glass-panel" style={{
@@ -332,7 +337,12 @@ const Navbar: React.FC<NavbarProps> = ({ onSelectTour, onNavigate }) => {
                 outline: 'none'
               }}
             />
-            <span style={{ position: 'absolute', left: '15px', top: '50%', transform: 'translateY(-50%)' }}>🔍</span>
+            <span style={{ position: 'absolute', left: '15px', top: '50%', transform: 'translateY(-50%)', display: 'flex', alignItems: 'center', opacity: 0.6 }}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+            </span>
 
             {showSuggestions && searchResults.length > 0 && (
               <div id="search-suggestions" role="listbox" aria-label="Search suggestions" style={{

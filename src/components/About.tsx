@@ -108,7 +108,9 @@ const About: React.FC = () => {
     >
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
         <h2 style={{ fontSize: '3rem', margin: 0, color: '#FFFFFF', fontWeight: '800' }}>4.9+</h2>
-        <span style={{ fontSize: '2.2rem', color: '#FBBF24' }}>★</span>
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="#FBBF24" style={{ display: 'inline-block', verticalAlign: 'middle' }}>
+          <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+        </svg>
       </div>
       <p style={{ color: '#FFFFFF', fontWeight: 700, margin: '2px 0 0' }}>Avg. Rating</p>
       <p style={{ fontSize: '0.85rem', color: 'rgba(255, 255, 255, 0.8)', margin: '2px 0 12px' }}>350+ Reviews</p>
@@ -121,9 +123,16 @@ const About: React.FC = () => {
         fontSize: '0.75rem',
         fontWeight: '800',
         textTransform: 'uppercase',
-        letterSpacing: '0.5px'
+        letterSpacing: '0.5px',
+        display: 'flex',
+        alignItems: 'center',
+        gap: '4px'
       }}>
-        View on Withlocals ↗
+        View on Withlocals
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ display: 'inline-block', verticalAlign: 'middle' }}>
+          <line x1="7" y1="17" x2="17" y2="7" />
+          <polyline points="7 7 17 7 17 17" />
+        </svg>
       </div>
     </a>
   );
@@ -138,11 +147,36 @@ const About: React.FC = () => {
     }}>
       <h3 style={{ color: '#E53935', marginBottom: '20px', fontWeight: '800' }}>Perks & Skills</h3>
       <ul style={{ listStyle: 'none', lineHeight: '2.5', padding: 0, color: 'var(--text-secondary)' }}>
-        <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><span style={{ color: '#E53935', fontWeight: 'bold' }}>✓</span> Licensed Professional Guide</li>
-        <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><span style={{ color: '#E53935', fontWeight: 'bold' }}>✓</span> Tourism Degree</li>
-        <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><span style={{ color: '#E53935', fontWeight: 'bold' }}>✓</span> Photography Assistant</li>
-        <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><span style={{ color: '#E53935', fontWeight: 'bold' }}>✓</span> SIM Card & Local Logistics</li>
-        <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><span style={{ color: '#E53935', fontWeight: 'bold' }}>✓</span> Hidden Gems Specialist</li>
+        <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#E53935" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
+            <polyline points="20 6 9 17 4 12" />
+          </svg>
+          Licensed Professional Guide
+        </li>
+        <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#E53935" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
+            <polyline points="20 6 9 17 4 12" />
+          </svg>
+          Tourism Degree
+        </li>
+        <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#E53935" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
+            <polyline points="20 6 9 17 4 12" />
+          </svg>
+          Photography Assistant
+        </li>
+        <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#E53935" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
+            <polyline points="20 6 9 17 4 12" />
+          </svg>
+          SIM Card & Local Logistics
+        </li>
+        <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#E53935" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
+            <polyline points="20 6 9 17 4 12" />
+          </svg>
+          Hidden Gems Specialist
+        </li>
       </ul>
     </div>
   );

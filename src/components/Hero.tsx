@@ -64,8 +64,12 @@ const Hero: React.FC<HeroProps> = ({ onSelectTour }) => {
       <div className="hero-content">
         <div className="hero-text-side">
           <div className="badges hero-anim">
-            <span className="tag-hero tag-guide">
-              <span className="star-icon">★</span> LICENSED PROFESSIONAL GUIDE
+            <span className="tag-hero tag-guide" style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+              <span className="star-icon" style={{ display: 'inline-flex', alignItems: 'center' }}>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                </svg>
+              </span> LICENSED PROFESSIONAL GUIDE
             </span>
             <span className="tag-hero tag-experience">8+ YEARS EXPERIENCE</span>
           </div>
@@ -85,7 +89,12 @@ const Hero: React.FC<HeroProps> = ({ onSelectTour }) => {
           <div className="hero-buttons hero-anim">
             <button className="btn-hero-cta" onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}>
               <span>Start Journey</span>
-              <span className="arrow">→</span>
+              <span className="arrow" style={{ display: 'inline-flex', alignItems: 'center' }}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                  <polyline points="12 5 19 12 12 19" />
+                </svg>
+              </span>
             </button>
             <button className="btn-hero-secondary" onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}>
               Learn My Story
@@ -173,8 +182,12 @@ const Hero: React.FC<HeroProps> = ({ onSelectTour }) => {
 
                 {/* Card "Highly Rated" nổi bên phải */}
                 <div className="highly-rated-card">
-                  <div className="rating-star-badge">
-                    <span className="star-icon">★</span>
+                  <div className="rating-star-badge" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <span className="star-icon" style={{ display: 'inline-flex', alignItems: 'center' }}>
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                      </svg>
+                    </span>
                   </div>
                   <div className="card-info">
                     <h4 className="card-title">Highly Rated</h4>

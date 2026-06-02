@@ -155,7 +155,12 @@ const Services: React.FC<ServicesProps> = ({ onSelectTour }) => {
                 }}
                 onFocus={() => setShowSuggestions(true)}
               />
-              <span style={{ position: 'absolute', left: '15px', top: '50%', transform: 'translateY(-50%)', fontSize: '1rem', opacity: 0.5 }}>🔍</span>
+              <span style={{ position: 'absolute', left: '15px', top: '50%', transform: 'translateY(-50%)', display: 'flex', alignItems: 'center', opacity: 0.5 }}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+              </span>
             </div>
 
             {/* Suggestions Dropdown via Portal */}
@@ -267,9 +272,14 @@ const Services: React.FC<ServicesProps> = ({ onSelectTour }) => {
                     <h3 className="card-title">{s.title}</h3>
                     <p className="card-brief">{s.brief}</p>
 
-                    <div className="card-link">
+                    <div className="card-link" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
                       View Experiences
-                      <span className="arrow">→</span>
+                      <span className="arrow" style={{ display: 'inline-flex', alignItems: 'center' }}>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                          <line x1="5" y1="12" x2="19" y2="12"></line>
+                          <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                      </span>
                     </div>
                   </div>
                 </div>

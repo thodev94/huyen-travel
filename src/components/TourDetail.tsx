@@ -170,7 +170,11 @@ const TourDetail: React.FC<TourDetailProps> = ({ tourId, onClose, onSelectTour }
             onMouseEnter={(e) => e.currentTarget.style.transform = 'translateX(-4px)'}
             onMouseLeave={(e) => e.currentTarget.style.transform = 'translateX(0)'}
           >
-            ← Back to All Tours
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ display: 'inline-block', verticalAlign: 'middle' }}>
+              <line x1="19" y1="12" x2="5" y2="12" />
+              <polyline points="12 19 5 12 12 5" />
+            </svg>
+            Back to All Tours
           </button>
         </div>
 
@@ -465,7 +469,10 @@ const TourDetail: React.FC<TourDetailProps> = ({ tourId, onClose, onSelectTour }
                     justifyContent: 'center',
                     fontSize: '0.85rem'
                   }}>
-                    👤
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                      <circle cx="12" cy="7" r="4" />
+                    </svg>
                   </div>
                   <div style={{ fontSize: '0.82rem', color: '#475569', lineHeight: '1.2' }}>
                     <strong style={{ color: '#0F172A' }}>Private Tour</strong>
@@ -485,7 +492,12 @@ const TourDetail: React.FC<TourDetailProps> = ({ tourId, onClose, onSelectTour }
                     justifyContent: 'center',
                     fontSize: '0.85rem'
                   }}>
-                    📅
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                      <line x1="16" y1="2" x2="16" y2="6" />
+                      <line x1="8" y1="2" x2="8" y2="6" />
+                      <line x1="3" y1="10" x2="21" y2="10" />
+                    </svg>
                   </div>
                   <div style={{ fontSize: '0.82rem', color: '#475569', lineHeight: '1.2' }}>
                     <strong style={{ color: '#0F172A' }}>Flexible Schedule</strong>
@@ -505,7 +517,9 @@ const TourDetail: React.FC<TourDetailProps> = ({ tourId, onClose, onSelectTour }
                     justifyContent: 'center',
                     fontSize: '0.85rem'
                   }}>
-                    🛡️
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                    </svg>
                   </div>
                   <div style={{ fontSize: '0.82rem', color: '#475569', lineHeight: '1.2' }}>
                     <strong style={{ color: '#0F172A' }}>No Tourist Traps</strong>
@@ -525,7 +539,9 @@ const TourDetail: React.FC<TourDetailProps> = ({ tourId, onClose, onSelectTour }
                     justifyContent: 'center',
                     fontSize: '0.85rem'
                   }}>
-                    ✓
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
                   </div>
                   <div style={{ fontSize: '0.82rem', color: '#475569', lineHeight: '1.2' }}>
                     <strong style={{ color: '#0F172A' }}>Licensed Guide</strong>
@@ -565,7 +581,12 @@ const TourDetail: React.FC<TourDetailProps> = ({ tourId, onClose, onSelectTour }
                   padding: '12px 10px',
                   boxShadow: 'none',
                 }}>
-                  💬 WhatsApp
+                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', justifyContent: 'center', width: '100%' }}>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                    </svg>
+                    WhatsApp
+                  </span>
                 </button>
               </a>
 
@@ -577,7 +598,13 @@ const TourDetail: React.FC<TourDetailProps> = ({ tourId, onClose, onSelectTour }
                   padding: '12px 10px',
                   boxShadow: 'none'
                 }}>
-                  ✉️ SMS
+                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', justifyContent: 'center', width: '100%' }}>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                      <polyline points="22,6 12,13 2,6" />
+                    </svg>
+                    SMS
+                  </span>
                 </button>
               </a>
             </div>

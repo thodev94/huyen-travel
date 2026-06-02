@@ -79,7 +79,7 @@
       {
         "type": "paragraph",
         "text": "Ben Tre - Can Tho - Chau Doc",
-        "html": "<strong>Ben Tre - Can Tho - Chau Doc  </strong>"
+        "html": "<strong>Ben Tre - Can Tho - Chau Doc </strong>"
       },
       {
         "type": "list-unordered",
@@ -295,8 +295,8 @@
     "nodes": [
       {
         "type": "paragraph",
-        "text": "🌸 Sa Dec",
-        "html": "<strong>🌸 Sa Dec </strong>"
+        "text": "Sa Dec",
+        "html": "<strong> Sa Dec </strong>"
       },
       {
         "type": "paragraph",
@@ -315,8 +315,8 @@
       },
       {
         "type": "paragraph",
-        "text": "🗺️ Tour Itinerary Highlights:",
-        "html": "<strong>🗺️ Tour Itinerary Highlights:</strong>"
+        "text": "Tour Itinerary Highlights:",
+        "html": "<strong> Tour Itinerary Highlights:</strong>"
       },
       {
         "type": "list-ordered",
@@ -338,8 +338,8 @@
       },
       {
         "type": "paragraph",
-        "text": "🚐 Return Journey",
-        "html": "<strong>🚐 Return Journey</strong>"
+        "text": "Return Journey",
+        "html": "<strong> Return Journey</strong>"
       }
     ],
     "brief": "Tour the charming riverside town of Sa Dec, famous for its historic flower village, ancient houses, and beautiful lotus pagodas.",
@@ -454,8 +454,8 @@
       },
       {
         "type": "paragraph",
-        "text": "✅ Cu Chi Tour Highlights:",
-        "html": "<strong>✅ Cu Chi Tour Highlights:</strong>"
+        "text": "Cu Chi Tour Highlights:",
+        "html": "<strong> Cu Chi Tour Highlights:</strong>"
       },
       {
         "type": "list-ordered",
@@ -543,8 +543,8 @@
       },
       {
         "type": "paragraph",
-        "text": "✅ Tour Highlights:",
-        "html": "<strong>✅ Tour Highlights:</strong>"
+        "text": "Tour Highlights:",
+        "html": "<strong> Tour Highlights:</strong>"
       },
       {
         "type": "list-ordered",
@@ -670,8 +670,8 @@
       },
       {
         "type": "paragraph",
-        "text": "🗺️ Tour Itinerary Highlights:",
-        "html": "<strong>🗺️ Tour Itinerary Highlights:</strong>"
+        "text": "Tour Itinerary Highlights:",
+        "html": "<strong> Tour Itinerary Highlights:</strong>"
       },
       {
         "type": "list-ordered",
@@ -685,8 +685,8 @@
       },
       {
         "type": "paragraph",
-        "text": "🚐 Tour End &amp; Return",
-        "html": "<strong>🚐 Tour End &amp; Return</strong>"
+        "text": "Tour End &amp; Return",
+        "html": "<strong> Tour End &amp; Return</strong>"
       }
     ],
     "brief": "A relaxing coastal escape to Vung Tau beach featuring colonial mansions, panoramic lighthouses, and a unique arms museum.",
