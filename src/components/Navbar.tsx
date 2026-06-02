@@ -121,7 +121,7 @@ const Navbar: React.FC<NavbarProps> = ({ onSelectTour, onNavigate }) => {
       if (document.getElementById('hero')) {
         const newHash = `#${activeSection}`;
         if (window.location.hash !== newHash) {
-          window.history.replaceState(null, "", newHash);
+          window.history.replaceState(window.history.state || {}, "", newHash);
         }
       }
     }
@@ -251,9 +251,7 @@ const Navbar: React.FC<NavbarProps> = ({ onSelectTour, onNavigate }) => {
                   onNavigate(link.id);
                 }
                 setActiveSection(link.id);
-                if (typeof window !== 'undefined') {
-                  window.history.replaceState(null, "", `#${link.id}`);
-                }
+                  window.history.replaceState(window.history.state || {}, "", `#${link.id}`);
               }}>
                 {link.label}
                 {activeSection === link.id && (
@@ -380,7 +378,7 @@ const Navbar: React.FC<NavbarProps> = ({ onSelectTour, onNavigate }) => {
                 }
                 setActiveSection(link.id);
                 if (typeof window !== 'undefined') {
-                  window.history.replaceState(null, "", `#${link.id}`);
+                  window.history.replaceState(window.history.state || {}, "", `#${link.id}`);
                 }
                 closeMenu();
               }}

@@ -40,7 +40,7 @@ const App: React.FC = () => {
       if (selectedTourId) {
         if (currentTour !== selectedTourId) {
           params.set('tour', selectedTourId);
-          window.history.replaceState(null, "", `${window.location.pathname}?${params.toString()}`);
+          window.history.replaceState(window.history.state || {}, "", `${window.location.pathname}?${params.toString()}`);
         }
       } else {
         if (currentTour) {
@@ -48,7 +48,7 @@ const App: React.FC = () => {
           const searchStr = params.toString();
           const searchPart = searchStr ? `?${searchStr}` : '';
           const hashPart = window.location.hash || '';
-          window.history.replaceState(null, "", `${window.location.pathname}${searchPart}${hashPart}`);
+          window.history.replaceState(window.history.state || {}, "", `${window.location.pathname}${searchPart}${hashPart}`);
         }
       }
     }
@@ -65,7 +65,7 @@ const App: React.FC = () => {
     // Clear hash immediately when selectedTourId changes to prevent browser target scroll
     if (!selectedTourId) {
       if (typeof window !== 'undefined' && window.location.hash) {
-        window.history.pushState("", document.title, window.location.pathname + window.location.search);
+        window.history.pushState(window.history.state || {}, document.title, window.location.pathname + window.location.search);
       }
     }
 
