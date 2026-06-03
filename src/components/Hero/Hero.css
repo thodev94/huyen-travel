@@ -15,16 +15,30 @@
   inset: 0;
   z-index: 0;
   background-color: var(--bg-soft);
-  background-image: radial-gradient(at 0% 0%, rgba(45, 116, 31, 0.05) 0px, transparent 50%),
-                    radial-gradient(at 100% 0%, rgba(235, 0, 0, 0.03) 0px, transparent 50%);
+}
+
+.hero-bg-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  will-change: transform;
 }
 
 .hero-overlay {
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: radial-gradient(1200px 400px at 10% 10%, rgba(46,125,50,0.04), transparent 20%), linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.9));
+  background: linear-gradient(180deg, rgba(248, 244, 241, 0.4), rgba(248, 244, 241, 0.85));
   pointer-events: none;
+}
+
+[data-theme='dark'] .hero-overlay {
+  background: linear-gradient(180deg, rgba(18, 18, 18, 0.5), rgba(18, 18, 18, 0.85));
 }
 
 .hero-content {
@@ -71,13 +85,13 @@
 
 .tag-hero {
   padding: 6px 14px;
-  border-radius: 30px;
+  border-radius: var(--border-radius);
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.5px;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
 }
 
@@ -89,6 +103,8 @@
 .tag-guide .star-icon {
   color: #B91C1C;
   font-size: 0.85rem;
+  display: inline-flex;
+  align-items: center;
 }
 
 .tag-experience {
@@ -123,7 +139,7 @@
   background: #B91C1C;
   color: #fff;
   padding: 14px 28px;
-  border-radius: 50px;
+  border-radius: var(--border-radius);
   font-weight: 700;
   font-size: 0.95rem;
   border: none;
@@ -142,6 +158,8 @@
   font-size: 1.1rem;
   line-height: 1;
   transition: transform 0.2s ease;
+  display: inline-flex;
+  align-items: center;
 }
 
 .btn-hero-cta:hover .arrow {
@@ -155,7 +173,7 @@
   background: transparent;
   color: #B91C1C;
   padding: 14px 28px;
-  border-radius: 50px;
+  border-radius: var(--border-radius);
   font-weight: 700;
   font-size: 0.95rem;
   border: 1px solid rgba(185, 28, 28, 0.25);
@@ -189,7 +207,8 @@
 .hero-arch-frame {
   width: 330px;
   height: 440px;
-  border-radius: 165px 165px 0 0;
+  border-top-left-radius: 300px;
+  border-top-right-radius: 300px;
   overflow: hidden;
   position: relative;
   z-index: 2;
@@ -208,7 +227,8 @@
   height: 460px;
   bottom: 0;
   border: 1px solid rgba(185, 28, 28, 0.15);
-  border-radius: 185px 185px 0 0;
+  border-top-left-radius: 300px;
+  border-top-right-radius: 300px;
   pointer-events: none;
   z-index: 1;
 }
@@ -238,7 +258,7 @@
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(8px);
   border: 1px solid rgba(241, 245, 249, 0.8);
-  border-radius: 16px;
+  border-radius: var(--border-radius);
   padding: 12px 18px;
   display: flex;
   align-items: center;
@@ -255,7 +275,7 @@
 .rating-star-badge {
   width: 32px;
   height: 32px;
-  border-radius: 50%;
+  border-radius: var(--border-radius);
   background-color: rgba(239, 68, 68, 0.1);
   display: flex;
   align-items: center;
@@ -266,6 +286,8 @@
 .rating-star-badge .star-icon {
   color: #EF4444;
   font-size: 0.9rem;
+  display: inline-flex;
+  align-items: center;
 }
 
 .card-info {
@@ -310,7 +332,7 @@
 .stat-icon {
   width: 44px;
   height: 44px;
-  border-radius: 12px;
+  border-radius: var(--border-radius);
   display: flex;
   align-items: center;
   justify-content: center;

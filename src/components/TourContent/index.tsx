@@ -1,6 +1,6 @@
 "use client";
 import React from 'react';
-import { renderNode, DocNode } from '../utils/NodeMapper';
+import { renderNode, DocNode } from '../../utils/NodeMapper';
 
 interface TourContentProps {
   nodes: DocNode[];

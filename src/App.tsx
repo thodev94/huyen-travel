@@ -102,7 +102,7 @@ const App: React.FC = () => {
           <Hero onSelectTour={setSelectedTourId} />
           <About />
           <Services onSelectTour={setSelectedTourId} />
-          <div style={{ maxWidth: "1536px", margin: "0 auto" }}> <Gallery onSelectTour={setSelectedTourId} /></div>
+          <div className="gallery-wrapper"> <Gallery onSelectTour={setSelectedTourId} /></div>
         </>
       )}
       <Contact />

@@ -1,14 +1,15 @@
 import React from 'react';
 import '../src/styles.css';
-import '../src/components/Navbar.css';
-import '../src/components/Hero.css';
-import '../src/components/About.css';
-import '../src/components/Services.css';
-import '../src/components/Gallery.css';
-import '../src/components/Contact.css';
-import '../src/components/FloatingContact.css';
-import '../src/components/MobileBottomNav.css';
+import '../src/components/Navbar/Navbar.css';
+import '../src/components/Hero/Hero.css';
+import '../src/components/About/About.css';
+import '../src/components/Services/Services.css';
+import '../src/components/Gallery/Gallery.css';
+import '../src/components/Contact/Contact.css';
+import '../src/components/FloatingContact/FloatingContact.css';
+import '../src/components/MobileBottomNav/MobileBottomNav.css';
 import '../src/utils/NodeMapper.css';
+import { ThemeProvider } from '../src/components/ThemeProvider';
 
 export const metadata = {
   title: 'Huyen Tour — Authentic Vietnam tours',
@@ -58,7 +59,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   };
 
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         {/* Basic viewport and canonical for SEO */}
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -80,8 +81,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }} />
       </head>
       <body>
-        <a href="#main" className="skip-link">Skip to content</a>
-        {children}
+        <ThemeProvider attribute="data-theme" defaultTheme="light" enableSystem={false}>
+          <a href="#main" className="skip-link">Skip to content</a>
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

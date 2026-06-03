@@ -3,8 +3,8 @@ import React, { useRef, useState, useEffect } from 'react';
 import Image from 'next/image';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
-import toursData from '../data/tours.json';
-import imageMap from '../data/imageMap.json';
+import toursData from '../../data/tours.json';
+import imageMap from '../../data/imageMap.json';
 import './Gallery.css';
 
 gsap.registerPlugin(useGSAP);
@@ -18,7 +18,6 @@ const Gallery: React.FC<GalleryProps> = ({ onSelectTour }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const thumbnailsRef = useRef<HTMLDivElement>(null);
 
-  // Keep all tours
   const tours = toursData;
 
   const scrollThumbnailIntoView = (index: number) => {
@@ -56,19 +55,18 @@ const Gallery: React.FC<GalleryProps> = ({ onSelectTour }) => {
   const imageUrl = images.length > 0 ? images[0] : "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=1200&auto=format&fit=crop";
 
   return (
-    <section id="gallery" className="gallery" style={{ padding: '20px 0' }}>
+    <section id="gallery" className="gallery">
       <div className="gallery-inner">
-        <h2 className="section-title text-center" style={{ marginBottom: '60px', color: 'var(--color-primary-deep)' }}>
+        <h2 className="section-title gallery-title">
           Discover your good time
         </h2>
  
-        <div ref={containerRef} style={{ position: 'relative' }}>
+        <div ref={containerRef} className="tour-slider-wrapper">
           <div
             key={activeIndex}
             className="tour-slider-container slide-anim-wrapper"
             onClick={() => onSelectTour && onSelectTour(currentTour.id)}
           >
-            {/* Left: Image */}
             <div className="slider-image-wrapper">
               <Image
                 src={imageUrl}
@@ -79,7 +77,6 @@ const Gallery: React.FC<GalleryProps> = ({ onSelectTour }) => {
               />
             </div>
  
-            {/* Right: Content */}
             <div className="slider-content-wrapper">
               <h3 className="slider-title">
                 {currentTour.title}
@@ -96,7 +93,6 @@ const Gallery: React.FC<GalleryProps> = ({ onSelectTour }) => {
                 <button
                   onClick={(e) => { e.stopPropagation(); handlePrev(); }}
                   className="slider-btn-prev"
-                  style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}
                 >
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                     <line x1="19" y1="12" x2="5" y2="12" />
@@ -107,7 +103,6 @@ const Gallery: React.FC<GalleryProps> = ({ onSelectTour }) => {
                 <button
                   onClick={(e) => { e.stopPropagation(); handleNext(); }}
                   className="slider-btn-next"
-                  style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}
                 >
                   Next
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -120,7 +115,6 @@ const Gallery: React.FC<GalleryProps> = ({ onSelectTour }) => {
           </div>
         </div>
 
-        {/* Thumbnails List */}
         <div ref={thumbnailsRef} className="thumbnails-container">
           {tours.map((t, index) => {
             const f = (t as any).folder as keyof typeof imageMap;

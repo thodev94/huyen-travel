@@ -5,9 +5,9 @@ import { createPortal } from 'react-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
-import { useWindowSize } from '../hooks/useWindowSize';
-import toursData from '../data/tours.json';
-import imageMapData from '../data/imageMap.json';
+import { useWindowSize } from '../../hooks/useWindowSize';
+import toursData from '../../data/tours.json';
+import imageMapData from '../../data/imageMap.json';
 import './Services.css';
 
 const imageMap: Record<string, string[]> = imageMapData;
@@ -48,7 +48,6 @@ const Services: React.FC<ServicesProps> = ({ onSelectTour }) => {
       t.category.toLowerCase().includes(searchQuery.toLowerCase())
     ).slice(0, 5);
 
-  // Initial entrance for section title and toolbar - runs only once
   useGSAP(() => {
     gsap.fromTo(
       '.services-entry-anim',
@@ -67,7 +66,6 @@ const Services: React.FC<ServicesProps> = ({ onSelectTour }) => {
     );
   }, { scope: sectionRef });
 
-  // Animation for tour cards - triggers on scroll AND when filtered
   useGSAP(() => {
     gsap.fromTo(
       '.tour-card-anim',
@@ -135,14 +133,8 @@ const Services: React.FC<ServicesProps> = ({ onSelectTour }) => {
         <h2 className="section-title services-entry-anim">Our Tours</h2>
 
         <div className="services-toolbar services-entry-anim">
-          {/* Search Bar */}
-          <div ref={searchRef} className="tour-card-anim search-input-wrapper" style={{
-            position: 'relative',
-            width: '100%',
-            maxWidth: isMobile ? '100%' : '400px',
-            zIndex: 100
-          }}>
-            <div style={{ position: 'relative' }}>
+          <div ref={searchRef} className="tour-card-anim search-input-wrapper">
+            <div className="search-input-inner">
               <input
                 ref={inputRef}
                 type="text"
@@ -155,7 +147,7 @@ const Services: React.FC<ServicesProps> = ({ onSelectTour }) => {
                 }}
                 onFocus={() => setShowSuggestions(true)}
               />
-              <span style={{ position: 'absolute', left: '15px', top: '50%', transform: 'translateY(-50%)', display: 'flex', alignItems: 'center', opacity: 0.5 }}>
+              <span className="search-icon">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                   <circle cx="11" cy="11" r="8"></circle>
                   <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
@@ -163,21 +155,11 @@ const Services: React.FC<ServicesProps> = ({ onSelectTour }) => {
               </span>
             </div>
 
-            {/* Suggestions Dropdown via Portal */}
             {showSuggestions && searchResults.length > 0 && createPortal(
-              <div ref={suggestionsRef} className="glass-panel" style={{
-                position: 'absolute',
+              <div ref={suggestionsRef} className="search-suggestions-portal" style={{
                 top: coords.top + 10,
                 left: coords.left,
                 width: coords.width,
-                padding: '10px',
-                borderRadius: '20px',
-                boxShadow: '0 10px 40px rgba(0,0,0,0.2)',
-                zIndex: 10000,
-                maxHeight: '400px',
-                overflowY: 'auto',
-                border: '1px solid rgba(0,0,0,0.05)',
-                background: '#FFFFFF'
               }}>
                   {searchResults.map((tour) => {
                   const folder = tour.folder as keyof typeof imageMap;
@@ -192,14 +174,6 @@ const Services: React.FC<ServicesProps> = ({ onSelectTour }) => {
                         setShowSuggestions(false);
                         setSearchQuery('');
                       }}
-                      style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '12px',
-                        padding: '10px',
-                        borderRadius: '12px',
-                        cursor: 'pointer'
-                      }}
                     >
                       <Image
                         src={thumb}
@@ -208,11 +182,11 @@ const Services: React.FC<ServicesProps> = ({ onSelectTour }) => {
                         height={50}
                         sizes="50px"
                         quality={60}
-                        style={{ objectFit: 'cover', borderRadius: '10px' }}
+                        className="search-suggestion-thumb"
                       />
                       <div style={{ flex: 1 }}>
-                        <div style={{ fontWeight: 'bold', fontSize: '0.85rem', color: 'var(--color-primary-deep)' }}>{tour.title}</div>
-                        <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', textTransform: 'capitalize' }}>{tour.category} Tours</div>
+                        <div className="search-suggestion-title">{tour.title}</div>
+                        <div className="search-suggestion-category">{tour.category} Tours</div>
                       </div>
                     </div>
                   );
@@ -222,7 +196,6 @@ const Services: React.FC<ServicesProps> = ({ onSelectTour }) => {
             )}
           </div>
 
-          {/* Category Menu — Now using CSS classes */}
           <div className="services-categories services-entry-anim">
             {categories.map(cat => (
               <button
@@ -248,10 +221,9 @@ const Services: React.FC<ServicesProps> = ({ onSelectTour }) => {
                 href={`/tours/${s.id}`}
                 onClick={(e) => { e.preventDefault(); onSelectTour(s.id); }}
                 className="card-container tour-card-anim"
-                style={{ cursor: 'pointer', textDecoration: 'none' }}
+                style={{ textDecoration: 'none' }}
               >
                 <div className="service-card">
-
                   <div className="service-img-wrapper">
                     <Image
                       src={coverImage}
@@ -272,9 +244,9 @@ const Services: React.FC<ServicesProps> = ({ onSelectTour }) => {
                     <h3 className="card-title">{s.title}</h3>
                     <p className="card-brief">{s.brief}</p>
 
-                    <div className="card-link" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+                    <div className="card-link">
                       View Experiences
-                      <span className="arrow" style={{ display: 'inline-flex', alignItems: 'center' }}>
+                      <span className="arrow">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                           <line x1="5" y1="12" x2="19" y2="12"></line>
                           <polyline points="12 5 19 12 12 19"></polyline>

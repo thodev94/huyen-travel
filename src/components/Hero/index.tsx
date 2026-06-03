@@ -3,9 +3,10 @@ import React, { useRef, useState, useEffect } from 'react';
 import Image from 'next/image';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
-import { useWindowSize } from '../hooks/useWindowSize';
-import toursData from '../data/tours.json';
-import imageMapData from '../data/imageMap.json';
+import { useWindowSize } from '../../hooks/useWindowSize';
+import toursData from '../../data/tours.json';
+import imageMapData from '../../data/imageMap.json';
+import './Hero.css';
 
 gsap.registerPlugin(useGSAP);
 
@@ -17,11 +18,18 @@ interface HeroProps {
 
 const Hero: React.FC<HeroProps> = ({ onSelectTour }) => {
   const heroRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const { width } = useWindowSize();
   const isMobile = width <= 768;
 
   const tours = toursData;
   const [activeIndex, setActiveIndex] = useState(0);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.playbackRate = 0.5; // 50% tốc độ
+    }
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -55,17 +63,42 @@ const Hero: React.FC<HeroProps> = ({ onSelectTour }) => {
 
   const toursCount = tours.length;
 
+  const handleLoadedMetadata = () => {
+
+  };
+
+  const handleTimeUpdate = (e: React.SyntheticEvent<HTMLVideoElement>) => {
+    const video = e.currentTarget;
+    if (video.duration && video.currentTime >= video.duration - 0.25) {
+      video.currentTime = 0;
+      video.play().catch((err) => console.log("TimeUpdate loop play failed:", err));
+    }
+  };
+
+
   return (
     <section id="hero" className="hero" ref={heroRef}>
       <div className="hero-bg" aria-hidden="true">
+        <video
+          ref={videoRef}
+          className="hero-bg-video"
+          src="/Videos/fyp.mp4"
+          autoPlay
+          muted
+          playsInline
+          preload="auto"
+          loop
+          onLoadedMetadata={handleLoadedMetadata}
+          onTimeUpdate={handleTimeUpdate}
+        />
         <div className="hero-overlay" aria-hidden="true" />
       </div>
 
       <div className="hero-content">
         <div className="hero-text-side">
           <div className="badges hero-anim">
-            <span className="tag-hero tag-guide" style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
-              <span className="star-icon" style={{ display: 'inline-flex', alignItems: 'center' }}>
+            <span className="tag-hero tag-guide">
+              <span className="star-icon">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
                 </svg>
@@ -89,7 +122,7 @@ const Hero: React.FC<HeroProps> = ({ onSelectTour }) => {
           <div className="hero-buttons hero-anim">
             <button className="btn-hero-cta" onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}>
               <span>Start Journey</span>
-              <span className="arrow" style={{ display: 'inline-flex', alignItems: 'center' }}>
+              <span className="arrow">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                   <line x1="5" y1="12" x2="19" y2="12" />
                   <polyline points="12 5 19 12 12 19" />
@@ -151,7 +184,6 @@ const Hero: React.FC<HeroProps> = ({ onSelectTour }) => {
 
             return (
               <div className="hero-arch-container" onClick={() => onSelectTour && onSelectTour(currentTour.id)}>
-                {/* SVG TextPath running on top of the arch */}
                 <svg className="hero-arch-text-svg" viewBox="0 0 380 520" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                   <defs>
                     <path id="archTextPath" d="M 35,200 A 155,155 0 0,1 345,200" fill="none" />
@@ -163,10 +195,8 @@ const Hero: React.FC<HeroProps> = ({ onSelectTour }) => {
                   </text>
                 </svg>
 
-                {/* Đường outline vòm lớn bao ngoài */}
                 <div className="hero-arch-outline" />
 
-                {/* Khung vòm chứa ảnh chính */}
                 <div className="hero-arch-frame">
                   <Image
                     key={activeIndex}
@@ -180,10 +210,9 @@ const Hero: React.FC<HeroProps> = ({ onSelectTour }) => {
                   />
                 </div>
 
-                {/* Card "Highly Rated" nổi bên phải */}
                 <div className="highly-rated-card">
-                  <div className="rating-star-badge" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <span className="star-icon" style={{ display: 'inline-flex', alignItems: 'center' }}>
+                  <div className="rating-star-badge">
+                    <span className="star-icon">
                       <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
                       </svg>

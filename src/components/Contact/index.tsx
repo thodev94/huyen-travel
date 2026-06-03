@@ -1,6 +1,6 @@
 "use client";
 import React from 'react';
-import { useWindowSize } from '../hooks/useWindowSize';
+import { useWindowSize } from '../../hooks/useWindowSize';
 import './Contact.css';
 
 const Contact: React.FC = () => {
@@ -8,9 +8,7 @@ const Contact: React.FC = () => {
   const isMobile = width <= 768;
 
   return (
-    <footer id="contact" className="contact-footer" style={{
-      paddingTop: isMobile ? '20px' : '80px',
-    }}>
+    <footer id="contact" className="contact-footer">
       <div className="contact-inner">
 
         {/* Main Footer Content */}
