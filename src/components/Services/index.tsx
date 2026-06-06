@@ -33,20 +33,20 @@ const Services: React.FC<ServicesProps> = ({ onSelectTour }) => {
   const isMobile = width <= 768;
   const [activeCategory, setActiveCategory] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState('');
-  const [showSuggestions, setShowSuggestions] = useState(false);
 
   const categories = ['all', ...Array.from(new Set(toursData.map(t => t.category)))];
 
-  const filteredTours = activeCategory === 'all'
-    ? toursData
-    : toursData.filter(t => t.category === activeCategory);
-
-  const searchResults = searchQuery.trim() === ''
-    ? []
-    : toursData.filter(t =>
-      t.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      t.category.toLowerCase().includes(searchQuery.toLowerCase())
-    ).slice(0, 5);
+  const filteredTours = toursData
+    .filter(t => activeCategory === 'all' || t.category === activeCategory)
+    .filter(t => {
+      if (searchQuery.trim() === '') return true;
+      const query = searchQuery.toLowerCase();
+      return (
+        t.title.toLowerCase().includes(query) ||
+        t.category.toLowerCase().includes(query) ||
+        t.brief.toLowerCase().includes(query)
+      );
+    });
 
   useGSAP(() => {
     gsap.fromTo(
@@ -82,50 +82,7 @@ const Services: React.FC<ServicesProps> = ({ onSelectTour }) => {
         }
       }
     );
-  }, { scope: sectionRef, dependencies: [activeCategory] });
-
-  const searchRef = useRef<HTMLDivElement>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
-  const suggestionsRef = useRef<HTMLDivElement>(null);
-  const [coords, setCoords] = useState({ top: 0, left: 0, width: 0 });
-
-  useEffect(() => {
-    const updateCoords = () => {
-      if (inputRef.current) {
-        const rect = inputRef.current.getBoundingClientRect();
-        setCoords({
-          top: rect.bottom + window.scrollY,
-          left: rect.left + window.scrollX,
-          width: rect.width
-        });
-      }
-    };
-
-    if (showSuggestions) {
-      updateCoords();
-      window.addEventListener('resize', updateCoords);
-      window.addEventListener('scroll', updateCoords);
-    }
-    
-    return () => {
-      window.removeEventListener('resize', updateCoords);
-      window.removeEventListener('scroll', updateCoords);
-    };
-  }, [showSuggestions]);
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      const target = event.target as Node;
-      const isOutsideSearch = searchRef.current && !searchRef.current.contains(target);
-      const isOutsideSuggestions = suggestionsRef.current && !suggestionsRef.current.contains(target);
-      
-      if (isOutsideSearch && isOutsideSuggestions) {
-        setShowSuggestions(false);
-      }
-    };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
+  }, { scope: sectionRef, dependencies: [activeCategory, searchQuery] });
 
   return (
     <section id="services" className="services" ref={sectionRef}>
@@ -133,19 +90,14 @@ const Services: React.FC<ServicesProps> = ({ onSelectTour }) => {
         <h2 className="section-title services-entry-anim">Our Tours</h2>
 
         <div className="services-toolbar services-entry-anim">
-          <div ref={searchRef} className="tour-card-anim search-input-wrapper">
+          <div className="tour-card-anim search-input-wrapper">
             <div className="search-input-inner">
               <input
-                ref={inputRef}
                 type="text"
                 className="search-input"
                 placeholder="Search tours (e.g. Mekong, Cu Chi...)"
                 value={searchQuery}
-                onChange={(e) => {
-                  setSearchQuery(e.target.value);
-                  setShowSuggestions(true);
-                }}
-                onFocus={() => setShowSuggestions(true)}
+                onChange={(e) => setSearchQuery(e.target.value)}
               />
               <span className="search-icon">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -154,46 +106,6 @@ const Services: React.FC<ServicesProps> = ({ onSelectTour }) => {
                 </svg>
               </span>
             </div>
-
-            {showSuggestions && searchResults.length > 0 && createPortal(
-              <div ref={suggestionsRef} className="search-suggestions-portal" style={{
-                top: coords.top + 10,
-                left: coords.left,
-                width: coords.width,
-              }}>
-                  {searchResults.map((tour) => {
-                  const folder = tour.folder as keyof typeof imageMap;
-                  const folderImages = imageMap[folder] || [];
-                  const thumb = folderImages.length > 0 ? folderImages[0] : BANNER_IMAGES[0];
-                  return (
-                    <div
-                      key={tour.id}
-                      className="search-suggestion-item"
-                      onClick={() => {
-                        onSelectTour(tour.id);
-                        setShowSuggestions(false);
-                        setSearchQuery('');
-                      }}
-                    >
-                      <Image
-                        src={thumb}
-                        alt={tour.title}
-                        width={50}
-                        height={50}
-                        sizes="50px"
-                        quality={60}
-                        className="search-suggestion-thumb"
-                      />
-                      <div style={{ flex: 1 }}>
-                        <div className="search-suggestion-title">{tour.title}</div>
-                        <div className="search-suggestion-category">{tour.category} Tours</div>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>,
-              document.body
-            )}
           </div>
 
           <div className="services-categories services-entry-anim">

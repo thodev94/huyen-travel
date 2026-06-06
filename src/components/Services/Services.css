@@ -93,8 +93,8 @@
 }
 
 .service-card {
-  background: #FFFFFF;
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  background: var(--bg-pure);
+  border: 1px solid var(--border-color);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
   border-radius: var(--border-radius);
   padding: 0;

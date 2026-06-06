@@ -1,8 +1,10 @@
 "use client";
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
+import { createPortal } from 'react-dom';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
+import { Search, Star, Map, X } from 'lucide-react';
 import { useWindowSize } from '../../hooks/useWindowSize';
 import toursData from '../../data/tours.json';
 import imageMapData from '../../data/imageMap.json';
@@ -16,218 +18,425 @@ interface HeroProps {
   onSelectTour?: (id: string) => void;
 }
 
+const FOLDERS = Object.keys(imageMapData);
+
+function getInitialSlots(): [string, string, string] {
+  const shuffled = [...FOLDERS].sort(() => Math.random() - 0.5);
+  return [shuffled[0] || FOLDERS[0], shuffled[1] || FOLDERS[1], shuffled[2] || FOLDERS[2]];
+}
+
+const ALL_CATEGORIES = Array.from(new Set(toursData.map(t => t.category)));
+
 const Hero: React.FC<HeroProps> = ({ onSelectTour }) => {
   const heroRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const hubRef = useRef<HTMLDivElement>(null);       // the hub-inner pill
+  const categoryRef = useRef<HTMLDivElement>(null);
+  const popupRef = useRef<HTMLDivElement>(null);
   const { width } = useWindowSize();
   const isMobile = width <= 768;
 
   const tours = toursData;
-  const [activeIndex, setActiveIndex] = useState(0);
+  const toursCount = tours.length;
 
-  useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.playbackRate = 0.5; // 50% tốc độ
+  // Phone card slots
+  const [slots, setSlots] = useState<[number, number, number]>(() => {
+    const s = getInitialSlots();
+    return [FOLDERS.indexOf(s[0]), FOLDERS.indexOf(s[1]), FOLDERS.indexOf(s[2])];
+  });
+  const [slotChanging, setSlotChanging] = useState<number | null>(null);
+
+  // Search state
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('');
+  const [showCategoryDrop, setShowCategoryDrop] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => { setMounted(true); }, []);
+
+  // Search results popup
+  const [showPopup, setShowPopup] = useState(false);
+  const [popupResults, setPopupResults] = useState<typeof toursData>([]);
+  const [popupCoords, setPopupCoords] = useState({ top: 0, left: 0, width: 0 });
+
+
+  // Compute popup position — position:absolute so coords include scrollY
+  // Smart flip: show above hub if not enough space below in viewport
+  const computePopupCoords = useCallback(() => {
+    if (!hubRef.current) return null;
+    const rect = hubRef.current.getBoundingClientRect();
+    const POPUP_MAX_H = 500;
+    const GAP = 10;
+    const spaceBelow = window.innerHeight - rect.bottom - GAP;
+    const spaceAbove = rect.top - GAP;
+
+    let top: number;
+    if (spaceBelow >= Math.min(POPUP_MAX_H, 280)) {
+      // enough space below → normal position
+      top = rect.bottom + window.scrollY + GAP;
+    } else if (spaceAbove >= Math.min(POPUP_MAX_H, 280)) {
+      // flip above hub
+      top = rect.top + window.scrollY - POPUP_MAX_H - GAP;
+    } else {
+      // best effort: whichever side has more room
+      top = spaceBelow >= spaceAbove
+        ? rect.bottom + window.scrollY + GAP
+        : rect.top + window.scrollY - POPUP_MAX_H - GAP;
     }
+
+    const coords = {
+      top: Math.max(window.scrollY + 8, top),  // never above visible area
+      left: rect.left + window.scrollX,
+      width: Math.max(rect.width, 580),
+    };
+    setPopupCoords(coords);
+    return coords;
   }, []);
 
+  // Filter tours based on current query + category
+  const getFilteredResults = useCallback(() => {
+    const q = searchQuery.trim().toLowerCase();
+    const results = toursData.filter(t => {
+      const matchQ = !q || t.title.toLowerCase().includes(q) || t.category.toLowerCase().includes(q);
+      const matchCat = !selectedCategory || t.category === selectedCategory;
+      return matchQ && matchCat;
+    });
+    return results.length > 0 ? results : toursData;
+  }, [searchQuery, selectedCategory]);
+
+  // Open/refresh popup with current results + recomputed position
+  const openPopup = useCallback(() => {
+    computePopupCoords();
+    setPopupResults(getFilteredResults());
+    setShowPopup(true);
+  }, [computePopupCoords, getFilteredResults]);
+
+  // Handle search button click or Enter key
+  const handleSearch = useCallback(() => {
+    openPopup();
+  }, [openPopup]);
+
+  // Close popup
+  const closePopup = useCallback(() => setShowPopup(false), []);
+
+  // Recompute coords on scroll/resize while popup open
+  useEffect(() => {
+    if (!showPopup) return;
+    const update = () => {
+      computePopupCoords();
+    };
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    return () => {
+      window.removeEventListener('scroll', update);
+      window.removeEventListener('resize', update);
+    };
+  }, [showPopup, computePopupCoords]);
+
+  // Refresh results whenever query or category changes while popup is open
+  useEffect(() => {
+    if (!showPopup) return;
+    setPopupResults(getFilteredResults());
+  }, [searchQuery, selectedCategory, showPopup, getFilteredResults]);
+
+  // Animate popup in with GSAP (after portal renders into DOM)
+  useEffect(() => {
+    if (!showPopup) return;
+    // rAF ensures the portal DOM is painted before we animate
+    const id = requestAnimationFrame(() => {
+      if (popupRef.current) {
+        gsap.fromTo(popupRef.current,
+          { opacity: 0, y: -14, scale: 0.97 },
+          { opacity: 1, y: 0, scale: 1, duration: 0.28, ease: 'power3.out' }
+        );
+      }
+    });
+    return () => cancelAnimationFrame(id);
+  }, [showPopup]);
+
+  // Click outside to close popup & category drop
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      const t = e.target as Node;
+      if (categoryRef.current && !categoryRef.current.contains(t)) setShowCategoryDrop(false);
+      if (popupRef.current && !popupRef.current.contains(t) && hubRef.current && !hubRef.current.contains(t)) {
+        setShowPopup(false);
+      }
+    };
+    document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
+  }, []);
+
+  // Video speed
+  useEffect(() => {
+    if (videoRef.current) videoRef.current.playbackRate = 0.5;
+  }, []);
+
+  // Cycle phone card slots every 5 s
   useEffect(() => {
     const interval = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % tours.length);
+      const slot = Math.floor(Math.random() * 3) as 0 | 1 | 2;
+      setSlotChanging(slot);
+      const current = slots[slot];
+      let next = current;
+      while (next === current && FOLDERS.length > 1) next = Math.floor(Math.random() * FOLDERS.length);
+      setTimeout(() => {
+        setSlots(prev => { const c = [...prev] as [number, number, number]; c[slot] = next; return c; });
+        setSlotChanging(null);
+      }, 400);
     }, 5000);
     return () => clearInterval(interval);
-  }, [tours.length]);
+  }, [slots]);
 
+  // GSAP entrance
   useGSAP(() => {
-    gsap.fromTo(
-      '.hero-anim',
+    gsap.fromTo('.hero-anim',
       { opacity: 0, y: isMobile ? 20 : 30 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: isMobile ? 0.6 : 1,
-        stagger: isMobile ? 0.1 : 0.2,
-        ease: 'power3.out',
-        delay: isMobile ? 0.1 : 0.2
-      }
+      { opacity: 1, y: 0, duration: isMobile ? 0.6 : 1, stagger: isMobile ? 0.1 : 0.2, ease: 'power3.out', delay: isMobile ? 0.1 : 0.2 }
     );
   }, { scope: heroRef });
 
+  // Phone card GSAP
   useGSAP(() => {
-    gsap.fromTo(
-      '.hero-slider-img',
-      { opacity: 0, scale: 1.05 },
-      { opacity: 1, scale: 1, duration: 0.8, ease: 'power2.out' }
+    if (slotChanging === null) return;
+    gsap.to(`.hero-phone-card-${slotChanging}`, { opacity: 0, scale: 0.95, duration: 0.35, ease: 'power2.in' });
+  }, { dependencies: [slotChanging], scope: heroRef });
+
+  useGSAP(() => {
+    if (slotChanging !== null) return;
+    gsap.fromTo('.hero-phone-card',
+      { opacity: 0, scale: 0.96 },
+      { opacity: 1, scale: 1, duration: 0.6, stagger: 0.08, ease: 'power2.out' }
     );
-  }, { dependencies: [activeIndex], scope: heroRef });
+  }, { dependencies: [slots], scope: heroRef });
 
-  const toursCount = tours.length;
-
-  const handleLoadedMetadata = () => {
-
-  };
-
+  const handleLoadedMetadata = () => { };
   const handleTimeUpdate = (e: React.SyntheticEvent<HTMLVideoElement>) => {
-    const video = e.currentTarget;
-    if (video.duration && video.currentTime >= video.duration - 0.25) {
-      video.currentTime = 0;
-      video.play().catch((err) => console.log("TimeUpdate loop play failed:", err));
+    const v = e.currentTarget;
+    if (v.duration && v.currentTime >= v.duration - 0.25) {
+      v.currentTime = 0;
+      v.play().catch(() => { });
     }
   };
 
+  const getSlotImage = (idx: number) => {
+    const key = FOLDERS[idx];
+    const imgs = imageMap[key] || [];
+    const url = imgs[0] || "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=600&auto=format&fit=crop";
+    const tour = tours.find(t => (t as any).folder === key);
+    return { url, title: tour ? tour.title : key };
+  };
+
+  const left = getSlotImage(slots[0]);
+  const center = getSlotImage(slots[1]);
+  const right = getSlotImage(slots[2]);
+
+  // Enter key in input triggers search
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') handleSearch();
+  };
 
   return (
     <section id="hero" className="hero" ref={heroRef}>
       <div className="hero-bg" aria-hidden="true">
-        <video
-          ref={videoRef}
-          className="hero-bg-video"
-          src="/Videos/fyp.mp4"
-          autoPlay
-          muted
-          playsInline
-          preload="auto"
-          loop
-          onLoadedMetadata={handleLoadedMetadata}
-          onTimeUpdate={handleTimeUpdate}
+        <video ref={videoRef} className="hero-bg-video" src="/Videos/fyp.mp4"
+          autoPlay muted playsInline preload="auto" loop
+          onLoadedMetadata={handleLoadedMetadata} onTimeUpdate={handleTimeUpdate}
         />
         <div className="hero-overlay" aria-hidden="true" />
       </div>
 
-      <div className="hero-content">
-        <div className="hero-text-side">
-          <div className="badges hero-anim">
-            <span className="tag-hero tag-guide">
-              <span className="star-icon">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
-                </svg>
-              </span> LICENSED PROFESSIONAL GUIDE
-            </span>
-            <span className="tag-hero tag-experience">8+ YEARS EXPERIENCE</span>
-          </div>
-
-          <h1 className="hero-main-title hero-anim">
-            EXPLORE
-            <br />
-            <span className="highlight">AUTHENTIC</span>
-            <br />
-            VIETNAM
-          </h1>
-
-          <p className="hero-sub hero-anim">
-            I am <strong>Huyen (Wind)</strong> — a licensed guide with a passion for showing the real side of Ho Chi Minh City and the Mekong Delta through storytelling and hidden gems.
-          </p>
-
-          <div className="hero-buttons hero-anim">
-            <button className="btn-hero-cta" onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}>
-              <span>Start Journey</span>
-              <span className="arrow">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <line x1="5" y1="12" x2="19" y2="12" />
-                  <polyline points="12 5 19 12 12 19" />
-                </svg>
+      <div className="hero-wrapper">
+        {/* TOP ROW */}
+        <div className="hero-content">
+          {/* LEFT */}
+          <div className="hero-text-side">
+            <div className="badges hero-anim">
+              <span className="tag-hero tag-guide">
+                <span className="star-icon">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                  </svg>
+                </span> LICENSED PROFESSIONAL GUIDE
               </span>
-            </button>
-            <button className="btn-hero-secondary" onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}>
-              Learn My Story
-            </button>
-          </div>
-
-          <div className="hero-stats hero-anim">
-            <div className="stat-item">
-              <div className="stat-icon icon-places">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                  <circle cx="12" cy="10" r="3" />
-                </svg>
-              </div>
-              <div className="stat-text">
-                <div className="stat-number">{toursCount.toLocaleString()}</div>
-                <div className="stat-label">Travel places</div>
-              </div>
+              <span className="tag-hero tag-experience">8+ YEARS EXPERIENCE</span>
             </div>
 
-            <div className="stat-item">
-              <div className="stat-icon icon-features">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-                </svg>
-              </div>
-              <div className="stat-text">
-                <div className="stat-number">Features</div>
-                <div className="stat-label">Local experiences</div>
-              </div>
-            </div>
+            <h1 className="hero-main-title hero-anim">
+              EXPLORE<br />
+              <span className="highlight">AUTHENTIC</span><br />
+              VIETNAM
+            </h1>
 
-            <div className="stat-item">
-              <div className="stat-icon icon-story">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
-                  <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
-                </svg>
-              </div>
-              <div className="stat-text">
-                <div className="stat-number">Our story</div>
-                <div className="stat-label">Local-first tours</div>
-              </div>
+            <p className="hero-sub hero-anim">
+              I am <strong>Huyen (Wind)</strong> — a licensed guide with a passion for showing the real side of Ho Chi Minh City and the Mekong Delta through storytelling and hidden gems.
+            </p>
+
+            <div className="hero-buttons hero-anim">
+              <button className="btn-hero-cta" onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}>
+                <span>Start Journey</span>
+                <span className="arrow">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
+                  </svg>
+                </span>
+              </button>
+              <button className="btn-hero-secondary" onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}>
+                Learn My Story
+              </button>
             </div>
           </div>
+
+          {/* RIGHT: Phone Cards */}
+          {!isMobile && (
+            <div className="hero-right hero-anim">
+              <div className="hero-phone-stack">
+                {[
+                  { cls: 'card-left hero-phone-card-0', data: left, sz: '180px', slot: 0 },
+                  { cls: 'card-center hero-phone-card-1', data: center, sz: '200px', slot: 1, priority: true },
+                  { cls: 'card-right hero-phone-card-2', data: right, sz: '180px', slot: 2 },
+                ].map(({ cls, data, sz, slot, priority }) => (
+                  <div key={slot} className={`hero-phone-card ${cls}`}
+                    onClick={() => { const t = tours.find(t => (t as any).folder === FOLDERS[slots[slot]]); if (t && onSelectTour) onSelectTour(t.id); }}>
+                    <Image src={data.url} alt={data.title} fill sizes={sz} className="hero-phone-card-img"
+                      style={{ objectFit: 'cover' }} {...(priority ? { priority: true } : {})} />
+                    <div className="hero-phone-card-label">{data.title}</div>
+                  </div>
+                ))}
+                <div className="hero-phone-badge">
+                  <div className="hero-phone-badge-icon">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                    </svg>
+                  </div>
+                  <div className="hero-phone-badge-info">
+                    <p className="badge-title">Highly Rated</p>
+                    <p className="badge-sub">Best travel experiences</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
 
-        {!isMobile && <div className="hero-right hero-anim">
-          {(() => {
-            const currentTour = tours[activeIndex];
-            const folder = (currentTour as any).folder as keyof typeof imageMap;
-            const images = imageMap[folder] || [];
-            const imageUrl = images.length > 0 ? images[0] : "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=2000&auto=format&fit=crop";
+        {/* UNIFIED SEARCH HUB */}
+        <div className="hero-unified-bar hero-anim">
+          <div className="hub-inner" ref={hubRef}>
 
-            return (
-              <div className="hero-arch-container" onClick={() => onSelectTour && onSelectTour(currentTour.id)}>
-                <svg className="hero-arch-text-svg" viewBox="0 0 380 520" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                  <defs>
-                    <path id="archTextPath" d="M 35,200 A 155,155 0 0,1 345,200" fill="none" />
-                  </defs>
-                  <text className="arch-curved-text">
-                    <textPath href="#archTextPath" startOffset="50%" textAnchor="middle">
-                      ★ TOP RATED LOCAL EXPERIENCES IN VIETNAM ★
-                    </textPath>
-                  </text>
-                </svg>
-
-                <div className="hero-arch-outline" />
-
-                <div className="hero-arch-frame">
-                  <Image
-                    key={activeIndex}
-                    className="hero-arch-img hero-slider-img"
-                    src={imageUrl}
-                    alt={currentTour.title}
-                    fill
-                    priority
-                    sizes="(max-width: 1200px) 340px, 340px"
-                    style={{ objectFit: 'cover', objectPosition: 'center' }}
-                  />
-                </div>
-
-                <div className="highly-rated-card">
-                  <div className="rating-star-badge">
-                    <span className="star-icon">
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
-                      </svg>
-                    </span>
-                  </div>
-                  <div className="card-info">
-                    <h4 className="card-title">Highly Rated</h4>
-                    <p className="card-subtitle">Best travel & relaxing experiences</p>
-                  </div>
-                </div>
+            {/* Field 1: Category */}
+            <div className="hub-field hub-field-clickable" ref={categoryRef}
+              onClick={() => setShowCategoryDrop(v => !v)}>
+              <div className="hub-field-icon hub-icon-cat"><Star size={18} /></div>
+              <div className="hub-field-body">
+                <span className="hub-field-label">Category</span>
+                <span className="hub-field-value">{selectedCategory || 'All tours'}</span>
               </div>
-            );
-          })()}
-        </div>}
+              {showCategoryDrop && (
+                <div className="hub-dropdown">
+                  <div className={`hub-drop-item ${!selectedCategory ? 'active' : ''}`}
+                    onClick={e => { e.stopPropagation(); setSelectedCategory(''); setShowCategoryDrop(false); }}>
+                    All tours
+                  </div>
+                  {ALL_CATEGORIES.map(cat => (
+                    <div key={cat} className={`hub-drop-item ${selectedCategory === cat ? 'active' : ''}`}
+                      onClick={e => { e.stopPropagation(); setSelectedCategory(cat); setShowCategoryDrop(false); }}>
+                      {cat}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <div className="hub-divider" />
+
+            {/* Field 2: Total stat */}
+            <div className="hub-field hub-field-stat">
+              <div className="hub-field-icon hub-icon-map"><Map size={18} /></div>
+              <div className="hub-field-body">
+                <span className="hub-field-label">Total Tours</span>
+                <span className="hub-field-value">{toursCount} destinations</span>
+              </div>
+            </div>
+
+            <div className="hub-divider" />
+
+            {/* Field 3: Destination input + Search btn — together */}
+            <div className="hub-search-group">
+              <Search size={16} className="hub-search-group-icon" />
+              <input
+                type="text"
+                className="hub-field-input hub-search-input"
+                placeholder="Destination or tour name..."
+                value={searchQuery}
+                aria-label="Search destination"
+                onChange={e => {
+                  setSearchQuery(e.target.value);
+                  // show popup immediately as user types
+                  if (!showPopup) {
+                    computePopupCoords();
+                    setShowPopup(true);
+                  }
+                }}
+                onKeyDown={handleKeyDown}
+              />
+              <button className="hub-search-btn" onClick={handleSearch} aria-label="Search">
+                <Search size={18} />
+              </button>
+            </div>
+
+          </div>
+        </div>
       </div>
+
+      {/* SEARCH RESULTS POPUP — via createPortal */}
+      {showPopup && mounted && createPortal(
+        <div
+          ref={popupRef}
+          className="hub-popup"
+          style={{
+            top: popupCoords.top,
+            left: popupCoords.left,
+            width: isMobile ? 350 : popupCoords.width,
+          }}
+        >
+          {/* Popup header */}
+          <div className="hub-popup-header">
+            <span className="hub-popup-title">
+              {popupResults.length} tour{popupResults.length !== 1 ? 's' : ''} found
+              {selectedCategory ? ` in "${selectedCategory}"` : ''}
+              {searchQuery ? ` for "${searchQuery}"` : ''}
+            </span>
+            <button className="hub-popup-close" onClick={closePopup} aria-label="Close">
+              <X size={16} />
+            </button>
+          </div>
+
+          {/* Tour grid */}
+          <div className="hub-popup-grid">
+            {popupResults.map(tour => {
+              const folder = (tour as any).folder as keyof typeof imageMap;
+              const imgs = imageMap[folder] || [];
+              const thumb = imgs[0] || '';
+              return (
+                <div key={tour.id} className="hub-popup-card"
+                  onClick={() => { if (onSelectTour) onSelectTour(tour.id); setShowPopup(false); }}>
+                  <div className="hub-popup-card-img">
+                    {thumb && (
+                      <Image src={thumb} alt={tour.title} fill sizes="200px"
+                        style={{ objectFit: 'cover' }} quality={70} />
+                    )}
+                    <div className="hub-popup-card-cat">{tour.category}</div>
+                  </div>
+                  <div className="hub-popup-card-body">
+                    <h4 className="hub-popup-card-title">{tour.title}</h4>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>,
+        document.body
+      )}
     </section>
   );
 };

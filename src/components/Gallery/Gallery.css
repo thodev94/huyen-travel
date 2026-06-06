@@ -1,10 +1,11 @@
 .gallery {
-  padding: 20px 0;
+  padding: 100px 20px;
   position: relative;
   z-index: 10;
 }
 
 .gallery-inner {
+  max-width: var(--max-width);
   margin: 0 auto;
 }
 

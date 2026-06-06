@@ -24,7 +24,7 @@
   /* Used in NodeMapper */
 
   /* Borders & Shadows */
-  --border-radius: 10px;
+  --border-radius: 6px;
   --border-color: #E9E4E2;
   --shadow-color: rgba(47, 93, 80, 0.12);
   --shadow-hover: rgba(47, 93, 80, 0.25);
@@ -660,8 +660,10 @@ body {
     display: none;
   }
 
-  .gallery-wrapper {
-    max-width: 1536px;
-    margin: 0 auto;
-  }
+
+}
+
+.gallery-wrapper {
+  max-width: 1536px;
+  margin: 0 auto;
 }

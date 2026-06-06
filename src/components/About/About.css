@@ -130,7 +130,6 @@
 .box2-btn {
   background: #FFFFFF;
   color: #0F172A;
-  border: 2px solid #0F172A;
   padding: 8px 20px;
   border-radius: var(--border-radius);
   font-size: 0.75rem;
@@ -272,11 +271,18 @@
     order: 3;
   }
 }
-.box1, .box2, .box3, .box4 {
+
+.box1,
+.box2,
+.box3,
+.box4 {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.box1:hover, .box2:hover, .box3:hover, .box4:hover {
+.box1:hover,
+.box2:hover,
+.box3:hover,
+.box4:hover {
   transform: translateY(-5px);
   box-shadow: 0 15px 40px var(--shadow-hover);
 }

@@ -54,7 +54,10 @@ const App: React.FC = () => {
     }
   }, [selectedTourId]);
 
+  // Force scroll to top ONLY when entering a tour detail page
   useEffect(() => {
+    if (!selectedTourId) return;
+
     const forceScrollTop = () => {
       window.scrollTo(0, 0);
     };
@@ -62,14 +65,7 @@ const App: React.FC = () => {
     // Run immediately
     forceScrollTop();
 
-    // Clear hash immediately when selectedTourId changes to prevent browser target scroll
-    if (!selectedTourId) {
-      if (typeof window !== 'undefined' && window.location.hash) {
-        window.history.pushState(window.history.state || {}, document.title, window.location.pathname + window.location.search);
-      }
-    }
-
-    // Run after a short delay to override browser scroll restoration and hash scroll
+    // Run after a short delay to override browser scroll restoration
     const timer1 = setTimeout(forceScrollTop, 50);
     const timer2 = setTimeout(forceScrollTop, 200);
 
@@ -85,7 +81,7 @@ const App: React.FC = () => {
       // Wait for React to render the main page before scrolling
       setTimeout(() => {
         document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-      }, 50);
+      }, 100);
     } else {
       document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
     }
@@ -94,7 +90,7 @@ const App: React.FC = () => {
   return (
     <main id="main" className="main-wrapper">
       {/* <BackgroundCanvas /> */}
-      <Navbar onSelectTour={setSelectedTourId} onNavigate={handleMobileNav} />
+      <Navbar onSelectTour={setSelectedTourId} onNavigate={handleMobileNav} selectedTourId={selectedTourId} />
       {selectedTourId ? (
         <TourDetail tourId={selectedTourId} onClose={() => setSelectedTourId(null)} onSelectTour={setSelectedTourId} />
       ) : (

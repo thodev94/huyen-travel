@@ -82,11 +82,7 @@ const Gallery: React.FC<GalleryProps> = ({ onSelectTour }) => {
                 {currentTour.title}
               </h3>
               <p className="slider-description">
-                {(() => {
-                  if (!currentTour.nodes) return (currentTour as any).brief;
-                  const overviewNode = currentTour.nodes.find((n: any) => n.type === 'paragraph' && n.text && n.text.length > 60);
-                  return overviewNode ? overviewNode.text : (currentTour as any).brief;
-                })()}
+                {currentTour.brief}
               </p>
 
               <div className="slider-nav-buttons">
