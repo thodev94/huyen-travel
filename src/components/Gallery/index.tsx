@@ -72,6 +72,7 @@ const Gallery: React.FC<GalleryProps> = ({ onSelectTour }) => {
                 src={imageUrl}
                 alt={currentTour.title}
                 fill
+                sizes="(max-width: 768px) 100vw, 1200px"
                 style={{ objectFit: 'cover' }}
                 priority
               />

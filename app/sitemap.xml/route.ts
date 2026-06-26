@@ -5,7 +5,7 @@ const BASE = process.env.NEXT_PUBLIC_METADATA_BASE ?? 'http://localhost:3000';
 export async function GET() {
   const urls = [
     `${BASE}/`,
-    ...((toursData as any[]) || []).map(t => `${BASE}/tours/${t.id}`),
+    ...((toursData as any[]) || []).map(t => `${BASE}/tour/${t.id}`),
   ];
 
   const lastmod = new Date().toISOString();

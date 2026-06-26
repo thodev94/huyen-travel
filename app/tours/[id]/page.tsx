@@ -8,7 +8,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   const p = await params;
   const tour = (toursData as any).find((t: any) => t.id === p.id);
   const base = process.env.NEXT_PUBLIC_METADATA_BASE ?? 'http://localhost:3002';
-  const url = `${base}/tours/${p.id}`;
+  const url = `${base}/tour/${p.id}`;
   const image = `${base}/images/AS11-40-5865HR.webp`;
   return {
     title: tour ? `${tour.title} — Huyen Tour` : 'Tour Detail',
@@ -34,7 +34,7 @@ export default async function TourPage({ params }: { params: Promise<{ id: strin
   const sms = `sms:${phone}?body=${encodeURIComponent(tour.title)}`;
 
   const base = process.env.NEXT_PUBLIC_METADATA_BASE ?? 'http://localhost:3002';
-  const url = `${base}/tours/${p.id}`;
+  const url = `${base}/tour/${p.id}`;
 
   const breadcrumb = {
     "@context": "https://schema.org",
@@ -50,7 +50,7 @@ export default async function TourPage({ params }: { params: Promise<{ id: strin
     <div style={{ width: '100%', minHeight: '100vh', background: 'var(--bg-soft)', paddingBottom: 20 }}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
       <div style={{ position: 'relative', width: '100%', height: '50vh', minHeight: 250, maxHeight: 600 }}>
-        <Image src={tour.image || '/images/AS11-40-5865HR.webp'} alt={tour?.title || "Tour Image"} fill style={{ objectFit: 'cover' }} />
+        <Image src={tour.image || '/images/AS11-40-5865HR.webp'} alt={tour?.title || "Tour Image"} fill sizes="100vw" style={{ objectFit: 'cover' }} />
 
         <div style={{ position: 'absolute', top: 40, left: 40, zIndex: 10 }}>
           <a href="/" style={{ textDecoration: 'none' }}>

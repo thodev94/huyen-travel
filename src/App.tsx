@@ -11,6 +11,19 @@ import FloatingContact from './components/FloatingContact';
 import MobileBottomNav from './components/MobileBottomNav';
 // global styles are imported from app/globals.css for Next.js
 
+const TOUR_DETAIL_PATH = '/tour';
+
+const getTourIdFromUrl = () => {
+  if (typeof window === 'undefined') return null;
+
+  const pathMatch = window.location.pathname.match(/^\/tours?\/([^/?#]+)/);
+  if (pathMatch?.[1]) {
+    return decodeURIComponent(pathMatch[1]);
+  }
+
+  const params = new URLSearchParams(window.location.search);
+  return params.get('tour') || params.get('') || null;
+};
 const App: React.FC = () => {
   const [selectedTourId, setSelectedTourId] = useState<string | null>(null);
 
@@ -20,35 +33,33 @@ const App: React.FC = () => {
     }
   }, []);
 
-  // Read ?tour parameter from URL on initial load
+  // Read tour id from URL on initial load
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const params = new URLSearchParams(window.location.search);
-      const tourId = params.get('tour');
-      if (tourId) {
-        setSelectedTourId(tourId);
-      }
+    const tourId = getTourIdFromUrl();
+    if (tourId) {
+      setSelectedTourId(tourId);
     }
   }, []);
 
-  // Update ?tour parameter in URL when selectedTourId changes
+  // Update URL when selectedTourId changes
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      const params = new URLSearchParams(window.location.search);
-      const currentTour = params.get('tour');
-      
       if (selectedTourId) {
-        if (currentTour !== selectedTourId) {
-          params.set('tour', selectedTourId);
-          window.history.replaceState(window.history.state || {}, "", `${window.location.pathname}?${params.toString()}`);
+        const nextPath = `${TOUR_DETAIL_PATH}/${encodeURIComponent(selectedTourId)}`;
+        if (window.location.pathname !== nextPath || window.location.search) {
+          window.history.replaceState(window.history.state || {}, "", `${nextPath}${window.location.hash || ''}`);
         }
       } else {
-        if (currentTour) {
+        const params = new URLSearchParams(window.location.search);
+        const hadTourQuery = params.has('tour') || params.has('');
+
+        if (hadTourQuery || /^\/tours?\//.test(window.location.pathname)) {
           params.delete('tour');
+          params.delete('');
           const searchStr = params.toString();
           const searchPart = searchStr ? `?${searchStr}` : '';
           const hashPart = window.location.hash || '';
-          window.history.replaceState(window.history.state || {}, "", `${window.location.pathname}${searchPart}${hashPart}`);
+          window.history.replaceState(window.history.state || {}, "", `/${searchPart}${hashPart}`);
         }
       }
     }

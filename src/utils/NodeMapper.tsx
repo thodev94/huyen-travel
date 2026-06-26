@@ -57,7 +57,7 @@ const AutoSlider = ({ images }: { images: string[] }) => {
         {displayImages.map((src, idx) => (
           <div key={idx} className="slider-item" style={{ flex: `0 0 ${100 / itemsToShow}%`, padding: itemsToShow > 1 ? '0 10px' : '0' }}>
             <div className="slider-item-inner">
-              <Image src={src} alt="Itinerary step illustration" fill className="slider-image" />
+              <Image src={src} alt="Itinerary step illustration" fill sizes={isMobile ? "100vw" : (isLarge ? "33vw" : "50vw")} className="slider-image" />
             </div>
           </div>
         ))}

@@ -130,7 +130,7 @@ const Services: React.FC<ServicesProps> = ({ onSelectTour }) => {
             return (
               <a
                 key={s.id}
-                href={`/tours/${s.id}`}
+                href={`/tour/${s.id}`}
                 onClick={(e) => { e.preventDefault(); onSelectTour(s.id); }}
                 className="card-container tour-card-anim"
                 style={{ textDecoration: 'none' }}
