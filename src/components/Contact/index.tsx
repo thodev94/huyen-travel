@@ -1,11 +1,71 @@
 "use client";
-import React from 'react';
+import React, { useState } from 'react';
+import DatePicker from 'react-datepicker';
+import Select, { SingleValue } from 'react-select';
 import { useWindowSize } from '../../hooks/useWindowSize';
 import './Contact.css';
+
+const CONTACT_EMAIL = 'xuanhuyenbui@gmail.com';
+
+const TOUR_OPTIONS = [
+  { value: 'Private tour', label: 'Private tour' },
+  { value: 'Saigon city', label: 'Saigon city' },
+  { value: 'Mekong Delta', label: 'Mekong Delta' },
+  { value: 'Cu Chi tunnels', label: 'Cu Chi tunnels' },
+  { value: 'Custom itinerary', label: 'Custom itinerary' },
+];
+
+type TourOption = typeof TOUR_OPTIONS[number];
+
+const formatTravelDate = (date: Date | null) => {
+  if (!date) return 'Not selected';
+  return new Intl.DateTimeFormat('en', {
+    year: 'numeric',
+    month: 'short',
+    day: '2-digit',
+  }).format(date);
+};
 
 const Contact: React.FC = () => {
   const { width } = useWindowSize();
   const isMobile = width <= 768;
+  const [form, setForm] = useState({
+    email: '',
+    phone: '',
+    date: null as Date | null,
+    tourType: TOUR_OPTIONS[0],
+  });
+  const [submitMessage, setSubmitMessage] = useState('');
+
+  const updateField = (field: 'email' | 'phone') => (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setForm(prev => ({ ...prev, [field]: event.target.value }));
+  };
+
+  const handleSubscribe = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const body = [
+      'New travel inquiry:',
+      '',
+      `Email: ${form.email}`,
+      `Phone: ${form.phone || 'Not provided'}`,
+      `Preferred date: ${formatTravelDate(form.date)}`,
+      `Interest: ${form.tourType.label}`,
+    ].join('\n');
+
+    const subject = 'New travel inquiry from Huyen Tour website';
+    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(CONTACT_EMAIL)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    const mailto = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    const opened = window.open(gmailUrl, '_blank', 'noopener,noreferrer');
+
+    if (!opened) {
+      window.location.href = mailto;
+    }
+
+    setSubmitMessage('Opening your email app...');
+  };
 
   return (
     <footer id="contact" className="contact-footer">
@@ -30,7 +90,7 @@ const Contact: React.FC = () => {
             <h4 className="contact-heading">Contact Info</h4>
             <p className="contact-text">
               <strong>Email:</strong><br />
-              <a href="mailto:guide@huyentour.com" className="contact-link">guide@huyentour.com</a>
+              <a href={`mailto:${CONTACT_EMAIL}`} className="contact-link">{CONTACT_EMAIL}</a>
             </p>
             <p className="contact-text">
               <strong>WhatsApp:</strong><br />
@@ -63,18 +123,53 @@ const Contact: React.FC = () => {
           <div className="newsletter-section">
             <h4 className="contact-heading">Join the Journey</h4>
             <p className="newsletter-desc">
-              Subscribe to get exclusive travel tips and updates on new hidden destinations.
+              Share your details and I will reply with travel tips, tour ideas, and availability.
             </p>
-            <div className="newsletter-form">
+            <form className="newsletter-form" onSubmit={handleSubscribe}>
               <input
                 type="email"
                 placeholder="Enter your email"
                 className="newsletter-input"
+                value={form.email}
+                onChange={updateField('email')}
+                required
               />
-              <button className="btn-accent newsletter-btn">
-                Subscribe
+              <input
+                type="tel"
+                placeholder="Phone number"
+                className="newsletter-input"
+                value={form.phone}
+                onChange={updateField('phone')}
+              />
+             
+              <Select<TourOption, false>
+                className="newsletter-select"
+                classNamePrefix="newsletter-select"
+                options={TOUR_OPTIONS}
+                value={form.tourType}
+                onChange={(option: SingleValue<TourOption>) => {
+                  if (option) setForm(prev => ({ ...prev, tourType: option }));
+                }}
+                inputId="tour-interest"
+                instanceId="tour-interest"
+                isSearchable={false}
+                aria-label="Select tour interest"
+              />
+               <DatePicker
+                selected={form.date}
+                onChange={(date: Date | null) => setForm(prev => ({ ...prev, date }))}
+                placeholderText="Preferred date"
+                className="newsletter-input"
+                wrapperClassName="newsletter-datepicker"
+                dateFormat="MMM dd, yyyy"
+                minDate={new Date()}
+                aria-label="Preferred travel date"
+              />
+              <button type="submit" className="btn-accent newsletter-btn">
+                Send Inquiry
               </button>
-            </div>
+              {submitMessage && <p className="newsletter-status">{submitMessage}</p>}
+            </form>
 
             {/* Social Icons */}
             <div className="social-container">

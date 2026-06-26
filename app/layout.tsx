@@ -9,6 +9,7 @@ import '../src/components/Contact/Contact.css';
 import '../src/components/FloatingContact/FloatingContact.css';
 import '../src/components/MobileBottomNav/MobileBottomNav.css';
 import '../src/utils/NodeMapper.css';
+import 'react-datepicker/dist/react-datepicker.css';
 import { ThemeProvider } from '../src/components/ThemeProvider';
 
 export const metadata = {

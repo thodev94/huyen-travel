@@ -114,16 +114,20 @@
 }
 
 .newsletter-form {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 10px;
 }
 
 .newsletter-btn {
   padding: 12px 25px;
   white-space: nowrap;
+  grid-column: span 2;
 }
 
 .newsletter-input {
+  width: 100%;
+  box-sizing: border-box;
   padding: 12px 15px;
   border-radius: var(--border-radius);
   border: 1px solid rgba(0,0,0,0.1);
@@ -137,6 +141,61 @@
 
 .newsletter-input:focus {
   border-color: var(--color-primary-bright);
+}
+
+.newsletter-status {
+  grid-column: span 2;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  margin: 0;
+}
+.newsletter-datepicker,
+.newsletter-datepicker .react-datepicker-wrapper,
+.newsletter-datepicker .react-datepicker__input-container {
+  width: 100%;
+  display: block;
+}
+
+.newsletter-select {
+  min-width: 0;
+}
+
+.newsletter-select__control {
+  min-height: 46px !important;
+  border-radius: var(--border-radius) !important;
+  border-color: rgba(0,0,0,0.1) !important;
+  background-color: var(--bg-main) !important;
+  box-shadow: none !important;
+  cursor: pointer !important;
+}
+
+.newsletter-select__control--is-focused {
+  border-color: var(--color-primary-bright) !important;
+}
+
+.newsletter-select__single-value,
+.newsletter-select__placeholder,
+.newsletter-select__input-container {
+  color: var(--text-primary) !important;
+  font-size: 0.95rem !important;
+}
+
+.newsletter-select__menu {
+  z-index: 20 !important;
+  background: var(--bg-pure) !important;
+  border: 1px solid var(--border-color) !important;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12) !important;
+}
+
+.newsletter-select__option {
+  cursor: pointer !important;
+  color: var(--text-primary) !important;
+}
+
+.newsletter-select__option--is-focused,
+.newsletter-select__option--is-selected {
+  background: var(--color-accent-light-orange) !important;
+  color: var(--color-primary-deep) !important;
 }
 
 .social-container {
@@ -213,7 +272,12 @@
   }
 
   .newsletter-form {
-    flex-direction: column;
+    grid-template-columns: 1fr;
+  }
+
+  .newsletter-btn,
+  .newsletter-status {
+    grid-column: span 1;
   }
 
   .newsletter-section {
