@@ -24,8 +24,12 @@ const getTourIdFromUrl = () => {
   const params = new URLSearchParams(window.location.search);
   return params.get('tour') || params.get('') || null;
 };
-const App: React.FC = () => {
-  const [selectedTourId, setSelectedTourId] = useState<string | null>(null);
+interface AppProps {
+  initialTourId?: string | null;
+}
+
+const App: React.FC<AppProps> = ({ initialTourId = null }) => {
+  const [selectedTourId, setSelectedTourId] = useState<string | null>(initialTourId);
 
   useEffect(() => {
     if (typeof window !== 'undefined' && 'scrollRestoration' in window.history) {
@@ -39,7 +43,7 @@ const App: React.FC = () => {
     if (tourId) {
       setSelectedTourId(tourId);
     }
-  }, []);
+  }, [initialTourId]);
 
   // Update URL when selectedTourId changes
   useEffect(() => {
