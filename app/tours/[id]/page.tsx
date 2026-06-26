@@ -2,6 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import toursData from '../../../src/data/tours.json';
 import TourContent from '../../../src/components/TourContent';
+export const runtime = 'edge';
 
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
   const p = await params;

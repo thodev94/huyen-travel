@@ -41,8 +41,7 @@ const Hero: React.FC<HeroProps> = ({ onSelectTour }) => {
 
   // Phone card slots
   const [slots, setSlots] = useState<[number, number, number]>(() => {
-    const s = getInitialSlots();
-    return [FOLDERS.indexOf(s[0]), FOLDERS.indexOf(s[1]), FOLDERS.indexOf(s[2])];
+    return [0, Math.min(1, FOLDERS.length - 1), Math.min(2, FOLDERS.length - 1)];
   });
   const [slotChanging, setSlotChanging] = useState<number | null>(null);
 
@@ -52,7 +51,12 @@ const Hero: React.FC<HeroProps> = ({ onSelectTour }) => {
   const [showCategoryDrop, setShowCategoryDrop] = useState(false);
   const [mounted, setMounted] = useState(false);
 
-  useEffect(() => { setMounted(true); }, []);
+  useEffect(() => {
+    setMounted(true);
+    // Shuffle slots on the client after mounting to avoid hydration mismatches
+    const s = getInitialSlots();
+    setSlots([FOLDERS.indexOf(s[0]), FOLDERS.indexOf(s[1]), FOLDERS.indexOf(s[2])]);
+  }, []);
 
   // Search results popup
   const [showPopup, setShowPopup] = useState(false);
