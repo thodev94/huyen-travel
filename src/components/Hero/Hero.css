@@ -18,6 +18,7 @@
   overflow: hidden;
 }
 
+
 .hero-bg-video {
   position: absolute;
   inset: 0;
@@ -40,6 +41,13 @@
 
 [data-theme='dark'] .hero-overlay {
   background: linear-gradient(180deg, rgba(18, 18, 18, 0.5), rgba(18, 18, 18, 0.85));
+}
+@media (max-width: 768px) {
+  .hero-bg {
+    background-image: url('/images/hero-mobile.webp');
+    background-size: cover;
+    background-position: center;
+  }
 }
 
 /* ---- Outer column wrapper ---- */

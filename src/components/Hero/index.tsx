@@ -178,6 +178,8 @@ const Hero: React.FC<HeroProps> = ({ onSelectTour }) => {
 
   // Cycle phone card slots every 5 s
   useEffect(() => {
+    if (isMobile) return;
+
     const interval = setInterval(() => {
       const slot = Math.floor(Math.random() * 3) as 0 | 1 | 2;
       setSlotChanging(slot);
@@ -190,15 +192,17 @@ const Hero: React.FC<HeroProps> = ({ onSelectTour }) => {
       }, 400);
     }, 5000);
     return () => clearInterval(interval);
-  }, [slots]);
+  }, [slots, isMobile]);
 
   // GSAP entrance
   useGSAP(() => {
+    if (isMobile) return;
+
     gsap.fromTo('.hero-anim',
-      { opacity: 0, y: isMobile ? 20 : 30 },
-      { opacity: 1, y: 0, duration: isMobile ? 0.6 : 1, stagger: isMobile ? 0.1 : 0.2, ease: 'power3.out', delay: isMobile ? 0.1 : 0.2 }
+      { opacity: 0, y: 30 },
+      { opacity: 1, y: 0, duration: 1, stagger: 0.2, ease: 'power3.out', delay: 0.2 }
     );
-  }, { scope: heroRef });
+  }, { scope: heroRef, dependencies: [isMobile] });
 
   // Phone card GSAP
   useGSAP(() => {
@@ -243,10 +247,20 @@ const Hero: React.FC<HeroProps> = ({ onSelectTour }) => {
   return (
     <section id="hero" className="hero" ref={heroRef}>
       <div className="hero-bg" aria-hidden="true">
-        <video ref={videoRef} className="hero-bg-video" src="/Videos/fyp.mp4"
-          autoPlay muted playsInline preload="auto" loop
-          onLoadedMetadata={handleLoadedMetadata} onTimeUpdate={handleTimeUpdate}
-        />
+        {mounted && !isMobile && (
+          <video
+            ref={videoRef}
+            className="hero-bg-video"
+            src="/Videos/fyp.mp4"
+            autoPlay
+            muted
+            playsInline
+            preload="metadata"
+            loop
+            onLoadedMetadata={handleLoadedMetadata}
+            onTimeUpdate={handleTimeUpdate}
+          />
+        )}
         <div className="hero-overlay" aria-hidden="true" />
       </div>
 
@@ -292,7 +306,7 @@ const Hero: React.FC<HeroProps> = ({ onSelectTour }) => {
           </div>
 
           {/* RIGHT: Phone Cards */}
-          {!isMobile && (
+          {mounted && !isMobile && (
             <div className="hero-right hero-anim">
               <div className="hero-phone-stack">
                 {[
