@@ -70,7 +70,6 @@ const MobileBottomNav: React.FC<MobileBottomNavProps> = ({ onNavigate }) => {
             <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
           </svg>
         </div>
-        <span>Tours</span>
       </div>
 
       {/* Journal Tab */}

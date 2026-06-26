@@ -31,14 +31,13 @@ const Contact: React.FC = () => {
   const isMobile = width <= 768;
   const [form, setForm] = useState({
     email: '',
-    phone: '',
-    date: null as Date | null,
-    tourType: TOUR_OPTIONS[0],
+    note: '',
+
   });
   const [submitMessage, setSubmitMessage] = useState('');
 
-  const updateField = (field: 'email' | 'phone') => (
-    event: React.ChangeEvent<HTMLInputElement>
+  const updateField = (field: 'email' | 'note') => (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     setForm(prev => ({ ...prev, [field]: event.target.value }));
   };
@@ -49,10 +48,8 @@ const Contact: React.FC = () => {
     const body = [
       'New travel inquiry:',
       '',
-      `Email: ${form.email}`,
-      `Phone: ${form.phone || 'Not provided'}`,
-      `Preferred date: ${formatTravelDate(form.date)}`,
-      `Interest: ${form.tourType.label}`,
+      `${form.email}`,
+      `${form.note}`,
     ].join('\n');
 
     const subject = 'New travel inquiry from Huyen Tour website';
@@ -128,13 +125,23 @@ const Contact: React.FC = () => {
             <form className="newsletter-form" onSubmit={handleSubscribe}>
               <input
                 type="email"
-                placeholder="Enter your email"
+                placeholder="Enter your email!"
                 className="newsletter-input"
                 value={form.email}
                 onChange={updateField('email')}
+                onFocus={() => {setSubmitMessage('');}}
                 required
               />
-              <input
+               <textarea
+                placeholder="Write me your wishes!"
+                className="newsletter-input"
+                value={form.note}
+                rows={3}
+                onChange={updateField('note')}
+                onFocus={() => {setSubmitMessage('');}}
+                required
+              />
+              {/* <input
                 type="tel"
                 placeholder="Phone number"
                 className="newsletter-input"
@@ -164,7 +171,7 @@ const Contact: React.FC = () => {
                 dateFormat="MMM dd, yyyy"
                 minDate={new Date()}
                 aria-label="Preferred travel date"
-              />
+              /> */}
               <button type="submit" className="btn-accent newsletter-btn">
                 Send Inquiry
               </button>

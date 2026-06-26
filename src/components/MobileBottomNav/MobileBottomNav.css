@@ -64,9 +64,9 @@
   .center-icon-wrap {
     background: var(--color-primary-deep);
     color: white;
-    width: 52px;
-    height: 52px;
-    border-radius: var(--border-radius);
+    width: 66px;
+    height: 66px;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -83,8 +83,8 @@
   /* Exclude center button from normal SVG rules */
   .nav-item.center-action svg {
     margin-bottom: 0;
-    width: 24px;
-    height: 24px;
+    width: 30px;
+    height: 30px;
     transform: none;
     /* Do not translate */
   }
