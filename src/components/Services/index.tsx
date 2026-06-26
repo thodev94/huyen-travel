@@ -122,7 +122,7 @@ const Services: React.FC<ServicesProps> = ({ onSelectTour }) => {
         </div>
 
         <div className="service-grid">
-          {filteredTours.map(s => {
+          {filteredTours.map((s, index) => {
             const folder = (s as any).folder as keyof typeof imageMap;
             const folderImages = imageMap[folder] || [];
             const coverImage = folderImages.length > 0 ? folderImages[0] : BANNER_IMAGES[0];
@@ -143,6 +143,7 @@ const Services: React.FC<ServicesProps> = ({ onSelectTour }) => {
                       fill
                       sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       quality={75}
+                      loading={index < 3 ? 'eager' : 'lazy'}
                       style={{ objectFit: 'cover' }}
                     />
                   </div>

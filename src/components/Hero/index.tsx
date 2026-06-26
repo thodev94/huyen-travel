@@ -31,6 +31,7 @@ const Hero: React.FC<HeroProps> = ({ onSelectTour }) => {
   const heroRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const hubRef = useRef<HTMLDivElement>(null);       // the hub-inner pill
+  const searchRef = useRef<HTMLDivElement>(null);
   const categoryRef = useRef<HTMLDivElement>(null);
   const popupRef = useRef<HTMLDivElement>(null);
   const { width } = useWindowSize();
@@ -64,38 +65,38 @@ const Hero: React.FC<HeroProps> = ({ onSelectTour }) => {
   const [popupCoords, setPopupCoords] = useState({ top: 0, left: 0, width: 0 });
 
 
-  // Compute popup position — position:absolute so coords include scrollY
-  // Smart flip: show above hub if not enough space below in viewport
+  // Compute popup position - document-absolute coords include scrollY.
   const computePopupCoords = useCallback(() => {
-    if (!hubRef.current) return null;
-    const rect = hubRef.current.getBoundingClientRect();
+    const anchor = isMobile ? searchRef.current : hubRef.current;
+    if (!anchor) return null;
+
+    const rect = anchor.getBoundingClientRect();
     const POPUP_MAX_H = 500;
-    const GAP = 10;
+    const GAP = isMobile ? 4 : 10;
     const spaceBelow = window.innerHeight - rect.bottom - GAP;
     const spaceAbove = rect.top - GAP;
 
     let top: number;
-    if (spaceBelow >= Math.min(POPUP_MAX_H, 280)) {
-      // enough space below → normal position
+    if (isMobile) {
+      top = rect.bottom + window.scrollY + GAP;
+    } else if (spaceBelow >= Math.min(POPUP_MAX_H, 280)) {
       top = rect.bottom + window.scrollY + GAP;
     } else if (spaceAbove >= Math.min(POPUP_MAX_H, 280)) {
-      // flip above hub
       top = rect.top + window.scrollY - POPUP_MAX_H - GAP;
     } else {
-      // best effort: whichever side has more room
       top = spaceBelow >= spaceAbove
         ? rect.bottom + window.scrollY + GAP
         : rect.top + window.scrollY - POPUP_MAX_H - GAP;
     }
 
     const coords = {
-      top: Math.max(window.scrollY + 8, top),  // never above visible area
+      top: Math.max(window.scrollY + 8, top),
       left: rect.left + window.scrollX,
-      width: Math.max(rect.width, 580),
+      width: isMobile ? rect.width : Math.max(rect.width, 580),
     };
     setPopupCoords(coords);
     return coords;
-  }, []);
+  }, [isMobile]);
 
   // Filter tours based on current query + category
   const getFilteredResults = useCallback(() => {
@@ -206,17 +207,25 @@ const Hero: React.FC<HeroProps> = ({ onSelectTour }) => {
 
   // Phone card GSAP
   useGSAP(() => {
-    if (slotChanging === null) return;
-    gsap.to(`.hero-phone-card-${slotChanging}`, { opacity: 0, scale: 0.95, duration: 0.35, ease: 'power2.in' });
-  }, { dependencies: [slotChanging], scope: heroRef });
+    if (!mounted || isMobile || slotChanging === null) return;
+
+    const card = heroRef.current?.querySelector(`.hero-phone-card-${slotChanging}`);
+    if (!card) return;
+
+    gsap.to(card, { opacity: 0, scale: 0.95, duration: 0.35, ease: 'power2.in' });
+  }, { dependencies: [slotChanging, mounted, isMobile], scope: heroRef });
 
   useGSAP(() => {
-    if (slotChanging !== null) return;
-    gsap.fromTo('.hero-phone-card',
+    if (!mounted || isMobile || slotChanging !== null) return;
+
+    const cards = heroRef.current?.querySelectorAll('.hero-phone-card');
+    if (!cards?.length) return;
+
+    gsap.fromTo(cards,
       { opacity: 0, scale: 0.96 },
       { opacity: 1, scale: 1, duration: 0.6, stagger: 0.08, ease: 'power2.out' }
     );
-  }, { dependencies: [slots], scope: heroRef });
+  }, { dependencies: [slots, mounted, isMobile], scope: heroRef });
 
   const handleLoadedMetadata = () => { };
   const handleTimeUpdate = (e: React.SyntheticEvent<HTMLVideoElement>) => {
@@ -379,7 +388,7 @@ const Hero: React.FC<HeroProps> = ({ onSelectTour }) => {
             <div className="hub-divider" />
 
             {/* Field 3: Destination input + Search btn — together */}
-            <div className="hub-search-group">
+            <div className="hub-search-group" ref={searchRef}>
               <Search size={16} className="hub-search-group-icon" />
               <input
                 type="text"
@@ -431,7 +440,7 @@ const Hero: React.FC<HeroProps> = ({ onSelectTour }) => {
 
           {/* Tour grid */}
           <div className="hub-popup-grid">
-            {popupResults.map(tour => {
+            {popupResults.map((tour, index) => {
               const folder = (tour as any).folder as keyof typeof imageMap;
               const imgs = imageMap[folder] || [];
               const thumb = imgs[0] || '';
@@ -441,12 +450,14 @@ const Hero: React.FC<HeroProps> = ({ onSelectTour }) => {
                   <div className="hub-popup-card-img">
                     {thumb && (
                       <Image src={thumb} alt={tour.title} fill sizes="200px"
+                        loading={index === 0 ? 'eager' : 'lazy'}
                         style={{ objectFit: 'cover' }} quality={70} />
                     )}
                     <div className="hub-popup-card-cat">{tour.category}</div>
                   </div>
                   <div className="hub-popup-card-body">
                     <h4 className="hub-popup-card-title">{tour.title}</h4>
+                    <p className="hub-popup-card-desc">{tour.brief}</p>
                   </div>
                 </div>
               );

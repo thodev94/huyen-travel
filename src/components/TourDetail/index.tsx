@@ -157,13 +157,13 @@ const TourDetail: React.FC<TourDetailProps> = ({ tourId, onClose, onSelectTour }
               <div className={`${styles.imgGrid} ${gridImages.length === 1 ? styles.imgGridCols1 : (gridImages.length === 2 ? styles.imgGridCols2 : styles.imgGridCols3)}`}>
                 {gridImages.length === 1 && (
                   <div className={styles.imgWrapper} style={{ height: isMobile ? '260px' : '380px' }}>
-                    <Image src={gridImages[0]} alt={tour.title} fill sizes="(max-width: 768px) 100vw, 800px" style={{ objectFit: 'cover' }} />
+                    <Image src={gridImages[0]} alt={tour.title} fill sizes="(max-width: 768px) 100vw, 800px" loading="eager" style={{ objectFit: 'cover' }} />
                   </div>
                 )}
                 {gridImages.length === 2 && (
                   <>
                     <div className={styles.imgWrapper} style={{ height: isMobile ? '200px' : '300px' }}>
-                      <Image src={gridImages[0]} alt={tour.title} fill sizes="400px" style={{ objectFit: 'cover' }} />
+                      <Image src={gridImages[0]} alt={tour.title} fill sizes="400px" loading="eager" style={{ objectFit: 'cover' }} />
                     </div>
                     <div className={styles.imgWrapper} style={{ height: isMobile ? '200px' : '300px' }}>
                       <Image src={gridImages[1]} alt={tour.title} fill sizes="400px" style={{ objectFit: 'cover' }} />
@@ -173,7 +173,7 @@ const TourDetail: React.FC<TourDetailProps> = ({ tourId, onClose, onSelectTour }
                 {gridImages.length >= 3 && (
                   <>
                     <div className={styles.imgWrapper} style={{ height: isMobile ? '300px' : '380px' }}>
-                      <Image src={gridImages[0]} alt={tour.title} fill sizes="(max-width: 768px) 100vw, 500px" style={{ objectFit: 'cover' }} />
+                      <Image src={gridImages[0]} alt={tour.title} fill sizes="(max-width: 768px) 100vw, 500px" loading="eager" style={{ objectFit: 'cover' }} />
                     </div>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                       <div className={styles.imgWrapper} style={{ height: isMobile ? '142px' : '182px' }}>
