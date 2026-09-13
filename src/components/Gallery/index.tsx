@@ -1,13 +1,9 @@
 "use client";
 import React, { useRef, useState, useEffect } from 'react';
 import Image from 'next/image';
-import gsap from 'gsap';
-import { useGSAP } from '@gsap/react';
 import toursData from '../../data/tours.json';
 import imageMap from '../../data/imageMap.json';
 import './Gallery.css';
-
-gsap.registerPlugin(useGSAP);
 
 interface GalleryProps {
   onSelectTour?: (id: string) => void;

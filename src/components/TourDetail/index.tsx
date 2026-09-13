@@ -2,8 +2,6 @@
 import React, { useEffect, useMemo, useRef } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import gsap from 'gsap';
-import { useGSAP } from '@gsap/react';
 import toursData from '../../data/tours.json';
 import { renderNode, DocNode } from '../../utils/NodeMapper';
 import imageMapData from '../../data/imageMap.json';
@@ -14,7 +12,6 @@ import styles from './TourDetail.module.css';
 
 const imageMap: Record<string, string[]> = imageMapData;
 const stepImagesMap: Record<string, string[]> = stepImagesData;
-gsap.registerPlugin(useGSAP);
 
 interface TourDetailProps {
   tourId: string;
@@ -29,18 +26,6 @@ const TourDetail: React.FC<TourDetailProps> = ({ tourId, onClose, onSelectTour }
   const isMobile = width <= 768;
   const tourIndex = toursData.findIndex(t => t.id === tourId);
   const tour = toursData[tourIndex];
-
-  useGSAP(() => {
-    if (isMobile) return;
-    const tl = gsap.timeline();
-    tl.from('.detail-anim', {
-      opacity: 0,
-      y: 30,
-      duration: 0.8,
-      stagger: 0.1,
-      ease: 'power3.out'
-    });
-  }, { scope: containerRef });
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });

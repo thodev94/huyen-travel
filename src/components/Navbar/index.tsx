@@ -1,39 +1,27 @@
 "use client";
 import React, { useState, useEffect, useRef } from 'react';
-import gsap from 'gsap';
-import { useGSAP } from '@gsap/react';
 import { useTheme } from 'next-themes';
 import { Sun, Moon } from 'lucide-react';
 import { useWindowSize } from '../../hooks/useWindowSize';
+import './Navbar.css';
 
 interface NavbarProps {
-  onSelectTour: (id: string) => void;
   onNavigate?: (id: string) => void;
   selectedTourId?: string | null;
+  onSelectTour?: (id: string | null) => void;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ onSelectTour, onNavigate, selectedTourId }) => {
-  const navRef = useRef<HTMLElement>(null);
-  const { width } = useWindowSize();
-  const isMobile = width <= 768;
+const Navbar: React.FC<NavbarProps> = ({ onNavigate, selectedTourId, onSelectTour }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
-  const { setTheme, resolvedTheme } = useTheme();
+  const { resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const navRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     setMounted(true);
   }, []);
-
-
-
-  useGSAP(() => {
-    if (isMobile) return;
-    const tl = gsap.timeline();
-    tl.from('.nav-logo-anim', { x: -20, opacity: 0, duration: 0.8, ease: 'power3.out' })
-      .from('.nav-link-anim', { y: -10, opacity: 0, duration: 0.5, stagger: 0.05, ease: 'power2.out' }, '-=0.2');
-  }, { scope: navRef });
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);

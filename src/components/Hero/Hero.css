@@ -88,11 +88,30 @@
 }
 
 .hero-main-title .highlight {
-  color: var(--color-primary-deep);
-  background: none;
-  -webkit-background-clip: unset;
-  -webkit-text-fill-color: unset;
+  background: var(--grad-sunset);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   display: inline-block;
+}
+
+.hero-anim {
+  animation: heroFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.hero-anim:nth-child(1) { animation-delay: 0.08s; }
+.hero-anim:nth-child(2) { animation-delay: 0.16s; }
+.hero-anim:nth-child(3) { animation-delay: 0.24s; }
+.hero-anim:nth-child(4) { animation-delay: 0.32s; }
+
+@keyframes heroFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .badges {
@@ -104,23 +123,24 @@
 
 .tag-hero {
   padding: 6px 14px;
-  border-radius: var(--border-radius);
+  border-radius: var(--border-radius-full);
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.5px;
   display: inline-flex;
   align-items: center;
-  gap: 4px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+  gap: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
 }
 
 .tag-guide {
   background-color: var(--color-accent-light-orange);
   color: var(--color-primary-deep);
+  border: 1px solid rgba(242, 92, 59, 0.25);
 }
 
 .tag-guide .star-icon {
-  color: var(--color-primary-deep);
+  color: var(--color-accent-amber);
   font-size: 0.85rem;
   display: inline-flex;
   align-items: center;
@@ -129,6 +149,7 @@
 .tag-experience {
   background-color: var(--bg-soft);
   color: var(--text-secondary);
+  border: 1px solid var(--border-color);
 }
 
 .hero-sub {
@@ -154,22 +175,22 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: var(--color-primary-deep);
+  background: var(--grad-sunset);
   color: #fff;
-  padding: 14px 28px;
+  padding: 14px 30px;
   border-radius: var(--border-radius);
   font-weight: 700;
   font-size: 0.95rem;
   border: none;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 14px rgba(185, 28, 28, 0.2);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 6px 20px rgba(220, 38, 38, 0.32);
 }
 
 .btn-hero-cta:hover {
-  background: var(--color-accent-orange);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(185, 28, 28, 0.3);
+  box-shadow: 0 10px 28px rgba(220, 38, 38, 0.45);
+  filter: brightness(1.05);
 }
 
 .btn-hero-cta .arrow {
@@ -188,20 +209,27 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: transparent;
-  color: var(--color-primary-deep);
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: var(--text-primary);
   padding: 14px 28px;
   border-radius: var(--border-radius);
   font-weight: 700;
   font-size: 0.95rem;
-  border: 1px solid var(--color-primary-deep);
+  border: 1px solid var(--border-color);
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
+[data-theme='dark'] .btn-hero-secondary {
+  background: rgba(255, 255, 255, 0.06);
+}
+
 .btn-hero-secondary:hover {
-  background: var(--color-accent-light-orange);
+  background: var(--bg-pure);
   border-color: var(--color-primary-deep);
+  color: var(--color-primary-deep);
   transform: translateY(-2px);
 }
 
@@ -404,36 +432,34 @@
 }
 
 .hub-icon-dest {
-  background: rgba(235, 0, 0, 0.08);
+  background: var(--color-accent-light-orange);
   color: var(--color-primary-deep);
 }
 
 .hub-icon-cat {
-  background: rgba(234, 179, 8, 0.1);
-  color: #CA8A04;
+  background: rgba(234, 160, 35, 0.12);
+  color: var(--color-accent-amber);
 }
 
 .hub-icon-map {
-  background: rgba(59, 130, 246, 0.1);
-  color: #2563EB;
+  background: rgba(13, 148, 99, 0.12);
+  color: var(--color-primary-bright);
 }
 
 /* Field body */
 .hub-field-body {
   display: flex;
   flex-direction: column;
-  gap: 1px;
   min-width: 0;
-  flex: 1;
 }
 
 .hub-field-label {
-  font-size: 0.7rem;
+  font-size: 0.72rem;
   font-weight: 700;
-  color: var(--text-muted);
   text-transform: uppercase;
-  letter-spacing: 0.5px;
-  white-space: nowrap;
+  letter-spacing: 0.6px;
+  color: var(--text-muted);
+  line-height: 1.2;
 }
 
 .hub-field-input {
@@ -454,18 +480,20 @@
 }
 
 .hub-field-value {
-  font-size: 0.9rem;
-  font-weight: 600;
+  font-size: 0.92rem;
+  font-weight: 700;
   color: var(--text-primary);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  text-transform: capitalize;
+  line-height: 1.3;
 }
 
-/* Divider */
+/* Divider line between fields */
 .hub-divider {
   width: 1px;
-  height: 40px;
+  height: 32px;
   background: var(--border-color);
   flex-shrink: 0;
   margin: 0 4px;
@@ -482,12 +510,12 @@
   flex: 1.4;
   min-width: 0;
   border: 1.5px solid transparent;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition: all 0.25s ease;
 }
 
 .hub-search-group:focus-within {
   border-color: var(--color-primary-deep);
-  box-shadow: 0 0 0 3px rgba(235, 0, 0, 0.08);
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.15);
   background: var(--bg-pure);
 }
 
@@ -504,10 +532,10 @@
 
 /* Search button (circle) */
 .hub-search-btn {
-  width: 46px;
-  height: 46px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
-  background: var(--color-primary-deep);
+  background: var(--grad-sunset);
   color: #fff;
   border: none;
   cursor: pointer;
@@ -515,14 +543,14 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
-  box-shadow: 0 4px 14px rgba(235, 0, 0, 0.28);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 14px rgba(220, 38, 38, 0.35);
 }
 
 .hub-search-btn:hover {
-  background: var(--color-accent-orange);
-  transform: scale(1.08);
-  box-shadow: 0 6px 20px rgba(212, 56, 13, 0.4);
+  transform: scale(1.06);
+  box-shadow: 0 6px 20px rgba(220, 38, 38, 0.5);
+  filter: brightness(1.05);
 }
 
 /* ---- Category dropdown ---- */
@@ -576,6 +604,18 @@
   min-width: 580px;
   display: flex;
   flex-direction: column;
+  animation: popupSlideDown 0.25s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes popupSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 .hub-popup-header {

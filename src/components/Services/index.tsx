@@ -1,18 +1,12 @@
 "use client";
 import React, { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
-import { createPortal } from 'react-dom';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useGSAP } from '@gsap/react';
 import { useWindowSize } from '../../hooks/useWindowSize';
 import toursData from '../../data/tours.json';
 import imageMapData from '../../data/imageMap.json';
 import './Services.css';
 
 const imageMap: Record<string, string[]> = imageMapData;
-
-gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 interface ServicesProps {
   onSelectTour: (tourId: string) => void;
@@ -47,42 +41,6 @@ const Services: React.FC<ServicesProps> = ({ onSelectTour }) => {
         t.brief.toLowerCase().includes(query)
       );
     });
-
-  useGSAP(() => {
-    gsap.fromTo(
-      '.services-entry-anim',
-      { opacity: 0, y: isMobile ? 20 : 30 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.6,
-        stagger: 0.1,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: isMobile ? 'top 90%' : 'top 80%',
-        }
-      }
-    );
-  }, { scope: sectionRef });
-
-  useGSAP(() => {
-    gsap.fromTo(
-      '.tour-card-anim',
-      { opacity: 0, y: 30 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.5,
-        stagger: 0.08,
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: isMobile ? 'top 90%' : 'top 80%',
-        }
-      }
-    );
-  }, { scope: sectionRef, dependencies: [activeCategory, searchQuery] });
 
   return (
     <section id="services" className="services" ref={sectionRef}>

@@ -1,13 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useGSAP } from '@gsap/react';
 import { useWindowSize } from '../../hooks/useWindowSize';
 import aboutData from '../../data/about.json';
 import { renderNode, DocNode } from '../../utils/NodeMapper';
 import './About.css';
-
-gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 const About: React.FC = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -19,25 +14,6 @@ const About: React.FC = () => {
   useEffect(() => {
     setMounted(true);
   }, []);
-
-  useGSAP(() => {
-    if (isMobile) return;
-    gsap.fromTo(
-      '.about-anim',
-      { opacity: 0, y: 50 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        stagger: 0.15,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top 80%',
-        }
-      }
-    );
-  }, { scope: sectionRef });
 
   const journeyNodes: DocNode[] = (aboutData as any)['My Journey into the Tourism Business']?.nodes || [];
 

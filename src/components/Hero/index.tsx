@@ -2,15 +2,11 @@
 import React, { useRef, useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 import { createPortal } from 'react-dom';
-import gsap from 'gsap';
-import { useGSAP } from '@gsap/react';
 import { Search, Star, Map, X } from 'lucide-react';
 import { useWindowSize } from '../../hooks/useWindowSize';
 import toursData from '../../data/tours.json';
 import imageMapData from '../../data/imageMap.json';
 import './Hero.css';
-
-gsap.registerPlugin(useGSAP);
 
 const imageMap: Record<string, string[]> = imageMapData;
 
@@ -144,21 +140,6 @@ const Hero: React.FC<HeroProps> = ({ onSelectTour }) => {
     setPopupResults(getFilteredResults());
   }, [searchQuery, selectedCategory, showPopup, getFilteredResults]);
 
-  // Animate popup in with GSAP (after portal renders into DOM)
-  useEffect(() => {
-    if (!showPopup) return;
-    // rAF ensures the portal DOM is painted before we animate
-    const id = requestAnimationFrame(() => {
-      if (popupRef.current) {
-        gsap.fromTo(popupRef.current,
-          { opacity: 0, y: -14, scale: 0.97 },
-          { opacity: 1, y: 0, scale: 1, duration: 0.28, ease: 'power3.out' }
-        );
-      }
-    });
-    return () => cancelAnimationFrame(id);
-  }, [showPopup]);
-
   // Click outside to close popup & category drop
   useEffect(() => {
     const handler = (e: MouseEvent) => {
@@ -194,38 +175,6 @@ const Hero: React.FC<HeroProps> = ({ onSelectTour }) => {
     }, 5000);
     return () => clearInterval(interval);
   }, [slots, isMobile]);
-
-  // GSAP entrance
-  useGSAP(() => {
-    if (isMobile) return;
-
-    gsap.fromTo('.hero-anim',
-      { opacity: 0, y: 30 },
-      { opacity: 1, y: 0, duration: 1, stagger: 0.2, ease: 'power3.out', delay: 0.2 }
-    );
-  }, { scope: heroRef, dependencies: [isMobile] });
-
-  // Phone card GSAP
-  useGSAP(() => {
-    if (!mounted || isMobile || slotChanging === null) return;
-
-    const card = heroRef.current?.querySelector(`.hero-phone-card-${slotChanging}`);
-    if (!card) return;
-
-    gsap.to(card, { opacity: 0, scale: 0.95, duration: 0.35, ease: 'power2.in' });
-  }, { dependencies: [slotChanging, mounted, isMobile], scope: heroRef });
-
-  useGSAP(() => {
-    if (!mounted || isMobile || slotChanging !== null) return;
-
-    const cards = heroRef.current?.querySelectorAll('.hero-phone-card');
-    if (!cards?.length) return;
-
-    gsap.fromTo(cards,
-      { opacity: 0, scale: 0.96 },
-      { opacity: 1, scale: 1, duration: 0.6, stagger: 0.08, ease: 'power2.out' }
-    );
-  }, { dependencies: [slots, mounted, isMobile], scope: heroRef });
 
   const handleLoadedMetadata = () => { };
   const handleTimeUpdate = (e: React.SyntheticEvent<HTMLVideoElement>) => {

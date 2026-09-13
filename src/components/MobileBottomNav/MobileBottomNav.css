@@ -10,17 +10,21 @@
     left: 0;
     width: 100%;
     height: 65px;
-    background: rgba(250, 247, 242, 0.98);
-    /* var(--bg-main) with opacity */
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    background: var(--nav-bg, rgba(250, 248, 245, 0.92));
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid var(--border-subtle);
     box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.04);
     z-index: 1000;
     justify-content: space-around;
     align-items: center;
     padding-bottom: env(safe-area-inset-bottom, 5px);
-    /* handle iOS notch */
+  }
+
+  [data-theme="dark"] .mobile-bottom-nav {
+    background: rgba(13, 17, 23, 0.92);
+    border-top-color: var(--border-subtle);
+    box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.4);
   }
 
   .nav-item {
@@ -57,48 +61,43 @@
   .nav-item.active svg {
     transform: translateY(-2px);
     stroke-width: 2.5;
-    /* Bold the icon for focus */
   }
 
   /* Center Highlight Styles */
   .center-icon-wrap {
-    background: var(--color-primary-deep);
+    background: var(--grad-sunset);
     color: white;
-    width: 66px;
-    height: 66px;
+    width: 62px;
+    height: 62px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     position: absolute;
-    top: -24px;
+    top: -22px;
     left: 50%;
     transform: translateX(-50%);
-    box-shadow: 0 6px 15px rgba(58, 125, 106, 0.35);
-    border: 4px solid var(--bg-pure);
-    /* Cut out effect from nav area */
+    box-shadow: 0 8px 20px rgba(220, 38, 38, 0.35);
+    border: 3px solid var(--bg-pure);
     transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   }
 
   /* Exclude center button from normal SVG rules */
   .nav-item.center-action svg {
     margin-bottom: 0;
-    width: 30px;
-    height: 30px;
+    width: 28px;
+    height: 28px;
     transform: none;
-    /* Do not translate */
   }
 
   .nav-item.center-action span {
     position: absolute;
     bottom: 5px;
-    /* Stick tightly below */
   }
 
   .nav-item.center-action.active .center-icon-wrap {
     transform: translateX(-50%) translateY(-6px);
-    box-shadow: 0 10px 20px rgba(58, 125, 106, 0.45);
-    background: var(--color-primary-deep);
+    box-shadow: 0 12px 24px rgba(220, 38, 38, 0.5);
   }
 
   .nav-item.center-action.active span {
