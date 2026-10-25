@@ -3,7 +3,7 @@ const path = require('path');
 const mammoth = require('mammoth');
 
 const docsDir = path.join(__dirname, 'src', 'documents');
-const outputDir = path.join(__dirname, 'src', 'data');
+const outputDir = path.join(__dirname, 'public', 'data');
 
 if (!fs.existsSync(outputDir)) {
   fs.mkdirSync(outputDir);

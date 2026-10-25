@@ -3,7 +3,7 @@ import App from '../src/App';
 
 export async function generateMetadata() {
   return {
-    title: 'Huyen Tour — Authentic Vietnam tours',
+    title: 'WithHuyen — Authentic Vietnam tours',
     description: 'Licensed guide Huyen — Explore authentic Vietnam tours',
   };
 }

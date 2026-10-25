@@ -13,11 +13,11 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { ThemeProvider } from '../src/components/ThemeProvider';
 
 export const metadata = {
-  title: 'Huyen Tour — Authentic Vietnam tours',
+  title: 'WithHuyen — Authentic Vietnam tours',
   description: 'Licensed guide Huyen — Explore authentic Vietnam tours',
   metadataBase: process.env.NEXT_PUBLIC_METADATA_BASE ?? 'http://localhost:3002',
   openGraph: {
-    title: 'Huyen Tour — Authentic Vietnam tours',
+    title: 'WithHuyen — Authentic Vietnam tours',
     description: 'Licensed guide Huyen — Explore authentic Vietnam tours',
     url: '/',
     images: [
@@ -30,7 +30,7 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Huyen Tour — Authentic Vietnam tours',
+    title: 'WithHuyen — Authentic Vietnam tours',
     description: 'Licensed guide Huyen — Explore authentic Vietnam tours',
   },
   robots: {
@@ -47,7 +47,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const ld = {
     "@context": "https://schema.org",
     "@type": "TravelAgency",
-    "name": "Huyen Tour",
+    "name": "WithHuyen",
     "description": "Licensed guide Huyen — Explore authentic Vietnam tours",
     "url": BASE,
     "telephone": "+84364399290",

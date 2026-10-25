@@ -2,10 +2,10 @@
 import React, { useEffect, useMemo, useRef } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import toursData from '../../data/tours.json';
+import toursData from '../../../public/data/tours.json';
 import { renderNode, DocNode } from '../../utils/NodeMapper';
-import imageMapData from '../../data/imageMap.json';
-import stepImagesData from '../../data/stepImages.json';
+import imageMapData from '../../../public/data/imageMap.json';
+import stepImagesData from '../../../public/data/stepImages.json';
 import { useWindowSize } from '../../hooks/useWindowSize';
 import Gallery from '../Gallery';
 import styles from './TourDetail.module.css';

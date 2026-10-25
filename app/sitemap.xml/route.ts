@@ -1,4 +1,4 @@
-import toursData from '../../src/data/tours.json';
+import toursData from '../../public/data/tours.json';
 
 const BASE = process.env.NEXT_PUBLIC_METADATA_BASE ?? 'http://localhost:3000';
 

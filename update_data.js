@@ -2,8 +2,8 @@ const fs = require('fs');
 const path = require('path');
 
 const imgDir = path.join(__dirname, 'public', 'images', 'imgs');
-const imageMapPath = path.join(__dirname, 'src', 'data', 'imageMap.json');
-const toursPath = path.join(__dirname, 'src', 'data', 'tours.json');
+const imageMapPath = path.join(__dirname, 'public', 'data', 'imageMap.json');
+const toursPath = path.join(__dirname, 'public', 'data', 'tours.json');
 
 // 1. Generate imageMap.json
 const folders = fs.readdirSync(imgDir).filter(f => fs.statSync(path.join(imgDir, f)).isDirectory());

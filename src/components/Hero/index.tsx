@@ -4,8 +4,8 @@ import Image from 'next/image';
 import { createPortal } from 'react-dom';
 import { Search, Star, Map, X } from 'lucide-react';
 import { useWindowSize } from '../../hooks/useWindowSize';
-import toursData from '../../data/tours.json';
-import imageMapData from '../../data/imageMap.json';
+import toursData from '../../../public/data/tours.json';
+import imageMapData from '../../../public/data/imageMap.json';
 import './Hero.css';
 
 const imageMap: Record<string, string[]> = imageMapData;
@@ -245,7 +245,7 @@ const Hero: React.FC<HeroProps> = ({ onSelectTour }) => {
             </h1>
 
             <p className="hero-sub hero-anim">
-              I am <strong>Huyen (Wind)</strong> — a licensed guide with a passion for showing the real side of Ho Chi Minh City and the Mekong Delta through storytelling and hidden gems.
+              I am <strong>Huyen</strong> — a licensed guide with a passion for showing the real side of Ho Chi Minh City and the Mekong Delta through storytelling and hidden gems.
             </p>
 
             <div className="hero-buttons hero-anim">
@@ -258,7 +258,7 @@ const Hero: React.FC<HeroProps> = ({ onSelectTour }) => {
                 </span>
               </button>
               <button className="btn-hero-secondary" onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}>
-                Learn My Story
+                About me
               </button>
             </div>
           </div>

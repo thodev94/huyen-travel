@@ -52,7 +52,7 @@ const Contact: React.FC = () => {
       `${form.note}`,
     ].join('\n');
 
-    const subject = 'New travel inquiry from Huyen Tour website';
+    const subject = 'New travel inquiry from WithHuyen website';
     const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(CONTACT_EMAIL)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     const mailto = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     const opened = window.open(gmailUrl, '_blank', 'noopener,noreferrer');
@@ -74,8 +74,7 @@ const Contact: React.FC = () => {
           {/* Column 1: Brand & Tagline */}
           <div className="contact-brand">
             <a href="#hero" className="contact-brand-link">
-              <span className="contact-logo-winds">WIND</span>
-              <span className="contact-logo-tour">TOURS.</span>
+              <span className="contact-logo-winds">WithHuyen</span>
             </a>
             <p className="contact-brand-tagline">
               Your local compass in Vietnam. Specializing in authentic storytelling, cultural immersions, and uncovering hidden gems you won't find in guidebooks.
@@ -196,7 +195,7 @@ const Contact: React.FC = () => {
         {/* Bottom Bar */}
         <div className="contact-bottom-bar">
           <p className="contact-copyright">
-            &copy; {new Date().getFullYear()} Huyen Tour. All rights reserved.
+            &copy; {new Date().getFullYear()} WithHuyen. All rights reserved.
           </p>
           <div className="contact-bottom-links">
             <a href="#" className="contact-bottom-link" onClick={(e) => e.preventDefault()}>Terms of Service</a>

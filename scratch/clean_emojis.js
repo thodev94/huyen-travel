@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const filePath = path.join(__dirname, '..', 'src', 'data', 'tours.json');
+const filePath = path.join(__dirname, '..', 'public', 'data', 'tours.json');
 const tours = JSON.parse(fs.readFileSync(filePath, 'utf8'));
 
 // Matches emojis (including maps, vans, flowers, checkboxes) and their variation selectors

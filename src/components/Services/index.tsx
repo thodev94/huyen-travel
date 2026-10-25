@@ -2,8 +2,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { useWindowSize } from '../../hooks/useWindowSize';
-import toursData from '../../data/tours.json';
-import imageMapData from '../../data/imageMap.json';
+import toursData from '../../../public/data/tours.json';
+import imageMapData from '../../../public/data/imageMap.json';
 import './Services.css';
 
 const imageMap: Record<string, string[]> = imageMapData;

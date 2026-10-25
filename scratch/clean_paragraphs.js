@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const toursPath = path.join(__dirname, '..', 'src', 'data', 'tours.json');
+const toursPath = path.join(__dirname, '..', 'public', 'data', 'tours.json');
 const tours = JSON.parse(fs.readFileSync(toursPath, 'utf8'));
 
 // Paragraph text patterns to remove

@@ -77,8 +77,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, selectedTourId, onSelectTou
             onNavigate('hero');
           }
         }}>
-          <span className="logo-wind">WIND</span>
-          <span className="logo-tours">TOURS.</span>
+          <span className="logo-wind">WithHuyen</span>
         </a>
 
         <div className="search-container">
@@ -132,8 +131,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, selectedTourId, onSelectTou
       >
         <div className="mobile-nav-header">
           <div className="logo">
-            <span className="logo-wind">WIND</span>
-            <span className="logo-tours">TOURS.</span>
+            <span className="logo-wind">WithHuyen</span>
           </div>
           <button onClick={closeMenu} className="mobile-nav-close">×</button>
         </div>

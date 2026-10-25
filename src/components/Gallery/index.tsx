@@ -1,8 +1,8 @@
 "use client";
 import React, { useRef, useState, useEffect } from 'react';
 import Image from 'next/image';
-import toursData from '../../data/tours.json';
-import imageMap from '../../data/imageMap.json';
+import toursData from '../../../public/data/tours.json';
+import imageMap from '../../../public/data/imageMap.json';
 import './Gallery.css';
 
 interface GalleryProps {

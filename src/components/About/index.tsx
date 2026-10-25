@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useWindowSize } from '../../hooks/useWindowSize';
-import aboutData from '../../data/about.json';
+import aboutData from '../../../public/data/about.json';
 import { renderNode, DocNode } from '../../utils/NodeMapper';
 import './About.css';
 
@@ -78,7 +78,7 @@ const About: React.FC = () => {
           <svg className="box3-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
             <polyline points="20 6 9 17 4 12" />
           </svg>
-          SIM Card & Local Logistics
+          Private Leading
         </li>
         <li>
           <svg className="box3-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
@@ -100,7 +100,7 @@ const About: React.FC = () => {
           className="journey-avatar"
         />
         {journeyNodes.slice(1).map((node, i) => renderNode(node, i + 1, true))}
-        
+
         {!isExpanded && <div className="box4-fade"></div>}
       </div>
 
