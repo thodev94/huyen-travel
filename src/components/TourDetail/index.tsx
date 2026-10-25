@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useMemo, useRef } from 'react';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
 import toursData from '../../../public/data/tours.json';
 import { renderNode, DocNode } from '../../utils/NodeMapper';
 import imageMapData from '../../../public/data/imageMap.json';
@@ -15,12 +14,10 @@ const stepImagesMap: Record<string, string[]> = stepImagesData;
 
 interface TourDetailProps {
   tourId: string;
-  onClose?: () => void;
   onSelectTour?: (id: string) => void;
 }
 
-const TourDetail: React.FC<TourDetailProps> = ({ tourId, onClose, onSelectTour }) => {
-  const router = useRouter();
+const TourDetail: React.FC<TourDetailProps> = ({ tourId, onSelectTour }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const { width } = useWindowSize();
   const isMobile = width <= 768;
@@ -112,25 +109,12 @@ const TourDetail: React.FC<TourDetailProps> = ({ tourId, onClose, onSelectTour }
   return (
     <div ref={containerRef} className={`${styles.container} ${isMobile ? styles.containerMobile : styles.containerDesktop}`}>
       <div className={styles.inner}>
-        <div className="detail-anim" style={{ marginBottom: '30px' }}>
-          <button onClick={onClose} className={styles.backBtn}>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <line x1="19" y1="12" x2="5" y2="12" />
-              <polyline points="12 19 5 12 12 5" />
-            </svg>
-            Back to All Tours
-          </button>
-        </div>
-
         <div className={`${styles.grid} ${isMobile ? styles.gridMobile : styles.gridDesktop}`}>
           <div className={`detail-anim ${styles.leftCol}`}>
-            <div>
+            <div className={styles.intro}>
               <h1 className={`${styles.title} ${isMobile ? styles.titleMobile : styles.titleDesktop}`}>
                 {displayTitle}
               </h1>
-              <p className={`${styles.subtitle} ${isMobile ? styles.subtitleMobile : styles.subtitleDesktop}`}>
-                {displaySubtitle}
-              </p>
               {displayDesc && (
                 <p className={styles.desc}>
                   {displayDesc}
@@ -179,7 +163,7 @@ const TourDetail: React.FC<TourDetailProps> = ({ tourId, onClose, onSelectTour }
               </p>
             ))}
 
-            <div style={{ fontSize: '1.05rem', color: 'var(--text-secondary)' }}>
+            <div className={styles.contentBody}>
               {(() => {
                 const stepImages = stepImagesMap[folder] || [];
                 let listOrderedCount = 0;
@@ -308,7 +292,7 @@ const TourDetail: React.FC<TourDetailProps> = ({ tourId, onClose, onSelectTour }
             </div>
           )}
         </div>
-        <div style={{ marginTop: '24px' }}>
+        <div className={styles.relatedTours}>
           <Gallery onSelectTour={onSelectTour} />
         </div>
       </div>

@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect, useRef } from 'react';
 import { useTheme } from 'next-themes';
-import { Sun, Moon } from 'lucide-react';
+import { ArrowLeft, Sun, Moon } from 'lucide-react';
 import { useWindowSize } from '../../hooks/useWindowSize';
 import './Navbar.css';
 
@@ -71,14 +71,34 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, selectedTourId, onSelectTou
   return (
     <nav className="navbar-wrapper" ref={navRef} role="navigation" aria-label="Main Navigation">
       <div className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
-        <a href="#hero" className="logo nav-logo-anim" onClick={(e) => {
-          if (onNavigate) {
-            e.preventDefault();
-            onNavigate('hero');
-          }
-        }}>
-          <span className="logo-wind">WithHuyen</span>
-        </a>
+        <div className="nav-brand-group">
+          <a href="#hero" className="logo nav-logo-anim" onClick={(e) => {
+            if (onNavigate) {
+              e.preventDefault();
+              onNavigate('hero');
+            }
+          }}>
+            <span className="logo-wind">WithHuyen</span>
+          </a>
+
+          {selectedTourId && (
+            <button
+              type="button"
+              className="nav-back-button"
+              onClick={() => {
+                if (onNavigate) {
+                  onNavigate('services');
+                } else {
+                  onSelectTour?.(null);
+                }
+              }}
+              aria-label="Back to all tours"
+            >
+              <ArrowLeft size={17} aria-hidden="true" />
+              <span className="nav-back-label">Back to All Tours</span>
+            </button>
+          )}
+        </div>
 
         <div className="search-container">
           {mounted && (

@@ -86,3 +86,11 @@
     /* Hide tooltips on mobile */
   }
 }
+.float-btn.email {
+  background: linear-gradient(135deg, #ef4938, #c62828);
+}
+
+.float-btn:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 3px;
+}

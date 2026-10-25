@@ -19,7 +19,7 @@
 }
 
 
-.hero-bg-video {
+.hero-bg-image {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -31,22 +31,10 @@
   will-change: transform;
 }
 
-.hero-overlay {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background: linear-gradient(180deg, rgba(248, 244, 241, 0.4), rgba(248, 244, 241, 0.85));
-  pointer-events: none;
-}
 
-[data-theme='dark'] .hero-overlay {
-  background: linear-gradient(180deg, rgba(18, 18, 18, 0.5), rgba(18, 18, 18, 0.85));
-}
 @media (max-width: 768px) {
-  .hero-bg {
-    background-image: url('/images/hero-mobile.webp');
-    background-size: cover;
-    background-position: center;
+  .hero-bg-image {
+    object-position: center;
   }
 }
 
@@ -866,4 +854,860 @@
     font-size: 0.58rem;
     padding: 3px 7px;
   }
+}
+/* --- MODERN HERO LAYOUT --- */
+.hero {
+  min-height: auto;
+  padding: clamp(92px, 8vw, 124px) 24px clamp(48px, 5vw, 72px);
+  isolation: isolate;
+}
+
+.hero-bg-image {
+  object-position: center 42%;
+  filter: saturate(0.96) contrast(1.02);
+}
+
+
+
+.hero-wrapper {
+  max-width: 1420px;
+  gap: 28px;
+}
+
+.hero-content {
+  display: grid;
+  grid-template-columns: minmax(500px, 1.02fr) minmax(480px, 0.98fr);
+  align-items: center;
+  gap: clamp(34px, 4vw, 68px);
+}
+
+.hero-text-side {
+  width: 100%;
+  max-width: 680px;
+  padding: clamp(28px, 3vw, 42px);
+  border: 1px solid rgba(255, 255, 255, 0.68);
+  border-radius: 30px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.58), rgba(255, 255, 255, 0.34));
+  box-shadow: 0 24px 70px rgba(15, 23, 42, 0.14);
+  backdrop-filter: blur(18px) saturate(1.08);
+  -webkit-backdrop-filter: blur(18px) saturate(1.08);
+}
+
+[data-theme='dark'] .hero-text-side {
+  border-color: rgba(255, 255, 255, 0.1);
+  background: linear-gradient(135deg, rgba(17, 24, 39, 0.7), rgba(17, 24, 39, 0.48));
+  box-shadow: 0 26px 70px rgba(0, 0, 0, 0.35);
+}
+
+.hero-main-title {
+  margin-bottom: 18px;
+  color: #172033;
+  font-size: clamp(3rem, 5.2vw, 5.15rem);
+  line-height: 0.93;
+  letter-spacing: -0.055em;
+}
+
+[data-theme='dark'] .hero-main-title {
+  color: #f8fafc;
+}
+
+.hero-main-title .highlight {
+  padding-bottom: 0.05em;
+  background: linear-gradient(105deg, #b91c1c 0%, #ef3f24 46%, #f59e0b 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+.badges {
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.tag-hero {
+  min-height: 32px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  font-size: 0.68rem;
+  font-weight: 850;
+  letter-spacing: 0.055em;
+  box-shadow: none;
+}
+
+.tag-guide {
+  border-color: rgba(220, 38, 38, 0.22);
+  background: rgba(254, 226, 226, 0.92);
+  color: #b91c1c;
+}
+
+.tag-experience {
+  border-color: rgba(37, 50, 71, 0.12);
+  background: rgba(248, 250, 252, 0.88);
+  color: #354158;
+}
+
+[data-theme='dark'] .tag-experience {
+  background: rgba(255, 255, 255, 0.08);
+  color: #e2e8f0;
+}
+
+.hero-sub {
+  max-width: 580px;
+  margin-bottom: 24px;
+  color: #48566c;
+  font-size: clamp(0.96rem, 1.25vw, 1.08rem);
+  line-height: 1.68;
+}
+
+.hero-sub strong {
+  color: #172033;
+}
+
+[data-theme='dark'] .hero-sub {
+  color: #cbd5e1;
+}
+
+[data-theme='dark'] .hero-sub strong {
+  color: #fff;
+}
+
+.hero-buttons {
+  gap: 12px;
+}
+
+.btn-hero-cta,
+.btn-hero-secondary {
+  min-height: 48px;
+  border-radius: 14px;
+}
+
+.btn-hero-secondary {
+  border-color: rgba(37, 50, 71, 0.15);
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.07);
+}
+
+.hero-right {
+  width: 100%;
+  min-width: 0;
+}
+
+.hero-phone-stack {
+  position: relative;
+  display: grid;
+  width: 100%;
+  height: auto;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: end;
+  gap: 12px;
+  padding: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.58);
+  border-radius: 30px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.58), rgba(255, 255, 255, 0.34));
+  box-shadow: 0 24px 70px rgba(15, 23, 42, 0.14);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+[data-theme='dark'] .hero-phone-stack {
+  border-color: rgba(255, 255, 255, 0.1);
+  background: linear-gradient(135deg, rgba(17, 24, 39, 0.7), rgba(17, 24, 39, 0.48));
+}
+
+.hero-phone-card,
+.hero-phone-card.card-left,
+.hero-phone-card.card-center,
+.hero-phone-card.card-right {
+  position: relative;
+  inset: auto;
+  width: 100%;
+  height: 300px;
+  border: 2px solid rgba(255, 255, 255, 0.78);
+  border-radius: 22px;
+  transform: none;
+  box-shadow: 0 14px 34px rgba(15, 23, 42, 0.18);
+}
+
+.hero-phone-card.card-center {
+  height: 332px;
+}
+
+.hero-phone-card:hover,
+.hero-phone-card.card-left:hover,
+.hero-phone-card.card-center:hover,
+.hero-phone-card.card-right:hover {
+  z-index: 2 !important;
+  transform: translateY(-6px);
+  border-color: rgba(249, 115, 22, 0.72);
+  box-shadow: 0 22px 44px rgba(15, 23, 42, 0.24);
+}
+
+.hero-phone-card-label {
+  padding: 42px 12px 14px;
+  background: linear-gradient(0deg, rgba(15, 23, 42, 0.9) 18%, rgba(15, 23, 42, 0) 100%);
+  font-size: 0.67rem;
+  font-weight: 850;
+  letter-spacing: 0.055em;
+}
+
+.hero-phone-badge {
+  position: relative;
+  inset: auto;
+  grid-column: 1 / -1;
+  justify-self: center;
+  transform: none;
+  margin-top: 2px;
+  padding: 9px 15px;
+  border-color: rgba(255, 255, 255, 0.65);
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.58), rgba(255, 255, 255, 0.34));
+  box-shadow: 0 10px 26px rgba(15, 23, 42, 0.12);
+  animation: none;
+}
+
+.hero-unified-bar {
+  position: relative;
+  z-index: 12;
+}
+
+.hub-inner {
+  max-width: 1040px;
+  min-height: 74px;
+  padding: 8px 9px 8px 22px;
+  border-color: rgba(255, 255, 255, 0.72);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.58), rgba(255, 255, 255, 0.34));
+  box-shadow: 0 18px 48px rgba(15, 23, 42, 0.14);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+[data-theme='dark'] .hub-inner {
+  border-color: rgba(255, 255, 255, 0.1);
+  background: linear-gradient(135deg, rgba(17, 24, 39, 0.7), rgba(17, 24, 39, 0.48));
+}
+
+@media (max-width: 1180px) {
+  .hero-content {
+    grid-template-columns: minmax(460px, 1fr) minmax(420px, 0.9fr);
+    gap: 26px;
+  }
+
+  .hero-phone-stack {
+    gap: 9px;
+    padding: 13px;
+  }
+
+  .hero-phone-card,
+  .hero-phone-card.card-left,
+  .hero-phone-card.card-center,
+  .hero-phone-card.card-right {
+    height: 270px;
+  }
+
+  .hero-phone-card.card-center {
+    height: 296px;
+  }
+}
+
+@media (max-width: 1060px) {
+  .hero {
+    padding: 92px 18px 48px;
+  }
+
+  .hero-content {
+    display: block;
+  }
+
+  .hero-text-side {
+    max-width: 760px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .hero-right {
+    display: none;
+  }
+
+  .hero-sub {
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .badges,
+  .hero-buttons {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero {
+    padding: 78px 14px 36px;
+  }
+
+  .hero-bg-image {
+    object-position: 52% center;
+  }
+
+  .hero-wrapper {
+    gap: 20px;
+  }
+
+  .hero-text-side {
+    padding: 24px 18px;
+    border-radius: 24px;
+  }
+
+  .hero-main-title {
+    font-size: clamp(2.65rem, 15vw, 4rem);
+    line-height: 0.96;
+  }
+
+  .badges {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .tag-hero {
+    width: fit-content;
+  }
+
+  .hero-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .btn-hero-cta,
+  .btn-hero-secondary {
+    width: 100%;
+    padding: 13px 16px;
+  }
+
+  .hub-inner {
+    min-height: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-anim {
+    animation: none;
+  }
+
+  .hero-phone-card,
+  .btn-hero-cta,
+  .btn-hero-secondary {
+    transition: none;
+  }
+}
+/* --- TRAVEL PALETTE AND SIMPLIFIED CONTENT --- */
+.hero-text-side {
+  max-width: 630px;
+  padding: clamp(28px, 3vw, 38px);
+  border-color: rgba(255, 255, 255, 0.88);
+  background: linear-gradient(145deg, rgba(255, 252, 245, 0.96), rgba(255, 247, 237, 0.9));
+  box-shadow: 0 24px 64px rgba(37, 50, 71, 0.18);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.hero-main-title {
+  margin-bottom: 16px;
+  font-size: clamp(3rem, 5vw, 4.8rem);
+  line-height: 0.94;
+}
+
+.tag-guide {
+  border-color: rgba(15, 118, 110, 0.22);
+  background: #e8f7f2;
+  color: #0f766e;
+}
+
+.tag-guide .star-icon {
+  color: #f59e0b;
+}
+
+.hero-sub {
+  max-width: 500px;
+  margin-bottom: 22px;
+  color: #425167;
+}
+
+.hero-phone-stack {
+  padding: 16px;
+  border-color: rgba(255, 255, 255, 0.52);
+  background: linear-gradient(145deg, rgba(15, 118, 110, 0.58), rgba(23, 32, 51, 0.5));
+  box-shadow: 0 24px 64px rgba(15, 23, 42, 0.22);
+}
+
+.hub-inner {
+  border: 2px solid rgba(239, 68, 68, 0.18);
+  background: rgba(255, 252, 245, 0.97);
+  box-shadow: 0 18px 48px rgba(37, 50, 71, 0.2), inset 0 1px 0 #fff;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.hub-field-label {
+  color: #0f766e;
+}
+
+.hub-field-value {
+  color: #172033;
+}
+
+.hub-search-group {
+  border-color: rgba(15, 118, 110, 0.14);
+  background: #fff;
+}
+
+[data-theme='dark'] .hero-text-side,
+[data-theme='dark'] .hub-inner {
+  border-color: rgba(255, 255, 255, 0.12);
+  background: rgba(17, 24, 39, 0.94);
+}
+
+[data-theme='dark'] .hero-phone-stack {
+  background: linear-gradient(145deg, rgba(15, 118, 110, 0.48), rgba(15, 23, 42, 0.82));
+}
+
+[data-theme='dark'] .hub-field-value {
+  color: #f8fafc;
+}
+
+/* --- COMPACT TOUR PREVIEWS INSIDE HERO CONTENT --- */
+.hero-content {
+  display: block;
+}
+
+.hero-text-side {
+  display: block;
+  max-width: 740px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.hero-copy {
+  position: relative;
+  min-width: 0;
+  padding: clamp(30px, 3.2vw, 44px) clamp(30px, 3.5vw, 48px);
+  overflow: hidden;
+  border-radius: 30px 76px 76px 30px;
+  background: linear-gradient(102deg, rgba(255, 252, 245, 0.91) 0%, rgba(255, 250, 242, 0.78) 64%, rgba(255, 250, 242, 0.3) 100%);
+  box-shadow: 0 20px 56px rgba(37, 50, 71, 0.1);
+  backdrop-filter: blur(7px) saturate(1.05);
+  -webkit-backdrop-filter: blur(7px) saturate(1.05);
+}
+
+.hero-copy::after {
+  position: absolute;
+  top: -70px;
+  right: -55px;
+  width: 190px;
+  height: 190px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.13), transparent 68%);
+  content: '';
+  pointer-events: none;
+}
+
+.hero-mini-gallery {
+  display: flex;
+  width: fit-content;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  margin-top: 14px;
+  padding-left: clamp(22px, 3vw, 38px);
+}
+
+.hero-mini-gallery .hero-phone-card,
+.hero-mini-gallery .hero-phone-card:hover {
+  position: relative;
+  inset: auto;
+  width: 104px;
+  height: 88px;
+  min-height: 88px;
+  border: 2px solid rgba(255, 255, 255, 0.82);
+  border-radius: 16px;
+  transform: none;
+  box-shadow: 0 9px 22px rgba(15, 23, 42, 0.16);
+}
+
+.hero-mini-gallery .hero-phone-card:hover {
+  transform: translateY(-5px) scale(1.035);
+  border-color: rgba(15, 118, 110, 0.68);
+  box-shadow: 0 14px 30px rgba(15, 23, 42, 0.23);
+}
+
+.hero-mini-gallery .hero-phone-card-label {
+  padding: 22px 7px 6px;
+  font-size: 0.5rem;
+  line-height: 1.12;
+  letter-spacing: 0.025em;
+}
+
+[data-theme='dark'] .hero-copy {
+  background: linear-gradient(102deg, rgba(17, 24, 39, 0.86) 0%, rgba(17, 24, 39, 0.7) 64%, rgba(17, 24, 39, 0.22) 100%);
+  box-shadow: 0 22px 54px rgba(0, 0, 0, 0.24);
+}
+
+@media (max-width: 1060px) and (min-width: 769px) {
+  .hero-text-side {
+    max-width: 720px;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: left;
+  }
+
+  .hero-sub {
+    margin-left: 0;
+  }
+
+  .badges,
+  .hero-buttons {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-text-side {
+    display: block;
+    max-width: 680px;
+    background: transparent;
+  }
+
+  .hero-copy {
+    padding: 26px 22px 28px;
+    border-radius: 24px;
+    background: rgba(255, 252, 245, 0.78);
+  }
+
+  [data-theme='dark'] .hero-copy {
+    background: rgba(17, 24, 39, 0.76);
+  }
+}
+
+/* --- HERO COPY + TOUR GALLERY ALIGNMENT --- */
+.hero-bg::after {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: rgba(255, 250, 242, 0.12);
+  content: '';
+  pointer-events: none;
+}
+
+[data-theme='dark'] .hero-bg::after {
+  background: rgba(15, 23, 42, 0.14);
+}
+
+.hero-content {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: clamp(32px, 5vw, 78px);
+}
+
+.hero-mini-gallery {
+  display: flex;
+  width: min(35vw, 500px);
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: flex-end;
+  gap: clamp(10px, 1.1vw, 18px);
+  margin: 0;
+  padding: 0;
+}
+
+.hero-mini-gallery .hero-phone-card,
+.hero-mini-gallery .hero-phone-card:hover {
+  width: min(10vw, 150px);
+  height: clamp(142px, 15vw, 222px);
+  min-height: 0;
+}
+
+.hero-mini-gallery .hero-phone-card-1 {
+  height: clamp(168px, 18vw, 268px);
+}
+
+.hero-mini-gallery .hero-phone-card-2 {
+  height: clamp(194px, 21vw, 314px);
+}
+
+@media (max-width: 1060px) and (min-width: 769px) {
+  .hero-content {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 28px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-content {
+    display: block;
+  }
+}
+/* --- FLOATING TOUR CARDS, UNBOXED HERO COPY --- */
+.hero-bg::after {
+  background: rgba(248, 250, 252, 0.18);
+}
+
+.hero-copy,
+[data-theme='dark'] .hero-copy {
+  padding: 0;
+  overflow: visible;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.hero-copy::after {
+  display: none;
+}
+
+.hero-content {
+  grid-template-columns: minmax(0, 1fr) minmax(430px, 500px);
+  gap: clamp(32px, 5vw, 88px);
+}
+
+.hero-mini-gallery {
+  position: relative;
+  width: min(29vw, 500px);
+  height: 420px;
+  display: block;
+  margin-left: auto;
+}
+
+.hero-mini-gallery .hero-phone-card,
+.hero-mini-gallery .hero-phone-card:hover {
+  position: absolute;
+  width: clamp(142px, 10.5vw, 174px);
+  height: clamp(268px, 20vw, 334px);
+  margin: 0;
+  border: 3px solid rgba(255, 255, 255, 0.92);
+  border-radius: 28px;
+  transform-origin: center center;
+  box-shadow: 0 20px 42px rgba(15, 23, 42, 0.2);
+}
+
+.hero-mini-gallery .hero-phone-card-0 {
+  top: 92px;
+  left: 0;
+  z-index: 1;
+  transform: rotate(-12deg);
+}
+
+.hero-mini-gallery .hero-phone-card-1 {
+  top: 0;
+  left: 50%;
+  z-index: 3;
+  height: clamp(336px, 25vw, 408px);
+  transform: translateX(-50%);
+}
+
+.hero-mini-gallery .hero-phone-card-2 {
+  top: 92px;
+  right: 0;
+  z-index: 2;
+  height: clamp(268px, 20vw, 334px);
+  transform: rotate(12deg);
+}
+
+.hero-mini-gallery .hero-phone-card-0:hover {
+  transform: rotate(-12deg) translateY(-8px) scale(1.03);
+}
+
+.hero-mini-gallery .hero-phone-card-1:hover {
+  transform: translateX(-50%) translateY(-8px) scale(1.03);
+}
+
+.hero-mini-gallery .hero-phone-card-2:hover {
+  transform: rotate(12deg) translateY(-8px) scale(1.03);
+}
+
+.hero-mini-gallery .hero-phone-card-label {
+  padding: 46px 10px 12px;
+  font-size: 0.58rem;
+}
+
+@media (max-width: 1060px) and (min-width: 769px) {
+  .hero-content {
+    grid-template-columns: minmax(0, 1fr) minmax(330px, 390px);
+    gap: 24px;
+  }
+
+  .hero-mini-gallery {
+    width: 390px;
+    height: 350px;
+  }
+
+  .hero-mini-gallery .hero-phone-card,
+  .hero-mini-gallery .hero-phone-card:hover {
+    width: 130px;
+    height: 244px;
+  }
+
+  .hero-mini-gallery .hero-phone-card-0,
+  .hero-mini-gallery .hero-phone-card-2 {
+    top: 78px;
+  }
+
+  .hero-mini-gallery .hero-phone-card-1 {
+    height: 334px;
+  }
+}
+/* Keep the wash visible above the Next image while leaving all controls interactive. */
+.hero-bg::after {
+  display: none;
+}
+
+.hero-bg-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: rgba(248, 250, 252, 0.26);
+  pointer-events: none;
+}
+
+[data-theme='dark'] .hero-bg-overlay {
+  background: rgba(15, 23, 42, 0.22);
+}
+
+/* Hover feedback must not move a rotated card under the pointer. */
+.hero-mini-gallery .hero-phone-card,
+.hero-mini-gallery .hero-phone-card:hover {
+  transition: box-shadow 180ms ease, border-color 180ms ease, filter 180ms ease;
+}
+
+.hero-mini-gallery .hero-phone-card:hover {
+  border-color: rgba(255, 255, 255, 1);
+  box-shadow: 0 24px 46px rgba(15, 23, 42, 0.28);
+  filter: brightness(1.03);
+}
+
+.hero-mini-gallery .hero-phone-card-0:hover {
+  transform: rotate(-12deg);
+}
+
+.hero-mini-gallery .hero-phone-card-1:hover {
+  transform: translateX(-50%);
+}
+
+.hero-mini-gallery .hero-phone-card-2:hover {
+  transform: rotate(12deg);
+}
+/* Give copy contrast through the banner wash, without restoring a title box. */
+.hero-bg-overlay {
+  background: linear-gradient(
+    90deg,
+    rgba(248, 250, 252, 0.62) 0%,
+    rgba(248, 250, 252, 0.46) 36%,
+    rgba(248, 250, 252, 0.2) 62%,
+    rgba(248, 250, 252, 0.14) 100%
+  );
+}
+
+.hero-main-title {
+  text-shadow: 0 2px 18px rgba(248, 250, 252, 0.38);
+}
+
+.hero-sub {
+  color: #26354a;
+  text-shadow: 0 1px 12px rgba(255, 255, 255, 0.72);
+}
+
+.hero-sub strong {
+  color: #111827;
+}
+/* Stronger left-side wash: content remains readable over any banner crop. */
+.hero-bg-overlay {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.88) 0%,
+    rgba(255, 255, 255, 0.78) 34%,
+    rgba(255, 255, 255, 0.44) 56%,
+    rgba(255, 255, 255, 0.16) 78%,
+    rgba(255, 255, 255, 0.1) 100%
+  );
+}
+
+.hero-main-title .highlight {
+  text-shadow: 0 2px 14px rgba(255, 255, 255, 0.72);
+}
+
+.hero-sub {
+  color: #1f2937;
+}
+/* Card hover: preserve the exact resting pose; only the shadow changes. */
+.hero-mini-gallery .hero-phone-card,
+.hero-mini-gallery .hero-phone-card:hover {
+  transition: box-shadow 180ms ease;
+  filter: none;
+}
+
+.hero-mini-gallery .hero-phone-card:hover {
+  border-color: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 26px 52px rgba(15, 23, 42, 0.34);
+  filter: none;
+}
+
+.hero-mini-gallery .hero-phone-card-0:hover {
+  transform: rotate(-12deg) !important;
+}
+
+.hero-mini-gallery .hero-phone-card-1:hover {
+  transform: translateX(-50%) !important;
+}
+
+.hero-mini-gallery .hero-phone-card-2:hover {
+  transform: rotate(12deg) !important;
+}
+/* Crisp red emphasis and a shared text shadow for all Hero copy. */
+.hero-main-title .highlight {
+  background: none;
+  color: #e63220;
+  -webkit-text-fill-color: #e63220;
+  text-shadow: 0 2px 14px rgba(255, 255, 255, 0.78);
+}
+
+.hero-copy,
+.hero-copy .tag-hero,
+.hero-copy .hero-main-title,
+.hero-copy .hero-sub,
+.hero-copy .hero-sub strong,
+.hero-copy .btn-hero-cta,
+.hero-copy .btn-hero-secondary {
+  text-shadow: 0 2px 12px rgba(255, 255, 255, 0.72);
+}
+
+.hero-copy .btn-hero-cta {
+  text-shadow: 0 1px 2px rgba(15, 23, 42, 0.25);
+}
+
+/* Prevent the pre-existing card hover rules from changing the right card pose. */
+.hero-mini-gallery .hero-phone-card-0:hover {
+  top: 92px !important;
+  left: 0 !important;
+  right: auto !important;
+  z-index: 1 !important;
+  transform: rotate(-12deg) !important;
+}
+
+.hero-mini-gallery .hero-phone-card-1:hover {
+  top: 0 !important;
+  left: 50% !important;
+  right: auto !important;
+  z-index: 3 !important;
+  transform: translateX(-50%) !important;
+}
+
+.hero-mini-gallery .hero-phone-card-2:hover {
+  top: 92px !important;
+  right: 0 !important;
+  left: auto !important;
+  z-index: 2 !important;
+  transform: rotate(12deg) !important;
 }

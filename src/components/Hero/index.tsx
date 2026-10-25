@@ -25,7 +25,6 @@ const ALL_CATEGORIES = Array.from(new Set(toursData.map(t => t.category)));
 
 const Hero: React.FC<HeroProps> = ({ onSelectTour }) => {
   const heroRef = useRef<HTMLDivElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
   const hubRef = useRef<HTMLDivElement>(null);       // the hub-inner pill
   const searchRef = useRef<HTMLDivElement>(null);
   const categoryRef = useRef<HTMLDivElement>(null);
@@ -153,10 +152,6 @@ const Hero: React.FC<HeroProps> = ({ onSelectTour }) => {
     return () => document.removeEventListener('mousedown', handler);
   }, []);
 
-  // Video speed
-  useEffect(() => {
-    if (videoRef.current) videoRef.current.playbackRate = 0.5;
-  }, []);
 
   // Cycle phone card slots every 5 s
   useEffect(() => {
@@ -176,14 +171,6 @@ const Hero: React.FC<HeroProps> = ({ onSelectTour }) => {
     return () => clearInterval(interval);
   }, [slots, isMobile]);
 
-  const handleLoadedMetadata = () => { };
-  const handleTimeUpdate = (e: React.SyntheticEvent<HTMLVideoElement>) => {
-    const v = e.currentTarget;
-    if (v.duration && v.currentTime >= v.duration - 0.25) {
-      v.currentTime = 0;
-      v.play().catch(() => { });
-    }
-  };
 
   const getSlotImage = (idx: number) => {
     const key = FOLDERS[idx];
@@ -205,21 +192,17 @@ const Hero: React.FC<HeroProps> = ({ onSelectTour }) => {
   return (
     <section id="hero" className="hero" ref={heroRef}>
       <div className="hero-bg" aria-hidden="true">
-        {mounted && !isMobile && (
-          <video
-            ref={videoRef}
-            className="hero-bg-video"
-            src="/Videos/fyp.mp4"
-            autoPlay
-            muted
-            playsInline
-            preload="metadata"
-            loop
-            onLoadedMetadata={handleLoadedMetadata}
-            onTimeUpdate={handleTimeUpdate}
-          />
-        )}
-        <div className="hero-overlay" aria-hidden="true" />
+        <Image
+          className="hero-bg-image"
+          src="/images/baners/bannerVietnamField-v2.png"
+          alt=""
+          fill
+          priority
+          quality={75}
+          sizes="100vw"
+          style={{ objectFit: 'cover' }}
+        />
+        <div className="hero-bg-overlay" aria-hidden="true" />
       </div>
 
       <div className="hero-wrapper">
@@ -227,70 +210,59 @@ const Hero: React.FC<HeroProps> = ({ onSelectTour }) => {
         <div className="hero-content">
           {/* LEFT */}
           <div className="hero-text-side">
-            <div className="badges hero-anim">
-              <span className="tag-hero tag-guide">
-                <span className="star-icon">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
-                  </svg>
-                </span> LICENSED PROFESSIONAL GUIDE
-              </span>
-              <span className="tag-hero tag-experience">8+ YEARS EXPERIENCE</span>
-            </div>
-
-            <h1 className="hero-main-title hero-anim">
-              EXPLORE<br />
-              <span className="highlight">AUTHENTIC</span><br />
-              VIETNAM
-            </h1>
-
-            <p className="hero-sub hero-anim">
-              I am <strong>Huyen</strong> — a licensed guide with a passion for showing the real side of Ho Chi Minh City and the Mekong Delta through storytelling and hidden gems.
-            </p>
-
-            <div className="hero-buttons hero-anim">
-              <button className="btn-hero-cta" onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}>
-                <span>Book now</span>
-                <span className="arrow">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
-                  </svg>
-                </span>
-              </button>
-              <button className="btn-hero-secondary" onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}>
-                About me
-              </button>
-            </div>
-          </div>
-
-          {/* RIGHT: Phone Cards */}
-          {mounted && !isMobile && (
-            <div className="hero-right hero-anim">
-              <div className="hero-phone-stack">
-                {[
-                  { cls: 'card-left hero-phone-card-0', data: left, sz: '180px', slot: 0 },
-                  { cls: 'card-center hero-phone-card-1', data: center, sz: '200px', slot: 1, priority: true },
-                  { cls: 'card-right hero-phone-card-2', data: right, sz: '180px', slot: 2 },
-                ].map(({ cls, data, sz, slot, priority }) => (
-                  <div key={slot} className={`hero-phone-card ${cls}`}
-                    onClick={() => { const t = tours.find(t => (t as any).folder === FOLDERS[slots[slot]]); if (t && onSelectTour) onSelectTour(t.id); }}>
-                    <Image src={data.url} alt={data.title} fill sizes={sz} className="hero-phone-card-img"
-                      style={{ objectFit: 'cover' }} {...(priority ? { priority: true } : {})} />
-                    <div className="hero-phone-card-label">{data.title}</div>
-                  </div>
-                ))}
-                <div className="hero-phone-badge">
-                  <div className="hero-phone-badge-icon">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <div className="hero-copy">
+              <div className="badges hero-anim">
+                <span className="tag-hero tag-guide">
+                  <span className="star-icon">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
                       <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
                     </svg>
-                  </div>
-                  <div className="hero-phone-badge-info">
-                    <p className="badge-title">Highly Rated</p>
-                    <p className="badge-sub">Best travel experiences</p>
-                  </div>
-                </div>
+                  </span>
+                  Private local tours
+                </span>
               </div>
+
+              <h1 className="hero-main-title hero-anim">
+                EXPLORE<br />
+                <span className="highlight">AUTHENTIC</span><br />
+                VIETNAM
+              </h1>
+
+              <p className="hero-sub hero-anim">
+                Private, story-led journeys through Saigon and the Mekong Delta with local guide <strong>Huyen</strong>.
+              </p>
+
+              <div className="hero-buttons hero-anim">
+                <button className="btn-hero-cta" onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}>
+                  <span>Explore tours</span>
+                  <span className="arrow">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
+                    </svg>
+                  </span>
+                </button>
+                <button className="btn-hero-secondary" onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}>
+                  Meet Huyen
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+          {mounted && !isMobile && (
+            <div className="hero-mini-gallery hero-anim" aria-label="Featured tours">
+              {[
+                { data: left, slot: 0 },
+                { data: center, slot: 1, priority: true },
+                { data: right, slot: 2 },
+              ].map(({ data, slot, priority }) => (
+                <div key={slot} className={`hero-phone-card hero-phone-card-${slot}`}
+                  onClick={() => { const t = tours.find(t => (t as any).folder === FOLDERS[slots[slot]]); if (t && onSelectTour) onSelectTour(t.id); }}>
+                  <Image src={data.url} alt={data.title} fill sizes="(max-width: 1180px) 130px, 170px" className="hero-phone-card-img"
+                    style={{ objectFit: 'cover' }} {...(priority ? { priority: true } : {})} />
+                  <div className="hero-phone-card-label">{data.title}</div>
+                </div>
+              ))}
             </div>
           )}
         </div>

@@ -118,7 +118,7 @@ const App: React.FC<AppProps> = ({ initialTourId = null }) => {
       {/* <BackgroundCanvas /> */}
       <Navbar onSelectTour={setSelectedTourId} onNavigate={handleMobileNav} selectedTourId={selectedTourId} />
       {selectedTourId ? (
-        <TourDetail tourId={selectedTourId} onClose={() => setSelectedTourId(null)} onSelectTour={setSelectedTourId} />
+        <TourDetail tourId={selectedTourId} onSelectTour={setSelectedTourId} />
       ) : (
         <>
           <Hero onSelectTour={setSelectedTourId} />
