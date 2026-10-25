@@ -399,3 +399,22 @@
     transform: none;
   }
 }
+@media (max-width: 640px) {
+  .gallery-heading-row {
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+
+  .gallery-heading-row > :first-child {
+    flex: 1 1 100%;
+  }
+
+  .gallery-controls {
+    align-self: flex-end;
+  }
+}
+@media (max-width: 640px) {
+  .gallery-controls {
+    margin-left: auto;
+  }
+}
