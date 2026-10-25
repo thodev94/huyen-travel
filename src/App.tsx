@@ -3,6 +3,17 @@ import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
+import {
+  BrandStory,
+  FinalContactCta,
+  JourneyDetails,
+  JourneyTimeline,
+  PrivateBenefits,
+  StaticFaq,
+  TravelerTypes,
+  TravelMoods,
+  TrustStrip,
+} from './components/Engagement';
 import Services from './components/Services';
 import Gallery from './components/Gallery';
 import Contact from './components/Contact';
@@ -111,9 +122,18 @@ const App: React.FC<AppProps> = ({ initialTourId = null }) => {
       ) : (
         <>
           <Hero onSelectTour={setSelectedTourId} />
+          <TrustStrip />
           <About />
           <Services onSelectTour={setSelectedTourId} />
+          <BrandStory />
+          <TravelMoods />
+          <JourneyTimeline />
           <div className="gallery-wrapper"> <Gallery onSelectTour={setSelectedTourId} /></div>
+          <PrivateBenefits />
+          <TravelerTypes />
+          <JourneyDetails />
+          <StaticFaq />
+          <FinalContactCta />
         </>
       )}
       <Contact />

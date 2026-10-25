@@ -1,5 +1,7 @@
 .about {
-  background: var(--bg-main);
+  background:
+    radial-gradient(circle at 88% 12%, rgba(239, 68, 68, 0.1), transparent 30%),
+    linear-gradient(180deg, var(--bg-main), color-mix(in srgb, var(--bg-soft) 72%, #fff1ed));
   padding: 80px 20px;
   position: relative;
   z-index: 10;
@@ -45,47 +47,48 @@
     grid-row: 1;
   }
 
-  .box1 {
+  .box3 {
     grid-column: span 5;
     grid-row: 2;
   }
-
-  .box3 {
-    grid-column: span 12;
-    grid-row: 3;
-  }
-}
-
-.box1 {
-  padding: 24px 28px;
-  background: var(--bg-pure);
-  border-radius: var(--border-radius);
-  border: 1px solid var(--border-color);
-  box-shadow: var(--shadow-card);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.box1:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-card-hover);
-  border-color: rgba(220, 38, 38, 0.2);
-}
-
-.box1 h3 {
-  color: var(--text-primary);
-  margin-bottom: 14px;
-  font-weight: 800;
-  font-size: 1.1rem;
-  letter-spacing: -0.01em;
 }
 
 .tags-wrapper {
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
+}
+
+.box2-languages {
+  width: 100%;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.box2-languages h3 {
+  color: #FFFFFF;
+  margin-bottom: 14px;
+  font-weight: 800;
+  font-size: 1.1rem;
+  letter-spacing: -0.01em;
+}
+
+.box2-languages .tags-wrapper {
+  justify-content: center;
+}
+.box2-languages .tag-en,
+.box2-languages .tag-vi {
+  background: rgba(255, 255, 255, 0.94);
+  border-color: rgba(255, 255, 255, 0.8);
+}
+
+.box2-languages .tag-en {
+  color: #B91C1C;
+}
+
+.box2-languages .tag-vi {
+  color: #B45309;
 }
 
 .tag-en {
@@ -235,8 +238,8 @@
   padding: 0;
   color: var(--text-secondary);
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 12px 24px;
+  grid-template-columns: 1fr;
+  gap: 12px;
 }
 
 .box3-list li {
@@ -261,6 +264,8 @@
 /* Box 4: Tour Guide Story */
 .box4 {
   padding: 36px;
+  display: flex;
+  flex-direction: column;
   position: relative;
   background: var(--bg-pure);
   border-radius: var(--border-radius);
@@ -334,7 +339,8 @@
 
 .box4-btn-wrap {
   text-align: center;
-  margin-top: 20px;
+  margin-top: auto;
+  padding-top: 20px;
 }
 
 .box4-btn {
@@ -357,14 +363,11 @@
 }
 
 /* Bento card hover animations */
-.box1,
 .box2,
 .box3,
 .box4 {
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
-
-.box1:hover,
 .box3:hover,
 .box4:hover {
   transform: translateY(-4px);
@@ -401,8 +404,6 @@
     grid-template-rows: auto;
     gap: 16px;
   }
-
-  .box1,
   .box2,
   .box3,
   .box4 {
@@ -411,7 +412,6 @@
   }
 
   .box4 { order: -1; }
-  .box1 { order: 1; }
-  .box2 { order: 2; }
-  .box3 { order: 3; }
+  .box2 { order: 1; }
+  .box3 { order: 2; }
 }

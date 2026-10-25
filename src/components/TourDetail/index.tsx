@@ -308,7 +308,7 @@ const TourDetail: React.FC<TourDetailProps> = ({ tourId, onClose, onSelectTour }
             </div>
           )}
         </div>
-        <div style={{ marginTop: '60px' }}>
+        <div style={{ marginTop: '24px' }}>
           <Gallery onSelectTour={onSelectTour} />
         </div>
       </div>

@@ -1,30 +1,19 @@
 "use client";
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import Image from 'next/image';
-import { useWindowSize } from '../../hooks/useWindowSize';
 import toursData from '../../../public/data/tours.json';
 import imageMapData from '../../../public/data/imageMap.json';
 import './Services.css';
 
 const imageMap: Record<string, string[]> = imageMapData;
+const FALLBACK_IMAGE = '/images/baners/banner.png';
 
 interface ServicesProps {
   onSelectTour: (tourId: string) => void;
 }
 
-const BANNER_IMAGES = [
-  "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=600&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1528127269322-539801943592?q=80&w=600&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=600&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1583417319070-4a69db38a482?q=80&w=600&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=80&w=600&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1534008897995-27a23e859048?q=80&w=600&auto=format&fit=crop"
-];
-
 const Services: React.FC<ServicesProps> = ({ onSelectTour }) => {
   const sectionRef = useRef<HTMLElement>(null);
-  const { width } = useWindowSize();
-  const isMobile = width <= 768;
   const [activeCategory, setActiveCategory] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -45,33 +34,58 @@ const Services: React.FC<ServicesProps> = ({ onSelectTour }) => {
   return (
     <section id="services" className="services" ref={sectionRef}>
       <div className="services-inner">
-        <h2 className="section-title services-entry-anim">Our Tours</h2>
+        <div className="services-header services-entry-anim">
+          <div className="services-heading">
+            <span className="services-eyebrow">Curated local experiences</span>
+            <h2 className="section-title services-title">Your good time here!</h2>
+            <p>Explore Saigon, the Mekong Delta and nearby escapes through local stories, culture and everyday life.</p>
+          </div>
+
+          <div className="services-count" aria-live="polite">
+            <strong>{String(filteredTours.length).padStart(2, '0')}</strong>
+            <span>{filteredTours.length === 1 ? 'experience' : 'experiences'}</span>
+          </div>
+        </div>
 
         <div className="services-toolbar services-entry-anim">
-          <div className="tour-card-anim search-input-wrapper">
+          <div className="search-input-wrapper">
             <div className="search-input-inner">
-              <input
-                type="text"
-                className="search-input"
-                placeholder="Search tours (e.g. Mekong, Cu Chi...)"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-              />
-              <span className="search-icon">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <span className="search-icon" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                   <circle cx="11" cy="11" r="8"></circle>
                   <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                 </svg>
               </span>
+              <label className="services-sr-only" htmlFor="tour-search">Search tours</label>
+              <input
+                id="tour-search"
+                type="search"
+                className="search-input"
+                placeholder="Search by place or experience..."
+                value={searchQuery}
+                onChange={(event) => setSearchQuery(event.target.value)}
+              />
+              {searchQuery && (
+                <button
+                  type="button"
+                  className="search-clear"
+                  onClick={() => setSearchQuery('')}
+                  aria-label="Clear tour search"
+                >
+                  ×
+                </button>
+              )}
             </div>
           </div>
 
-          <div className="services-categories services-entry-anim">
+          <div className="services-categories" aria-label="Filter tours by category">
             {categories.map(cat => (
               <button
+                type="button"
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
-                className={`category-btn ${activeCategory === cat ? 'active' : ''}`}
+                className={'category-btn ' + (activeCategory === cat ? 'active' : '')}
+                aria-pressed={activeCategory === cat}
               >
                 {cat}
               </button>
@@ -79,57 +93,78 @@ const Services: React.FC<ServicesProps> = ({ onSelectTour }) => {
           </div>
         </div>
 
-        <div className="service-grid">
-          {filteredTours.map((s, index) => {
-            const folder = (s as any).folder as keyof typeof imageMap;
-            const folderImages = imageMap[folder] || [];
-            const coverImage = folderImages.length > 0 ? folderImages[0] : BANNER_IMAGES[0];
+        {filteredTours.length > 0 ? (
+          <div className="service-grid">
+            {filteredTours.map((tour, index) => {
+              const folder = (tour as any).folder as keyof typeof imageMap;
+              const folderImages = imageMap[folder] || [];
+              const coverImage = folderImages[0] || FALLBACK_IMAGE;
 
-            return (
-              <a
-                key={s.id}
-                href={`/tour/${s.id}`}
-                onClick={(e) => { e.preventDefault(); onSelectTour(s.id); }}
-                className="card-container tour-card-anim"
-                style={{ textDecoration: 'none' }}
-              >
-                <div className="service-card">
-                  <div className="service-img-wrapper">
-                    <Image
-                      src={coverImage}
-                      alt={s.title}
-                      fill
-                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      quality={75}
-                      loading={index < 3 ? 'eager' : 'lazy'}
-                      style={{ objectFit: 'cover' }}
-                    />
-                  </div>
-
-                  <div className="card-content">
-                    <div style={{ alignSelf: 'flex-start', marginBottom: '15px' }}>
-                      <span className={s.category.toLowerCase() === 'saigon' ? 'tag-badge saigon' : 'tag-badge'}>
-                        {s.category}
+              return (
+                <a
+                  key={tour.id}
+                  href={'/tour/' + tour.id}
+                  onClick={(event) => {
+                    event.preventDefault();
+                    onSelectTour(tour.id);
+                  }}
+                  className="card-container tour-card-anim"
+                >
+                  <article className="service-card">
+                    <div className="service-img-wrapper">
+                      <Image
+                        src={coverImage}
+                        alt={tour.title}
+                        fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        quality={82}
+                        loading={index < 3 ? 'eager' : 'lazy'}
+                        style={{ objectFit: 'cover' }}
+                      />
+                      <div className="service-image-overlay" aria-hidden="true" />
+                      <span className={'tag-badge ' + (tour.category.toLowerCase() === 'saigon' ? 'saigon' : '')}>
+                        {tour.category}
+                      </span>
+                      <span className="service-card-index">
+                        {String(index + 1).padStart(2, '0')}
                       </span>
                     </div>
-                    <h3 className="card-title">{s.title}</h3>
-                    <p className="card-brief">{s.brief}</p>
 
-                    <div className="card-link">
-                      View Experiences
-                      <span className="arrow">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                          <line x1="5" y1="12" x2="19" y2="12"></line>
-                          <polyline points="12 5 19 12 12 19"></polyline>
-                        </svg>
-                      </span>
+                    <div className="card-content">
+                      <h3 className="card-title">{tour.title}</h3>
+                      <p className="card-brief">{tour.brief}</p>
+
+                      <div className="card-footer">
+                        <span className="card-link">Explore tour</span>
+                        <span className="card-arrow" aria-hidden="true">
+                          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                          </svg>
+                        </span>
+                      </div>
                     </div>
-                  </div>
-                </div>
-              </a>
-            );
-          })}
-        </div>
+                  </article>
+                </a>
+              );
+            })}
+          </div>
+        ) : (
+          <div className="services-empty">
+            <span>0 results</span>
+            <h3>No tours found</h3>
+            <p>Try a different destination or view all available experiences.</p>
+            <button
+              type="button"
+              onClick={() => {
+                setSearchQuery('');
+                setActiveCategory('all');
+              }}
+            >
+              View all tours
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );
